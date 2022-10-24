@@ -1,0 +1,16 @@
+@import './base.var.scss';
+@import './theme.purple.scss';
+
+// 设置根大小
+html {
+  font-size: 16px;
+  // 设置主题样式
+  $buttonPadding: 2rem 2rem;
+  @include media-phone {
+    font-size: 14px;
+  }
+}
+
+:root {
+	--primary-color: #7356ff;
+}
