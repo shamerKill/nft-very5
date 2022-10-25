@@ -1,3 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import './app/styles/rest.scss';
 @import './app/styles/theme.scss';
+
+:root {
+  --black-900: #000000;
+}

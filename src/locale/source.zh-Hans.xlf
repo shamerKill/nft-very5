@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US">
+  <file id="ngi18n" original="ng.template">
+    <unit id="3426497293769476612">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:20</note>
+        <note category="description">this yi shu</note>
+        <note category="meaning">do it</note>
+      </notes>
+      <segment>
+        <source>这是艺术中文</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>
