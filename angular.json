@@ -10,14 +10,28 @@
           "style": "scss"
         }
       },
-      "root": "",
+      "root": ".",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "zh",
+        "locales": {
+          "en-US": {
+            "baseHref": "/en-US/",
+            "translation": "src/locale/source.en-US.xlf"
+          },
+          "zh-Hans": {
+            "baseHref": "/zh-Hans/",
+            "translation": "src/locale/source.zh-Hans.xlf"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/nft-very5",
+            "baseHref": "/",
+            "outputPath": "dist/nft",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -29,6 +43,7 @@
             ],
             "styles": [
               "node_modules/primeicons/primeicons.css",
+              "node_modules/primeflex/primeflex.css",
               "node_modules/primeng/resources/primeng.min.css",
               "src/styles.scss"
             ],
@@ -82,7 +97,10 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "nft-very5:build"
+            "browserTarget": "nft-very5:build",
+            "outFile": "source.xlf",
+            "format": "xlf2",
+            "outputPath": "src/locale"
           }
         },
         "test": {

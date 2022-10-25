@@ -4,16 +4,17 @@ export interface InDataApp {
 
 export class DataApp implements InDataApp {
   // 语言
-  /** zh-CN | en-US */
+  /** zh-Hans | en-US */
   language: string = 'en-US';
-  #languageList: string[] = ['zh-CN', 'en-US'];
+  #languageList: string[] = ['zh-Hans', 'en-US'];
   // 初始化语言
   #initLanguage() {
-    const browserLanguage = navigator.language.split('-')[0];
-    if (browserLanguage[0] === 'zh') {
-      this.language = this.#languageList[0];
-    } else {
-      this.language = this.#languageList[1];
+    const browserLanguage = window.location.pathname.split('/')[1];
+    for (let i = 0; i < this.#languageList.length; i++) {
+      if (browserLanguage === this.#languageList[i]) {
+        this.language = this.#languageList[i];
+        break;
+      }
     }
   }
 

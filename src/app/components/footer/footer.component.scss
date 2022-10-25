@@ -1,0 +1,23 @@
+@import "../../styles/base.var.scss";
+
+footer {
+  background-color: var(--black-900);
+  color: var(--surface-300);
+  .list-header {
+    color: var(--surface-a);
+  }
+  .list-content {
+    max-height: 10rem;
+    @include media-phone {
+      max-height: none;
+    }
+  }
+  ::ng-deep {
+    .p-card {
+      background-color: transparent;
+    }
+    .p-card-body {
+      padding: 0;
+    }
+  }
+}

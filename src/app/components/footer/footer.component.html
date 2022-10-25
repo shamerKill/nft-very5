@@ -1,0 +1,29 @@
+<footer>
+  <!-- 列表 -->
+  <app-base-box class="flex flex-column pt-5 xl:mx-auto lg:flex-row flex-wrap justify-content-between">
+    <ng-template *ngTemplateOutlet="list;context:{title:exploreTitle,list:exploreList}"></ng-template>
+    <ng-template *ngTemplateOutlet="list;context:{title:nftTitle,list:nftFuncList}"></ng-template>
+    <ng-template *ngTemplateOutlet="list;context:{title:friendsTitle,list:friendsLink}"></ng-template>
+  </app-base-box>
+  <!-- 声明 -->
+  <app-base-box class="border-top flex flex-row justify-content-between py-4 px-4 xl:px-0">
+    <img class="w-6rem" src="../../../assets/images/logo/very5-W.png" />
+    <p class="text-xs text-500">Copyright @2022 {{projectName}}</p>
+  </app-base-box>
+</footer>
+
+<ng-template #list let-title="title" let-list="list">
+  <p-card class="flex-1 px-3">
+    <ng-template pTemplate="header">
+      <h3 class="list-header">{{title}}</h3>
+    </ng-template>
+    <div class="list-content flex flex-wrap flex-row lg:flex-column">
+      <a
+        *ngFor="let item of list"
+        [href]="item.link"
+        class="py-2 px-1 text-400 block flex w-6">
+        {{item.name}}
+      </a>
+    </div>
+  </p-card>
+</ng-template>

@@ -1,0 +1,12 @@
+:host {
+  width: 100%;
+  max-width: 1200px;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+:host.border-top {
+  border-top: 1px solid var(--surface-900);
+}
