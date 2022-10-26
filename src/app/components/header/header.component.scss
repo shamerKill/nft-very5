@@ -1,0 +1,10 @@
+.com-header {
+  ::ng-deep {
+    .p-inputtext {
+      background-color: var(--surface-100);
+    }
+  }
+  .header-input {
+    max-width: 37rem;
+  }
+}

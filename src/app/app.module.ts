@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import {ButtonModule} from 'primeng/button';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +27,9 @@ import { BaseBoxComponent } from './components/base-box/base-box.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     CardModule,
+    InputTextModule,
+    FormsModule,
+    ButtonModule,
   ],
   providers: [DatabaseService],
   bootstrap: [AppComponent]

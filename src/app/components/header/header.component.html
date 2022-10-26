@@ -1,1 +1,14 @@
-<p>header works!</p>
+<app-base-box class="com-header">
+  <header class="hidden com-header lg:flex py-3 align-items-center">
+    <img class="w-8rem" src="../../../assets/images/logo/very5-B@2x.png" />
+    <div class="flex flex-1 justify-content-end pr-2">
+      <label class="header-input p-input-icon-right w-full">
+        <i class="pi pi-search"></i>
+        <input class="w-full" type="text" pInputText [(ngModel)]="searchText" >
+      </label>
+    </div>
+  </header>
+  <header class="block lg:hidden">
+  web
+  </header>
+</app-base-box>
