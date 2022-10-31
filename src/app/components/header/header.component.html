@@ -1,11 +1,33 @@
 <app-base-box class="com-header">
   <header class="hidden com-header lg:flex py-3 align-items-center">
     <img class="w-8rem" src="../../../assets/images/logo/very5-B@2x.png" />
-    <div class="flex flex-1 justify-content-end pr-2">
+    <div class="flex flex-1 justify-content-end pr-2 pl-4">
       <label class="header-input p-input-icon-right w-full">
         <i class="pi pi-search"></i>
-        <input class="w-full" type="text" pInputText [(ngModel)]="searchText" >
+        <input class="w-full" i18n-placeholder placeholder="搜索收藏品、合集、以及账户" type="text" pInputText [(ngModel)]="searchText" >
+        <button class="header-input-search" type="submit"></button>
       </label>
+    </div>
+    <div class="flex">
+      <p-megaMenu [model]="items">
+        <ng-template pTemplate="end">
+          <p-button
+            *ngIf="!hadAccount"
+            styleClass="get-account-button"
+            i18n="按钮"
+            (onClick)="linkWallet()">
+            关联钱包
+          </p-button>
+          <div *ngIf="hadAccount" class="pl-2">
+            <button class="avatar-button">
+              <p-avatar
+                [image]="accountAvatar === undefined ? '../../../assets/images/logo/default-avatar@2x.png' : accountAvatar"
+                pBadge
+                shape="circle"></p-avatar>
+            </button>
+          </div>
+        </ng-template>
+      </p-megaMenu>
     </div>
   </header>
   <header class="block lg:hidden">

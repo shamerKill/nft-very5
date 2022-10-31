@@ -6,6 +6,8 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
+import {MegaMenuModule} from 'primeng/megamenu';
+import {AvatarModule} from 'primeng/avatar';
 
 
 
@@ -30,6 +32,8 @@ import { BaseBoxComponent } from './components/base-box/base-box.component';
     InputTextModule,
     FormsModule,
     ButtonModule,
+    MegaMenuModule,
+    AvatarModule,
   ],
   providers: [DatabaseService],
   bootstrap: [AppComponent]
