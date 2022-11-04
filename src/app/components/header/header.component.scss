@@ -1,0 +1,50 @@
+.com-header {
+  overflow: initial;
+  position: relative;
+  z-index: 10;
+  ::ng-deep {
+    .p-inputtext {
+      background-color: var(--surface-100);
+    }
+    .p-megamenu {
+      background-color: transparent;
+      border: none;
+    }
+    .p-menuitem {
+      font-weight: bold;
+      color: var(--surface-900);
+      .pi-globe {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--surface-900);
+        margin-right: 0!important;
+      }
+      .pi-angle-down {
+        display: none;
+      }
+      .p-megamenu-panel {
+        right: 0;
+      }
+    }
+    .get-account-button {
+      background-color: var(--surface-900);
+      padding: 0.4rem 2rem;
+    }
+  }
+  .header-input {
+    max-width: 37rem;
+  }
+  .header-input-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 3rem;
+    background-color: transparent;
+    border: none;
+  }
+  .avatar-button {
+    background: none;
+    border: none;
+  }
+}
