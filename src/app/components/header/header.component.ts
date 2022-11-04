@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   // 展示列表
   items: MegaMenuItem[] = [];
   // 是否关联了钱包
-  hadAccount: boolean = true;
+  hadAccount: boolean = false;
   // 账户头像
   accountAvatar?: string
 
@@ -69,15 +69,16 @@ export class HeaderComponent implements OnInit {
       {
         label: $localize`探索`,
         items: [
-          this.exploreList.map(
+          this.exploreList.map<MenuItem>(
             item => ({
-              label: item.name
+              items: [{label: item.name}]
             })
           )
         ],
       },
       {
-        label: $localize`排行榜`
+        label: $localize`排行榜`,
+        command: console.log
       },
       {
         label: $localize`创造NFT`
@@ -86,8 +87,8 @@ export class HeaderComponent implements OnInit {
         icon: 'pi pi-globe',
         items: [
           [
-            { label: $localize`English` },
-            { label: $localize`简体中文` }
+            { items: [{label: $localize`English`}] },
+            { items: [{label: $localize`简体中文`}] },
           ]
         ]
       },

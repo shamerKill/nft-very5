@@ -3,6 +3,8 @@
 footer {
   background-color: var(--black-900);
   color: var(--surface-300);
+  position: relative;
+  z-index: 10;
   .list-header {
     color: var(--surface-a);
   }

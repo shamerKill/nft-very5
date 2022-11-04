@@ -1,22 +1,265 @@
-<div class="content">
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
-  <p>1</p>
+<!-- 首屏 -->
+<div class="home-first">
+  <div class="first-bg">
+    <div class="first-bg-circular"></div>
+  </div>
+  <app-base-box class="first-info">
+    <h2 class="first-title text-center" i18n>
+      <span>Create Discover and <br/> Trade NFTs</span>
+    </h2>
+    <p class="first-described text-center pt-3" i18n>
+      <span>A marketplace to explore marvelous NFTs and feast the charm of</span>
+    </p>
+    <div class="first-btn-group flex justify-content-center pt-4 pb-4">
+      <p-button styleClass="first-btn-full mr-4" i18n>探索</p-button>
+      <p-button styleClass="first-btn-outline" i18n>创造NFT</p-button>
+    </div>
+
+    <app-base-box class="first-pic-pc hidden lg:block">
+      <ng-container *ngFor="let item of firstCards.items">
+        <p-card
+          class="first-pic-container"
+          styleClass="first-pic-card">
+          <ng-template pTemplate="header">
+            <img class="card-image" [src]="item.image" [alt]="item.name">
+          </ng-template>
+          <p class="card-name">
+            {{item.name}}
+          </p>
+          <p class="card-described">
+            {{item.owner}} #{{item.id}}
+          </p>
+        </p-card>
+      </ng-container>
+    </app-base-box>
+    <app-base-box class="first-pic-web lg:hidden">
+    </app-base-box>
+  </app-base-box>
+</div>
+<!-- NFG资产排行 -->
+<app-base-box class="assets-rank">
+  <h2 class="rank-title text-center" i18n>
+    NFT资产排行榜
+  </h2>
+  <div class="rank-tab-btn-group flex justify-content-center pb-4">
+    <button
+      class="rank-tab-btn"
+      type="button"
+      *ngFor="let item of assetsRank.list; let index = index;"
+      [ngClass]="index == assetsRank.index ? 'rank-tab-btn-select' : ''"
+      (click)="onChangeAssetsRankIndex(index)">
+      {{item.title}}
+    </button>
+  </div>
+  <p-tabView [activeIndex]="assetsRank.index" (onChange)="onChangeAssetsRankIndex($event.index)">
+    <p-tabPanel *ngFor="let rank of assetsRank.list">
+      <div class="rank-list flex flex-column flex-wrap justify-content-between">
+        <div class="rank-card flex align-items-center" *ngFor="let item of rank.data">
+          <p class="card-number">{{item.number}}</p>
+          <img class="card-logo" [src]="item.logo" [alt]="item.name" />
+          <p class="card-name flex-1 pl-2">{{item.name}}</p>
+          <div class="card-assets">
+            <p class="card-change" [ngClass]="item.direction ? 'card-change-up' : 'card-change-down'">
+              {{item.chgRate}}
+            </p>
+            <div class="card-price">
+              <img class="card-price-unit" src="../../../assets/images/home/plug-logo.png" alt="plug">
+              <p class="card-price-num">{{item.assets}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+  <button
+    pButton
+    type="button"
+    class="assets-more"
+    i18n>
+    更多
+  </button>
+
+</app-base-box>
+<!-- 顶级艺术家 -->
+<div class="top-artist">
+  <h2 class="artist-title text-center" i18n>顶级艺术家</h2>
+  <app-base-box class="relative">
+    <swiper
+      [grabCursor]="true"
+      [centeredSlides]="true"
+      [slidesPerView]="'auto'"
+      [pagination]="true"
+      [loop]="true"
+      [spaceBetween]="30"
+      class="artist-swiper"
+    >
+      <ng-template
+        swiperSlide
+        *ngFor="let item of artistList.list">
+        <p-card styleClass="artist-item px-4 py-3">
+          <ng-template pTemplate="header">
+            <div class="flex justify-content-center align-items-center">
+              <img
+                class="artist-logo"
+                [src]="item.logo"
+                [alt]="item.name" />
+              <p class="artist-name flex-1 pl-2">{{item.name}}</p>
+              <i class="artist-collection-icon pi" [ngClass]="item.favorite ? 'pi-star-fill' : 'pi-star'"></i>
+            </div>
+          </ng-template>
+          <div class="artist-show-list flex flex-column flex-wrap align-items-between justify-content-start">
+            <div class="artist-show-item" *ngFor="let work of item.collectionList">
+              <div class="artist-show-inner">
+                <div class="artist-show-center">
+                  <img
+                    class="artist-show-img"
+                    [src]="work.logo"
+                    [alt]="work.id" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template pTemplate="footer">
+            <div class="flex">
+              <p
+                class="artist-num-info"
+                data-name="收藏品"
+                i18n-data>
+                {{item.collectionNum}}
+              </p>
+              <p
+                class="artist-num-info"
+                data-name="持有者"
+                i18n-data>
+                {{item.ownerNum}}
+              </p>
+              <button class="artist-more">
+                <i class="pi pi-arrow-right"></i>
+              </button>
+            </div>
+          </ng-template>
+        </p-card>
+      </ng-template>
+    </swiper>
+  </app-base-box>
+</div>
+<!-- 探索世界 -->
+<app-base-box class="explore-world">
+  <h2 class="explore-title text-center" i18n>探索very5的世界</h2>
+  <div class="flex flex-wrap justify-content-between align-items-stretch">
+    <p-card styleClass="explore-card">
+      <ng-template pTemplate="header">
+        <img class="explore-card-image" src="../../../assets/images/home/explore-1.png" alt="">
+      </ng-template>
+      <h3 class="explore-card-title" i18n>设置Pando Wallet</h3>
+      <ng-template pTemplate="footer">
+        <p class="explore-card-describes" i18n>
+          设置好Pando Wallet钱包并将其连接至very5
+        </p>
+        <p class="explore-card-describes" i18n>
+          开启你的NFT探索之旅
+        </p>
+      </ng-template>
+    </p-card>
+    <p-card styleClass="explore-card">
+      <ng-template pTemplate="header">
+        <img class="explore-card-image" src="../../../assets/images/home/explore-2.png" alt="">
+      </ng-template>
+      <h3 class="explore-card-title" i18n>探索NFT世界</h3>
+      <ng-template pTemplate="footer">
+        <p class="explore-card-describes" i18n>
+          在vrey5的世界中，你可以自由的探索、寻找并交易各种类型NFT。
+        </p>
+      </ng-template>
+    </p-card>
+    <p-card styleClass="explore-card">
+      <ng-template pTemplate="header">
+        <img class="explore-card-image" src="../../../assets/images/home/explore-3.png" alt="">
+      </ng-template>
+      <h3 class="explore-card-title" i18n>创建你的NFT</h3>
+      <ng-template pTemplate="footer">
+        <p class="explore-card-describes" i18n>
+          上传作品并填写名称和描述，制作只属于你自己的NFT。
+        </p>
+      </ng-template>
+    </p-card>
+    <p-card styleClass="explore-card">
+      <ng-template pTemplate="header">
+        <img class="explore-card-image" src="../../../assets/images/home/explore-4.png" alt="">
+      </ng-template>
+      <h3 class="explore-card-title" i18n>出售你的NFT</h3>
+      <ng-template pTemplate="footer">
+        <p class="explore-card-describes" i18n>
+          你可以自由选择出售 NFT 的方式，我们会帮助您出售它们！
+        </p>
+      </ng-template>
+    </p-card>
+  </div>
+</app-base-box>
+<!-- 探索市场 -->
+<div class="explore-market">
+  <h2 class="explore-title text-center" i18n>探索市场</h2>
+  <app-base-box>
+    <div class="explore-tab-btn-group flex flex-wrap justify-content-center pb-4">
+      <button
+        class="explore-tab-btn"
+        type="button"
+        *ngFor="let item of exploreMarket.list; let index = index;"
+        [ngClass]="index == exploreMarket.index ? 'explore-tab-btn-select' : ''"
+        (click)="onChangeExploreMarketIndex(index)">
+        {{item.title}}
+      </button>
+    </div>
+    <p-tabView [activeIndex]="exploreMarket.index" (onChange)="onChangeExploreMarketIndex($event.index)">
+      <p-tabPanel *ngFor="let markets of exploreMarket.list">
+        <div class="explore-list flex flex-wrap justify-content-between">
+          <div class="explore-card flex align-items-center" *ngFor="let item of markets.data">
+            <p-card
+              class="explore-pic-container"
+              styleClass="explore-pic-card">
+              <ng-template pTemplate="header">
+                <div class="card-header-inner">
+                  <div class="card-header-center">
+                    <img
+                      class="card-image"
+                      [src]="item.image"
+                      [alt]="item.id" />
+                  </div>
+                </div>
+              </ng-template>
+              <div class="card-owner flex justify-content-between align-items-center">
+                <p class="card-owner-name">{{item.ownerName}}</p>
+                <img class="card-owner-logo" [src]="item.ownerLogo" [alt]="item.ownerName">
+              </div>
+              <div class="card-info flex justify-content-between align-items-center">
+                <p class="card-info-name">{{item.name}} #{{item.id}}</p>
+                <div class="card-info-price flex align-items-center">
+                  <img class="card-price-unit" src="../../../assets/images/home/plug-logo.png" alt="plug">
+                  <p class="card-price-num">{{item.price}}</p>
+                </div>
+              </div>
+            </p-card>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </app-base-box>
+</div>
+<!-- 了解very5 -->
+<div class="home-video">
+  <h2 class="video-title text-center" i18n>了解very5</h2>
+  <app-base-box class="video-content flex flex-column align-items-center">
+    <iframe class="hidden lg:block" width="790" height="444" src="https://www.youtube.com/embed/FfhNnXQalOc" title="Pluggin Me (Plug Chain) Theme Song with 5 languages | Music Production" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe class="block lg:hidden" width="300" height="179" src="https://www.youtube.com/embed/FfhNnXQalOc" title="Pluggin Me (Plug Chain) Theme Song with 5 languages | Music Production" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="pt-6 flex justify-content-center w-full">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="探索市场"
+        i18n-label
+        class="video-more"
+        ></button>
+    </div>
+  </app-base-box>
 </div>

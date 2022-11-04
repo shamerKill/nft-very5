@@ -1,0 +1,685 @@
+@use "sass:math";
+@import "../../styles/base.var.scss";
+
+.home-first {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  background-image: url(../../../assets/images/home/first-bg.jpg);
+  background-size: 100% 100%;
+  .first {
+    @keyframes circularRotate {
+      0% {
+        transform: rotateZ(0deg);
+      }
+      100% {
+        transform: rotateZ(720deg);
+      }
+    }
+    &-info {
+      position: relative;
+      padding-bottom: 20rem;
+    }
+    &-bg {
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      &::before {
+        $diameter: 80rem;
+        content: '';
+        position: absolute;
+        top: -#{math.div($diameter,3)};
+        left: 50%;
+        margin-left: -#{math.div($diameter,2)};
+        width: $diameter;
+        height: $diameter;
+        border-radius: 100%;
+        border: 1px dashed var(--surface-800);
+        animation: circularRotate 10s linear infinite;
+      }
+      &-circular {
+        width: 40vw;
+        max-width: 18rem;
+        height: 40vw;
+        max-height: 18rem;
+        position: absolute;
+        top: 5rem;
+        left: 50%;
+        margin-left: -10rem;
+        border: 1px solid var(--surface-600);
+        border-radius: 100%;
+        transform: skew(30deg, 20deg);
+        @keyframes circularRotateBefore {
+          0% {
+            transform: translate(5rem, -5rem) rotateZ(0deg);
+          }
+          100% {
+            transform: translate(5rem, -5rem) rotateZ(720deg);
+          }
+        }
+        @keyframes circularRotateAfter {
+          0% {
+            transform: translate(-5rem, 5rem) rotateZ(0deg);
+          }
+          100% {
+            transform: translate(-5rem, 5rem) rotateZ(720deg);
+          }
+        }
+        &::before, &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: 1px dashed var(--surface-800);
+          border-radius: 100%;
+        }
+        &::before {
+          animation: circularRotateBefore 1s linear infinite;
+        }
+        &::after {
+          animation: circularRotateAfter 1s linear infinite;
+        }
+      }
+    }
+    &-title {
+      font-size: 4rem;
+      padding-top: 4rem;
+      font-weight: 900;
+      position: relative;
+      z-index: 2;
+      pointer-events: none;
+      span {
+        pointer-events: auto;
+      }
+    }
+    &-described {
+      position: relative;
+      z-index: 2;
+      pointer-events: none;
+      span {
+        pointer-events: auto;
+      }
+    }
+    &-btn-group {
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      pointer-events: none;
+      ::ng-deep {
+        .p-button {
+          pointer-events: auto;
+          border-color: var(--surface-900);
+          padding: 0.3rem 0;
+          width: 8rem;
+          justify-content: center;
+          &:focus {
+            box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--surface-900), 0 1px 2px 0 var(--surface-900);
+          }
+          .p-button-label {
+            display: none;
+          }
+          &.first-btn-full {
+            background-color: var(--surface-900);
+          }
+          &.first-btn-outline {
+            background-color: var(--surface-0);
+            color: var(--surface-900);
+          }
+        }
+      }
+    }
+    &-pic-pc {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-image: linear-gradient(to left, #FFFFFFFF, var(--surface-600), #FFFFFFFF);
+      }
+      &::before {
+        $diameter: 70%;
+        content: '';
+        position: absolute;
+        top: -(math.div($diameter,2));
+        left: math.div((100%-$diameter),2);
+        width: $diameter;
+        height: 0;
+        padding-bottom: $diameter;
+        border: 1px dashed var(--surface-600);
+        border-radius: 100%;
+        animation: circularRotate 10s linear infinite;
+        z-index: -1;
+      }
+    }
+  }
+  ::ng-deep {
+    @function cardTouch($deg) {
+      @return rotateZ($deg+deg) scale(1.05);
+    }
+    .first-pic-card {
+      width: 10rem;
+      overflow: hidden;
+      border: 0.5rem solid var(--surface-0);
+      border-radius: 0.5rem;
+      position: absolute;
+      transition: transform 0.3s;
+      cursor: pointer;
+      .p-card-body {
+        padding: 0;
+      }
+      .p-card-content {
+        padding: 0.5rem 0.2rem;
+      }
+      .card-image {
+        border-radius: 0.5rem;
+      }
+      .card-name {
+        font-size: 1.1rem;
+      }
+      .card-described {
+        font-size: 0.8rem;
+        padding-top: 0.3rem;
+        color: var(--surface-400);
+      }
+    }
+    .first-pic-container {
+      &:nth-child(1) .first-pic-card {
+        top: 5%;
+        left: 5%;
+        transform: rotateZ(20deg);
+        &:hover {
+          transform: cardTouch(20);
+        }
+      }
+      &:nth-child(2) .first-pic-card {
+        top: 45%;
+        left: 15%;
+        transform: rotateZ(-10deg);
+        &:hover {
+          transform: cardTouch(-10);
+        }
+      }
+      &:nth-child(3) .first-pic-card {
+        $width: 15rem;
+        left: 50%;
+        bottom: 0;
+        width: $width;
+        margin-left: -(math.div($width,2));
+        background-color: var(--surface-900);
+        border-color: var(--surface-900);
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        border-bottom-left-radius: 0rem;
+        border-bottom-right-radius: 0rem;
+        &:hover {
+          transform: cardTouch(0);
+        }
+        .card-name {
+          color: var(--surface-0);
+        }
+        .card-described {
+          color: var(--surface-600);
+        }
+      }
+      &:nth-child(4) .first-pic-card {
+        top: 45%;
+        right: 15%;
+        transform: rotateZ(10deg);
+        &:hover {
+          transform: cardTouch(10);
+        }
+      }
+      &:nth-child(5) .first-pic-card {
+        top: 5%;
+        right: 5%;
+        transform: rotateZ(-20deg);
+        &:hover {
+          transform: cardTouch(-20);
+        }
+      }
+    }
+  }
+}
+
+.assets-rank {
+  padding-top: 3rem;
+  padding-bottom: 2rem;;
+  .rank-title {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+  }
+  .rank-tab-btn {
+    width: 8rem;
+    justify-content: center;
+    font-size: 1rem;
+    height: 2.4rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    margin: 0 1rem;
+    background-color: var(--surface-200);
+    transition: color 0.3s, background-color 0.3s;
+    &.rank-tab-btn-select {
+      background-color: var(--primary-color);
+      color: var(--surface-0);
+    }
+  }
+  ::ng-deep {
+    .p-tabview-nav-container {
+      display: none;
+    }
+    .p-tabview-panels {
+      padding: 0;
+      overflow-x: auto;
+    }
+    .assets-more {
+      border-color: var(--surface-900);
+      padding: 0.3rem 0;
+      width: 10rem;
+      display: flex;
+      justify-content: center;
+      background-color: var(--surface-900);
+      text-align: center;
+      margin: 1rem auto 0;
+      &:focus {
+        box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--surface-900), 0 1px 2px 0 var(--surface-900);
+      }
+      .p-button-label {
+        display: none;
+      }
+    }
+  }
+  .rank-list {
+    $cardHeight: 4rem;
+    height: $cardHeight * 5;
+    padding: 0 0.5rem;
+    min-width: 45rem;
+    .rank-card {
+      width: 30%;
+      height: $cardHeight;
+      box-sizing: border-box;
+      max-width: 20rem;
+    }
+    .card {
+      &-number {
+        font-size: 0.9rem;
+        font-weight: bold;
+        padding-right: 0.2rem;
+        width: 2rem;
+      }
+      &-logo {
+        display: block;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 100%;
+      }
+      &-name {
+        color: var(--surface-900);
+      }
+      &-assets {
+        text-align: right;
+        font-size: 0.9rem;
+        transform: scale(0.9);
+        transform-origin: right center;
+      }
+      &-change {
+        &-up {
+          color: green;
+        }
+        &-down {
+          color: red;
+        }
+      }
+      &-price {
+        display: flex;
+        align-items: center;
+        padding-top: 0.3rem;
+        &-unit {
+          width: 1rem;
+          height: 1rem;
+        }
+        &-num {
+          padding-left: 0.2rem;
+          line-height: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.top-artist {
+  position: relative;
+  padding-bottom: 2rem;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: var(--cyan-300);
+    opacity: 0.1;
+    z-index: -1;
+  }
+  .artist-title {
+    padding-top: 2rem;
+    font-size: 2rem;
+    padding-bottom: 2rem;
+  }
+  ::ng-deep {
+    .swiper-pagination-bullet {
+      transition: all 0.2s;
+    }
+    .swiper-pagination-bullet.swiper-pagination-bullet-active {
+      width: 2rem;
+      border-radius: 0.5rem;
+      background-color: var(--surface-600);
+    }
+    .swiper {
+      width: 100%;
+      padding: 2rem;
+      padding-bottom: 4rem;
+    }
+
+    .swiper-slide {
+      width: 23rem;
+      transform: translateY(-1rem);
+      transition: transform 0.5s;
+      &.swiper-slide-active {
+        transform: translate(0);
+      }
+    }
+    .artist-item {
+      background-color: var(--surface-900);
+    }
+    .p-card-body {
+      padding: 0;
+    }
+    .p-card-footer {
+      padding: 0;
+    }
+  }
+  .artist-logo {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+  .artist-name {
+    color: var(--surface-0);
+  }
+  .artist-collection-icon {
+    font-size: 1.4rem;
+    &.pi-star-fill {
+      color: var(--primary-color);
+    }
+    &.pi-star {
+      color: var(--surface-400);
+    }
+  }
+  $picSize: 10rem;
+  .artist-show-list {
+    height: #{$picSize * 3};
+  }
+  .artist-show-item {
+    overflow: hidden;
+    height: $picSize;
+    width: $picSize;
+    padding: 0.2rem;
+    box-sizing: border-box;
+    &:nth-child(1) {
+      height: #{$picSize * 3};
+    }
+    .artist-show-inner {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .artist-show-center {
+      position: relative;
+      top: 0;
+      left: 50%;
+      margin-left: -500rem;
+      height: 100%;
+      width: 1000rem;
+    }
+    .artist-show-img {
+      height: 100%;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+  .artist-num-info {
+    color: var(--surface-200);
+    text-align: center;
+    padding-right: 1rem;
+    &:after {
+      content: attr(data-name);
+      display: block;
+      color: var(--surface-600);
+      font-size: 0.9rem;
+      transform: scale(0.9);
+    }
+  }
+  .artist-more {
+    background-color: transparent;
+    flex: 1;
+    text-align: right;
+    cursor: pointer;
+    color: var(--surface-0);
+    font-weight: bold;
+    transition: all 0.3s;
+    &:hover {
+      color: var(--primary-color);
+    }
+    &:active {
+      transform: translateX(1px);
+    }
+    .pi {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.explore-world {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  .explore-title {
+    padding-top: 2rem;
+    font-size: 2rem;
+    padding-bottom: 2rem;
+  }
+  .explore-card {
+    &-image {
+      height: 5rem;
+      width: auto;
+      margin-left: 1rem;
+      margin-top: 1rem;
+    }
+  }
+  ::ng-deep {
+    p-card {
+      width: 24%;
+      @include media-phone {
+        width: 80%;
+        margin: 1rem auto;
+      }
+    }
+    .explore-card {
+      height: 100%;
+    }
+  }
+}
+
+
+.explore-market {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  position: relative;
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-image: url(../../../assets/images/home/first-bg.jpg);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    z-index: -1;
+    transform: rotateZ(180deg);
+  }
+  .explore-title {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+  }
+  .explore-tab-btn-group {
+    .explore-tab-btn {
+      min-width: 7rem;
+      justify-content: center;
+      font-size: 1rem;
+      height: 2.4rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      margin: 0.5rem 1rem;
+      background-color: var(--surface-200);
+      transition: color 0.3s, background-color 0.3s;
+      padding: 0 1rem;
+      &.explore-tab-btn-select {
+        background-color: var(--primary-color);
+        color: var(--surface-0);
+      }
+    }
+  }
+  ::ng-deep {
+    .p-tabview-nav-container {
+      display: none;
+    }
+    .p-tabview-panels {
+      padding: 0;
+      overflow-x: auto;
+      background-color: transparent;
+    }
+    .explore-card {
+      width: 32%;
+      min-width: 13rem;
+      margin: 0 auto 1rem;
+      cursor: pointer;
+    }
+    .explore-pic-container {
+      width: 100%;
+    }
+    .p-card-content {
+      padding: 0;
+    }
+    .explore-pic-card {
+      background-color: var(--surface-900);
+      border: 0.5rem solid var(--surface-900);
+      box-sizing: border-box;
+      border-radius: 0.5rem;
+      width: 100%;
+      transition: background-color 0.3s, border-color 0.3s;
+      &:hover {
+        background-color: var(--surface-800);
+        border-color: var(--surface-800);
+      }
+      .card-header-inner {
+        height: 0;
+        padding-bottom: 100%;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+      .card-header-center {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -500rem;
+        height: 100%;
+        width: 1000rem;
+      }
+      .card-image {
+        height: 100%;
+        width: auto;
+        margin: 0 auto;
+        display: block;
+      }
+    }
+  }
+  .card-owner-name {
+    color: var(--surface-500);
+  }
+  .card-owner-logo {
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .card-info-name {
+    color: var(--surface-100);
+  }
+  .card-info {
+    padding-top: 0.5rem;
+  }
+  .card-price-unit {
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-right: 0.5rem;
+  }
+  .card-price-num {
+    color: var(--surface-100);
+  }
+}
+
+
+.home-video {
+  padding-top: 2rem;
+  position: relative;
+  background-color: var(--black-900);
+  z-index: 20;
+  &::after, &::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background-image: url(../../../assets/images/logo/very5.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    filter: blur(20px) opacity(0.5);
+    z-index: -1;
+  }
+  &::after {
+    top: -1rem;
+    left: -3rem;
+    transform: rotateZ(20deg);
+  }
+  &::before {
+    bottom: -2rem;
+    right: -5rem;
+    transform: rotateZ(-40deg);
+  }
+  .video-title {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+    color: var(--surface-0);
+  }
+  .video-content {
+    border-bottom: 1px solid var(--surface-900);
+    padding-bottom: 4rem;
+  }
+  .video-more {
+    max-width: 20rem;
+    width: 50%;
+  }
+}
