@@ -1,3 +1,15 @@
 <div class="content-explore">
-  dsadsads
+  <div class="content-explore-title">
+    探索合集
+  </div>
+  <div class="content-explore-tabbar flex align-items-center">
+    <div class="content-explore-tabbar-item flex justify-content-center align-items-center" *ngFor="let item of tabbar; let i=index" [class]="i==tabbarIndex?'actived':''" (click)="changeIndex(i)">
+      <span>{{item.name}}</span>
+    </div>
+  </div>
+  <div class="content-explore-list flex flex-wrap">
+    <div class="content-explore-list-item" *ngFor="let items of exploreList">
+      <explore-item [item]="items"></explore-item>
+    </div>
+  </div>
 </div>

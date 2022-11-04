@@ -9,11 +9,11 @@ type exploreItem = {
   id: string;
 }[]
 @Component({
-  selector: 'app-explore',
-  templateUrl: './explore.component.html',
-  styleUrls: ['./explore.component.scss']
+  selector: 'app-allNft',
+  templateUrl: './allNft.component.html',
+  styleUrls: ['./allNft.component.scss']
 })
-export class ExploreComponent implements OnInit {
+export class AllNftComponent implements OnInit {
   tabbar: tabbarItem = [
     {
       name: $localize`热门`,

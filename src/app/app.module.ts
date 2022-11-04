@@ -10,15 +10,13 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BaseBoxComponent } from './components/base-box/base-box.component';
-import { ExploreComponent } from './page/explore/explore.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    BaseBoxComponent,
-    ExploreComponent
+    BaseBoxComponent
   ],
   imports: [
     BrowserModule,
