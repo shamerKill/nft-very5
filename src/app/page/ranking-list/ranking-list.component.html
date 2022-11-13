@@ -1,0 +1,64 @@
+<app-page-bg-box class="ranking-list-box pb-8">
+  <h2 class="ranking-list-title text-center px-4 text-4xl pt-6" i18n>NFT资产排行</h2>
+  <p class="ranking-list-describe text-center px-4 pt-4 pb-6 lg:pb-8" i18n>热门NFT资产成交量实时排名，发现流行趋势</p>
+  <app-base-box class="border-round-2xl px-3 md:px-0">
+    <p-table [value]="listData" responsiveLayout="scroll">
+      <ng-template pTemplate="header">
+        <tr class="h-4rem">
+          <th class="text-600 text-center white-space-nowrap" i18n>热门合集</th>
+          <th class="text-600 text-center white-space-nowrap" i18n>成交额</th>
+          <th class="text-600 text-center white-space-nowrap" i18n>1日 %</th>
+          <th class="text-600 text-center white-space-nowrap" i18n>7日 %</th>
+          <th class="text-600 text-center white-space-nowrap" i18n>日内均价</th>
+          <th class="text-600 text-center white-space-nowrap" i18n>地板价</th>
+          <th class="text-600 text-center white-space-nowrap" i18n>持有者</th>
+          <th class="text-600 text-center white-space-nowrap" i18n>资产总数</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>
+            <div class="flex align-items-center">
+              <p class="font-bold w-2rem">{{product.num}}</p>
+              <img
+                class="border-circle w-3rem h-3rem ml-2 mr-4"
+                [src]="product.collection.logo"
+                [alt]="product.collection.name">
+              <p class="text-xl">{{product.collection.name}}</p>
+            </div>
+          </td>
+          <td>
+            <div class="flex align-items-center justify-content-center">
+              <img class="w-1rem h-1rem mr-1" src="../../../assets/images/home/plug-logo.png" alt="plug">
+              <p class="font-bold">{{product.businessVolumeOfBaseToken}}</p>
+            </div>
+          </td>
+          <td class="text-center" [class]="checkChgDirection(product.chgRateInDay) ? 'text-green-400': 'text-red-400'">
+            {{product.chgRateInDay}}
+          </td>
+          <td class="text-center" [class]="checkChgDirection(product.chgRateInWeek) ? 'text-green-400': 'text-red-400'">
+            {{product.chgRateInWeek}}
+          </td>
+          <td>
+            <div class="flex align-items-center justify-content-center">
+              <img class="w-1rem h-1rem mr-1" src="../../../assets/images/home/plug-logo.png" alt="plug">
+              <p class="font-bold">{{product.middlePriceInDay}}</p>
+            </div>
+          </td>
+          <td>
+            <div class="flex align-items-center justify-content-center">
+              <img class="w-1rem h-1rem mr-1" src="../../../assets/images/home/plug-logo.png" alt="plug">
+              <p class="font-bold">{{product.bottomPrice}}</p>
+            </div>
+          </td>
+          <td class="text-center font-bold">
+            {{product.ownerVolume}}
+          </td>
+          <td class="text-center font-bold">
+            {{product.valuationOfNowTime}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </app-base-box>
+</app-page-bg-box>

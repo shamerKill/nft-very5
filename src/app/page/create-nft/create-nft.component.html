@@ -1,0 +1,184 @@
+<app-page-bg-box class="create-nft">
+  <app-base-box class="overflow-visible">
+    <h2
+      class="text-4xl font-bold py-4 lg:py-6 px-4 lg:px-0"
+      i18n>
+      创建收藏品
+    </h2>
+    <div class="border-round-lg w-full surface-0 px-4 gl:px-6 py-4 lg:py-6 mb-4">
+      <!--  -->
+      <div class="flex-1 flex mb-4">
+        <div class="surface-100 h-15rem w-15rem border-round-lg flex flex-column justify-content-center align-items-center text-center text-400">
+          <p class="pi pi-cloud-upload text-7xl pb-2"></p>
+          <p class="text-xl" i18n>收藏品文件</p>
+        </div>
+        <div class="flex flex-column flex-1 pl-4 align-items-start">
+          <div class="flex align-items-center pb-2">
+            <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+            <p class="text-lg font-bold" i18n>收藏品文件</p>
+          </div>
+          <p class="text-600 flex-1" i18n>
+            支持JPG、PNG、GIF
+            <br />
+            推荐尺寸 400 x 400px
+            <br />
+            大小在1M以内
+          </p>
+          <button
+            pButton
+            type="button"
+            label="选择文件"
+            class="p-button-outlined mb-4"></button>
+        </div>
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            收藏品名称&nbsp;<sup>*</sup>
+          </h3>
+        </div>
+        <input
+          class="w-9 lg:w-6 p-inputtext-lg text-base"
+          type="text"
+          pInputText
+          placeholder="好的名字能引发关联想象，吸引观众哦～"
+          i18n-placeholder />
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
+          <h3 class="text-xl" i18n>
+            外部链接
+          </h3>
+        </div>
+        <input
+          class="w-9 lg:w-6 p-inputtext-lg text-base"
+          type="text"
+          pInputText
+          placeholder="欢迎您链接到自己的网页"
+          i18n-placeholder />
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
+          <h3 class="text-xl" i18n>
+            描述
+          </h3>
+        </div>
+        <input
+          class="w-9 lg:w-6 p-inputtext-lg text-base"
+          type="text"
+          pInputText
+          placeholder="介绍你的作品，让更多人了解TA的价值"
+          i18n-placeholder />
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-2">
+          <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
+          <h3 class="text-xl" i18n>
+            属性 (选填)
+          </h3>
+        </div>
+        <p class="text-sm text-500" i18n>
+          多适用于系列作品，用以突出系列中单个收藏品的特点，例如加密猫属性，眼睛：异瞳； 独立收藏品无需设置，可直接跳过本步骤；
+        </p>
+        <div class="w-full lg:w-6 mt-4 lg:mx-0">
+          <div class="flex pb-3" *ngFor="let item of attributeList; let index = index;">
+            <input
+              class="text-base w-4 flex-1"
+              type="text"
+              pInputText
+              placeholder="属性"
+              i18n-placeholder />
+            <div class="w-1rem h-1rem"></div>
+            <input
+              class="text-base w-4 flex-1"
+              type="text"
+              pInputText
+              placeholder="值"
+              i18n-placeholder />
+            <div class="w-1rem h-1rem"></div>
+            <button
+              pButton
+              class="p-button-outlined attr-del-btn"
+              icon="pi pi-trash"
+              (click)="delAttribute(index)"
+              type="button"></button>
+          </div>
+          <button
+            pButton
+            class="w-full h-2rem flex justify-content-center add-button lg:mx-0 mx-auto"
+            icon="pi pi-pencil"
+            label="添加"
+            (click)="addAttribute()"
+            type="button"></button>
+        </div>
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 border-circle mr-3 bg-primary"></div>
+          <h3 class="text-xl" i18n>
+            收藏品副本数量
+          </h3>
+        </div>
+        <div class="w-full lg:w-6 lg:mx-0 flex justify-content-between">
+          <div id="one-btn" class="flex-1 flex px-3 py-2 border-1 border-300 border-round-sm surface-100">
+            <p-radioButton inputId="one-btn" name="nftNum" value="one" [(ngModel)]="selectedNum"></p-radioButton>
+            <div class="ml-3">
+              <p class="font-bold pb-1" i18n>单个</p>
+              <p class="text-500 text-sm" i18n>此收藏品独一无二</p>
+            </div>
+          </div>
+          <div class="w-1rem h-1rem"></div>
+          <div id="more-btn" class="flex-1 flex px-3 py-2 border-1 border-300 border-round-sm surface-100">
+            <p-radioButton inputId="more-btn" name="nftNum" value="more" [(ngModel)]="selectedNum"></p-radioButton>
+            <div class="ml-3">
+              <p class="font-bold pb-1" i18n>多个</p>
+              <p class="text-500 text-sm" i18n>此收藏品可售出多份</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 border-circle mr-3 bg-primary"></div>
+          <h3 class="text-xl" i18n>
+            选择合集
+          </h3>
+        </div>
+        <div class="flex flex-wrap">
+          <ng-container *ngFor="let item of collectionList">
+            <div
+              class="collection-item flex border-round-lg relative hidden"
+              [class]="selectedCollection === item.id ? 'collection-selected': ''"
+              (click)="changeCollection(item.id)">
+              <img class="collection-image" [src]="item.image" [alt]="item.name">
+              <div class="collection-describe text-sm border-round-lg">{{item.name}}</div>
+            </div>
+            <div class="w-1rem h-1rem"></div>
+          </ng-container>
+          <a href="">
+            <div class="collection-create-item border-round-lg flex flex-column justify-content-center align-items-center">
+              <img class="collection-create-icon w-2 h-2" src="../../../assets/images/create/add-s.png" alt="add">
+              <p class="pt-3 text-sm text-900" i18n>创建新合集</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!--  -->
+      <button
+        pButton
+        [disabled]="true"
+        class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
+        label="创建"
+        type="button"></button>
+    </div>
+  </app-base-box>
+</app-page-bg-box>

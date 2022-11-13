@@ -1,0 +1,175 @@
+<app-page-bg-box class="create-collection">
+  <app-base-box class="overflow-visible">
+    <h2
+      class="text-4xl font-bold py-4 lg:py-6 px-4 lg:px-0"
+      i18n>
+      创建新合集
+    </h2>
+    <div class="border-round-lg w-full surface-0 px-4 gl:px-6 py-4 lg:py-6 mb-4">
+      <!--  -->
+      <div>
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            上传图片
+          </h3>
+        </div>
+        <div class="flex flex-column lg:flex-row justify-content-between">
+          <div class="flex-1 flex mb-4">
+            <div class="surface-100 h-15rem w-15rem border-round-lg flex flex-column justify-content-center align-items-center text-center text-400">
+              <p class="pi pi-cloud-upload text-7xl pb-2"></p>
+              <p class="text-xl" i18n>合集主图</p>
+            </div>
+            <div class="flex flex-column flex-1 pl-4 align-items-start">
+              <p class="text-lg font-bold pb-2" i18n>合集主图</p>
+              <p class="text-600 flex-1" i18n>
+                支持JPG、PNG、GIF
+                <br />
+                推荐尺寸 400 x 400px
+                <br />
+                大小在1M以内
+              </p>
+              <button
+                pButton
+                type="button"
+                label="选择文件"
+                class="p-button-outlined mb-4"></button>
+            </div>
+          </div>
+          <div class="flex-1 flex mb-4">
+            <div class="surface-100 h-15rem w-15rem border-round-lg flex flex-column justify-content-center align-items-center text-center text-400">
+              <p class="pi pi-cloud-upload text-7xl pb-2"></p>
+              <p class="text-xl" i18n>横幅背景</p>
+            </div>
+            <div class="flex flex-column flex-1 pl-4 align-items-start">
+              <p class="text-lg font-bold pb-2" i18n>横幅背景</p>
+              <p class="text-600 flex-1" i18n>
+                支持JPG、PNG、GIF
+                <br />
+                推荐尺寸 1920 x 280px
+                <br />
+                大小在1M以内
+              </p>
+              <button
+                pButton
+                type="button"
+                label="选择文件"
+                class="p-button-outlined mb-4"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            合集名称&nbsp;<sup>*</sup>
+          </h3>
+        </div>
+        <input
+          class="w-9 lg:w-6 p-inputtext-lg text-base"
+          type="text"
+          pInputText
+          placeholder="好的名字能引发关联想象，吸引观众哦～"
+          i18n-placeholder />
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
+          <h3 class="text-xl" i18n>
+            自定义个性化网址
+          </h3>
+        </div>
+        <input
+          class="w-9 lg:w-6 p-inputtext-lg text-base"
+          type="text"
+          pInputText
+          placeholder="https://"
+          i18n-placeholder />
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            创作者收益
+          </h3>
+        </div>
+        <div class="flex flex-column-reverse lg:flex-row w-9 lg:w-6">
+          <input
+            class="p-inputtext-lg text-base flex-1"
+            type="text"
+            pInputText
+            placeholder="地址"
+            i18n-placeholder />
+          <div class="w-1rem h-1rem"></div>
+          <p-inputNumber
+            class="text-base p-0 border-none"
+            pInputText
+            suffix="%"
+            placeholder="费率"
+            [min]="0"
+            [max]="100"
+            i18n-placeholder>
+          </p-inputNumber>
+        </div>
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
+          <h3 class="text-xl" i18n>
+            社交链接
+          </h3>
+        </div>
+        <input
+          class="w-9 lg:w-6 p-inputtext-lg text-base"
+          type="text"
+          pInputText
+          placeholder="欢迎您链接到自己的网页"
+          i18n-placeholder />
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            付款代币 (多选)
+          </h3>
+        </div>
+        <p-multiSelect
+          styleClass="w-9 lg:w-6"
+          [options]="tokens"
+          tooltipPosition="bottom"
+          optionLabel="name">
+        </p-multiSelect>
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            类别
+          </h3>
+        </div>
+        <p-multiSelect
+          styleClass="w-9 lg:w-6"
+          [options]="types"
+          placeholder="选择"
+          optionLabel="name"
+          [baseZIndex]="20"
+          i18n-placeholder>
+        </p-multiSelect>
+      </div>
+      <!--  -->
+      <button
+        pButton
+        [disabled]="true"
+        class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
+        label="创建"
+        type="button"></button>
+    </div>
+  </app-base-box>
+</app-page-bg-box>

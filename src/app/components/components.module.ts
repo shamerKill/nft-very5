@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {AvatarModule} from 'primeng/avatar';
+import { PageBgBoxComponent } from './page-bg-box/page-bg-box.component';
 
 
 
@@ -21,6 +22,7 @@ import {AvatarModule} from 'primeng/avatar';
     FooterComponent,
     BaseBoxComponent,
     FilterBoxComponent,
+    PageBgBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import {AvatarModule} from 'primeng/avatar';
     FooterComponent,
     BaseBoxComponent,
     FilterBoxComponent,
+    PageBgBoxComponent,
   ]
 })
 export class ComponentsModule {

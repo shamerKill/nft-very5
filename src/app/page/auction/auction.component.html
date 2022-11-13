@@ -1,0 +1,230 @@
+<app-page-bg-box class="auction">
+  <app-base-box class="auction-top flex flex-column-reverse md:flex-row md:align-items-stretch">
+    <div class="top-image-box">
+      <img
+        class="top-image-img"
+        [src]="productInfo.image"
+        [alt]="productInfo.name">
+    </div>
+    <div class="top-info-box flex-1 flex flex-column justify-content-between">
+      <div class="info-info flex-1 pl-4 pr-6">
+        <p class="info-user">
+          <i class="pi pi-book"></i>{{productInfo.owner}}
+        </p>
+        <h3 class="info-title">
+          {{productInfo.name}} #{{productInfo.id}}
+        </h3>
+        <p class="info-followers">
+          <i class="pi pi-heart-fill"></i>{{productInfo.followerVol}} <span i18n>关注</span>
+        </p>
+      </div>
+      <div class="market-box flex align-items-center">
+        <div class="market-info flex-1 pl-4">
+          <p class="market-title" i18n>
+            最高出价
+            <span class="market-title-describe pl-1">未达保留价</span>
+          </p>
+          <p class="market-price">
+            {{marketInfo.startPriceOfBaseToken}} PC
+          </p>
+          <p class="market-price-supply">
+            &asymp;${{marketInfo.maxOutputPriceOfDollar}}
+          </p>
+        </div>
+        <button
+          pButton
+          class="market-output-btn mr-4"
+          label="竞拍出价"
+          i18n-label>
+        </button>
+        <div class="market-btn-list">
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-heart-fill"
+            class="p-button-rounded market-btns-btn">
+          </button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-replay"
+            class="p-button-rounded market-btns-btn">
+          </button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-share-alt"
+            class="p-button-rounded market-btns-btn">
+          </button>
+        </div>
+      </div>
+      <div class="info-time flex-1 px-4" *ngIf="downTimeData === undefined">
+        <p class="time-title" i18n>竞拍已结束</p>
+      </div>
+      <div class="info-time flex-1 md:px-4" *ngIf="downTimeData !== undefined">
+        <p class="time-title" i18n>距离竞拍结束</p>
+        <div class="time-show flex">
+          <div class="time-show-item">
+            <p class="time-show-text">
+              <span class="time-show-num">{{downTimeData.day[0]}}</span>
+              <span class="time-show-num">{{downTimeData.day[1]}}</span>
+            </p>
+            <p class="time-show-unit" i18n>天</p>
+          </div>
+          <div class="time-show-item">
+            <p class="time-show-text">
+              <span class="time-show-num">{{downTimeData.hour[0]}}</span>
+              <span class="time-show-num">{{downTimeData.hour[1]}}</span>
+            </p>
+            <p class="time-show-unit" i18n>时</p>
+          </div>
+          <div class="time-show-item">
+            <p class="time-show-text">
+              <span class="time-show-num">{{downTimeData.minute[0]}}</span>
+              <span class="time-show-num">{{downTimeData.minute[1]}}</span>
+            </p>
+            <p class="time-show-unit" i18n>分</p>
+          </div>
+          <div class="time-show-item">
+            <p class="time-show-text">
+              <span class="time-show-num">{{downTimeData.second[0]}}</span>
+              <span class="time-show-num">{{downTimeData.second[1]}}</span>
+            </p>
+            <p class="time-show-unit" i18n>秒</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-base-box>
+  <app-base-box class="auction-info flex flex-column lg:flex-row px-1 lg:px-0">
+    <div class="auction-box flex-1">
+      <p-tabView>
+        <p-tabPanel header="收藏品介绍" i18n-header>
+          <p class="info-"></p>
+        </p-tabPanel>
+        <p-tabPanel header="合计介绍" i18n-header>
+        </p-tabPanel>
+        <p-tabPanel header="链信息" i18n-header>
+        </p-tabPanel>
+    </p-tabView>
+    </div>
+    <div class="w-1rem h-1rem"></div>
+    <div class="auction-box flex-1">
+      <p class="auction-box-title" i18n>卖家定价</p>
+      <p-table [value]="sellerSet" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th i18n>价格</th>
+            <th i18n>USD价格</th>
+            <th i18n>过期时间</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{product.startPriceOfBaseToken}}</td>
+            <td>{{product.startPriceOfDollar}}</td>
+            <td>{{product.remainingDays|date:'yyyy/MM/dd HH:mm:ss'}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </app-base-box>
+  <app-base-box>
+    <div class="w-1rem h-1rem"></div>
+    <div class="auction-box">
+      <p class="auction-box-title" i18n>买家报价</p>
+      <p-table [value]="outputPriceList" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th i18n>价格</th>
+            <th i18n>USD价格</th>
+            <th i18n>过期时间</th>
+            <th i18n>发送方</th>
+          </tr>
+        </ng-template>
+        <ng-template *ngIf="outputPriceList.length !== 0" pTemplate="body" let-product>
+          <tr>
+            <td>{{product.priceOfBaseToken}}</td>
+            <td>{{product.priceOfDollar}}</td>
+            <td>{{product.remainingDays}}</td>
+            <td>{{product.user.name}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="4">
+              <div class="mx-auto flex flex-column align-items-center py-6">
+                <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+                <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </app-base-box>
+  <app-base-box>
+    <div class="w-1rem h-1rem"></div>
+    <div class="auction-box">
+      <p class="auction-box-title" i18n>交易历史</p>
+      <p-table [value]="marketHistoryList" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th></th>
+            <th i18n>价格</th>
+            <th i18n>发送方</th>
+            <th i18n>时间</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{product.type}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.user.name}}</td>
+            <td>{{product.time}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="4">
+              <div class="mx-auto flex flex-column align-items-center py-6">
+                <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+                <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </app-base-box>
+  <app-base-box class="pb-6">
+    <p class="auction-box-title" i18n>更多藏品</p>
+    <div class="auction-more flex flex-wrap justify-content-between" *ngIf="moreRecommend.length !== 0">
+      <div class="auction-more-outer" *ngFor="let item of moreRecommend">
+        <div class="auction-more-item">
+          <img class="auction-more-img" [src]="item.image" [alt]="item.name">
+          <div class="auction-more-info flex justify-content-between px-2 align-items-end">
+            <p class="auction-more-name">
+              {{item.name}}
+            </p>
+            <p class="auction-more-price">
+              {{item.price}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="auction-box flex flex-column align-items-center py-8" *ngIf="moreRecommend.length === 0">
+      <img class="w-4rem" src="../../../assets/images/home/no-data-more.png" alt="no-data">
+      <p class="pt-2 text-400 text-sm" i18n>没有更多信息</p>
+    </div>
+    <button
+      pButton
+      class="auction-btn-more mx-auto block mt-4"
+      label="查看合集"
+      i18n-label></button>
+  </app-base-box>
+</app-page-bg-box>
