@@ -6,12 +6,19 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './page/home/home.component';
 import { ExploreComponent } from './page/explore/explore.component';
 import { AllNftComponent } from './page/allNft/allNft.component';
+import { NftItemComponent } from './page/allNft/nftItem/nftItem.component';
+import { SearchComponent } from './page/search/search.component';
+import { CollectionComponent } from './page/collection/collection.component';
+import { UserComponent } from './page/search/user/user.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ExploreItemComponent } from './page/explore/item/item.component';
+import { GatherItemComponent } from './page/search/item/item.component';
+import { TableComponent } from './page/collection/table/table.component';
 import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { SwiperModule } from 'swiper/angular';
+import {DropdownModule} from 'primeng/dropdown';
 
 const routes: Routes = [
   {
@@ -27,6 +34,14 @@ const routes: Routes = [
     path: 'nft',
   },
   {
+    component: SearchComponent,
+    path: 'search',
+  },
+  {
+    component: CollectionComponent,
+    path: 'collection',
+  },
+  {
     component: HomeComponent,
     path: '**',
   },
@@ -36,8 +51,14 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     ExploreItemComponent,
+    GatherItemComponent,
+    NftItemComponent,
     ExploreComponent,
     AllNftComponent,
+    UserComponent,
+    SearchComponent,
+    TableComponent,
+    CollectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +69,7 @@ const routes: Routes = [
     CardModule,
     TabViewModule,
     SwiperModule,
+    DropdownModule,
     RouterModule.forRoot(routes),
   ],
   exports: [

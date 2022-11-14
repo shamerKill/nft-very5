@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import '@angular/localize';
+import SwiperCore, { Pagination } from "swiper";
+
+SwiperCore.use([Pagination]);
 
 type sortItem = {name: string; id: number};
 type exploreItem = {
@@ -10,11 +13,11 @@ type exploreItem = {
 }[]
 
 @Component({
-  selector: 'app-allNft',
-  templateUrl: './allNft.component.html',
-  styleUrls: ['./allNft.component.scss']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
 })
-export class AllNftComponent implements OnInit {
+export class SearchComponent implements OnInit {
   sortList:sortItem[]=[
     {
       name: $localize`最近转移`,
@@ -48,6 +51,31 @@ export class AllNftComponent implements OnInit {
       headImg: '../../../assets/images/explore/imgs.png',
       img: '../../../assets/images/explore/sb.jpeg',
       id: '1'
+    },{
+      name: 'NFT Brtod',
+      headImg: '../../../assets/images/explore/imgs.png',
+      img: '../../../assets/images/explore/sb1.jpeg',
+      id: '2'
+    },{
+      name: 'NFT Brtod',
+      headImg: '../../../assets/images/explore/imgs.png',
+      img: '../../../assets/images/explore/sb1.jpeg',
+      id: '2'
+    },{
+      name: 'NFT Brtod',
+      headImg: '../../../assets/images/explore/imgs.png',
+      img: '../../../assets/images/explore/sb1.jpeg',
+      id: '2'
+    },{
+      name: 'NFT Brtod',
+      headImg: '../../../assets/images/explore/imgs.png',
+      img: '../../../assets/images/explore/sb1.jpeg',
+      id: '2'
+    },{
+      name: 'NFT Brtod',
+      headImg: '../../../assets/images/explore/imgs.png',
+      img: '../../../assets/images/explore/sb1.jpeg',
+      id: '2'
     },{
       name: 'NFT Brtod',
       headImg: '../../../assets/images/explore/imgs.png',

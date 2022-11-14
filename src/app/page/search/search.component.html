@@ -1,6 +1,42 @@
 <div class="content-nft">
   <app-filter-box></app-filter-box>
   <div class="list-box">
+    <div class="list-box-name" i18n>合集结果</div>
+    <div class="list-box-swiper">
+      <swiper
+        [slidesPerView]="'auto'"
+        [spaceBetween]="30"
+        [pagination]="{
+          clickable: true
+        }"
+        class="artist-swiper"
+      >
+        <ng-template
+          swiperSlide
+          *ngFor="let item of exploreList">
+          <gather-item [item]="item"></gather-item>
+        </ng-template>
+      </swiper>
+    </div>
+    <div class="list-box-name" i18n>用户结果</div>
+    <div class="list-box-swiper">
+      <swiper
+        [slidesPerView]="'auto'"
+        [spaceBetween]="30"
+        [pagination]="{
+          clickable: true
+        }"
+        class="user-swiper"
+      >
+        <ng-template
+          swiperSlide
+          class="user-slide"
+          *ngFor="let item of exploreList">
+          <app-user></app-user>
+        </ng-template>
+      </swiper>
+    </div>
+    <div class="list-box-name" i18n>收藏品结果</div>
     <div class="list-box-title flex align-items-center justify-content-between">
       <div class="list-box-title-total flex align-items-center">
         <div class="list-box-title-total-icon flex align-items-center justify-content-center">

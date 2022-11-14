@@ -1,3 +1,77 @@
 .filter-box{
-  
+  width: 100%;
+  min-height: 80rem;
+  background-image: url('../../../assets/images/explore/filterbg.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+  padding: 2.5rem;
+  position: relative;
+  .tips{
+    position: absolute;
+    left: 0;
+    top: 6rem;
+  }
+  &-title{
+    .iconfont{
+      font-size: 1.5rem;
+    }
+  }
+  &-item{
+    border-bottom: 1px solid #F0F0F0;
+    padding: 0.45rem 0;
+    &-title{
+      height: 5.2rem;
+      cursor: pointer;
+      &-name{
+        font-size: 1.1rem;
+        color: #000;
+        font-weight: bold;
+        .iconfont{
+          font-size: 1.2rem;
+          font-weight: normal;
+          margin-right: 0.75rem;
+        }
+      }
+      &-tips{
+        font-size: 1.1rem;
+        transform: rotate(-180deg);
+        transition: 0.5s;
+        &.down{
+          transform: rotate(0deg);
+        }
+      }
+    }
+    &-list{
+      transition: 0.5s;
+      max-height: 11rem;
+      overflow: hidden;
+      &.hide{
+        max-height: 0;
+      }
+    }
+    &-options{
+      width: 100%;
+      height: 3.6rem;
+      font-size: 1rem;
+      color: #000;
+      cursor: pointer;
+      .icon{
+        img{
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+    }
+    .unit-item{
+      width: 100%;
+      font-size: 1.1rem;
+      color: #000;
+      font-weight: bold;
+      img{
+        width: 1.25rem;
+        margin-right: 0.8rem;
+      }
+    }
+  }
 }

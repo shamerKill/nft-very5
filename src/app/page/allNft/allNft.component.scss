@@ -1,7 +1,43 @@
 .content-nft{
-  background-image: url('../../../assets/images/explore/explorebg.png');
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  padding: 6rem 3rem 0;
   background-color: #F8FAFC;
+  display: flex;
+  .list-box{
+    flex: 1;
+    padding: 2rem 0 2rem 3.1rem;
+    &-title{
+      &-total{
+        &-icon{
+          margin-right: 1.3rem;
+          width: 3rem;
+          height: 3rem;
+          background: #FFFFFF;
+          border-radius: 50%;
+          cursor: pointer;
+          .iconfont{
+            font-size: 1.5rem;
+            color: #000000;
+            font-weight: bold;
+          }
+        }
+        &-num{
+          font-size: 1rem;
+          color: #010101;
+        }
+      }
+      &-sort{
+        &-icon{
+          margin-left: 1.5rem;
+          width: 3rem;
+          height: 3rem;
+          background: #FFFFFF;
+          border-radius: 50%;
+          cursor: pointer;
+          img{
+            width: 1.25rem;
+            height: 1.25rem;
+          }
+        }
+      }
+    }
+  }
 }

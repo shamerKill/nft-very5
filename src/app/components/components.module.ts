@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {AvatarModule} from 'primeng/avatar';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 
 
@@ -32,6 +34,8 @@ import {AvatarModule} from 'primeng/avatar';
     MegaMenuModule,
     AvatarModule,
     AccordionModule,
+    DropdownModule,
+    InputNumberModule
   ],
   exports: [
     HeaderComponent,
