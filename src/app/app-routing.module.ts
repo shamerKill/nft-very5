@@ -1,3 +1,5 @@
+import { MySettingComponent } from './page/my-setting/my-setting.component';
+import { MyNftComponent } from './page/my-nft/my-nft.component';
 import { SellNftComponent } from './page/sell-nft/sell-nft.component';
 import { ShowNftComponent } from './page/show-nft/show-nft.component';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +19,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CheckboxModule} from 'primeng/checkbox';
+import {TooltipModule} from 'primeng/tooltip';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 import { ComponentsModule } from './components/components.module';
 
@@ -61,6 +65,16 @@ const routes: Routes = [
     component: SellNftComponent,
     path: 'sell/nft/:id',
   },
+  // 我的关注/收藏
+  {
+    component: MyNftComponent,
+    path: 'my/nft',
+  },
+  // 我的设置
+  {
+    component: MySettingComponent,
+    path: 'my/setting',
+  },
   {
     component: ExploreComponent,
     path: 'explore',
@@ -87,6 +101,8 @@ const routes: Routes = [
     CreateNftComponent,
     ShowNftComponent,
     SellNftComponent,
+    MyNftComponent,
+    MySettingComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,6 +120,8 @@ const routes: Routes = [
     CheckboxModule,
     RadioButtonModule,
     FormsModule,
+    InputSwitchModule,
+    TooltipModule,
     RouterModule.forRoot(routes),
   ],
   exports: [

@@ -1,0 +1,10 @@
+.my-nft-box {
+  ::ng-deep {
+    .p-tabview-panels {
+      padding: 1rem 0;
+      th {
+        padding: 0.8rem 1rem;
+      }
+    }
+  }
+}

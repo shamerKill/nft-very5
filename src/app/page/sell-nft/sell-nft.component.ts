@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sell-nft.component.scss']
 })
 export class SellNftComponent implements OnInit {
+  // 付款代币列表
+  buyTokens: {name: string}[] = [
+    {name: 'PLUG'},
+    {name: 'PUSD'},
+  ];
+  // 日期列表
+  dayList: {name: string}[] = [
+    {name: $localize`1 天`},
+    {name: $localize`3 天`},
+    {name: $localize`7 天`},
+    {name: $localize`1 个月`},
+    {name: $localize`3 个月`},
+    {name: $localize`6 个月`},
+    {name: $localize`自定义`},
+  ];
 
   // 收藏品ID
   productId: string = '';
@@ -39,9 +55,38 @@ export class SellNftComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  // 出售类型 fixed / float
+  sellType: string = 'float';
+  // 选择的代币
+  selectedBuyToken = [this.buyTokens[0]];
+  // 初始价格
+  startPrice: string = '';
+  // 持续时间
+  sellTimeLine = [this.dayList[0]];
+  // 是否开启捆绑销售
+  bundleSale = true;
+  // 是否为特定卖家预留
+  designatedBuyer = true;
+
+
+  constructor(
+    public location: Location,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  // 切换类型
+  onChangeSellType(type: string) {
+    this.sellType = type;
+  }
+  // 修改价格单位
+  changeBuyToken(event: any) {
+    this.selectedBuyToken = [event.itemValue];
+  }
+  // 修改持续时间
+  changeSellTimeLine(event: any) {
+    this.sellTimeLine = [event.itemValue];
   }
 
 }

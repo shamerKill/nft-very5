@@ -1,0 +1,77 @@
+<app-page-bg-box class="my-nft-box pb-8">
+  <app-base-box>
+    <h2 class="text-4xl font-bold py-4 lg:py-6 px-4 lg:px-0 pb-5" i18n>我的关注/收藏</h2>
+    <div class="border-round-lg w-full surface-0 px-4 gl:px-6 py-4">
+      <p-tabView [activeIndex]="tabType" (onChange)="onChangeTab($event)">
+        <p-tabPanel header="关注" i18n-header>
+          <p-table [value]="followTableData" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+              <tr>
+                <th class="text-600 text-center white-space-nowrap" i18n></th>
+                <th class="text-600 font-normal text-left white-space-nowrap" i18n>用户</th>
+                <th class="text-600 font-normal text-center white-space-nowrap" i18n>地板价</th>
+                <th class="text-600 font-normal text-center white-space-nowrap" i18n>7日 %</th>
+                <th class="text-600 font-normal text-center white-space-nowrap" i18n>1日 %</th>
+                <th class="text-600 font-normal text-center white-space-nowrap" i18n>持有者</th>
+                <th class="text-600 font-normal text-center white-space-nowrap" i18n>项目</th>
+                <th class="text-600 text-center white-space-nowrap" i18n></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+              <tr>
+                <td class="text-center">{{product.id}}</td>
+                <td>
+                  <div class="flex align-items-center">
+                    <img class="w-2rem h-2rem border-circle" [src]="product.user.logo" [alt]="product.user.name">
+                    <p class="pl-1">{{product.user.name}}</p>
+                  </div>
+                </td>
+                <td>
+                  <div class="flex align-items-center justify-content-center">
+                    <img class="w-1rem h-1rem border-circle" [src]="product.minPriceUnit.logo" [alt]="product.user.name">
+                    <p class="pl-1 font-bold">{{product.minPrice}}</p>
+                  </div>
+                </td>
+                <td>
+                  <p class="text-center" [class]="product.chgInWeekDirection ? 'text-green-600' : 'text-red-600'">
+                    {{product.chgInWeek}}
+                  </p>
+                </td>
+                <td>
+                  <p class="text-center" [class]="product.chgInDayDirection ? 'text-green-600' : 'text-red-600'">
+                    {{product.chgInDay}}
+                  </p>
+                </td>
+                <td>
+                  <p class="text-center">
+                    {{product.ownersNum}}
+                  </p>
+                </td>
+                <td>
+                  <p class="text-center">
+                    {{product.productsNum}}
+                  </p>
+                </td>
+                <td>
+                  <button
+                    pButton
+                    (click)="changeFollowData(product)"
+                    class="p-button-outlined border-circle"
+                    [ngClass]="product.isFollow ? '' : 'text-400'"
+                    [icon]="product.isFollow ? 'pi pi-star-fill' : 'pi pi-star'"></button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-tabPanel>
+        <p-tabPanel header="收藏品" i18n-header>
+        </p-tabPanel>
+        <p-tabPanel header="合集" i18n-header>
+          <div *ngFor="let item of collectionTableData">
+            123
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </app-base-box>
+</app-page-bg-box>
