@@ -21,16 +21,22 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {CheckboxModule} from 'primeng/checkbox';
 import {TooltipModule} from 'primeng/tooltip';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import {DropdownModule} from 'primeng/dropdown';
 
 import { ComponentsModule } from './components/components.module';
-
-import { ExploreItemComponent } from './page/explore/item/item.component';
-import { HomeComponent } from './page/home/home.component';
-import { ExploreComponent } from './page/explore/explore.component';
-import { AllNftComponent } from './page/allNft/allNft.component';
 import { AuctionComponent } from './page/auction/auction.component';
 import { RankingListComponent } from './page/ranking-list/ranking-list.component';
 import { CreateCollectionComponent } from './page/create-collection/create-collection.component';
+import { HomeComponent } from './page/home/home.component';
+import { ExploreComponent } from './page/explore/explore.component';
+import { AllNftComponent } from './page/allNft/allNft.component';
+import { NftItemComponent } from './page/allNft/nftItem/nftItem.component';
+import { SearchComponent } from './page/search/search.component';
+import { CollectionComponent } from './page/collection/collection.component';
+import { UserComponent } from './page/search/user/user.component';
+import { ExploreItemComponent } from './page/explore/item/item.component';
+import { GatherItemComponent } from './page/search/item/item.component';
+import { TableComponent } from './page/collection/table/table.component';
 
 const routes: Routes = [
   { // 首页
@@ -84,6 +90,14 @@ const routes: Routes = [
     path: 'nft',
   },
   {
+    component: SearchComponent,
+    path: 'search',
+  },
+  {
+    component: CollectionComponent,
+    path: 'collection',
+  },
+  {
     component: HomeComponent,
     path: '**',
   },
@@ -93,6 +107,8 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     ExploreItemComponent,
+    GatherItemComponent,
+    NftItemComponent,
     ExploreComponent,
     AllNftComponent,
     AuctionComponent,
@@ -103,6 +119,10 @@ const routes: Routes = [
     SellNftComponent,
     MyNftComponent,
     MySettingComponent,
+    UserComponent,
+    SearchComponent,
+    TableComponent,
+    CollectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -122,6 +142,7 @@ const routes: Routes = [
     FormsModule,
     InputSwitchModule,
     TooltipModule,
+    DropdownModule,
     RouterModule.forRoot(routes),
   ],
   exports: [

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import '@angular/localize';
 
 type sortItem = {name: string; id: number};
 type exploreItem = {
@@ -10,11 +9,11 @@ type exploreItem = {
 }[]
 
 @Component({
-  selector: 'app-allNft',
-  templateUrl: './allNft.component.html',
-  styleUrls: ['./allNft.component.scss']
+  selector: 'app-collection',
+  templateUrl: './collection.component.html',
+  styleUrls: ['./collection.component.scss']
 })
-export class AllNftComponent implements OnInit {
+export class CollectionComponent implements OnInit {
   sortList:sortItem[]=[
     {
       name: $localize`最近转移`,
@@ -59,8 +58,21 @@ export class AllNftComponent implements OnInit {
   switchList(type:number) {
     this.listType = type;
   };
-  constructor() {
-  }
+  showMore:boolean=false;
+  clickMore() {
+    this.showMore = !this.showMore;
+  };
+  tabbar:string[]=[
+    $localize`收藏品`,
+    $localize`创建的`,
+    $localize`合集`,
+    $localize`交易历史`,
+  ]
+  tabActive:number=0;
+  checkTab(i:number) {
+    this.tabActive = i;
+  };
+  constructor() { }
 
   ngOnInit(): void {
   }
