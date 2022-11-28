@@ -34,6 +34,15 @@ export const ToolFuncLinkWallet = async (login$: NetService['signLogin$'], init:
 	}
 	const accountType = await cosmo.getAccountType();
 	const accountAddress = await cosmo.getAccount();
+  if (init) {
+    return {
+      isLinked: false,
+      isWallet: deviceType === 'wallet',
+      isWeb: deviceType === 'web',
+      accountAddress: accountAddress??'',
+      accountType: accountType === 'PRC20' ? 'PRC20' : 'PRC10'
+    };
+  }
   // 进行签名
   let sign: string | undefined;
   if (deviceType === 'web') {

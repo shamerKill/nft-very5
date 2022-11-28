@@ -74,6 +74,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
   ngOnInit(): void {
     this.listenWalletInfo();
     this.initMenu();
+    this.checkLoginType();
   }
 
   initMenu() {
@@ -105,6 +106,21 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
         ]
       },
     ];
+  }
+
+  /**
+   * 判断是否已经登录
+   **/
+  private async checkLoginType() {
+    const result = await ToolFuncLinkWallet(this.netService.signLogin$.bind(this.netService), true);
+    if (result?.accountAddress !== null) {
+      this.netService.getMyNFTList$().pipe(this.pipeSwitch$()).subscribe(({code}) => {
+        if (code === 200 && result) {
+          result.isLinked = true;
+          this.stateService.linkedWallet$.next(result);
+        }
+      });
+    }
   }
 
   /**
