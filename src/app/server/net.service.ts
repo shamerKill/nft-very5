@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throttleTime } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 // 数据类型
 type TypeInterfaceNet<T=any> = {
@@ -14,7 +15,7 @@ type TypeInterfaceNet<T=any> = {
 })
 export class NetService {
 
-  private apiUrl = 'http://47.243.114.57:9999/';
+  private apiUrl = environment.apiPath;
   private $url = (path: string) => `${this.apiUrl}${path}`;
 
   constructor(
@@ -49,10 +50,10 @@ export class NetService {
   }
 
   /**
-   * 推出登录
+   * 退出登录
    **/
   outLogin$() {
-    return this.http.post<TypeInterfaceNet>(this.$url('v1/my/loginOut'), null);
+    return this.http.post<TypeInterfaceNet>(this.$url('v1/my/loginOut'), null, { withCredentials: true });
   }
 
 }

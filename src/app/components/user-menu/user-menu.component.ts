@@ -1,10 +1,9 @@
 import { BaseMessageService } from './../../server/base-message.service';
 import { NetService } from './../../server/net.service';
-import { MessageService } from 'primeng/api';
 import { ToolFuncTimeSleep } from './../../tools/functions/time';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 import { StateService } from './../../server/state.service';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { Router } from '@angular/router';
 

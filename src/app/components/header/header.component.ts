@@ -1,11 +1,10 @@
-import { BaseMessageService } from './../../server/base-message.service';
 import { NetService } from './../../server/net.service';
-import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { BaseMessageService } from './../../server/base-message.service';
 import { StateService } from './../../server/state.service';
-import { Component, OnInit } from '@angular/core';
-import { MegaMenuItem, MenuItem, MessageService } from 'primeng/api';
 import { ToolFuncLinkWallet } from 'src/app/tools/functions/wallet';
-import { filter } from 'rxjs';
+import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { Component, OnInit } from '@angular/core';
+import { MegaMenuItem, MenuItem } from 'primeng/api';
 
 type TypeLinkList = {name: string; link: string}[];
 
@@ -140,5 +139,9 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
       !this.stateService.userMenuState$.value
     );
   }
+
+  /**
+   * 前往首页
+   **/
 
 }

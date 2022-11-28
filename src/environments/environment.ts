@@ -3,9 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  projectName: 'very5',
   production: false,
+  projectName: 'very5',
   signStr: 'very5',
+  apiPath: '/api/',
 };
 
 /*
