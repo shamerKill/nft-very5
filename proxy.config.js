@@ -1,10 +1,10 @@
 const PROXY_CONFIG = {
-  "/api": {
+  "/proxy": {
       "target": "http://47.243.114.57:9999/",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {
-        "^/api": ""
+        "^/proxy": ""
       },
       "onProxyRes": function (proxyRes, req, res) {
         var cookies = proxyRes.headers['set-cookie'];

@@ -2,7 +2,7 @@ import { BaseMessageService } from './../../server/base-message.service';
 import { NetService } from './../../server/net.service';
 import { ToolFuncTimeSleep } from './../../tools/functions/time';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
-import { StateService } from './../../server/state.service';
+import { StateService, accountStoreInit } from './../../server/state.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { Router } from '@angular/router';
@@ -114,6 +114,8 @@ export class UserMenuComponent extends ToolClassAutoClosePipe implements OnInit 
     this.net.outLogin$().subscribe(data => {
       if (data.code === 200) {
         this.baseMessage.success($localize`退出成功`);
+        this.stateService.linkedWallet$.next(accountStoreInit);
+        this.stateService.userMenuState$.next(false);
       } else {
         this.baseMessage.warn($localize`退出失败`);
       }

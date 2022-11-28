@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   projectName: 'very5',
   signStr: 'very5',
-  apiPath: '/api/',
+  apiPath: '/proxy/',
 };
 
 /*

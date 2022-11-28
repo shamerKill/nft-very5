@@ -62,7 +62,7 @@ export class NetService {
    **/
   // 此处调用时this指向错误，需用箭头函数
   signLogin$(message: string, signStr: string) {
-    return this.$post(this.$url('v1/auth/login'), { signStr, message }).pipe(throttleTime(1000));
+    return this.$post('v1/auth/login', { signStr, message }).pipe(throttleTime(1000));
   }
 
   /**
