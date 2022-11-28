@@ -35,3 +35,20 @@ export function ToolFuncNumAddZero(input: number, length = 2): string {
   }
   return outArr.join('');
 }
+export function ToolFuncTimeToFormatBig(input: TypeToolFuncDownTime<number>): string {
+  if (input.day !== 0) return input.day + $localize`天`;
+  if (input.hour !== 0) return input.hour + $localize`时`;
+  if (input.minute !== 0) return input.minute + $localize`分`;
+  if (input.second !== 0) return input.minute + $localize`秒`;
+  return '';
+}
+
+
+/**
+ * 睡眠函数
+ * @param time 秒数
+**/
+export const ToolFuncTimeSleep = (time: number) => {
+  const sleepTime = Math.floor(time * 1000) || 0;
+  return new Promise<void>(resolve => setTimeout(resolve, sleepTime));
+}

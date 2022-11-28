@@ -1,5 +1,11 @@
+import { BaseMessageService } from './../../server/base-message.service';
+import { NetService } from './../../server/net.service';
+import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { StateService } from './../../server/state.service';
 import { Component, OnInit } from '@angular/core';
-import {MegaMenuItem,MenuItem} from 'primeng/api';
+import { MegaMenuItem, MenuItem, MessageService } from 'primeng/api';
+import { ToolFuncLinkWallet } from 'src/app/tools/functions/wallet';
+import { filter } from 'rxjs';
 
 type TypeLinkList = {name: string; link: string}[];
 
@@ -8,7 +14,7 @@ type TypeLinkList = {name: string; link: string}[];
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
 
   // 搜索内容
   searchText: string = '';
@@ -58,9 +64,16 @@ export class HeaderComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    public stateService: StateService,
+    private BaseMessage: BaseMessageService,
+    private netService: NetService,
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
+    this.listenWalletInfo();
     this.initMenu();
   }
 
@@ -95,11 +108,37 @@ export class HeaderComponent implements OnInit {
     ];
   }
 
-  // 关联钱包方法
-  linkWallet() {
-    if (this.hadAccount === false) {
-      this.hadAccount = true;
+  /**
+   * 监听账户信息
+  **/
+  private listenWalletInfo() {
+    this.stateService.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(data => {
+      this.hadAccount = data.isLinked;
+    });
+  }
+
+  /**
+   * 关联钱包方法
+  **/
+  async onLinkWallet() {
+    this.stateService.globalLoadingSwitch(true);
+    // this指向修改
+    const result = await ToolFuncLinkWallet(this.netService.signLogin$.bind(this.netService));
+    this.stateService.globalLoadingSwitch(false);
+    if (result == null) {
+      this.BaseMessage.warn($localize`获取账户失败`);
+      return;
     }
+    this.stateService.linkedWallet$.next(result);
+  }
+
+  /**
+   * 展示个人菜单栏
+   **/
+  onSwitchUserMenu() {
+    this.stateService.userMenuState$.next(
+      !this.stateService.userMenuState$.value
+    );
   }
 
 }

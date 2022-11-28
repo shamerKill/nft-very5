@@ -147,7 +147,7 @@ export class AuctionComponent extends ToolClassAutoClosePipe implements OnInit {
 
   // 注册读取收藏品ID
   #getProductIdByPath() {
-    this.route.paramMap.pipe(this.$pipeSwitch()).subscribe((input) => {
+    this.route.paramMap.pipe(this.pipeSwitch$()).subscribe((input) => {
       if (input.has('id') && input.get('id') !== null) {
         this.productId = input.get('id')!;
       } else {
@@ -158,7 +158,7 @@ export class AuctionComponent extends ToolClassAutoClosePipe implements OnInit {
 
   // 获取倒计时
   #getDownTime(time: number) {
-    const timer = interval(1000).pipe(this.$pipeSwitch()).subscribe((didTime) => {
+    const timer = interval(1000).pipe(this.pipeSwitch$()).subscribe((didTime) => {
       const hadTime = time - didTime * 1000;
       if (hadTime <= 0) {
         timer.unsubscribe();

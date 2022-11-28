@@ -34,3 +34,8 @@ html {
 .float-r {
   float: right;
 }
+.no-focus {
+  &:focus {
+    box-shadow: none;
+  }
+}

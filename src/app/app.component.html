@@ -1,7 +1,11 @@
 <div id="base-root" class="flex flex-column">
   <app-header></app-header>
-  <div class="flex-1">
+  <div id="root-content" class="flex-1 relative">
     <router-outlet></router-outlet>
   </div>
   <app-footer></app-footer>
+  <app-user-menu></app-user-menu>
+  <app-loading></app-loading>
 </div>
+
+<p-toast></p-toast>

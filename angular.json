@@ -47,7 +47,10 @@
               "node_modules/primeng/resources/primeng.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "cosmo-wallet-tool"
+            ]
           },
           "configurations": {
             "production": {

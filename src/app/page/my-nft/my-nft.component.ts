@@ -1,8 +1,7 @@
-import { TypeToolFuncDownTime } from './../../tools/functions/time';
+import { ToolFuncFormatTime, ToolFuncTimeToFormatBig, TypeToolFuncDownTime } from './../../tools/functions/time';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-my-nft',
@@ -58,6 +57,7 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
   // 收藏品数据
   ownTableData: {
     id: string;
+    image: string;
     // 合集数据
     collectionInfo: {
       name: string;
@@ -75,9 +75,11 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
     auctionInfo: {
       inAuctioning: boolean;
       endTime?: TypeToolFuncDownTime;
+      showTime?: string;
     }
-  }[] = Array(5).fill(0).map(_ => ({
-    id: '1',
+  }[] = Array(5).fill(0).map((_, index) => ({
+    id: `${index + 1}`,
+    image: '../../../assets/images/cache/home/矩形 5.png',
     collectionInfo: {
       name: 'BUTTON',
       id: '12',
@@ -88,9 +90,11 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
       name: 'PC',
       logo: '../../../assets/images/home/plug-logo.png'
     },
-    isFollow: true,
+    isFollow: Math.random() < 0.5,
     auctionInfo: {
-      inAuctioning: false,
+      inAuctioning: true,
+      endTime: ToolFuncFormatTime(1000000),
+      showTime: ToolFuncTimeToFormatBig(ToolFuncFormatTime(1000000)),
     }
   }));
 
@@ -108,10 +112,10 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
     describe: string;
     // 是否关注
     isFollow: boolean;
-  }[] = Array(4).fill(0).map(_ => ({
-    id: '1',
-    mainImage: '../../../assets/images/home/plug-logo.png',
-    bgImage: '../../../assets/images/home/plug-logo.png',
+  }[] = Array(4).fill(0).map((_, index) => ({
+    id: `${index + 1}`,
+    mainImage: '../../../assets/images/cache/home/矩形 5.png',
+    bgImage: '../../../assets/images/explore/sb.jpeg',
     name: 'BUTTONS',
     describe: 'THIS IS BUTTONS',
     isFollow: true,
@@ -120,7 +124,6 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location,
   ) {
     super();
     this.getQueryData();
@@ -131,7 +134,7 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
 
   // 获取query数据
   getQueryData() {
-    this.route.queryParams.pipe(this.$pipeSwitch()).subscribe((data) => {
+    this.route.queryParams.pipe(this.pipeSwitch$()).subscribe((data) => {
       if (data['type'] === 'follow') this.tabType = 0;
       if (data['type'] === 'own') this.tabType = 1;
       if (data['type'] === 'collection') this.tabType = 2;
@@ -155,6 +158,24 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
     for (let i = 0; i < this.followTableData.length; i++) {
       if (this.followTableData[i].id === item.id) {
         this.followTableData[i].isFollow = !this.followTableData[i].isFollow;
+        break;
+      }
+    }
+  }
+  // 修改收藏品数据
+  changeOwnData(item: any) {
+    for (let i = 0; i < this.ownTableData.length; i++) {
+      if (this.ownTableData[i].id === item.id) {
+        this.ownTableData[i].isFollow = !this.ownTableData[i].isFollow;
+        break;
+      }
+    }
+  }
+  // 修改合集数据
+  changeCollectionData(item: any) {
+    for (let i = 0; i < this.collectionTableData.length; i++) {
+      if (this.collectionTableData[i].id === item.id) {
+        this.collectionTableData[i].isFollow = !this.collectionTableData[i].isFollow;
         break;
       }
     }

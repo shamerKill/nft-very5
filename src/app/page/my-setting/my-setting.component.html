@@ -2,6 +2,103 @@
   <app-base-box>
     <h2 class="text-4xl font-bold py-4 lg:py-6 px-4 lg:px-0 pb-5" i18n>设置个人信息</h2>
     <div class="border-round-lg w-full surface-0 px-4 gl:px-6 py-4">
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            头像
+          </h3>
+        </div>
+      </div>
+      <!--  -->
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            主页封面图
+          </h3>
+        </div>
+      </div>
+      <!--  -->
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            用户名
+          </h3>
+        </div>
+        <input
+          class="w-9 lg:w-6 p-inputtext-lg text-base"
+          type="text"
+          pInputText
+          placeholder="4-60个字符，支持中英文、数字、下划线和减号"
+          i18n-placeholder />
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
+          <h3 class="text-xl" i18n>
+            简介
+          </h3>
+        </div>
+        <input
+          class="w-9 lg:w-6 p-inputtext-lg text-base"
+          type="text"
+          pInputText
+          placeholder="请输入个人简介"
+          i18n-placeholder />
+      </div>
+      <!--  -->
+      <div class="pb-2">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
+          <h3 class="text-xl" i18n>
+            添加链接
+          </h3>
+        </div>
+        <div class="w-9 lg:w-6 p-input-icon-left">
+          <i class="pi pi-flag-fill"></i>
+          <input
+            class="w-full p-inputtext-lg text-base"
+            type="text"
+            pInputText
+            placeholder="网站"
+            i18n-placeholder />
+        </div>
+      </div>
+      <div class="pb-2">
+        <div class="w-9 lg:w-6 p-input-icon-left">
+          <i class="pi pi-twitter"></i>
+          <input
+            class="w-full p-inputtext-lg text-base"
+            type="text"
+            pInputText
+            placeholder="https://twitter.com/"
+            i18n-placeholder />
+        </div>
+      </div>
+      <div class="pb-2">
+        <div class="w-9 lg:w-6 p-input-icon-left">
+          <i class="pi pi-telegram"></i>
+          <input
+            class="w-full p-inputtext-lg text-base"
+            type="text"
+            pInputText
+            placeholder="https://t.me/"
+            i18n-placeholder />
+        </div>
+      </div>
+      <!--  -->
+      <button
+        pButton
+        [disabled]="true"
+        class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
+        label="提交"
+        type="button"></button>
     </div>
   </app-base-box>
 </app-page-bg-box>

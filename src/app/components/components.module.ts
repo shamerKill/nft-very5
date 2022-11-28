@@ -1,3 +1,5 @@
+import { SlicePipePipe } from '../tools/pipe/slice-pipe.pipe';
+import { ToastModule } from 'primeng/toast';
 import { AccordionModule } from 'primeng/accordion';
 import { FilterBoxComponent } from './filter-box/filter-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +17,9 @@ import {AvatarModule} from 'primeng/avatar';
 import { PageBgBoxComponent } from './page-bg-box/page-bg-box.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputNumberModule} from 'primeng/inputnumber';
+import { UserMenuComponent } from './user-menu/user-menu.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -25,6 +30,9 @@ import {InputNumberModule} from 'primeng/inputnumber';
     BaseBoxComponent,
     FilterBoxComponent,
     PageBgBoxComponent,
+    UserMenuComponent,
+    SlicePipePipe,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +45,9 @@ import {InputNumberModule} from 'primeng/inputnumber';
     AvatarModule,
     AccordionModule,
     DropdownModule,
-    InputNumberModule
+    InputNumberModule,
+    ToastModule,
+    ClipboardModule,
   ],
   exports: [
     HeaderComponent,
@@ -45,6 +55,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
     BaseBoxComponent,
     FilterBoxComponent,
     PageBgBoxComponent,
+    UserMenuComponent,
+    LoadingComponent,
   ]
 })
 export class ComponentsModule {

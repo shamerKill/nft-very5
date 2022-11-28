@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { MySettingComponent } from './page/my-setting/my-setting.component';
 import { MyNftComponent } from './page/my-nft/my-nft.component';
 import { SellNftComponent } from './page/sell-nft/sell-nft.component';
@@ -22,6 +23,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {TooltipModule} from 'primeng/tooltip';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {DropdownModule} from 'primeng/dropdown';
+import {ToastModule} from 'primeng/toast';
 
 import { ComponentsModule } from './components/components.module';
 import { AuctionComponent } from './page/auction/auction.component';
@@ -143,10 +145,14 @@ const routes: Routes = [
     InputSwitchModule,
     TooltipModule,
     DropdownModule,
+    ToastModule,
     RouterModule.forRoot(routes),
   ],
   exports: [
     RouterModule,
+  ],
+  providers: [
+    MessageService,
   ]
 })
 export class AppRoutingModule {

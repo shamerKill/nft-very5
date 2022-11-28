@@ -5,6 +5,7 @@
 export const environment = {
   projectName: 'very5',
   production: false,
+  signStr: 'very5',
 };
 
 /*

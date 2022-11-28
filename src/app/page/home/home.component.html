@@ -15,7 +15,7 @@
       <p-button styleClass="first-btn-outline" i18n>创造NFT</p-button>
     </div>
 
-    <app-base-box class="first-pic-pc hidden lg:block">
+    <app-base-box *ngIf="firstCards.initiated" class="first-pic-pc hidden lg:block">
       <ng-container *ngFor="let item of firstCards.items">
         <p-card
           class="first-pic-container"
@@ -32,7 +32,33 @@
         </p-card>
       </ng-container>
     </app-base-box>
-    <app-base-box class="first-pic-web lg:hidden">
+    <app-base-box *ngIf="firstCards.initiated" class="first-pic-web lg:hidden">
+      <swiper
+        [centeredSlides]="true"
+        [slidesPerView]="'auto'"
+        [loop]="true"
+        [spaceBetween]="30"
+        class="first-swiper"
+      >
+        <ng-template
+          swiperSlide
+          *ngFor="let item of firstCards.items">
+          <p-card
+            class="first-pic-container"
+            styleClass="first-pic-card">
+            <ng-template pTemplate="header">
+              <img class="card-image" [src]="item.image" [alt]="item.name">
+            </ng-template>
+            <p class="card-name">
+              {{item.name}}
+            </p>
+            <p class="card-described">
+              {{item.owner}} #{{item.id}}
+            </p>
+          </p-card>
+        </ng-template>
+      </swiper>
+
     </app-base-box>
   </app-base-box>
 </div>
@@ -53,7 +79,7 @@
   </div>
   <p-tabView [activeIndex]="assetsRank.index" (onChange)="onChangeAssetsRankIndex($event.index)">
     <p-tabPanel *ngFor="let rank of assetsRank.list">
-      <div class="rank-list flex flex-column flex-wrap justify-content-between">
+      <div class="rank-list flex flex-column flex-wrap justify-content-between w-full overflow-hidden">
         <div class="rank-card flex align-items-center" *ngFor="let item of rank.data">
           <p class="card-number">{{item.number}}</p>
           <img class="card-logo" [src]="item.logo" [alt]="item.name" />
@@ -263,3 +289,5 @@
     </div>
   </app-base-box>
 </div>
+
+

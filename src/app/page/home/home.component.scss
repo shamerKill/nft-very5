@@ -20,6 +20,9 @@
     &-info {
       position: relative;
       padding-bottom: 20rem;
+      @include media-phone{
+        padding-bottom: 0;
+      }
     }
     &-bg {
       position: absolute;
@@ -166,6 +169,12 @@
     }
   }
   ::ng-deep {
+    .swiper {
+      width: 100%;
+    }
+    .swiper-slide {
+      width: auto;
+    }
     @function cardTouch($deg) {
       @return rotateZ($deg+deg) scale(1.05);
     }
@@ -177,6 +186,10 @@
       position: absolute;
       transition: transform 0.3s;
       cursor: pointer;
+      @include media-phone {
+        position: initial;
+        transform: none!important;
+      }
       .p-card-body {
         padding: 0;
       }
@@ -185,6 +198,8 @@
       }
       .card-image {
         border-radius: 0.5rem;
+        height: 10rem;
+        object-fit: contain;
       }
       .card-name {
         font-size: 1.1rem;
@@ -196,6 +211,9 @@
       }
     }
     .first-pic-container {
+      @include media-phone {
+        display: inline-block;
+      }
       &:nth-child(1) .first-pic-card {
         top: 5%;
         left: 5%;

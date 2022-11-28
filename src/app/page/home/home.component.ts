@@ -1,7 +1,11 @@
+import { BaseMessageService } from './../../server/base-message.service';
+import { ToolFuncGetChg } from './../../tools/functions/number';
+import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { NetService } from './../../server/net.service';
 import { DatabaseService } from './../../server/database.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import SwiperCore, { Pagination } from "swiper";
+import { MessageService } from 'primeng/api';
 
 SwiperCore.use([Pagination]);
 
@@ -10,42 +14,19 @@ SwiperCore.use([Pagination]);
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
   // 首屏card数据
-  firstCards = {
+  firstCards: {
+    initiated: boolean;
+    items: {
+      image: string;
+      name: string;
+      owner: string;
+      id: string;
+    }[];
+} = {
     initiated: false,
-    items: [
-      {
-        image: '../../../assets/images/cache/home/矩形 5.png',
-        name: 'Geek Dude',
-        owner: 'Dude',
-        id: '87534',
-      },
-      {
-        image: '../../../assets/images/cache/home/矩形 5.png',
-        name: 'Geek Dude',
-        owner: 'Dude',
-        id: '87534',
-      },
-      {
-        image: '../../../assets/images/cache/home/矩形 5.png',
-        name: 'Geek Dude',
-        owner: 'Dude',
-        id: '87534',
-      },
-      {
-        image: '../../../assets/images/cache/home/矩形 5.png',
-        name: 'Geek Dude',
-        owner: 'Dude',
-        id: '87534',
-      },
-      {
-        image: '../../../assets/images/cache/home/矩形 5.png',
-        name: 'Geek Dude',
-        owner: 'Dude',
-        id: '87534',
-      }
-    ]
+    items: []
   }
 
   // 资产排行榜数据
@@ -68,27 +49,11 @@ export class HomeComponent implements OnInit {
     list: [
       {
         title: $localize`24小时`,
-        data: Array(15).fill(0).map((_, index) => ({
-          number: `${index + 1}`,
-          name: 'hello world',
-          logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          assets: '99000.09',
-          chgRate: '20.989%',
-          direction: true,
-          id: '2012',
-        }))
+        data: []
       },
       {
         title: $localize`7天`,
-        data: Array(15).fill(0).map((_, index) => ({
-          number: `${index + 1}`,
-          name: 'hello world',
-          logo: '../../../assets/images/cache/home/矩形 12 拷贝 3.png',
-          assets: '99000.09',
-          chgRate: '-20.989%',
-          direction: false,
-          id: '2012',
-        }))
+        data: []
       },
       {
         title: $localize`30天`,
@@ -335,14 +300,55 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public dataBase: DatabaseService,
-    private router: Router,
+    private net: NetService,
+    private BaseMessage: BaseMessageService,
   ) {
+    super();
   }
 
   ngOnInit(): void {
+    // 获取数据
+    this.net.getHomeData$().pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+      if (code !== 200) return this.BaseMessage.warn(msg??'');
+      console.log(data);
+      this.formatTopData(data.top);
+      this.formatAssertRanking(data.ranking);
+    });
   }
 
-  // 更改资产排行榜tab
+  // 处理顶部数据
+  private formatTopData(input: any[]) {
+    this.firstCards.initiated = true;
+    this.firstCards.items = input.map(item => ({
+      image: item.NftOriginal.Image,
+      name: item.NftOriginal.Name,
+      owner: item.Owner,
+      id: item.TokenID,
+    }));
+  }
+  // 处理资产排行
+  private formatAssertRanking(input: any) {
+    const _doMap = (item: any, index: number) => {
+      const { str, dir } = ToolFuncGetChg(item.BeforePrice, item.CurrentPrice);
+      return {
+        number: index + 1,
+        name: item.NftOriginal.Name,
+        logo: item.NftOriginal.Image,
+        assets: item.CurrentPrice,
+        chgRate: str,
+        direction: dir,
+        id: item.ID,
+      };
+    };
+    this.assetsRank.list[0].data = input.dayRanking.map(_doMap);
+    this.assetsRank.list[1].data = input.weekRanking.map(_doMap);
+    this.assetsRank.list[2].data = input.monthRanking.map(_doMap);
+  }
+
+
+  /**
+   * 更改资产排行榜tab
+   **/
   onChangeAssetsRankIndex(index: number) {
     if (index < 0) {
       this.assetsRank.index = 0;
@@ -353,7 +359,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  // 更改探索市场tab
+  /**
+   * 更改探索市场tab
+   **/
   onChangeExploreMarketIndex(index: number) {
     if (index < 0) {
       this.exploreMarket.index = 0;
