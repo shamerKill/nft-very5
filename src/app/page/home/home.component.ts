@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { BaseMessageService } from './../../server/base-message.service';
 import { ToolFuncGetChg } from './../../tools/functions/number';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
@@ -57,15 +58,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       },
       {
         title: $localize`30天`,
-        data: Array(15).fill(0).map((_, index) => ({
-          number: `${index + 1}`,
-          name: 'hello world',
-          logo: '../../../assets/images/cache/home/椭圆 3 拷贝.png',
-          assets: '99000.09',
-          chgRate: '20.989%',
-          direction: true,
-          id: '2012',
-        }))
+        data: []
       }
     ],
   };
@@ -80,91 +73,26 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       collectionNum: number, // 收藏品数量
       ownerNum: number, // 持有者数量
       id: string, // id
-      collectionList: {
+      nftList: {
         logo: string, // 用户logo
         id: string, // id
       }[] // 收藏品列表
     }[],
   } = {
     index: 0,
-    list: [
-      {
-        name: 'SUPER JOJO 1',
-        logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-        favorite: true,
-        collectionNum: 200,
-        ownerNum: 123,
-        id: '8903',
-        collectionList: [
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-        ]
-      },
-      {
-        name: 'SUPER JOJO 2',
-        logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-        favorite: false,
-        collectionNum: 200,
-        ownerNum: 123,
-        id: '8903',
-        collectionList: [
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-        ]
-      },
-      {
-        name: 'SUPER JOJO 3',
-        logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-        favorite: false,
-        collectionNum: 200,
-        ownerNum: 123,
-        id: '8903',
-        collectionList: [
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-        ]
-      },
-      {
-        name: 'SUPER JOJO 4',
-        logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-        favorite: false,
-        collectionNum: 200,
-        ownerNum: 123,
-        id: '8903',
-        collectionList: [
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-        ]
-      },
-      {
-        name: 'SUPER JOJO 5',
-        logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-        favorite: false,
-        collectionNum: 200,
-        ownerNum: 123,
-        id: '8903',
-        collectionList: [
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-          { logo: '../../../assets/images/cache/home/矩形 12 拷贝 2@2x.png', id: '123' },
-        ]
-      }
-    ]
+    list: []
   };
 
   // 探索市场数据
   exploreMarket: {
-    index: number, // tab选项
+    index: BehaviorSubject<number>, // tab选项
     list: {
       title: string, // tab按钮标题
+      key: string; // 接口调用值
+      loaded: boolean; // 是否加载中
       data: {
-        ownerName: string, // 拥有者名字
-        ownerLogo: string, // 拥有者logo
+        collectionName: string, // 合集名字
+        sellType: number, // 售卖方式/1售卖|2拍卖
         image: string; // 资产
         id: string, // 编号
         name: string; // 名字
@@ -172,128 +100,49 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       }[], // 列表数据
     }[],
   } = {
-    index: 0,
+    index: new BehaviorSubject(0),
     list: [
       {
         title: $localize`热门`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
+        key: '热门',
+        loaded: false,
+        data: []
       },
       {
         title: $localize`艺术`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
+        key: '艺术',
+        loaded: false,
+        data: []
       },
       {
         title: $localize`收藏品`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
+        key: '收藏品',
+        loaded: false,
+        data: []
       },
       {
         title: $localize`虚拟世界`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
+        key: '虚拟世界',
+        loaded: false,
+        data: []
       },
       {
         title: $localize`音乐`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
+        key: '音乐',
+        loaded: false,
+        data: []
       },
       {
         title: $localize`实用`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
+        key: '实用',
+        loaded: false,
+        data: []
       },
       {
         title: $localize`体育`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
-      },
-      {
-        title: $localize`体育`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
-      },
-      {
-        title: $localize`体育`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
-      },
-      {
-        title: $localize`体育`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
-      },
-      {
-        title: $localize`体育`,
-        data: Array(6).fill(0).map(() => ({
-          ownerName: 'DuDuDu',
-          ownerLogo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-          image: '../../../assets/images/cache/home/矩形 5.png',
-          name: 'hello world',
-          id: '2012',
-          price: '20123.12',
-        }))
+        key: '热门',
+        loaded: false,
+        data: []
       }
     ],
   };
@@ -310,10 +159,12 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
     // 获取数据
     this.net.getHomeData$().pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      console.log(data);
       this.formatTopData(data.top);
       this.formatAssertRanking(data.ranking);
+      this.formatArtist(data.artist);
     });
+    // 监听探索市场数据
+    this.exploreMarket.index.pipe(this.pipeSwitch$()).subscribe(this.getExploreData.bind(this));
   }
 
   // 处理顶部数据
@@ -344,7 +195,39 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
     this.assetsRank.list[1].data = input.weekRanking.map(_doMap);
     this.assetsRank.list[2].data = input.monthRanking.map(_doMap);
   }
-
+  // 顶级合集
+  private formatArtist(input: any) {
+    this.artistList.list = input.map((item: any) => ({
+      name: item.CollectionOriginal.Name,
+      logo: item.ImageUrl,
+      favorite: item.IsFocus || false,
+      collectionNum: item.AssetCount,
+      ownerNum: item.HaveNumber,
+      id: item.CollectionOriginal.ID,
+      nftList: item.Nfts.map((nft: any) => ({
+        logo: nft.NftOriginal.Image,
+        id: nft.ID
+      }))
+    }));
+    if (this.artistList.list.length > 2) this.artistList.index = 1;
+  }
+  // 获取探索市场数据
+  getExploreData(input: number) {
+    const key = this.exploreMarket.list[input].key;
+    this.net.getNefListByFilter$({category: key}).pipe(this.pipeSwitch$()).subscribe(data => {
+      this.exploreMarket.list[input].loaded = true;
+      if (data.code === 200) {
+        this.exploreMarket.list[input].data = data.data.map((item: any) => ({
+          collectionName: item.CollectionName,
+          sellType: item.sellingType,
+          image: item.NftOriginal.Image,
+          id: item.NftOriginal.ID,
+          name: item.NftOriginal.Name,
+          price: item.CurrentPrice,
+        }));
+      }
+    });
+  }
 
   /**
    * 更改资产排行榜tab
@@ -364,11 +247,11 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
    **/
   onChangeExploreMarketIndex(index: number) {
     if (index < 0) {
-      this.exploreMarket.index = 0;
+      this.exploreMarket.index.next(0);
     } else if (index >= this.exploreMarket.list.length - 1) {
-      this.exploreMarket.index = this.exploreMarket.list.length - 1;
+      this.exploreMarket.index.next(this.exploreMarket.list.length - 1);
     } else {
-      this.exploreMarket.index = index;
+      this.exploreMarket.index.next(index);
     }
   }
 

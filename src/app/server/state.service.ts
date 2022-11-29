@@ -1,5 +1,3 @@
-import { ToolFuncTimeSleep } from './../tools/functions/time';
-import { ToolFuncLinkWallet } from 'src/app/tools/functions/wallet';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 

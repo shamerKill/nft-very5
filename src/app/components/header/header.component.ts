@@ -1,10 +1,13 @@
+import { DatabaseService } from './../../server/database.service';
+import { BehaviorSubject } from 'rxjs';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { StateService } from './../../server/state.service';
 import { ToolFuncLinkWallet } from 'src/app/tools/functions/wallet';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MegaMenuItem, MenuItem } from 'primeng/api';
+import { ToolFuncTimeSleep } from 'src/app/tools/functions/time';
 
 type TypeLinkList = {name: string; link: string}[];
 
@@ -15,6 +18,11 @@ type TypeLinkList = {name: string; link: string}[];
 })
 export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
 
+  @ViewChild('comHeader')
+  headerContent?: ElementRef<HTMLDivElement>;
+  @ViewChild('webMenuContent')
+  menuContent?: ElementRef<HTMLDivElement>;
+
   // 搜索内容
   searchText: string = '';
   // 展示列表
@@ -22,7 +30,10 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
   // 是否关联了钱包
   hadAccount: boolean = false;
   // 账户头像
-  accountAvatar?: string
+  accountAvatar?: string;
+  // 是否显示web菜单 0不显示 1首页 2探索 3语言
+  webMenuType$ = new BehaviorSubject(0);
+  webMenuType = this.webMenuType$.value;
 
   exploreList: TypeLinkList = [
     {
@@ -65,6 +76,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
 
   constructor(
     public stateService: StateService,
+    public appService: DatabaseService,
     private BaseMessage: BaseMessageService,
     private netService: NetService,
   ) {
@@ -75,6 +87,13 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
     this.listenWalletInfo();
     this.initMenu();
     this.checkLoginType();
+    this.webMenuType$.pipe(this.pipeSwitch$()).subscribe((value) => {
+      this.webMenuType = value;
+      this.setWebMenuHeight();
+    });
+    this.stateService.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(data => {
+      this.hadAccount = data.isLinked;
+    });
   }
 
   initMenu() {
@@ -112,6 +131,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
    * 判断是否已经登录
    **/
   private async checkLoginType() {
+    await ToolFuncTimeSleep(1);
     const result = await ToolFuncLinkWallet(this.netService.signLogin$.bind(this.netService), true);
     if (result?.accountAddress !== null) {
       this.netService.getMyNFTList$().pipe(this.pipeSwitch$()).subscribe(({code}) => {
@@ -157,7 +177,25 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
   }
 
   /**
-   * 前往首页
+   * 修改web侧边栏状态
    **/
+  onChangeWebMenuType(index: number) {
+    this.webMenuType$.next(index);
+  }
+
+  // 侧边栏高度调整
+  async setWebMenuHeight() {
+    await ToolFuncTimeSleep(0.1);
+    const headerHeight = this.headerContent?.nativeElement.clientHeight || 0;
+    const bodyHeight = document.body.clientHeight;
+    // 获取body滚动距离
+    const bodyScroll = document.body.scrollTop;
+    if (this.menuContent) {
+      this.menuContent.nativeElement.style.height = (
+        bodyHeight - headerHeight + bodyScroll
+      ) + 'px';
+      this.menuContent.nativeElement.style.top = (headerHeight - bodyScroll) + 'px';
+    }
+  }
 
 }

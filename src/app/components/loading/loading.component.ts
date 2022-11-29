@@ -1,6 +1,6 @@
-import { BehaviorSubject, interval, Observable, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, interval, Subscription, timer } from 'rxjs';
 import { StateService } from './../../server/state.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-loading',
@@ -15,18 +15,15 @@ export class LoadingComponent implements OnInit {
 
   showLoading$ = new BehaviorSubject(false);
 
+  @Input('init-show')
+  initShow: boolean = false;
+  @Input('hide-bg')
+  hideBg: boolean = false;
+
 
   constructor(
     private state: StateService,
   ) {
-    this.state.globalLoading$.subscribe(data => {
-      if (data > 0) {
-        this.addLoading$.next(true);
-      } else {
-        this.showLoading$.next(false);
-        timer(500).subscribe(() => this.addLoading$.next(false));
-      }
-    });
   }
 
   ngOnInit(): void {
@@ -43,6 +40,18 @@ export class LoadingComponent implements OnInit {
         timer$.forEach(item => item.unsubscribe());
       }
     });
+    if (this.initShow) {
+      this.addLoading$.next(true);
+    } else {
+      this.state.globalLoading$.subscribe(data => {
+        if (data > 0) {
+          this.addLoading$.next(true);
+        } else {
+          this.showLoading$.next(false);
+          timer(500).subscribe(() => this.addLoading$.next(false));
+        }
+      });
+    }
   }
 
 }

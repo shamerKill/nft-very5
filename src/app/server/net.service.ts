@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throttleTime } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -19,8 +19,9 @@ export class NetService {
   private $url = (path: string) => `${this.apiUrl}${path}`;
   private $get = <T = TypeInterfaceNet>(
     url: string,
+    params?: HttpParams
   ) => {
-    return this.http.get<T>(this.$url(url), { withCredentials: true });
+    return this.http.get<T>(this.$url(url), { withCredentials: true, params: params });
   };
   private $post = <T = TypeInterfaceNet>(
     url: string,
@@ -43,7 +44,9 @@ export class NetService {
   ) {
   }
 
-  // 获取首页数据
+  /**
+   * 获取首页数据
+   **/
   getHomeData$() {
     type _TypeReturn = TypeInterfaceNet<{
       artist: any[];
@@ -56,6 +59,15 @@ export class NetService {
     }>;
     return this.$get<_TypeReturn>('v1/nft/index').pipe(throttleTime(1000));
   }
+
+  /**
+   * 获取nft列表
+   **/
+  getNefListByFilter$(params: {[key: string]: string}) {
+    const queryParams = new HttpParams({ fromObject: params });
+    return this.$get<TypeInterfaceNet>('v1/nft/list', queryParams)
+  }
+
 
   /**
    * 登录接口

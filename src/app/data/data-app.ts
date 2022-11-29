@@ -1,5 +1,7 @@
 export interface InDataApp {
   language: string;
+  languageToFormat: () => string;
+  languageListToFormat: () => (string[]);
 }
 
 export class DataApp implements InDataApp {
@@ -20,5 +22,21 @@ export class DataApp implements InDataApp {
 
   constructor() {
     this.#initLanguage();
+  }
+
+  public languageToFormat(input?: string) {
+    let language = this.language;
+    if (input) language = input;
+    switch (language) {
+      case this.#languageList[0]:
+        return '中文';
+      default:
+        return 'English';
+    }
+  }
+
+
+  public languageListToFormat(): string[] {
+    return this.#languageList.map<string>(item => this.languageToFormat(item));
   }
 }
