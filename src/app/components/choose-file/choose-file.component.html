@@ -1,0 +1,10 @@
+<label [for]="label" class="choose-file" [ngClass]="class" (click)="onChoose()">
+  <ng-content></ng-content>
+  <input
+    #input
+    [id]="label"
+    [accept]="fileType"
+    class="file-input"
+    type="file"
+    (change)="onChange($event)">
+</label>

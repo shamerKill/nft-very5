@@ -20,6 +20,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { LoadingComponent } from './loading/loading.component';
+import { DragBoxComponent } from './drag-box/drag-box.component';
+import { ChooseFileComponent } from './choose-file/choose-file.component';
 
 
 
@@ -33,6 +35,8 @@ import { LoadingComponent } from './loading/loading.component';
     UserMenuComponent,
     SlicePipePipe,
     LoadingComponent,
+    DragBoxComponent,
+    ChooseFileComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,8 @@ import { LoadingComponent } from './loading/loading.component';
     PageBgBoxComponent,
     UserMenuComponent,
     LoadingComponent,
+    DragBoxComponent,
+    ChooseFileComponent,
   ]
 })
 export class ComponentsModule {

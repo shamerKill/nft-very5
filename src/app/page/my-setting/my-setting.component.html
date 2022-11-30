@@ -10,8 +10,40 @@
             头像
           </h3>
         </div>
+        <div class="flex">
+          <app-drag-box (onDrop)="onGetAvatar($event)">
+            <div #avatar draggable="true" class="surface-100 h-10rem w-10rem border-circle flex flex-column justify-content-center align-items-center text-center text-400 relative overflow-hidden">
+              <p class="pi pi-cloud-upload text-5xl pb-2"></p>
+              <p class="text-base" i18n>个人头像</p>
+              <div *ngIf="userAvatar" class="w-full h-full absolute z-1 surface-0">
+                <img
+                  class="w-full h-full absolute top-0 left-0 fit-contain"
+                  [src]="userAvatar"
+                  alt="">
+              </div>
+            </div>
+          </app-drag-box>
+          <div class="flex flex-column flex-1 pl-4 align-items-start">
+            <p class="text-lg font-bold pb-2" i18n>个人头像</p>
+            <p class="text-600 flex-1 text-sm" i18n>
+              支持JPG、PNG、GIF
+              <br />
+              推荐尺寸 400 x 400px
+              <br />
+              大小在1M以内
+            </p>
+            <app-choose-file
+              (onDrop)="onGetAvatar($event)"
+              styleClass="mb-4">
+              <button
+                pButton
+                type="button"
+                label="选择文件"
+                class="p-button-outlined h-2rem"></button>
+            </app-choose-file>
+          </div>
+        </div>
       </div>
-      <!--  -->
       <!--  -->
       <div class="pb-5">
         <div class="flex align-items-center pb-5">
@@ -20,8 +52,31 @@
             主页封面图
           </h3>
         </div>
+        <app-drag-box
+          [max-size]="3*1024"
+          (onDrop)="onGetMainBg($event)">
+          <div class="w-full py-5 px-4 surface-100 border-round-lg flex flex-column align-items-center relative">
+            <div *ngIf="mainBg" class="w-full h-5rem h-full mb-2">
+              <img
+                class="w-full h-full fit-contain"
+                [src]="mainBg"
+                alt="">
+            </div>
+            <p class="text-600 flex-1 text-sm text-center" [ngClass]="{'mb-4': !mainBg, 'mb-2': mainBg}" i18n>
+              支持JPG、PNG、GIF， 推荐尺寸 1200 x 175px， 大小在3M以内
+            </p>
+            <app-choose-file
+              (onDrop)="onGetMainBg($event)"
+              [max-size]="3*1024">
+              <button
+                pButton
+                type="button"
+                label="选择文件"
+                class="p-button-outlined h-2rem"></button>
+            </app-choose-file>
+          </div>
+        </app-drag-box>
       </div>
-      <!--  -->
       <!--  -->
       <div class="pb-5">
         <div class="flex align-items-center pb-5">
