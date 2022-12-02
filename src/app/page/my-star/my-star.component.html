@@ -8,7 +8,7 @@
           <div class="flex flex-wrap">
             <div
               class="w-6 md:w-3 px-2 mb-3 overflow-hidden"
-              *ngFor="let item of ownTableData">
+              *ngFor="let item of starTableData">
               <p-card
                 styleClass="surface-900 p-2"
                 class="surface-900">
@@ -32,7 +32,7 @@
                   </p>
                   <div class="flex align-items-center pt-2">
                     <img class="w-1rem h-1rem border-circle" [src]="item.priceUnit.logo" [alt]="item.priceUnit.name">
-                    <p class="pl-1 font-bold text-0">{{item.price}}</p>
+                    <p class="pl-1 font-bold text-0">{{item.price | bigNum}}</p>
                   </div>
                   <div class="flex pt-1 align-items-center">
                     <p class="flex-1 text-xs">

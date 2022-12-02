@@ -1,4 +1,5 @@
-import { SlicePipePipe } from '../tools/pipe/slice-pipe.pipe';
+import { PipeModule } from './../tools/pipe/pipe.module';
+
 import { ToastModule } from 'primeng/toast';
 import { AccordionModule } from 'primeng/accordion';
 import { FilterBoxComponent } from './filter-box/filter-box.component';
@@ -33,7 +34,6 @@ import { ChooseFileComponent } from './choose-file/choose-file.component';
     FilterBoxComponent,
     PageBgBoxComponent,
     UserMenuComponent,
-    SlicePipePipe,
     LoadingComponent,
     DragBoxComponent,
     ChooseFileComponent,
@@ -52,6 +52,7 @@ import { ChooseFileComponent } from './choose-file/choose-file.component';
     InputNumberModule,
     ToastModule,
     ClipboardModule,
+    PipeModule,
   ],
   exports: [
     HeaderComponent,

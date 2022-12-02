@@ -56,7 +56,7 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
   }));
 
   // 收藏品数据
-  ownTableData: {
+  starTableData: {
     id: string;
     image: string;
     // 合集数据
@@ -86,7 +86,7 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
       id: '12',
     },
     name: 'BUTTON SHOW',
-    price: '9.9k',
+    price: '9951',
     priceUnit: {
       name: 'PC',
       logo: '../../../assets/images/home/plug-logo.png'
@@ -177,9 +177,9 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
   }
   // 修改收藏品数据
   changeOwnData(item: any) {
-    for (let i = 0; i < this.ownTableData.length; i++) {
-      if (this.ownTableData[i].id === item.id) {
-        this.ownTableData[i].isFollow = !this.ownTableData[i].isFollow;
+    for (let i = 0; i < this.starTableData.length; i++) {
+      if (this.starTableData[i].id === item.id) {
+        this.starTableData[i].isFollow = !this.starTableData[i].isFollow;
         break;
       }
     }

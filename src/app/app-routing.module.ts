@@ -1,3 +1,4 @@
+import { PipeModule } from './tools/pipe/pipe.module';
 import { MessageService } from 'primeng/api';
 import { MySettingComponent } from './page/my-setting/my-setting.component';
 import { MyStarComponent } from './page/my-star/my-star.component';
@@ -146,6 +147,7 @@ const routes: Routes = [
     TooltipModule,
     DropdownModule,
     ToastModule,
+    PipeModule,
     RouterModule.forRoot(routes),
   ],
   exports: [
