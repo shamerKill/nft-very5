@@ -216,7 +216,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
     const key = this.exploreMarket.list[input].key;
     this.net.getNefListByFilter$({category: key}).pipe(this.pipeSwitch$()).subscribe(data => {
       this.exploreMarket.list[input].loaded = true;
-      if (data.code === 200) {
+      if (data.code === 200 && data.data) {
         this.exploreMarket.list[input].data = data.data.map((item: any) => ({
           collectionName: item.CollectionName,
           sellType: item.sellingType,

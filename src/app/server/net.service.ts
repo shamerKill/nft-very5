@@ -1,6 +1,7 @@
+import { DatabaseService } from './database.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throttleTime } from 'rxjs';
+import { Observable, Subject, throttleTime } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 // 数据类型
@@ -26,14 +27,14 @@ export class NetService {
   private $post = <T = TypeInterfaceNet>(
     url: string,
     body?: {
-      [key: string]: string,
+      [key: string]: string|undefined,
     }
   ) => {
     let fd: FormData|undefined;
     if (body) {
       fd = new FormData();
       Object.keys(body).forEach(key => {
-        fd?.append(key, body[key]);
+        if (body[key]) fd?.append(key, body[key]!);
       });
     }
     return this.http.post<T>(this.$url(url), fd, { withCredentials: true });
@@ -41,6 +42,7 @@ export class NetService {
 
   constructor(
     private http: HttpClient,
+    private database: DatabaseService,
   ) {
   }
 
@@ -90,6 +92,58 @@ export class NetService {
   // 用来做判断是否存在登录状态
   getMyNFTList$() {
     return this.$get<TypeInterfaceNet>('v1/my/creatorNfts');
+  }
+
+  /**
+   * 获取当前用户信息
+   **/
+  getNowUserInfo$() {
+    return this.$get<TypeInterfaceNet>('v1/user/user_info').pipe(sub => {
+      // 处理本地database
+      const _sub = sub.subscribe(data => {
+        const info = data.data.info;
+        const asset = data.data.asset;
+        let link = {};
+        try {
+          link = JSON.parse(info.Link);
+        } catch (_) {}
+        this.database.nowUserInfo = {
+          avatar: info.Avator,
+          name: info.Name,
+          mainBg: info.Conver,
+          describe: info.Description,
+          link: link,
+          balance: asset.balance.amount
+        };
+        _sub.unsubscribe();
+      });
+      return sub;
+    });
+  }
+
+  /**
+   * 上传图片
+   **/
+  postBaseImage$(input: string) {
+    return this.$post('v1/upload_base64', { file: input }).pipe(sub => {
+      const sub$ = new Subject<TypeInterfaceNet>();
+      sub.subscribe(({data, ...other}) => {
+        if (data && data.baseUrl && data.filePath) {
+          sub$.next({
+            ...other,
+            data: data.baseUrl + data.filePath,
+          });
+        }
+      });
+      return sub$.pipe();
+    });
+  }
+
+  /**
+   * 更新当前用户信息
+   **/
+  putNowUserInfo$(obj: {[key: string]: string|undefined}) {
+    return this.$post('v1/user/update_info', obj);
   }
 
 }

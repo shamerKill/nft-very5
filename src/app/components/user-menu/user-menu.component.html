@@ -11,7 +11,7 @@
       src="../../../assets/images/explore/icon1.png" />
     <div class="flex relative mt-4 align-items-center overflow-hidden">
       <img
-        class="w-4rem h-4rem border-circle"
+        class="w-4rem h-4rem border-circle fit-contain"
         [src]="userInfo.avatar"
         [alt]="userInfo.name">
       <p class="ml-3 flex-1 w-full text-bold text-2xl text-overflow-ellipsis white-space-nowrap overflow-hidden">
@@ -41,8 +41,8 @@
           </p>
         </div>
         <div class="text-right">
-          <p class="text-0">{{tokenNumber.base | number}}</p>
-          <p class="text-300 text-xs pt-2">$ {{tokenNumber.usd | number}}</p>
+          <p class="text-0">{{tokenNumber.base | number : '1.0-6'}}</p>
+          <p class="text-300 text-xs pt-2">$ {{tokenNumber.usd | number : '1.0-2'}}</p>
         </div>
       </div>
     </div>

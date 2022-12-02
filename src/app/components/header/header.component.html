@@ -71,7 +71,7 @@
         <div class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus" (click)="onChangeWebMenuType(3)">
           <i class="iconfont icon-yuyan-01 text-xl"></i>
           <p class="flex-1 px-2 font-bold text-xl" i18n>语言</p>
-          <p class="px-2 font-bold text-xl">{{(appService.appData|async)?.languageToFormat()}}</p>
+          <p class="px-2 font-bold text-xl">{{(appService.appData$|async)?.languageToFormat()}}</p>
           <i class="pi pi-angle-right text-xl"></i>
         </div>
       </div>
@@ -101,7 +101,7 @@
         语言
       </div>
       <div class="flex-1 overflow-scroll pl-4">
-        <div *ngFor="let item of (appService.appData|async)?.languageListToFormat()" class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus">
+        <div *ngFor="let item of (appService.appData$|async)?.languageListToFormat()" class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus">
           <p class="flex-1 px-2 font-bold text-xl" i18n>{{item}}</p>
         </div>
       </div>

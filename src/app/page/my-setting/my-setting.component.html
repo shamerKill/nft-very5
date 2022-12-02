@@ -86,8 +86,10 @@
           </h3>
         </div>
         <input
+          [(ngModel)]="userNickname"
           class="w-9 lg:w-6 p-inputtext-lg text-base"
           type="text"
+          [minlength]="4"
           pInputText
           placeholder="4-60个字符，支持中英文、数字、下划线和减号"
           i18n-placeholder />
@@ -101,6 +103,7 @@
           </h3>
         </div>
         <input
+          [(ngModel)]="userDescribe"
           class="w-9 lg:w-6 p-inputtext-lg text-base"
           type="text"
           pInputText
@@ -118,6 +121,7 @@
         <div class="w-9 lg:w-6 p-input-icon-left">
           <i class="pi pi-flag-fill"></i>
           <input
+            [(ngModel)]="userWebSite['homeSite']"
             class="w-full p-inputtext-lg text-base"
             type="text"
             pInputText
@@ -129,6 +133,7 @@
         <div class="w-9 lg:w-6 p-input-icon-left">
           <i class="pi pi-twitter"></i>
           <input
+            [(ngModel)]="userWebSite['twitter']"
             class="w-full p-inputtext-lg text-base"
             type="text"
             pInputText
@@ -140,6 +145,7 @@
         <div class="w-9 lg:w-6 p-input-icon-left">
           <i class="pi pi-telegram"></i>
           <input
+            [(ngModel)]="userWebSite['telegram']"
             class="w-full p-inputtext-lg text-base"
             type="text"
             pInputText
@@ -150,7 +156,8 @@
       <!--  -->
       <button
         pButton
-        [disabled]="true"
+        [disabled]="isLoading"
+        (click)="onPostUpdate()"
         class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
         label="提交"
         type="button"></button>

@@ -134,7 +134,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
     await ToolFuncTimeSleep(1);
     const result = await ToolFuncLinkWallet(this.netService.signLogin$.bind(this.netService), true);
     if (result?.accountAddress !== null) {
-      this.netService.getMyNFTList$().pipe(this.pipeSwitch$()).subscribe(({code}) => {
+      this.netService.getNowUserInfo$().pipe(this.pipeSwitch$()).subscribe(({code}) => {
         if (code === 200 && result) {
           result.isLinked = true;
           this.stateService.linkedWallet$.next(result);
