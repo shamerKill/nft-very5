@@ -1,6 +1,6 @@
 import { MessageService } from 'primeng/api';
 import { MySettingComponent } from './page/my-setting/my-setting.component';
-import { MyNftComponent } from './page/my-nft/my-nft.component';
+import { MyStarComponent } from './page/my-star/my-star.component';
 import { SellNftComponent } from './page/sell-nft/sell-nft.component';
 import { ShowNftComponent } from './page/show-nft/show-nft.component';
 import { FormsModule } from '@angular/forms';
@@ -75,8 +75,8 @@ const routes: Routes = [
   },
   // 我的关注/收藏
   {
-    component: MyNftComponent,
-    path: 'my/nft',
+    component: MyStarComponent,
+    path: 'my/star',
   },
   // 我的设置
   {
@@ -119,7 +119,7 @@ const routes: Routes = [
     CreateNftComponent,
     ShowNftComponent,
     SellNftComponent,
-    MyNftComponent,
+    MyStarComponent,
     MySettingComponent,
     UserComponent,
     SearchComponent,

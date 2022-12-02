@@ -1,14 +1,15 @@
-import { ToolFuncFormatTime, ToolFuncTimeToFormatBig, TypeToolFuncDownTime } from './../../tools/functions/time';
-import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { NetService } from './../../server/net.service';
+import { ToolFuncFormatTime, ToolFuncTimeToFormatBig, TypeToolFuncDownTime } from '../../tools/functions/time';
+import { ToolClassAutoClosePipe } from '../../tools/classes/pipe-close';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-nft',
-  templateUrl: './my-nft.component.html',
-  styleUrls: ['./my-nft.component.scss']
+  templateUrl: './my-star.component.html',
+  styleUrls: ['./my-star.component.scss']
 })
-export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
+export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
 
   // 展示类型 follow/own/collection
   tabType: number = 0;
@@ -124,15 +125,25 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private net: NetService,
   ) {
     super();
     this.getQueryData();
+    this.getRemoteData();
   }
 
   ngOnInit(): void {
   }
 
   // 获取数据
+  getRemoteData() {
+    this.net.getUserStarList$().pipe(this.pipeSwitch$()).subscribe(data => {
+      console.log(data);
+    });
+    this.net.getUserStarSellList$().pipe(this.pipeSwitch$()).subscribe(data => {
+      console.log(data);
+    });
+  }
 
   // 获取query数据
   getQueryData() {
@@ -149,7 +160,7 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
     if (event.index === 0) type = 'star';
     if (event.index === 1) type = 'follow';
     if (event.index === 2) type = 'collection';
-    this.router.navigate(['my/nft'], {
+    this.router.navigate(['my/star'], {
       queryParams: { type },
       queryParamsHandling: 'merge'
     });

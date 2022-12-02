@@ -150,7 +150,14 @@ export class NetService {
    * 获取用户收藏列表
    **/
   getUserStarList$() {
-    return this.$get('/v1/user/collect_list');
+    return this.$get('v1/user/collect_list');
+  }
+
+  /**
+   * 获取用户关注售卖列表
+   **/
+  getUserStarSellList$() {
+    return this.$get('v1/user/focus_list');
   }
 
 }
