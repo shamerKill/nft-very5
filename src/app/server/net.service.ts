@@ -146,4 +146,11 @@ export class NetService {
     return this.$post('v1/user/update_info', obj);
   }
 
+  /**
+   * 获取用户收藏列表
+   **/
+  getUserStarList$() {
+    return this.$get('/v1/user/collect_list');
+  }
+
 }

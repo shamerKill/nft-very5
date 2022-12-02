@@ -132,10 +132,12 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
   ngOnInit(): void {
   }
 
+  // 获取数据
+
   // 获取query数据
   getQueryData() {
     this.route.queryParams.pipe(this.pipeSwitch$()).subscribe((data) => {
-      if (data['type'] === 'own') this.tabType = 0;
+      if (data['type'] === 'star') this.tabType = 0;
       if (data['type'] === 'follow') this.tabType = 1;
       if (data['type'] === 'collection') this.tabType = 2;
     });
@@ -144,7 +146,7 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
   // 切换tab
   onChangeTab(event: any) {
     let type = 'follow';
-    if (event.index === 0) type = 'own';
+    if (event.index === 0) type = 'star';
     if (event.index === 1) type = 'follow';
     if (event.index === 2) type = 'collection';
     this.router.navigate(['my/nft'], {
