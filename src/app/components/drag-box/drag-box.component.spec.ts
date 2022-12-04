@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyNftComponent } from './my-nft.component';
+import { DragBoxComponent } from './drag-box.component';
 
-describe('MyNftComponent', () => {
-  let component: MyNftComponent;
-  let fixture: ComponentFixture<MyNftComponent>;
+describe('DragBoxComponent', () => {
+  let component: DragBoxComponent;
+  let fixture: ComponentFixture<DragBoxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MyNftComponent ]
+      declarations: [ DragBoxComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MyNftComponent);
+    fixture = TestBed.createComponent(DragBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,12 @@
+.choose-file {
+  overflow: hidden;
+  display: block;
+}
+.file-input {
+  opacity: 0;
+  position: fixed;
+  top: -100rem;
+  bottom: -100rem;
+  width: 0;
+  height: 0;
+}

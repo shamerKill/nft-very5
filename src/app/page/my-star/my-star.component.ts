@@ -1,14 +1,15 @@
-import { ToolFuncFormatTime, ToolFuncTimeToFormatBig, TypeToolFuncDownTime } from './../../tools/functions/time';
-import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { NetService } from './../../server/net.service';
+import { ToolFuncFormatTime, ToolFuncTimeToFormatBig, TypeToolFuncDownTime } from '../../tools/functions/time';
+import { ToolClassAutoClosePipe } from '../../tools/classes/pipe-close';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-nft',
-  templateUrl: './my-nft.component.html',
-  styleUrls: ['./my-nft.component.scss']
+  templateUrl: './my-star.component.html',
+  styleUrls: ['./my-star.component.scss']
 })
-export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
+export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
 
   // 展示类型 follow/own/collection
   tabType: number = 0;
@@ -55,7 +56,7 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
   }));
 
   // 收藏品数据
-  ownTableData: {
+  starTableData: {
     id: string;
     image: string;
     // 合集数据
@@ -85,7 +86,7 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
       id: '12',
     },
     name: 'BUTTON SHOW',
-    price: '9.9k',
+    price: '9951',
     priceUnit: {
       name: 'PC',
       logo: '../../../assets/images/home/plug-logo.png'
@@ -124,19 +125,31 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private net: NetService,
   ) {
     super();
     this.getQueryData();
+    this.getRemoteData();
   }
 
   ngOnInit(): void {
   }
 
+  // 获取数据
+  getRemoteData() {
+    this.net.getUserStarList$().pipe(this.pipeSwitch$()).subscribe(data => {
+      console.log(data);
+    });
+    this.net.getUserStarSellList$().pipe(this.pipeSwitch$()).subscribe(data => {
+      console.log(data);
+    });
+  }
+
   // 获取query数据
   getQueryData() {
     this.route.queryParams.pipe(this.pipeSwitch$()).subscribe((data) => {
-      if (data['type'] === 'follow') this.tabType = 0;
-      if (data['type'] === 'own') this.tabType = 1;
+      if (data['type'] === 'star') this.tabType = 0;
+      if (data['type'] === 'follow') this.tabType = 1;
       if (data['type'] === 'collection') this.tabType = 2;
     });
   }
@@ -144,10 +157,10 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
   // 切换tab
   onChangeTab(event: any) {
     let type = 'follow';
-    if (event.index === 0) type = 'follow';
-    if (event.index === 1) type = 'own';
+    if (event.index === 0) type = 'star';
+    if (event.index === 1) type = 'follow';
     if (event.index === 2) type = 'collection';
-    this.router.navigate(['my/nft'], {
+    this.router.navigate(['my/star'], {
       queryParams: { type },
       queryParamsHandling: 'merge'
     });
@@ -164,9 +177,9 @@ export class MyNftComponent extends ToolClassAutoClosePipe implements OnInit {
   }
   // 修改收藏品数据
   changeOwnData(item: any) {
-    for (let i = 0; i < this.ownTableData.length; i++) {
-      if (this.ownTableData[i].id === item.id) {
-        this.ownTableData[i].isFollow = !this.ownTableData[i].isFollow;
+    for (let i = 0; i < this.starTableData.length; i++) {
+      if (this.starTableData[i].id === item.id) {
+        this.starTableData[i].isFollow = !this.starTableData[i].isFollow;
         break;
       }
     }

@@ -3,6 +3,56 @@
     <h2 class="text-4xl font-bold py-4 lg:py-6 px-4 lg:px-0 pb-5" i18n>我的关注/收藏</h2>
     <div class="border-round-lg w-full surface-0 px-4 gl:px-6 py-4">
       <p-tabView [activeIndex]="tabType" (onChange)="onChangeTab($event)">
+        <!--  -->
+        <p-tabPanel header="收藏" i18n-header>
+          <div class="flex flex-wrap">
+            <div
+              class="w-6 md:w-3 px-2 mb-3 overflow-hidden"
+              *ngFor="let item of starTableData">
+              <p-card
+                styleClass="surface-900 p-2"
+                class="surface-900">
+                <ng-template pTemplate="header">
+                  <div class="card-header-inner">
+                    <div class="card-header-center">
+                      <img
+                        class="w-full card-image"
+                        [src]="item.image"
+                        [alt]="item.id" />
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="body">
+                  <div class="flex justify-content-between text-500">
+                    <p class="text-xs">{{item.name}}</p>
+                    <i class="pi border-circle border-1 p-1 text-xs" [ngClass]="item.auctionInfo.inAuctioning ? 'pi-book' : 'pi-tag'"></i>
+                  </div>
+                  <p class="text-0 py-2">
+                    {{item.collectionInfo.name}} #{{item.id}}
+                  </p>
+                  <div class="flex align-items-center pt-2">
+                    <img class="w-1rem h-1rem border-circle" [src]="item.priceUnit.logo" [alt]="item.priceUnit.name">
+                    <p class="pl-1 font-bold text-0">{{item.price | bigNum}}</p>
+                  </div>
+                  <div class="flex pt-1 align-items-center">
+                    <p class="flex-1 text-xs">
+                      {{
+                        item.auctionInfo.inAuctioning ? ('还剩' + item.auctionInfo.showTime) : ''
+                      }}
+                    </p>
+                    <button
+                      pButton
+                      (click)="changeOwnData(item)"
+                      class="p-button-rounded p-button-text p-0 h-2rem w-2rem"
+                      [ngClass]="{'text-500': !item.isFollow}"
+                      [icon]="item.isFollow ? 'pi pi-heart-fill' : 'pi pi-heart'"></button>
+                  </div>
+                </ng-template>
+              </p-card>
+            </div>
+          </div>
+        </p-tabPanel>
+        <!--  -->
         <p-tabPanel header="关注" i18n-header>
           <p-table [value]="followTableData" responsiveLayout="scroll">
             <ng-template pTemplate="header">
@@ -65,56 +115,7 @@
           </p-table>
         </p-tabPanel>
         <!--  -->
-        <p-tabPanel header="收藏品" i18n-header>
-          <div class="flex flex-wrap">
-            <div
-              class="w-6 md:w-3 px-2 mb-3 overflow-hidden"
-              *ngFor="let item of ownTableData">
-              <p-card
-                styleClass="surface-900 p-2"
-                class="surface-900">
-                <ng-template pTemplate="header">
-                  <div class="card-header-inner">
-                    <div class="card-header-center">
-                      <img
-                        class="w-full card-image"
-                        [src]="item.image"
-                        [alt]="item.id" />
-                    </div>
-                  </div>
-                </ng-template>
-                <ng-template pTemplate="body">
-                  <div class="flex justify-content-between text-500">
-                    <p class="text-xs">{{item.name}}</p>
-                    <i class="pi border-circle border-1 p-1 text-xs" [ngClass]="item.auctionInfo.inAuctioning ? 'pi-book' : 'pi-tag'"></i>
-                  </div>
-                  <p class="text-0 py-2">
-                    {{item.collectionInfo.name}} #{{item.id}}
-                  </p>
-                  <div class="flex align-items-center pt-2">
-                    <img class="w-1rem h-1rem border-circle" [src]="item.priceUnit.logo" [alt]="item.priceUnit.name">
-                    <p class="pl-1 font-bold text-0">{{item.price}}</p>
-                  </div>
-                  <div class="flex pt-1 align-items-center">
-                    <p class="flex-1 text-xs">
-                      {{
-                        item.auctionInfo.inAuctioning ? ('还剩' + item.auctionInfo.showTime) : ''
-                      }}
-                    </p>
-                    <button
-                      pButton
-                      (click)="changeOwnData(item)"
-                      class="p-button-rounded p-button-text p-0 h-2rem w-2rem"
-                      [ngClass]="{'text-500': !item.isFollow}"
-                      [icon]="item.isFollow ? 'pi pi-heart-fill' : 'pi pi-heart'"></button>
-                  </div>
-                </ng-template>
-              </p-card>
-            </div>
-          </div>
-        </p-tabPanel>
-        <!--  -->
-        <p-tabPanel header="合集" i18n-header>
+        <!-- <p-tabPanel header="合集" i18n-header>
           <div class="flex flex-wrap">
             <div
               class="w-full md:w-6 lg:w-3 px-2 pb-4"
@@ -145,7 +146,7 @@
               </div>
             </div>
           </div>
-        </p-tabPanel>
+        </p-tabPanel> -->
       </p-tabView>
     </div>
   </app-base-box>

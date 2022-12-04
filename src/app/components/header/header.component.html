@@ -1,5 +1,5 @@
 <app-base-box class="com-header">
-  <header class="hidden com-header lg:flex py-3 align-items-center">
+  <header class="hidden pc-header lg:flex py-3 align-items-center">
     <a [routerLink]="['']">
       <img class="w-8rem" src="../../../assets/images/logo/very5-B@2x.png" />
     </a>
@@ -32,8 +32,81 @@
       </p-megaMenu>
     </div>
   </header>
-  <header class="block lg:hidden">
-  web
+  <header #comHeader class="flex web-header lg:hidden py-2 px-2 align-items-center" [ngClass]="{'white-bg': webMenuType !== 0}">
+    <a [routerLink]="['']">
+      <img class="w-8rem" src="../../../assets/images/logo/very5-B@2x.png" />
+    </a>
+    <div class="flex-1"></div>
+    <button
+      pButton
+      class="p-button-text"
+      icon="iconfont icon-sousuo"></button>
+    <button
+      pButton
+      (click)="onChangeWebMenuType(webMenuType === 0 ? 1 : 0)"
+      class="p-button-text text-2xl"
+      icon="iconfont icon-liebiao"></button>
   </header>
+  <ng-template *ngTemplateOutlet="webMenu"></ng-template>
 </app-base-box>
+
+<!-- 移动端侧边栏 -->
+<ng-template #webMenu>
+  <div #webMenuContent class="web-menu flex flex-column py-4" *ngIf="webMenuType">
+    <div class="flex flex-column flex-1 z-1 relative" *ngIf="webMenuType === 1">
+      <div class="flex-1 overflow-scroll">
+        <div class="flex py-4 px-4 align-items-center cursor-pointer item-focus" (click)="onChangeWebMenuType(2)">
+          <i class="iconfont icon-tansuo text-xl"></i>
+          <p class="flex-1 px-2 font-bold text-xl" i18n>探索</p>
+          <i class="pi pi-angle-right text-xl"></i>
+        </div>
+        <div class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus">
+          <i class="iconfont icon-paihangbang text-xl"></i>
+          <p class="flex-1 px-2 font-bold text-xl" i18n>排行榜</p>
+        </div>
+        <div class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus">
+          <i class="iconfont icon-chuangjian text-xl"></i>
+          <p class="flex-1 px-2 font-bold text-xl" i18n>创造NFT</p>
+        </div>
+        <div class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus" (click)="onChangeWebMenuType(3)">
+          <i class="iconfont icon-yuyan-01 text-xl"></i>
+          <p class="flex-1 px-2 font-bold text-xl" i18n>语言</p>
+          <p class="px-2 font-bold text-xl">{{(appService.appData$|async)?.languageToFormat()}}</p>
+          <i class="pi pi-angle-right text-xl"></i>
+        </div>
+      </div>
+      <div class="px-4" *ngIf="!hadAccount">
+        <button
+          pButton
+          (click)="onLinkWallet()"
+          label="链接钱包"
+          class="w-full"
+          i18n-label></button>
+      </div>
+    </div>
+    <div class="flex flex-column flex-1 z-1 relative" *ngIf="webMenuType === 2">
+      <div class="item-focus text-2xl pl-2 py-2" i18n (click)="onChangeWebMenuType(1)">
+        <i class="pi pi-angle-left text-2xl"></i>
+        探索
+      </div>
+      <div class="flex-1 overflow-scroll pl-4">
+        <div *ngFor="let item of exploreList" class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus">
+          <p class="flex-1 px-2 font-bold text-xl" i18n>{{item.name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-column flex-1 z-1 relative" *ngIf="webMenuType === 3">
+      <div class="item-focus text-2xl pl-2 py-2" i18n (click)="onChangeWebMenuType(1)">
+        <i class="pi pi-angle-left text-2xl"></i>
+        语言
+      </div>
+      <div class="flex-1 overflow-scroll pl-4">
+        <div *ngFor="let item of (appService.appData$|async)?.languageListToFormat()" class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus">
+          <p class="flex-1 px-2 font-bold text-xl" i18n>{{item}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
 

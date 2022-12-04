@@ -1,6 +1,13 @@
 @use "sass:math";
 @import "../../styles/base.var.scss";
 
+:host {
+  display: block;
+  @include media-phone{
+    margin-top: -4rem;
+  }
+}
+
 .home-first {
   width: 100%;
   position: relative;
@@ -189,6 +196,8 @@
       @include media-phone {
         position: initial;
         transform: none!important;
+        border-color: var(--surface-900);
+        background-color: var(--surface-900);
       }
       .p-card-body {
         padding: 0;
@@ -656,6 +665,10 @@
   }
   .card-price-num {
     color: var(--surface-100);
+  }
+  .explore-list {
+    min-height: 20rem;
+    position: relative;
   }
 }
 

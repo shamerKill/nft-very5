@@ -1,6 +1,6 @@
 const PROXY_CONFIG = {
   "/proxy": {
-      "target": "http://47.243.114.57:9999/",
+      "target": "http://124.248.67.122:9999/",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {

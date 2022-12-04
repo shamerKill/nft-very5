@@ -11,7 +11,7 @@
       src="../../../assets/images/explore/icon1.png" />
     <div class="flex relative mt-4 align-items-center overflow-hidden">
       <img
-        class="w-4rem h-4rem border-circle"
+        class="w-4rem h-4rem border-circle fit-contain"
         [src]="userInfo.avatar"
         [alt]="userInfo.name">
       <p class="ml-3 flex-1 w-full text-bold text-2xl text-overflow-ellipsis white-space-nowrap overflow-hidden">
@@ -41,24 +41,24 @@
           </p>
         </div>
         <div class="text-right">
-          <p class="text-0">{{tokenNumber.base | number}}</p>
-          <p class="text-300 text-xs pt-2">$ {{tokenNumber.usd | number}}</p>
+          <p class="text-0">{{tokenNumber.base | number : '1.0-6'}}</p>
+          <p class="text-300 text-xs pt-2">$ {{tokenNumber.usd | number : '1.0-2'}}</p>
         </div>
       </div>
     </div>
     <div class="flex flex-column flex-1">
       <div class="flex-1 overflow-scroll">
-        <div (click)="onGoToPage('my/nft', {type: 'own'})" class="flex py-4 align-items-center cursor-pointer item-focus">
+        <div (click)="onGoToPage('my/star', {type: 'star'})" class="flex py-4 align-items-center cursor-pointer item-focus">
           <i class="iconfont icon-shoucang1 text-xl"></i>
           <p class="flex-1 px-2 font-bold" i18n>我的NFTs</p>
           <i class="pi pi-angle-right text-xl"></i>
         </div>
-        <div (click)="onGoToPage('my/nft', {type: 'collection'})" class="flex py-4 align-items-center cursor-pointer top-border item-focus">
+        <div (click)="onGoToPage('my/star', {type: 'collection'})" class="flex py-4 align-items-center cursor-pointer top-border item-focus">
           <i class="iconfont icon-wenjianjia text-xl"></i>
           <p class="flex-1 px-2 font-bold" i18n>我的合集</p>
           <i class="pi pi-angle-right text-xl"></i>
         </div>
-        <div (click)="onGoToPage('my/nft', {type: 'follow'})" class="flex py-4 align-items-center cursor-pointer top-border item-focus">
+        <div (click)="onGoToPage('my/star', {type: 'follow'})" class="flex py-4 align-items-center cursor-pointer top-border item-focus">
           <i class="iconfont icon-icon-test text-xl"></i>
           <p class="flex-1 px-2 font-bold" i18n>我的关注</p>
           <i class="pi pi-angle-right text-xl"></i>

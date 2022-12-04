@@ -1,4 +1,4 @@
-<div class="loading" [ngClass]="{'show-loading': showLoading$|async}" *ngIf="addLoading$|async">
+<div class="loading" [ngClass]="{'show-loading': showLoading$|async, 'global-loading': !initShow, 'hide-bg': hideBg}" *ngIf="addLoading$|async">
   <div class="loading-inner"></div>
   <p class="loading-text">
     <i class="loading-dot" *ngFor="let item of loadingNumArr"></i>

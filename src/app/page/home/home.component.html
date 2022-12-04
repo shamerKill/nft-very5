@@ -108,7 +108,7 @@
 </app-base-box>
 <!-- 顶级艺术家 -->
 <div class="top-artist">
-  <h2 class="artist-title text-center" i18n>顶级艺术家</h2>
+  <h2 class="artist-title text-center" i18n>顶级合集</h2>
   <app-base-box class="relative">
     <swiper
       [grabCursor]="true"
@@ -117,6 +117,7 @@
       [pagination]="true"
       [loop]="true"
       [spaceBetween]="30"
+      [tabIndex]="artistList.index"
       class="artist-swiper"
     >
       <ng-template
@@ -134,7 +135,7 @@
             </div>
           </ng-template>
           <div class="artist-show-list flex flex-column flex-wrap align-items-between justify-content-start">
-            <div class="artist-show-item" *ngFor="let work of item.collectionList">
+            <div class="artist-show-item" *ngFor="let work of item.nftList">
               <div class="artist-show-inner">
                 <div class="artist-show-center">
                   <img
@@ -231,14 +232,15 @@
         class="explore-tab-btn"
         type="button"
         *ngFor="let item of exploreMarket.list; let index = index;"
-        [ngClass]="index == exploreMarket.index ? 'explore-tab-btn-select' : ''"
+        [ngClass]="index == (exploreMarket.index | async) ? 'explore-tab-btn-select' : ''"
         (click)="onChangeExploreMarketIndex(index)">
         {{item.title}}
       </button>
     </div>
-    <p-tabView [activeIndex]="exploreMarket.index" (onChange)="onChangeExploreMarketIndex($event.index)">
+    <p-tabView [activeIndex]="(exploreMarket.index | async)!" (onChange)="onChangeExploreMarketIndex($event.index)">
       <p-tabPanel *ngFor="let markets of exploreMarket.list">
         <div class="explore-list flex flex-wrap justify-content-between">
+          <app-loading *ngIf="!markets.loaded" [init-show]="true" [hide-bg]="true"></app-loading>
           <div class="explore-card flex align-items-center" *ngFor="let item of markets.data">
             <p-card
               class="explore-pic-container"
@@ -254,8 +256,8 @@
                 </div>
               </ng-template>
               <div class="card-owner flex justify-content-between align-items-center">
-                <p class="card-owner-name">{{item.ownerName}}</p>
-                <img class="card-owner-logo" [src]="item.ownerLogo" [alt]="item.ownerName">
+                <p class="card-owner-name">{{item.collectionName}}</p>
+                <i class="card-sell-type iconfont" [ngClass]="{'icon-paimai': item.sellType === 2, 'icon-biaoq': item.sellType === 1}"></i>
               </div>
               <div class="card-info flex justify-content-between align-items-center">
                 <p class="card-info-name">{{item.name}} #{{item.id}}</p>

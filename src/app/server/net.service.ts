@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { DatabaseService } from './database.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throttleTime } from 'rxjs';
+import { Observable, Subject, throttleTime } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 // 数据类型
@@ -19,20 +20,21 @@ export class NetService {
   private $url = (path: string) => `${this.apiUrl}${path}`;
   private $get = <T = TypeInterfaceNet>(
     url: string,
+    params?: HttpParams
   ) => {
-    return this.http.get<T>(this.$url(url), { withCredentials: true });
+    return this.http.get<T>(this.$url(url), { withCredentials: true, params: params });
   };
   private $post = <T = TypeInterfaceNet>(
     url: string,
     body?: {
-      [key: string]: string,
+      [key: string]: string|undefined,
     }
   ) => {
     let fd: FormData|undefined;
     if (body) {
       fd = new FormData();
       Object.keys(body).forEach(key => {
-        fd?.append(key, body[key]);
+        if (body[key]) fd?.append(key, body[key]!);
       });
     }
     return this.http.post<T>(this.$url(url), fd, { withCredentials: true });
@@ -40,10 +42,13 @@ export class NetService {
 
   constructor(
     private http: HttpClient,
+    private database: DatabaseService,
   ) {
   }
 
-  // 获取首页数据
+  /**
+   * 获取首页数据
+   **/
   getHomeData$() {
     type _TypeReturn = TypeInterfaceNet<{
       artist: any[];
@@ -56,6 +61,15 @@ export class NetService {
     }>;
     return this.$get<_TypeReturn>('v1/nft/index').pipe(throttleTime(1000));
   }
+
+  /**
+   * 获取nft列表
+   **/
+  getNefListByFilter$(params: {[key: string]: string}) {
+    const queryParams = new HttpParams({ fromObject: params });
+    return this.$get<TypeInterfaceNet>('v1/nft/list', queryParams)
+  }
+
 
   /**
    * 登录接口
@@ -102,6 +116,71 @@ export class NetService {
    * **/
    getNftList$(creator:string,category:string,sellingType:string,lowPrice:string|number,highPrice:string|number,coinType:string,collectionName:string,sort:string,) {
     return this.$get<TypeInterfaceNet>(`v1/nft/list?creator=${creator}&category=${category}&sellingType=${sellingType}&lowPrice=${lowPrice}&highPrice=${highPrice}&coinType=${coinType}&collectionName=${collectionName}&sort=${sort}`);
+  }
+  /**
+   * 获取当前用户信息
+   **/
+  getNowUserInfo$() {
+    return this.$get<TypeInterfaceNet>('v1/user/user_info').pipe(sub => {
+      // 处理本地database
+      const _sub = sub.subscribe(data => {
+        const info = data.data.info;
+        const asset = data.data.asset;
+        let link = {};
+        try {
+          link = JSON.parse(info.Link);
+        } catch (_) {}
+        this.database.nowUserInfo = {
+          avatar: info.Avator,
+          name: info.Name,
+          mainBg: info.Conver,
+          describe: info.Description,
+          link: link,
+          balance: asset.balance.amount
+        };
+        _sub.unsubscribe();
+      });
+      return sub;
+    });
+  }
+
+  /**
+   * 上传图片
+   **/
+  postBaseImage$(input: string) {
+    return this.$post('v1/upload_base64', { file: input }).pipe(sub => {
+      const sub$ = new Subject<TypeInterfaceNet>();
+      sub.subscribe(({data, ...other}) => {
+        if (data && data.baseUrl && data.filePath) {
+          sub$.next({
+            ...other,
+            data: data.baseUrl + data.filePath,
+          });
+        }
+      });
+      return sub$.pipe();
+    });
+  }
+
+  /**
+   * 更新当前用户信息
+   **/
+  putNowUserInfo$(obj: {[key: string]: string|undefined}) {
+    return this.$post('v1/user/update_info', obj);
+  }
+
+  /**
+   * 获取用户收藏列表
+   **/
+  getUserStarList$() {
+    return this.$get('v1/user/collect_list');
+  }
+
+  /**
+   * 获取用户关注售卖列表
+   **/
+  getUserStarSellList$() {
+    return this.$get('v1/user/focus_list');
   }
 
 }

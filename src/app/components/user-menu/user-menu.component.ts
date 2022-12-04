@@ -1,3 +1,4 @@
+import { DatabaseService } from './../../server/database.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { NetService } from './../../server/net.service';
 import { ToolFuncTimeSleep } from './../../tools/functions/time';
@@ -6,6 +7,7 @@ import { StateService, accountStoreInit } from './../../server/state.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
 import { Router } from '@angular/router';
+import { ToolFuncNumberDiv } from 'src/app/tools/functions/number';
 
 @Component({
   selector: 'app-user-menu',
@@ -21,8 +23,8 @@ export class UserMenuComponent extends ToolClassAutoClosePipe implements OnInit 
    * 用户信息
    **/
   userInfo = {
-    avatar: '../../../assets/images/cache/home/椭圆 3 拷贝@2x.png',
-    name: 'PuPu'
+    avatar: '',
+    name: '--'
   };
   /**
    * 币种信息
@@ -35,8 +37,8 @@ export class UserMenuComponent extends ToolClassAutoClosePipe implements OnInit 
    * 持币数量
    **/
   tokenNumber = {
-    base: '10232',
-    usd: '1234123',
+    base: '0',
+    usd: '0',
   }
 
   constructor(
@@ -45,6 +47,7 @@ export class UserMenuComponent extends ToolClassAutoClosePipe implements OnInit 
     private net: NetService,
     private baseMessage: BaseMessageService,
     private router: Router,
+    private database: DatabaseService,
   ) {
     super();
   }
@@ -52,6 +55,17 @@ export class UserMenuComponent extends ToolClassAutoClosePipe implements OnInit 
   ngOnInit(): void {
     this.stateService.userMenuState$.pipe(this.pipeSwitch$()).subscribe(state => {
       this.settingContentHeight(state);
+    });
+    this.listenUserInfo();
+  }
+
+  // 监听用户信息
+  private listenUserInfo() {
+    this.database.nowUserInfo$.pipe(this.pipeSwitch$()).subscribe(data => {
+      if (data?.avatar) this.userInfo.avatar = data.avatar;
+      if (data?.name) this.userInfo.name = data.name;
+      if (data?.balance) this.tokenNumber.base = ToolFuncNumberDiv(data.balance, (10**6).toString(), { places: 6 });
+      if (data?.balanceDollar) this.tokenNumber.usd = data.balanceDollar;
     });
   }
 
