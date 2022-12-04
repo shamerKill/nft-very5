@@ -79,5 +79,29 @@ export class NetService {
   getMyNFTList$() {
     return this.$get<TypeInterfaceNet>('v1/my/creatorNfts');
   }
+  /** 
+   * v1/collection/list
+   * owner 地址
+   * category 分类
+   * 合集-列表(查询条件)
+   * **/
+  getCollectionList$(owner:string,category:string) {
+    return this.$get<TypeInterfaceNet>(`v1/collection/list?owner=${owner}&category=${category}`);
+  }
+  /** 
+   * v1/nft/list
+   * creator 创建者
+   * category 类别-多选(用"，"隔开"）
+   * sellingType 挂单状态(1：一口价，2：拍卖，3：（拍卖，有出价)） 多选用","隔开
+   * lowPrice 低价一价格筛选
+   * highPrice 高价一价格筛选
+   * coinType 币种类型
+   * collectionName 合集名称
+   * sort 排序(1最近转移,2最近上架,3最近创建，4最近卖出，5最近结束,6价格从低到高，7价格从高到低，8销售最高）
+   * nft-列表(查询条件)
+   * **/
+   getNftList$(creator:string,category:string,sellingType:string,lowPrice:string|number,highPrice:string|number,coinType:string,collectionName:string,sort:string,) {
+    return this.$get<TypeInterfaceNet>(`v1/nft/list?creator=${creator}&category=${category}&sellingType=${sellingType}&lowPrice=${lowPrice}&highPrice=${highPrice}&coinType=${coinType}&collectionName=${collectionName}&sort=${sort}`);
+  }
 
 }

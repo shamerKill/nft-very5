@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 type sortItem = {name: string; id: number};
+type CollectionOriginal = {
+  CollectionID: string; // id
+  Name:string;
+  Image: string
+}
 type exploreItem = {
-  name: string;
-  headImg: string;
-  img: string;
-  id: string;
-}[]
+  BannerImageUrl:string;
+  CollectionOriginal: CollectionOriginal;
+}
 
 @Component({
   selector: 'app-collection',
@@ -41,19 +44,7 @@ export class CollectionComponent implements OnInit {
       id: 8
     }
   ];
-  exploreList: exploreItem = [
-    {
-      name: 'NFT Brtod',
-      headImg: '../../../assets/images/explore/imgs.png',
-      img: '../../../assets/images/explore/sb.jpeg',
-      id: '1'
-    },{
-      name: 'NFT Brtod',
-      headImg: '../../../assets/images/explore/imgs.png',
-      img: '../../../assets/images/explore/sb1.jpeg',
-      id: '2'
-    }
-  ];
+  exploreList: exploreItem[] = [];
   listType:number=1;
   switchList(type:number) {
     this.listType = type;

@@ -1,91 +1,121 @@
-<div class="filter-box">
-  <img src="../../../assets/images/explore/icon1.png" alt="" class="tips">
-  <div class="filter-box-title">
-    <span class="iconfont icon-liebiao"></span>
-  </div>
-  <div class="filter-box-item">
-    <div class="filter-box-item-title flex align-items-center justify-content-between" (click)="changeState()">
-      <div class="filter-box-item-title-name flex align-items-center">
-        <span class="iconfont icon-shijian"></span>
-        <span i18n>状态</span>
+<div class="filter-box" [ngClass]="showMore ? 'show':'hide'">
+  <div class="filter-box-show">
+    <img src="../../../assets/images/explore/icon1.png" alt="" class="tips">
+    <div class="filter-box-title" (click)="showFilterMenu()">
+      <span class="iconfont icon-liebiao"></span>
+    </div>
+    <div class="filter-box-item">
+      <div class="filter-box-item-title flex align-items-center justify-content-between" (click)="changeState()">
+        <div class="filter-box-item-title-name flex align-items-center">
+          <span class="iconfont icon-shijian"></span>
+          <span i18n>状态</span>
+        </div>
+        <div class="filter-box-item-title-tips" [class]="stateState ? 'down': ''">
+          <span class="iconfont icon-xiala"></span>
+        </div>
       </div>
-      <div class="filter-box-item-title-tips" [class]="stateState ? 'down': ''">
-        <span class="iconfont icon-xiala"></span>
+      <div class="filter-box-item-list"  [class]="stateState ? '': 'hide'">
+        <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of stateList; let i=index" (click)="changeStateIndex(i)">
+          <span i18n>{{item.name}}</span>
+          <div class="icon">
+            <img src="../../../assets/images/explore/choose.png" alt="" *ngIf="item.checked">
+            <img src="../../../assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
+          </div>
+        </div>
       </div>
     </div>
-    <div class="filter-box-item-list"  [class]="stateState ? '': 'hide'">
-      <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of stateList; let i=index" (click)="changeStateIndex(i)">
-        <span i18n>{{item}}</span>
-        <div class="icon">
-          <img src="../../../assets/images/explore/choose.png" alt="" *ngIf="i==stateIndex">
-          <img src="../../../assets/images/explore/unchoose.png" alt="" *ngIf="i!=stateIndex">
+    <div class="filter-box-item">
+      <div class="filter-box-item-title flex align-items-center justify-content-between" (click)="changePrice()">
+        <div class="filter-box-item-title-name flex align-items-center">
+          <span class="iconfont icon-qian"></span>
+          <span i18n>价格</span>
+        </div>
+        <div class="filter-box-item-title-tips" [class]="priceState ? 'down': ''">
+          <span class="iconfont icon-xiala"></span>
+        </div>
+      </div>
+      <div class="filter-box-item-list"  [class]="priceState ? '': 'hide'">
+        <div class="filter-box-item-options flex align-items-center justify-content-between">
+          <p-dropdown [options]="PriceUnit" [(ngModel)]="PriceSelect" optionLabel="name" placeholder="Select a Unit" [style]="{'width': '100%'}">
+            <ng-template let-unit pTemplate="unit">
+              <div class="unit-item flex align-items-center">
+                <img [src]="unit.logo"/>
+                <div>{{unit.name}}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+        <div class="filter-box-item-options flex align-items-center justify-content-between">
+          <p-inputNumber [(ngModel)]="minPrice" inputId="min" mode="decimal" [size]="10">
+          </p-inputNumber>
+          <span>-</span>
+          <p-inputNumber [(ngModel)]="maxPrice" inputId="max" mode="decimal" [size]="10">
+          </p-inputNumber>
+        </div>
+        <div class="filter-box-item-options flex align-items-center justify-content-between">
+          <p-button label="搜索" [loading]="priceSearch" (onClick)="submitSearch"></p-button>
+        </div>
+      </div>
+    </div>
+    <div class="filter-box-item">
+      <div class="filter-box-item-title flex align-items-center justify-content-between" (click)="changeSearch()">
+        <div class="filter-box-item-title-name flex align-items-center">
+          <span class="iconfont icon-wenjianjia"></span>
+          <span i18n>合集</span>
+        </div>
+        <div class="filter-box-item-title-tips" [class]="searchState ? 'down': ''">
+          <span class="iconfont icon-xiala"></span>
+        </div>
+      </div>
+      <div class="filter-box-item-list"  [class]="searchState ? '': 'hide'">
+        <div class="filter-box-item-options flex align-items-center justify-content-between">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText [(ngModel)]="searchName" placeholder="合集名称">         
+          </span>
+        </div>
+        <div class="filter-box-item-options flex align-items-center justify-content-between">
+          <p-button label="搜索" [loading]="priceSearch" (onClick)="submitSearch"></p-button>
+        </div>
+      </div>
+    </div>
+    <div class="filter-box-item">
+      <div class="filter-box-item-title flex align-items-center justify-content-between" (click)="changeClass()">
+        <div class="filter-box-item-title-name flex align-items-center">
+          <span class="iconfont icon-sort"></span>
+          <span i18n>分类</span>
+        </div>
+        <div class="filter-box-item-title-tips" [class]="classState ? 'down': ''">
+          <span class="iconfont icon-xiala"></span>
+        </div>
+      </div>
+      <div class="filter-box-item-class"  [class]="classState ? '': 'hide'">
+        <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of classList; let i=index" (click)="changeClassIndex(i)">
+          <span i18n>{{item.name}}</span>
+          <div class="icon">
+            <img src="../../../assets/images/explore/choose.png" alt="" *ngIf="item.checked">
+            <img src="../../../assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="filter-box-item">
-    <div class="filter-box-item-title flex align-items-center justify-content-between" (click)="changePrice()">
-      <div class="filter-box-item-title-name flex align-items-center">
-        <span class="iconfont icon-qian"></span>
-        <span i18n>价格</span>
-      </div>
-      <div class="filter-box-item-title-tips" [class]="priceState ? 'down': ''">
-        <span class="iconfont icon-xiala"></span>
-      </div>
+  <div class="filter-box-hide">
+    <img src="../../../assets/images/explore/icon1.png" alt="" class="tips">
+    <div class="filter-box-title" (click)="showFilterMenu()">
+      <span class="iconfont icon-liebiao"></span>
     </div>
-    <div class="filter-box-item-list"  [class]="priceState ? '': 'hide'">
-      <div class="filter-box-item-options flex align-items-center justify-content-between">
-        <p-dropdown [options]="PriceUnit" [(ngModel)]="PriceSelect" optionLabel="name" placeholder="Select a Unit" [style]="{'width': '100%'}">
-          <ng-template let-unit pTemplate="unit">
-            <div class="unit-item flex align-items-center">
-              <img [src]="unit.logo"/>
-              <div>{{unit.name}}</div>
-            </div>
-          </ng-template>
-        </p-dropdown>
-      </div>
-      <div class="filter-box-item-options flex align-items-center justify-content-between">
-        <p-inputNumber [(ngModel)]="minPrice" inputId="min" mode="decimal" [min]="0" [max]="100" [size]="10">
-        </p-inputNumber>
-        <span>-</span>
-        <p-inputNumber [(ngModel)]="maxPrice" inputId="max" mode="decimal" [min]="0" [max]="100" [size]="10">
-        </p-inputNumber>
-      </div>
-      <div class="filter-box-item-options flex align-items-center justify-content-between">
-        <p-button label="Search" [loading]="priceSearch" (onClick)="submitSearch"></p-button>
-      </div>
+    <div class="filter-box-icon">
+      <span class="iconfont icon-shijian"></span>
     </div>
-  </div>
-  <div class="filter-box-item">
-    <div class="filter-box-item-title flex align-items-center justify-content-between" (click)="changeNum()">
-      <div class="filter-box-item-title-name flex align-items-center">
-        <span class="iconfont icon-chuangjiang"></span>
-        <span i18n>数量</span>
-      </div>
-      <div class="filter-box-item-title-tips" [class]="numState ? 'down': ''">
-        <span class="iconfont icon-xiala"></span>
-      </div>
+    <div class="filter-box-icon">
+      <span class="iconfont icon-qian"></span>
     </div>
-
-    <div class="filter-box-item-list"  [class]="numState ? '': 'hide'">
-      <div class="filter-box-item-options flex align-items-center justify-content-between">
-        <span i18n>所有藏品</span>
-        <div class="icon">
-          <img src="../../../assets/images/explore/choose.png" alt="">
-        </div>
-      </div>
-      <div class="filter-box-item-options flex align-items-center justify-content-between">
-        <span i18n>单个藏品</span>
-        <div class="icon">
-          <img src="../../../assets/images/explore/choose.png" alt="">
-        </div>
-      </div>
-      <div class="filter-box-item-options flex align-items-center justify-content-between">
-        <span i18n>捆绑销售</span>
-        <div class="icon">
-          <img src="../../../assets/images/explore/choose.png" alt="">
-        </div>
-      </div>
+    <div class="filter-box-icon">
+      <span class="iconfont icon-wenjianjia"></span>
+    </div>
+    <div class="filter-box-icon">
+      <span class="iconfont icon-sort"></span>
     </div>
   </div>
 </div>
