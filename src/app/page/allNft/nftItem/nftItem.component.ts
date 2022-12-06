@@ -19,7 +19,17 @@ type nftItem = {
 })
 export class NftItemComponent implements OnInit {
   @Input() type:number = 1;
-  @Input() item?:nftItem;
+  @Input() item:nftItem={
+    Sellinglype:'',
+    CollectionName:'',
+    CollectionID:'',
+    NftOriginal: {
+      Name:'',
+      NftID:'',
+      Image:'',
+    },
+    CurrentPrice: '',
+  };
   constructor() {
   }
   ngOnInit(): void {

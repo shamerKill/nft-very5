@@ -1,35 +1,10 @@
-.app-collection{
+.app-user{
   &-top{
     width: 100%;
     height: 17.5rem;
-    position: relative;
-    background: #CED4D9;
     img{
       width: 100%;
       height: 100%;
-    }
-    &-iconList{
-      position: absolute;
-      right: 2.7rem;
-      top: 2.7rem;
-      &-item{
-        width: 2.6rem;
-        height: 2.6rem;
-        background: #FFFFFF;
-        border-radius: 1.3rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 1rem;
-        cursor: pointer;
-        .iconfont{
-          font-size: 1.3rem;
-          color: #000;
-          &.icon-aixin1{
-            color: #7456FF;
-          }
-        }
-      }
     }
   }
   &-info{

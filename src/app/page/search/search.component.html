@@ -1,5 +1,5 @@
 <div class="content-nft">
-  <app-filter-box></app-filter-box>
+  <!-- <app-filter-box></app-filter-box> -->
   <div class="list-box">
     <div class="list-box-name" i18n>合集结果</div>
     <div class="list-box-swiper">
@@ -58,12 +58,9 @@
       </div>
     </div>
     <div class="list-box-list flex align-items-center flex-wrap">
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
+      <div *ngFor="let items of nftList">
+        <nft-item  [type]="listType" [item]="items"></nft-item>
+      </div>
     </div>
   </div>
 </div>

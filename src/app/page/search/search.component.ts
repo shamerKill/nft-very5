@@ -1,6 +1,10 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import '@angular/localize';
 import SwiperCore, { Pagination } from "swiper";
+import { ActivatedRoute } from '@angular/router';
+import { NetService } from './../../server/net.service';
+import { BaseMessageService } from './../../server/base-message.service';
+import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 
 SwiperCore.use([Pagination]);
 
@@ -11,13 +15,24 @@ type exploreItem = {
   img: string;
   id: string;
 }[]
-
+type NftOriginal= {
+  Name: string; // nft名称
+  NftID: string|number;
+  Image: string; // nft图片
+}
+type nftItem = {
+  Sellinglype:string; // 正在售卖类型（1：一口价,2拍卖）
+  CollectionName: string; // 集合名称
+  CollectionID: string|number;
+  NftOriginal: NftOriginal;
+  CurrentPrice: string|number;
+}
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent extends ToolClassAutoClosePipe implements OnInit {
   sortList:sortItem[]=[
     {
       name: $localize`最近转移`,
@@ -83,14 +98,32 @@ export class SearchComponent implements OnInit {
       id: '2'
     }
   ];
+  nftList: nftItem[] = [];
   listType:number=1;
   switchList(type:number) {
     this.listType = type;
   };
-  constructor() {
+  constructor(
+    private net: NetService,
+    private BaseMessage: BaseMessageService,
+    private routerInfo: ActivatedRoute
+  ) {
+    super();
   }
-
+  searchStr: string='';
   ngOnInit(): void {
+    this.searchStr = this.routerInfo.snapshot.queryParams['id'];
+    this.getList();
   }
-
+  getList() {
+    // 获取数据
+    this.net.getSearchNftList$(this.searchStr).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+      if (code !== 200) return this.BaseMessage.warn(msg??'');
+      this.nftList = data
+    });
+    this.net.getSearchCollectionList$(this.searchStr).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+      if (code !== 200) return this.BaseMessage.warn(msg??'');
+      console.log(data)
+    });
+  }
 }

@@ -103,6 +103,59 @@ export class NetService {
     return this.$get<TypeInterfaceNet>(`v1/collection/list?owner=${owner}&category=${category}`);
   }
   /** 
+   * v1/search_collection/{search}
+   * search 搜索
+   * 搜索合集
+   * **/
+   getSearchCollectionList$(search:string) {
+    return this.$get<TypeInterfaceNet>(`v1/search_collection/${search}`);
+  }
+  /** 
+   * v1/collection/{search}
+   * search id
+   * 合集详情
+   * **/
+   getCollectionDetail$(search:string) {
+    return this.$get<TypeInterfaceNet>(`v1/collection/${search}`);
+  }
+  /** 
+   * v1/nft/evevt
+   * collectionID 合集id
+   * nftID nft id
+   * eventType 类型
+   * addr 根据地址查询
+   * 合集交易列表
+   * **/
+   getUserTrans$(collectionID:string,nftID:string,eventType:string,addr:string) {
+    return this.$get<TypeInterfaceNet>(`v1/nft/event?collectionID=${collectionID}&nftID=${nftID}&eventType=${eventType}&addr=${addr}`);
+  }
+  /** 
+   * v1/search_nft/{search}
+   * search 搜索
+   * 搜索nft
+   * **/
+   getSearchNftList$(search:string) {
+    return this.$get<TypeInterfaceNet>(`v1/search_nft/${search}`);
+  }
+  
+  /** 
+   * v1/user/add_focus/{collection_id}
+   * id 
+   * 收藏合集
+   * **/
+   postAddFocus$(id:string) {
+    return this.$post('v1/user/add_focus/'+id);
+  }
+  /** 
+   * v1/user/del_collect/{collect_id}
+   * id 
+   * 删除收藏合集
+   * **/
+   postDelFocus$(id:string) {
+    return this.$post('v1/user/del_focus/'+id);
+  }
+
+  /** 
    * v1/nft/list
    * creator 创建者
    * category 类别-多选(用"，"隔开"）
@@ -111,11 +164,12 @@ export class NetService {
    * highPrice 高价一价格筛选
    * coinType 币种类型
    * collectionName 合集名称
+   * collectionID 合集id
    * sort 排序(1最近转移,2最近上架,3最近创建，4最近卖出，5最近结束,6价格从低到高，7价格从高到低，8销售最高）
    * nft-列表(查询条件)
    * **/
-   getNftList$(creator:string,category:string,sellingType:string,lowPrice:string|number,highPrice:string|number,coinType:string,collectionName:string,sort:string,) {
-    return this.$get<TypeInterfaceNet>(`v1/nft/list?creator=${creator}&category=${category}&sellingType=${sellingType}&lowPrice=${lowPrice}&highPrice=${highPrice}&coinType=${coinType}&collectionName=${collectionName}&sort=${sort}`);
+   getNftList$(creator:string,category:string,sellingType:string,lowPrice:string|number,highPrice:string|number,coinType:string,collectionName:string,sort:string,collectionID:string) {
+    return this.$get<TypeInterfaceNet>(`v1/nft/list?creator=${creator}&category=${category}&sellingType=${sellingType}&lowPrice=${lowPrice}&highPrice=${highPrice}&coinType=${coinType}&collectionName=${collectionName}&sort=${sort}&collectionID=${collectionID}`);
   }
   /**
    * 获取当前用户信息

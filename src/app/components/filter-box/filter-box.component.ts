@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 type UnitItem = {name: string;logo:string;id:number}
 type chooseItem = {
   name:string;
@@ -20,6 +20,7 @@ type outputObj = {
 })
 export class FilterBoxComponent implements OnInit {
   constructor() { }
+  @Input() collectionType?:number;
   @Output() change: EventEmitter<outputObj> = new EventEmitter<outputObj>();
   newFilterObj:outputObj = {
     sell: '',
@@ -31,11 +32,19 @@ export class FilterBoxComponent implements OnInit {
   };
   setChange() {
     let stateArr:Array<string> = [];
-    this.stateList.map(item => {
-      if (item.checked) {
-        stateArr.push(item.id)
-      }
-    })
+    if(this.collectionType ==2) {
+      this.collectionTypeList.map(item => {
+        if (item.checked) {
+          stateArr.push(item.id)
+        }
+      })
+    } else {
+      this.stateList.map(item => {
+        if (item.checked) {
+          stateArr.push(item.id)
+        }
+      })
+    }
     let cateArr:Array<string> = [];
     this.classList.map(item => {
       if (item.checked) {
@@ -75,6 +84,25 @@ export class FilterBoxComponent implements OnInit {
       checked:false
     }
   ]
+  collectionTypeList: chooseItem[] = [
+    {
+      name: '新的拍卖',
+      id: 'create',
+      checked:false
+    },{
+      name: '销售',
+      id: 'successful',
+      checked:false
+    },{
+      name: '职消的拍卖',
+      id: 'cancelled',
+      checked:false
+    }
+  ]
+  collectionTypeState: boolean = false;
+  changeCollectionType() {
+    this.collectionTypeState = !this.collectionTypeState;
+  };
   changeStateIndex(index:number) {
     this.stateList[index].checked = !this.stateList[index].checked;
     this.setChange();
@@ -137,6 +165,11 @@ export class FilterBoxComponent implements OnInit {
   ]
   changeClassIndex(index:number) {
     this.classList[index].checked = !this.classList[index].checked
+    this.setChange();
+  };
+  changeCollectionIndex(index:number) {
+    this.collectionTypeList[index].checked = !this.collectionTypeList[index].checked
+    this.setChange();
   };
   priceState: boolean = false;
   changePrice() {
@@ -155,13 +188,13 @@ export class FilterBoxComponent implements OnInit {
     }
   ];
   PriceSelect: UnitItem={
-    name: 'PC',
-    logo: '../../../assets/images/explore/pc.png',
-    id: 2
+    name: '',
+    logo: '',
+    id: 0
   };
   numState: boolean = false;
-  minPrice: number|string = '0';
-  maxPrice: number|string = '0';
+  minPrice: number|string = '';
+  maxPrice: number|string = '';
   priceSearch: boolean = false;
   searchState: boolean = false;
   changeSearch() {
