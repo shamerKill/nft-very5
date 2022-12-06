@@ -1,9 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
+type CollectionOriginal = {
+  CollectionID: string; // id
+  Name:string;
+  Image: string
+}
 type exploreItem = {
-  name: string;
-  headImg: string;
-  img: string;
-  id: string;
+  BannerImageUrl:string;
+  CollectionOriginal: CollectionOriginal;
 }
 @Component({
   selector: 'explore-item',

@@ -36,7 +36,9 @@ import { ExploreComponent } from './page/explore/explore.component';
 import { AllNftComponent } from './page/allNft/allNft.component';
 import { NftItemComponent } from './page/allNft/nftItem/nftItem.component';
 import { SearchComponent } from './page/search/search.component';
+import { UserDetailComponent } from './page/userDetail/userDetail.component';
 import { CollectionComponent } from './page/collection/collection.component';
+
 import { UserComponent } from './page/search/user/user.component';
 import { ExploreItemComponent } from './page/explore/item/item.component';
 import { GatherItemComponent } from './page/search/item/item.component';
@@ -102,6 +104,10 @@ const routes: Routes = [
     path: 'collection',
   },
   {
+    component: UserDetailComponent,
+    path: 'user',
+  },
+  {
     component: HomeComponent,
     path: '**',
   },
@@ -126,6 +132,7 @@ const routes: Routes = [
     UserComponent,
     SearchComponent,
     TableComponent,
+    UserDetailComponent,
     CollectionComponent,
   ],
   imports: [

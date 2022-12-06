@@ -1,15 +1,15 @@
 <div class="content-nft">
-  <app-filter-box></app-filter-box>
+  <app-filter-box (change)="filterChange($event)"></app-filter-box>
   <div class="list-box">
     <div class="list-box-title flex align-items-center justify-content-between">
       <div class="list-box-title-total flex align-items-center">
-        <div class="list-box-title-total-icon flex align-items-center justify-content-center">
+        <div class="list-box-title-total-icon flex align-items-center justify-content-center" (click)="getNftList()">
           <span class="iconfont icon-shuaxin"></span>
         </div>
-        <div class="list-box-title-total-num">1,104,299<span i18n> 结果</span></div>
+        <div class="list-box-title-total-num">{{nftList.length}}<span i18n> 结果</span></div>
       </div>
       <div class="list-box-title-sort flex align-items-center">
-        <p-dropdown [options]="sortList" optionLabel="name" placeholder="排 序" [style]="{'width': '100%'}">
+        <p-dropdown [options]="sortList" [(ngModel)]="sortObj" optionLabel="name" placeholder="排 序" [style]="{'width': '100%'}">
         </p-dropdown>
         <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(1)">
           <img src="../../../assets/images/explore/sige.png" alt="" *ngIf="listType == 1">
@@ -22,12 +22,9 @@
       </div>
     </div>
     <div class="list-box-list flex align-items-center flex-wrap">
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
-      <nft-item [type]="listType"></nft-item>
+      <div *ngFor="let items of nftList">
+        <nft-item  [type]="listType" [item]="items"></nft-item>
+      </div>
     </div>
   </div>
 </div>

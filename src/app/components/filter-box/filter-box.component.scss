@@ -1,12 +1,33 @@
 .filter-box{
-  width: 100%;
   min-height: 80rem;
   background-image: url('../../../assets/images/explore/filterbg.png');
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-color: #FFFFFF;
-  padding: 2.5rem;
   position: relative;
+  transition: 0.5s;
+  max-width: 100%;
+  overflow: hidden;
+  &.hide{
+    max-width: 0;
+    padding: 2.5rem 1.5rem;
+    .filter-box-show{
+      display: none;
+    }
+    .filter-box-hide{
+      display: block;
+    }
+  }
+  &.show{
+    max-width: 100%;
+    padding: 2.5rem 3.1rem 2.5rem 1.5rem;
+    .filter-box-show{
+      display: block;
+    }
+    .filter-box-hide{
+      display: none;
+    }
+  }
   .tips{
     position: absolute;
     left: 0;
@@ -14,12 +35,29 @@
   }
   &-title{
     .iconfont{
+      cursor: pointer;
       font-size: 1.5rem;
+    }
+  }
+  &-icon{
+    height: 6.1rem;
+    width: 2rem;
+    font-size: 1.1rem;
+    color: #000;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    .iconfont{
+      font-size: 1.2rem;
+      font-weight: normal;
+      margin-right: 0.75rem;
     }
   }
   &-item{
     border-bottom: 1px solid #F0F0F0;
     padding: 0.45rem 0;
+    width: 20rem;
+    overflow: hidden;
     &-title{
       height: 5.2rem;
       cursor: pointer;
@@ -50,6 +88,14 @@
         max-height: 0;
       }
     }
+    &-class{
+      transition: 0.5s;
+      max-height: 36rem;
+      overflow: hidden;
+      &.hide{
+        max-height: 0;
+      }
+    }
     &-options{
       width: 100%;
       height: 3.6rem;
@@ -72,6 +118,22 @@
         width: 1.25rem;
         margin-right: 0.8rem;
       }
+    }
+  }
+}
+.filter-hidebox{
+  position: fixed;
+  .tips{
+    position: absolute;
+    left: 0;
+    top: 6rem;
+  }
+  &-title{
+    cursor: pointer;
+    position: relative;
+    z-index: 9;
+    .iconfont{
+      font-size: 1.5rem;
     }
   }
 }

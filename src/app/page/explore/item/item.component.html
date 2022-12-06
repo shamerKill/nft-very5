@@ -1,12 +1,12 @@
 <div class="explore-item">
   <div class="explore-item-img">
-    <img [src]="item?.img" alt="">
+    <img [src]="item?.BannerImageUrl" alt="" *ngIf="item?.BannerImageUrl">
+    <img src="../../../../assets/images/explore/pic.png" alt="">
   </div>
   <div class="explore-item-info flex align-items-center">
     <div class="explore-item-info-img flex align-items-center justify-content-center">
-      <img [src]="item?.headImg" alt="">
+      <img [src]="item?.CollectionOriginal?.Image" alt="">
     </div>
-    <div class="explore-item-info-name">{{item?.name}}</div>
+    <div class="explore-item-info-name">{{item?.CollectionOriginal?.Name}}</div>
   </div>
-  
 </div>

@@ -1,34 +1,46 @@
 <div class="app-collection">
   <div class="app-collection-top">
-
+    <img [src]="collectionDetail.BannerImageUrl?collectionDetail.BannerImageUrl:'../../../assets/images/explore/very5bg.png'" alt="">
+    <div class="app-collection-top-iconList">
+      <div class="app-collection-top-iconList-item" (click)="focusCollection()">
+        <span class="iconfont icon-aixin" *ngIf="!collectionDetail.IsFocus"></span>
+        <span class="iconfont icon-aixin1" *ngIf="collectionDetail.IsFocus"></span>
+      </div>
+      <div class="app-collection-top-iconList-item" (click)="refresh()">
+        <span class="iconfont icon-shuaxin"></span>
+      </div>
+      <div class="app-collection-top-iconList-item">
+        <span class="iconfont icon-share"></span>
+      </div>
+    </div>
   </div>
   <div class="app-collection-info flex justify-content-between flex-wrap">
     <div class="app-collection-info-detail flex">
       <div class="app-collection-info-detail-head">
-        <img src="../../../assets/images/explore/imgs.png" alt="">
+        <img [src]="collectionDetail.CollectionOriginal.Image" alt="">
       </div>
       <div class="app-collection-info-detail-title">
           <div class="app-collection-info-detail-title-name">
-            StreetMachine
+            {{collectionDetail.CollectionOriginal.Name}}
           </div>
           <div class="app-collection-info-detail-title-symple">
-            NFT Brtod
+            {{collectionDetail.CreatorAccount.Name}}
           </div>
           <div class="app-collection-info-detail-title-num flex align-items-center">
             <div class="app-collection-info-detail-title-num-item flex align-items-center">
               <span i18n>项目</span>
-              <div class="app-collection-info-detail-title-num-num">8.0K</div>
+              <div class="app-collection-info-detail-title-num-num">{{collectionDetail.AssetCount | bigNum}}</div>
             </div>
             <div class="app-collection-info-detail-title-num-item flex align-items-center">
-              <span i18n>项目</span>
-              <div class="app-collection-info-detail-title-num-num">8.0K</div>
+              <span i18n>创建日期</span>
+              <div class="app-collection-info-detail-title-num-num">{{collectionDetail.CollectionOriginal.CreatedAt}}</div>
             </div>
             <div class="app-collection-info-detail-title-num-item flex align-items-center">
-              <span i18n>项目</span>
-              <div class="app-collection-info-detail-title-num-num">8.0K</div>
+              <span i18n>创作者费用</span>
+              <div class="app-collection-info-detail-title-num-num">7%</div>
             </div>
           </div>
-          <div class="app-collection-info-detail-title-introduce" [class]="showMore?'':'shot'">Here is the introduction.Here is the introduction.Here is the introduction.Here is the introduction.</div>
+          <div class="app-collection-info-detail-title-introduce" [class]="showMore?'':'shot'">{{collectionDetail.CollectionOriginal.Description}}</div>
           <div class="app-collection-info-detail-title-btn flex align-items-center" (click)="clickMore()">
             <div *ngIf="showMore" class="flex align-items-center">
               <span i18n>收起 </span> 
@@ -45,54 +57,45 @@
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
             <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>407K</span>
+            <span>{{collectionDetail.TransactionAmount|bigNum}}</span>
           </div>
-          <div class="app-collection-info-total-item-tips">总交易额</div>
+          <div class="app-collection-info-total-item-tips" i18n>总交易额</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
             <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>407K</span>
+            <span>{{collectionDetail.LowestPrice}}</span>
           </div>
-          <div class="app-collection-info-total-item-tips">总交易额</div>
+          <div class="app-collection-info-total-item-tips" i18n>地板价</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
             <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>407K</span>
+            <span>{{collectionDetail.HighestPrice}}</span>
           </div>
-          <div class="app-collection-info-total-item-tips">总交易额</div>
+          <div class="app-collection-info-total-item-tips" i18n>最佳报价</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>407K</span>
+            <span>2%</span>
           </div>
-          <div class="app-collection-info-total-item-tips">总交易额</div>
+          <div class="app-collection-info-total-item-tips" i18n>已刊登</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>407K</span>
+            <span>{{collectionDetail.HoldersNumber}}</span>
           </div>
-          <div class="app-collection-info-total-item-tips">总交易额</div>
-      </div>
-      <div class="app-collection-info-total-item">
-          <div class="app-collection-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>407K</span>
-          </div>
-          <div class="app-collection-info-total-item-tips">总交易额</div>
+          <div class="app-collection-info-total-item-tips" i18n>持有者</div>
       </div>
     </div>
   </div>
   <div class="contents-nft">
-    <app-filter-box></app-filter-box>
+    <app-filter-box [collectionType]="(tabActive+1)" (change)="filterChange($event)"></app-filter-box>
     <div class="list-box">
       <div class="list-box-tabbar flex align-items-center">
         <div class="list-box-tabbar-item flex justify-content-center align-items-center" *ngFor="let item of tabbar; let i=index" [class]="i==tabActive?'actived':''" (click)="checkTab(i)">{{item}}</div>
       </div>
-      <div *ngIf="tabActive==0||tabActive==1">
+      <div *ngIf="tabActive==0">
         <div class="list-box-title flex align-items-center justify-content-between">
           <div class="list-box-title-total flex align-items-center">
             <div class="list-box-title-total-icon flex align-items-center justify-content-center">
@@ -114,21 +117,13 @@
           </div>
         </div>
         <div class="list-box-list flex align-items-center flex-wrap">
-          <nft-item [type]="listType"></nft-item>
-          <nft-item [type]="listType"></nft-item>
-          <nft-item [type]="listType"></nft-item>
-          <nft-item [type]="listType"></nft-item>
-          <nft-item [type]="listType"></nft-item>
-          <nft-item [type]="listType"></nft-item>
+          <div *ngFor="let items of nftList">
+            <nft-item  [type]="listType" [item]="items"></nft-item>
+          </div>
         </div>
       </div>
-      <div *ngIf="tabActive==2">
-        <div class="content-explore-list-item flex align-items-center">
-          <explore-item *ngFor="let items of exploreList" [item]="items"></explore-item>
-        </div>
-      </div>
-      <div *ngIf="tabActive==3">
-        <app-table></app-table>
+      <div *ngIf="tabActive==1">
+        <app-table [list]="transList"></app-table>
       </div>
     </div>
   </div>

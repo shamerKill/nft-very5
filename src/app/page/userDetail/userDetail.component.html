@@ -1,0 +1,105 @@
+<div class="app-user">
+  <div class="app-user-top">
+    <img [src]="userInfo.Conver?userInfo.Conver:'../../../assets/images/explore/very5bg.png'" alt="">
+  </div>
+  <div class="app-user-info flex justify-content-between flex-wrap">
+    <div class="app-user-info-detail flex">
+      <div class="app-user-info-detail-head">
+        <img [src]="userInfo.Avator" alt="">
+      </div>
+      <div class="app-user-info-detail-title">
+          <div class="app-user-info-detail-title-name">
+            {{userInfo.Name}}
+          </div>
+          
+          <div class="app-user-info-detail-title-introduce" [class]="showMore?'':'shot'">{{userInfo.Description}}</div>
+          <div class="app-user-info-detail-title-btn flex align-items-center" (click)="clickMore()">
+            <div *ngIf="showMore" class="flex align-items-center">
+              <span i18n>收起 </span> 
+              <span [class]="showMore?'down':''" class="iconfont icon-xiala"></span>
+            </div>
+            <div *ngIf="!showMore" class="flex align-items-center">
+              <span i18n>展开 </span> 
+              <span class="iconfont icon-xiala"></span>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- <div class="app-user-info-total flex">
+      <div class="app-user-info-total-item">
+          <div class="app-user-info-total-item-num flex align-items-center">
+            <img src="../../../assets/images/explore/pc.png" alt="">
+            <span>407K</span>
+          </div>
+          <div class="app-user-info-total-item-tips" i18n>总交易额</div>
+      </div>
+      <div class="app-user-info-total-item">
+          <div class="app-user-info-total-item-num flex align-items-center">
+            <img src="../../../assets/images/explore/pc.png" alt="">
+            <span>13</span>
+          </div>
+          <div class="app-user-info-total-item-tips" i18n>地板价</div>
+      </div>
+      <div class="app-user-info-total-item">
+          <div class="app-user-info-total-item-num flex align-items-center">
+            <img src="../../../assets/images/explore/pc.png" alt="">
+            <span>0.09</span>
+          </div>
+          <div class="app-user-info-total-item-tips" i18n>最佳报价</div>
+      </div>
+      <div class="app-user-info-total-item">
+          <div class="app-user-info-total-item-num flex align-items-center">
+            <span>2%</span>
+          </div>
+          <div class="app-user-info-total-item-tips" i18n>已刊登</div>
+      </div>
+      <div class="app-user-info-total-item">
+          <div class="app-user-info-total-item-num flex align-items-center">
+            <span>12</span>
+          </div>
+          <div class="app-user-info-total-item-tips" i18n>持有者</div>
+      </div>
+    </div> -->
+  </div>
+  <div class="contents-nft">
+    <app-filter-box></app-filter-box>
+    <div class="list-box">
+      <div class="list-box-tabbar flex align-items-center">
+        <div class="list-box-tabbar-item flex justify-content-center align-items-center" *ngFor="let item of tabbar; let i=index" [class]="i==tabActive?'actived':''" (click)="checkTab(i)">{{item}}</div>
+      </div>
+      <div *ngIf="tabActive==0||tabActive==1">
+        <div class="list-box-title flex align-items-center justify-content-between">
+          <div class="list-box-title-total flex align-items-center">
+            <div class="list-box-title-total-icon flex align-items-center justify-content-center">
+              <span class="iconfont icon-shuaxin"></span>
+            </div>
+            <div class="list-box-title-total-num">1,104,299<span i18n> 结果</span></div>
+          </div>
+          <div class="list-box-title-sort flex align-items-center">
+            <p-dropdown [options]="sortList" optionLabel="name" placeholder="排 序" [style]="{'width': '100%'}">
+            </p-dropdown>
+            <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(1)">
+              <img src="../../../assets/images/explore/sige.png" alt="" *ngIf="listType == 1">
+              <img src="../../../assets/images/explore/sige1.png" alt="" *ngIf="listType == 2">
+            </div>
+            <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(2)">
+              <img src="../../../assets/images/explore/jiuge.png" alt="" *ngIf="listType == 1">
+              <img src="../../../assets/images/explore/jiuge1.png" alt="" *ngIf="listType == 2">
+            </div>
+          </div>
+        </div>
+        <div class="list-box-list flex align-items-center flex-wrap">
+          <nft-item [type]="listType"></nft-item>
+        </div>
+      </div>
+      <div *ngIf="tabActive==2">
+        <div class="content-explore-list-item flex align-items-center">
+          <!-- <explore-item *ngFor="let items of exploreList" [item]="items"></explore-item> -->
+        </div>
+      </div>
+      <div *ngIf="tabActive==3">
+        <app-table></app-table>
+      </div>
+    </div>
+  </div>
+</div>
