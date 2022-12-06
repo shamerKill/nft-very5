@@ -25,6 +25,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {DropdownModule} from 'primeng/dropdown';
 import {ToastModule} from 'primeng/toast';
+import {ConfirmationService} from 'primeng/api';
 
 import { ComponentsModule } from './components/components.module';
 import { AuctionComponent } from './page/auction/auction.component';
@@ -155,6 +156,7 @@ const routes: Routes = [
   ],
   providers: [
     MessageService,
+    ConfirmationService,
   ]
 })
 export class AppRoutingModule {

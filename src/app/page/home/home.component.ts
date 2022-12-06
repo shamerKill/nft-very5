@@ -3,10 +3,9 @@ import { BaseMessageService } from './../../server/base-message.service';
 import { ToolFuncGetChg } from './../../tools/functions/number';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 import { NetService } from './../../server/net.service';
-import { DatabaseService } from './../../server/database.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DatabaseService, nftTypesArr } from './../../server/database.service';
+import { Component, OnInit } from '@angular/core';
 import SwiperCore, { Pagination } from "swiper";
-import { MessageService } from 'primeng/api';
 
 SwiperCore.use([Pagination]);
 
@@ -101,50 +100,11 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
     }[],
   } = {
     index: new BehaviorSubject(0),
-    list: [
-      {
-        title: $localize`热门`,
-        key: '热门',
-        loaded: false,
-        data: []
-      },
-      {
-        title: $localize`艺术`,
-        key: '艺术',
-        loaded: false,
-        data: []
-      },
-      {
-        title: $localize`收藏品`,
-        key: '收藏品',
-        loaded: false,
-        data: []
-      },
-      {
-        title: $localize`虚拟世界`,
-        key: '虚拟世界',
-        loaded: false,
-        data: []
-      },
-      {
-        title: $localize`音乐`,
-        key: '音乐',
-        loaded: false,
-        data: []
-      },
-      {
-        title: $localize`实用`,
-        key: '实用',
-        loaded: false,
-        data: []
-      },
-      {
-        title: $localize`体育`,
-        key: '热门',
-        loaded: false,
-        data: []
-      }
-    ],
+    list: nftTypesArr.map(item => ({
+      ...item,
+      loaded: false,
+      data: []
+    })),
   };
 
   constructor(
@@ -188,7 +148,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
         assets: item.CurrentPrice,
         chgRate: str,
         direction: dir,
-        id: item.ID,
+        id: item.NftOriginal.NftID,
       };
     };
     this.assetsRank.list[0].data = input.dayRanking.map(_doMap);
@@ -206,7 +166,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       id: item.CollectionOriginal.ID,
       nftList: item.Nfts.map((nft: any) => ({
         logo: nft.NftOriginal.Image,
-        id: nft.ID
+        id: nft.NftOriginal.NftID
       }))
     }));
     if (this.artistList.list.length > 2) this.artistList.index = 1;
@@ -221,7 +181,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
           collectionName: item.CollectionName,
           sellType: item.sellingType,
           image: item.NftOriginal.Image,
-          id: item.NftOriginal.ID,
+          id: item.NftOriginal.NftID,
           name: item.NftOriginal.Name,
           price: item.CurrentPrice,
         }));

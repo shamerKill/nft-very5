@@ -1,7 +1,7 @@
 import { DatabaseService } from './database.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, throttleTime } from 'rxjs';
+import { map, Observable, Subject, throttleTime } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 // 数据类型
@@ -75,8 +75,12 @@ export class NetService {
    * 登录接口
    **/
   // 此处调用时this指向错误，需用箭头函数
-  signLogin$(message: string, signStr: string) {
-    return this.$post('v1/auth/login', { signStr, message }).pipe(throttleTime(1000));
+  signLogin$ = (message: string, signStr: string) => {
+    return this.$post('v1/auth/login', { signStr, message }).pipe(throttleTime(1000), sub => {
+      const _sub = new Subject();
+      sub.subscribe((data) => this.getNowUserInfo$().subscribe(() => _sub.next(data)));
+      return _sub.pipe();
+    });
   }
 
   /**
@@ -98,45 +102,49 @@ export class NetService {
    * 获取当前用户信息
    **/
   getNowUserInfo$() {
-    return this.$get<TypeInterfaceNet>('v1/user/user_info').pipe(sub => {
-      // 处理本地database
-      const _sub = sub.subscribe(data => {
-        const info = data.data.info;
-        const asset = data.data.asset;
-        let link = {};
-        try {
-          link = JSON.parse(info.Link);
-        } catch (_) {}
-        this.database.nowUserInfo = {
-          avatar: info.Avator,
-          name: info.Name,
-          mainBg: info.Conver,
-          describe: info.Description,
-          link: link,
-          balance: asset.balance.amount
-        };
-        _sub.unsubscribe();
-      });
-      return sub;
-    });
+    const sub = this.$get<TypeInterfaceNet>('v1/user/user_info').pipe(
+      map(
+        // 处理本地database
+        (data): TypeInterfaceNet => {
+          if (!data.data) return data;
+          const info = data.data.info;
+          const asset = data.data.asset;
+          let link = {};
+          try {
+            link = JSON.parse(info.Link);
+          } catch (_) {}
+          this.database.nowUserInfo = {
+            avatar: info.Avator,
+            name: info.Name,
+            mainBg: info.Conver,
+            describe: info.Description,
+            link: link,
+            balance: asset.balance.amount
+          };
+          return data;
+        }
+      ),
+    );
+    return sub;
   }
 
   /**
    * 上传图片
    **/
   postBaseImage$(input: string) {
-    return this.$post('v1/upload_base64', { file: input }).pipe(sub => {
-      const sub$ = new Subject<TypeInterfaceNet>();
-      sub.subscribe(({data, ...other}) => {
+    return this.$post('v1/upload_base64', { file: input }).pipe(
+      map((res) => {
+        const { data, ...other } = res;
         if (data && data.baseUrl && data.filePath) {
-          sub$.next({
+          return {
             ...other,
             data: data.baseUrl + data.filePath,
-          });
+          };
+        } else {
+          return res;
         }
-      });
-      return sub$.pipe();
-    });
+      }),
+    );
   }
 
   /**
@@ -147,17 +155,73 @@ export class NetService {
   }
 
   /**
-   * 获取用户收藏列表
+   * 获取用户收藏nft列表
    **/
   getUserStarList$() {
     return this.$get('v1/user/collect_list');
   }
 
   /**
-   * 获取用户关注售卖列表
+   * 获取用户关注合集列表
    **/
   getUserStarSellList$() {
     return this.$get('v1/user/focus_list');
+  }
+
+  /**
+   * 搜索
+   **/
+  getSearchContent$(type: 'user'|'collection'|'nft', search: string) {
+    let url = '';
+    if (type === 'user') url = 'v1/search_account/';
+    if (type === 'collection') url = 'v1/search_collection/';
+    if (type === 'nft') url = 'v1/search_nft/';
+    return this.$get(url + search);
+  }
+
+  /**
+   * 关注收藏
+   **/
+  putAddStar$(type: 'collection'|'nft', id: string) {
+    let url = '';
+    if (type === 'collection') url = 'v1/user/add_focus/';
+    if (type === 'nft') url = 'v1/user/add_collect/';
+    return this.$post(url + id);
+  }
+
+  /**
+   * 取消关注收藏
+   **/
+  putDelStar$(type: 'collection'|'nft', id: string) {
+    let url = '';
+    if (type === 'collection') url = 'v1/user/del_focus/';
+    if (type === 'nft') url = 'v1/user/del_collect/';
+    return this.$post(url + id);
+  }
+
+  /**
+   * 创建新合集
+   **/
+  putNewCollection$(params: {
+    [key in 'name'|'image'|'banner_image'|'external_link'|'creator_rate'|'fee_recipient'|'category']: string
+  }) {
+    return this.$post('v1/my/collection', params);
+  }
+
+  /**
+   * 创建新nft
+   **/
+   putNewNFT$(params: {
+    [key in 'name'|'image'|'external_link'|'description'|'attr'|'number'|'collection_id']: string
+  }) {
+    return this.$post('v1/my/nft', params);
+  }
+
+  /**
+   * 获取我的合集列表
+   **/
+  getMyCollectionList$() {
+    return this.$get('v1/my/collection');
   }
 
 }

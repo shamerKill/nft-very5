@@ -94,3 +94,33 @@
     background-size: 100% 100%;
   }
 }
+
+::ng-deep {
+  .p-overlaypanel.no-from {
+    &::before, &::after {
+      content: none;
+    }
+  }
+  .p-accordion .p-accordion-header .p-accordion-header-link {
+    padding: 0.75rem 1rem;
+  }
+}
+
+.search-content {
+  min-height: 10rem;
+  ::ng-deep {
+    .p-accordion-content {
+      padding: 0;
+    }
+  }
+  .search-content-scroll {
+    max-height: 20rem;
+    overflow: auto;
+    .cursor-pointer {
+      padding: 0 1rem;
+      &:hover {
+        background-color: var(--surface-100);
+      }
+    }
+  }
+}

@@ -7,8 +7,7 @@ import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { TypeFileEvent } from './../../components/choose-file/choose-file.component';
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { of, zip } from 'rxjs';
+import { zip } from 'rxjs';
 
 @Component({
   selector: 'app-my-setting',
@@ -54,7 +53,9 @@ export class MySettingComponent extends ToolClassAutoClosePipe implements OnInit
   }
 
   ngOnInit(): void {
-    this.getUserInfo();
+    this.state.linkedWallet$.subscribe(data => {
+      if (data.isLinked) this.getUserInfo();
+    });
     this.state.globalLoading$.subscribe(type => this.isLoading = (type > 0));
   }
 

@@ -16,11 +16,19 @@
         </div>
         <div class="flex flex-column lg:flex-row justify-content-between">
           <div class="flex-1 flex mb-4">
-            <div class="surface-100 h-15rem w-15rem border-round-lg flex flex-column justify-content-center align-items-center text-center text-400">
-              <p class="pi pi-cloud-upload text-7xl pb-2"></p>
-              <p class="text-xl" i18n>合集主图</p>
-            </div>
-            <div class="flex flex-column flex-1 pl-4 align-items-start">
+            <app-drag-box (onDrop)="onGetMainImage($event)">
+              <div class="surface-100 h-15rem w-15rem border-round-lg flex flex-column justify-content-center align-items-center text-center text-400 relative">
+                <p class="pi pi-cloud-upload text-7xl pb-2"></p>
+                <p class="text-xl" i18n>合集主图</p>
+                <div *ngIf="mainImage" class="w-full h-full absolute z-1 surface-0">
+                  <img
+                    class="w-full h-full absolute top-0 left-0 fit-contain"
+                    [src]="mainImage"
+                    alt="">
+                </div>
+              </div>
+            </app-drag-box>
+            <div class="flex flex-column flex-1 pl-4 align-items-start ">
               <p class="text-lg font-bold pb-2" i18n>合集主图</p>
               <p class="text-600 flex-1" i18n>
                 支持JPG、PNG、GIF
@@ -29,18 +37,30 @@
                 <br />
                 大小在1M以内
               </p>
-              <button
-                pButton
-                type="button"
-                label="选择文件"
-                class="p-button-outlined mb-4"></button>
+              <app-choose-file
+                (onDrop)="onGetMainImage($event)"
+                styleClass="mb-4">
+                <button
+                  pButton
+                  type="button"
+                  label="选择文件"
+                  class="p-button-outlined mb-4"></button>
+              </app-choose-file>
             </div>
           </div>
           <div class="flex-1 flex mb-4">
-            <div class="surface-100 h-15rem w-15rem border-round-lg flex flex-column justify-content-center align-items-center text-center text-400">
-              <p class="pi pi-cloud-upload text-7xl pb-2"></p>
-              <p class="text-xl" i18n>横幅背景</p>
-            </div>
+            <app-drag-box (onDrop)="onGetBannerBg($event)">
+              <div class="surface-100 h-15rem w-15rem border-round-lg flex flex-column justify-content-center align-items-center text-center text-400 relative">
+                <p class="pi pi-cloud-upload text-7xl pb-2"></p>
+                <p class="text-xl" i18n>横幅背景</p>
+                <div *ngIf="bannerBg" class="w-full h-full absolute z-1 surface-0">
+                  <img
+                    class="w-full h-full absolute top-0 left-0 fit-contain"
+                    [src]="bannerBg"
+                    alt="">
+                </div>
+              </div>
+            </app-drag-box>
             <div class="flex flex-column flex-1 pl-4 align-items-start">
               <p class="text-lg font-bold pb-2" i18n>横幅背景</p>
               <p class="text-600 flex-1" i18n>
@@ -50,11 +70,15 @@
                 <br />
                 大小在1M以内
               </p>
-              <button
-                pButton
-                type="button"
-                label="选择文件"
-                class="p-button-outlined mb-4"></button>
+              <app-choose-file
+                (onDrop)="onGetBannerBg($event)"
+                styleClass="mb-4">
+                <button
+                  pButton
+                  type="button"
+                  label="选择文件"
+                  class="p-button-outlined mb-4"></button>
+              </app-choose-file>
             </div>
           </div>
         </div>
@@ -72,6 +96,8 @@
           type="text"
           pInputText
           placeholder="好的名字能引发关联想象，吸引观众哦～"
+          [(ngModel)]="name"
+          (input)="onListenData()"
           i18n-placeholder />
       </div>
       <!--  -->
@@ -86,6 +112,7 @@
           class="w-9 lg:w-6 p-inputtext-lg text-base"
           type="text"
           pInputText
+          [(ngModel)]="webSite"
           placeholder="https://"
           i18n-placeholder />
       </div>
@@ -102,7 +129,9 @@
             class="p-inputtext-lg text-base flex-1"
             type="text"
             pInputText
-            placeholder="地址"
+            placeholder="收益地址"
+            [(ngModel)]="profit.address"
+            (input)="onListenData()"
             i18n-placeholder />
           <div class="w-1rem h-1rem"></div>
           <p-inputNumber
@@ -110,6 +139,9 @@
             pInputText
             suffix="%"
             placeholder="费率"
+            [(ngModel)]="profit.rate"
+            (onInput)="onListenData()"
+            (onBlur)="onListenData()"
             [min]="0"
             [max]="100"
             i18n-placeholder>
@@ -128,11 +160,12 @@
           class="w-9 lg:w-6 p-inputtext-lg text-base"
           type="text"
           pInputText
+          [(ngModel)]="interactiveLink"
           placeholder="欢迎您链接到自己的网页"
           i18n-placeholder />
       </div>
       <!--  -->
-      <div class="pb-5">
+      <!-- <div class="pb-5">
         <div class="flex align-items-center pb-5">
           <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
           <h3 class="text-xl" i18n>
@@ -145,7 +178,7 @@
           tooltipPosition="bottom"
           optionLabel="name">
         </p-multiSelect>
-      </div>
+      </div> -->
       <!--  -->
       <div class="pb-5">
         <div class="flex align-items-center pb-5">
@@ -158,17 +191,21 @@
           styleClass="w-9 lg:w-6"
           [options]="types"
           placeholder="选择"
-          optionLabel="name"
+          optionLabel="title"
           [baseZIndex]="20"
+          [selectionLimit]="1"
+          [(ngModel)]="typeSelected"
+          (onChange)="onListenData()"
           i18n-placeholder>
         </p-multiSelect>
       </div>
       <!--  -->
       <button
         pButton
-        [disabled]="true"
+        [disabled]="!canCreate"
         class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
         label="创建"
+        (click)="onCreateCollection()"
         type="button"></button>
     </div>
   </app-base-box>

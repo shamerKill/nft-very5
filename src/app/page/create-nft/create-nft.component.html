@@ -8,15 +8,20 @@
     <div class="border-round-lg w-full surface-0 px-4 gl:px-6 py-4 lg:py-6 mb-4">
       <!--  -->
       <div class="flex-1 flex mb-4">
-        <div class="surface-100 h-15rem w-15rem border-round-lg flex flex-column justify-content-center align-items-center text-center text-400">
-          <p class="pi pi-cloud-upload text-7xl pb-2"></p>
-          <p class="text-xl" i18n>收藏品文件</p>
-        </div>
-        <div class="flex flex-column flex-1 pl-4 align-items-start">
-          <div class="flex align-items-center pb-2">
-            <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
-            <p class="text-lg font-bold" i18n>收藏品文件</p>
+        <app-drag-box (onDrop)="onGetNFTImage($event)">
+          <div class="surface-100 h-15rem w-15rem border-round-lg flex flex-column justify-content-center align-items-center text-center text-400 relative">
+            <p class="pi pi-cloud-upload text-7xl pb-2"></p>
+            <p class="text-xl" i18n>收藏品文件</p>
+            <div *ngIf="nftImage" class="w-full h-full absolute z-1 surface-0">
+              <img
+                class="w-full h-full absolute top-0 left-0 fit-contain"
+                [src]="nftImage"
+                alt="">
+            </div>
           </div>
+        </app-drag-box>
+        <div class="flex flex-column flex-1 pl-4 align-items-start ">
+          <p class="text-lg font-bold pb-2" i18n>收藏品文件</p>
           <p class="text-600 flex-1" i18n>
             支持JPG、PNG、GIF
             <br />
@@ -24,11 +29,15 @@
             <br />
             大小在1M以内
           </p>
-          <button
-            pButton
-            type="button"
-            label="选择文件"
-            class="p-button-outlined mb-4"></button>
+          <app-choose-file
+            (onDrop)="onGetNFTImage($event)"
+            styleClass="mb-4">
+            <button
+              pButton
+              type="button"
+              label="选择文件"
+              class="p-button-outlined mb-4"></button>
+          </app-choose-file>
         </div>
       </div>
       <!--  -->
@@ -42,6 +51,8 @@
         <input
           class="w-9 lg:w-6 p-inputtext-lg text-base"
           type="text"
+          [(ngModel)]="name"
+          (input)="onListenData()"
           pInputText
           placeholder="好的名字能引发关联想象，吸引观众哦～"
           i18n-placeholder />
@@ -51,13 +62,14 @@
         <div class="flex align-items-center pb-5">
           <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
           <h3 class="text-xl" i18n>
-            外部链接
+            社交链接
           </h3>
         </div>
         <input
           class="w-9 lg:w-6 p-inputtext-lg text-base"
           type="text"
           pInputText
+          [(ngModel)]="interactiveLink"
           placeholder="欢迎您链接到自己的网页"
           i18n-placeholder />
       </div>
@@ -73,6 +85,7 @@
           class="w-9 lg:w-6 p-inputtext-lg text-base"
           type="text"
           pInputText
+          [(ngModel)]="describe"
           placeholder="介绍你的作品，让更多人了解TA的价值"
           i18n-placeholder />
       </div>
@@ -93,6 +106,7 @@
               class="text-base w-4 flex-1"
               type="text"
               pInputText
+              [(ngModel)]="item.key"
               placeholder="属性"
               i18n-placeholder />
             <div class="w-1rem h-1rem"></div>
@@ -100,6 +114,7 @@
               class="text-base w-4 flex-1"
               type="text"
               pInputText
+              [(ngModel)]="item.value"
               placeholder="值"
               i18n-placeholder />
             <div class="w-1rem h-1rem"></div>
@@ -127,9 +142,14 @@
             收藏品副本数量
           </h3>
         </div>
-        <div class="w-full lg:w-6 lg:mx-0 flex justify-content-between">
+        <div class="w-full lg:w-6 lg:mx-0 flex flex-column md:flex-row justify-content-between">
           <div id="one-btn" class="flex-1 flex px-3 py-2 border-1 border-300 border-round-sm surface-100">
-            <p-radioButton inputId="one-btn" name="nftNum" value="one" [(ngModel)]="selectedNum"></p-radioButton>
+            <p-radioButton
+              inputId="one-btn"
+              name="nftNum"
+              [value]="1"
+              [(ngModel)]="selectedNum"
+              (ngModelChange)="onListenData()"></p-radioButton>
             <div class="ml-3">
               <p class="font-bold pb-1" i18n>单个</p>
               <p class="text-500 text-sm" i18n>此收藏品独一无二</p>
@@ -137,10 +157,29 @@
           </div>
           <div class="w-1rem h-1rem"></div>
           <div id="more-btn" class="flex-1 flex px-3 py-2 border-1 border-300 border-round-sm surface-100">
-            <p-radioButton inputId="more-btn" name="nftNum" value="more" [(ngModel)]="selectedNum"></p-radioButton>
-            <div class="ml-3">
+            <p-radioButton
+              inputId="more-btn"
+              name="nftNum"
+              [value]="selectedNum === 1 ? 2 : selectedNum"
+              [(ngModel)]="selectedNum"
+              (ngModelChange)="onListenData()"></p-radioButton>
+            <div *ngIf="selectedNum === 1" class="ml-3">
               <p class="font-bold pb-1" i18n>多个</p>
               <p class="text-500 text-sm" i18n>此收藏品可售出多份</p>
+            </div>
+            <div *ngIf="selectedNum !== 1" class="ml-3">
+              <p-inputNumber
+                class="text-base p-0 border-none"
+                pInputText
+                placeholder="数量"
+                suffix="份"
+                [(ngModel)]="selectedNum"
+                (input)="onListenData()"
+                (onBlur)="onListenData()"
+                [min]="0"
+                i18n-placeholder
+                i18n-suffix>
+              </p-inputNumber>
             </div>
           </div>
         </div>
@@ -157,14 +196,14 @@
           <ng-container *ngFor="let item of collectionList">
             <div
               class="collection-item flex border-round-lg relative hidden"
-              [class]="selectedCollection === item.id ? 'collection-selected': ''"
+              [class]="selectedCollectionId === item.id ? 'collection-selected': ''"
               (click)="changeCollection(item.id)">
               <img class="collection-image" [src]="item.image" [alt]="item.name">
-              <div class="collection-describe text-sm border-round-lg">{{item.name}}</div>
+              <div class="collection-describe text-sm border-round-lg">{{item.name}}-{{item.type}}</div>
             </div>
             <div class="w-1rem h-1rem"></div>
           </ng-container>
-          <a href="">
+          <a [routerLink]="['/create/collection']" [queryParams]="{back: 'nft'}">
             <div class="collection-create-item border-round-lg flex flex-column justify-content-center align-items-center">
               <img class="collection-create-icon w-2 h-2" src="../../../assets/images/create/add-s.png" alt="add">
               <p class="pt-3 text-sm text-900" i18n>创建新合集</p>
@@ -175,7 +214,8 @@
       <!--  -->
       <button
         pButton
-        [disabled]="true"
+        [disabled]="!canCreate"
+        (click)="onCreateNft()"
         class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
         label="创建"
         type="button"></button>

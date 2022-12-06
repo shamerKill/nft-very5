@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { NgModule } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { FormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {MegaMenuModule} from 'primeng/megamenu';
@@ -53,6 +54,7 @@ import { ChooseFileComponent } from './choose-file/choose-file.component';
     ToastModule,
     ClipboardModule,
     PipeModule,
+    OverlayPanelModule,
   ],
   exports: [
     HeaderComponent,

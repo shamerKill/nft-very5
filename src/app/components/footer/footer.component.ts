@@ -1,8 +1,9 @@
+import { nftTypesArr } from './../../server/database.service';
 import { environment } from './../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import '@angular/localize';
 
-type TypeLinkList = {name: string; link: string}[];
+type TypeLinkList = {title: string; link: string, key?: string}[];
 
 @Component({
   selector: 'app-footer',
@@ -13,57 +14,27 @@ export class FooterComponent implements OnInit {
 
   // 探索列表
   exploreTitle = $localize`探索`;
-  exploreList: TypeLinkList = [
-    {
-      name: $localize`艺术`,
-      link: '',
-    },
-    {
-      name: $localize`收藏品`,
-      link: '',
-    },
-    {
-      name: $localize`实用`,
-      link: '',
-    },
-    {
-      name: $localize`卡片`,
-      link: '',
-    },
-    {
-      name: $localize`虚拟世界`,
-      link: '',
-    },
-    {
-      name: $localize`音乐`,
-      link: '',
-    },
-    {
-      name: $localize`体育`,
-      link: '',
-    },
-    {
-      name: $localize`域名`,
-      link: '',
-    }
-  ];
+  exploreList: TypeLinkList = nftTypesArr.map(item => ({
+    ...item,
+    link: '',
+  }));
   // NFT功能列表
   nftTitle = $localize`NFT`;
   nftFuncList: TypeLinkList = [
     {
-      name: $localize`创建`,
+      title: $localize`创建`,
       link: '',
     },
     {
-      name: $localize`推荐`,
+      title: $localize`推荐`,
       link: '',
     },
     {
-      name: $localize`排行榜`,
+      title: $localize`排行榜`,
       link: '',
     },
     {
-      name: $localize`交易历史`,
+      title: $localize`交易历史`,
       link: '',
     }
   ];
@@ -71,19 +42,19 @@ export class FooterComponent implements OnInit {
   friendsTitle = $localize`Links`;
   friendsLink: TypeLinkList = [
     {
-      name: $localize`Plug Chain`,
+      title: $localize`Plug Chain`,
       link: '',
     },
     {
-      name: $localize`ONP`,
+      title: $localize`ONP`,
       link: '',
     },
     {
-      name: $localize`Telegram`,
+      title: $localize`Telegram`,
       link: '',
     },
     {
-      name: $localize`CMC`,
+      title: $localize`CMC`,
       link: '',
     }
   ];

@@ -1,27 +1,36 @@
-import { DatabaseService } from './../../server/database.service';
-import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { DatabaseService, nftTypesArr } from './../../server/database.service';
+import { BehaviorSubject, debounceTime, fromEvent, zip } from 'rxjs';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { StateService } from './../../server/state.service';
 import { ToolFuncLinkWallet } from 'src/app/tools/functions/wallet';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MegaMenuItem, MenuItem } from 'primeng/api';
 import { ToolFuncTimeSleep } from 'src/app/tools/functions/time';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
-type TypeLinkList = {name: string; link: string}[];
+type TypeLinkList = {title: string; link: string, key: string}[];
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
+export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, AfterViewInit {
 
   @ViewChild('comHeader')
   headerContent?: ElementRef<HTMLDivElement>;
   @ViewChild('webMenuContent')
   menuContent?: ElementRef<HTMLDivElement>;
+
+  @ViewChild('searchInput')
+  searchContent?: ElementRef<HTMLInputElement>;
+  @ViewChild('searchTip')
+  searchTip?: OverlayPanel;
+  // searchTip宽度
+  searchTipWidth = 0;
 
   // 搜索内容
   searchText: string = '';
@@ -35,50 +44,33 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
   webMenuType$ = new BehaviorSubject(0);
   webMenuType = this.webMenuType$.value;
 
-  exploreList: TypeLinkList = [
-    {
-      name: $localize`全部`,
-      link: '',
-    },
-    {
-      name: $localize`艺术`,
-      link: '',
-    },
-    {
-      name: $localize`收藏品`,
-      link: '',
-    },
-    {
-      name: $localize`实用`,
-      link: '',
-    },
-    {
-      name: $localize`卡片`,
-      link: '',
-    },
-    {
-      name: $localize`虚拟世界`,
-      link: '',
-    },
-    {
-      name: $localize`音乐`,
-      link: '',
-    },
-    {
-      name: $localize`体育`,
-      link: '',
-    },
-    {
-      name: $localize`域名`,
-      link: '',
-    }
-  ];
+  exploreList: TypeLinkList = nftTypesArr.map(item => ({
+    ...item,
+    link: '',
+  }));
+
+  // 搜索结果
+  searchResult: {
+    [key in 'nft'|'collection'|'user']: {
+      id: string;
+      logo: string;
+      name: string;
+      describe: string;
+    }[];
+  } & {loading: boolean; selected: number;} = {
+    selected: 0,
+    loading: false,
+    nft: [],
+    collection: [],
+    user: [],
+  };
 
   constructor(
     public stateService: StateService,
     public appService: DatabaseService,
     private BaseMessage: BaseMessageService,
     private netService: NetService,
+    private router: Router,
   ) {
     super();
   }
@@ -96,6 +88,105 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    this.addSearchListen();
+  }
+
+  // 添加search监听
+  private addSearchListen() {
+    if (this.searchContent) {
+      let timer: number;
+      fromEvent(this.searchContent.nativeElement, 'focus').subscribe(data => {
+        const target = data.target as HTMLInputElement;
+        if (target.value !== '') this.searchTip?.show('click', target);
+      });
+      fromEvent(this.searchContent.nativeElement, 'input').pipe(
+        debounceTime(1000)
+      ).subscribe(data => {
+        const target = data.target as HTMLInputElement;
+        if (target.value === '') {
+          clearTimeout(timer);
+          this.searchResult = {
+            selected: 0,
+            loading: false,
+            nft: [],
+            collection: [],
+            user: []
+          };
+          return this.searchTip?.hide();
+        } else {
+          this.searchTip?.show('click', target);
+          this.searchTipWidth = target.clientWidth;
+        }
+        if (this.searchResult.loading) {
+          clearTimeout(timer);
+          timer = setInterval(() => {
+            if (!this.searchResult.loading) {
+              this.searchFromNet(target.value);
+              clearTimeout(timer);
+            }
+          }, 1000) as unknown as number;
+        } else {
+          this.searchFromNet(target.value);
+        }
+      });
+    }
+  }
+  // 搜索内容
+  private searchFromNet(value: string) {
+    this.searchResult.loading = true;
+    zip([
+      this.netService.getSearchContent$('nft', value),
+      this.netService.getSearchContent$('collection', value),
+      this.netService.getSearchContent$('user', value),
+    ]).subscribe(([nft, collection, user]) => {
+      this.searchResult.loading = false;
+      if (!this.searchTip?.render) return;
+      this.searchResult.nft = [];
+      this.searchResult.collection = [];
+      this.searchResult.user = [];
+      if (nft.code === 200 && nft.data && nft.data.length) {
+        this.searchResult.nft = nft.data.map((item: any) => {
+          return {
+            id: item.NftID,
+            logo: item.Image,
+            name: item.Name,
+            describe: item.Description,
+          };
+        });
+      }
+      if (collection.code === 200 && collection.data && collection.data.length) {
+        this.searchResult.collection = collection.data.map((item: any) => {
+          return {
+            id: item.CollectionID,
+            logo: item.Image,
+            name: item.Name,
+            describe: item.Description,
+          };
+        });
+      }
+      if (user.code === 200 && user.data && user.data.length) {
+        this.searchResult.user = user.data.map((item: any) => {
+          return {
+            id: item.ID,
+            logo: item.Avator,
+            name: item.Name,
+            describe: item.Description,
+          };
+        });
+      }
+      if (this.searchResult.nft.length) {
+        this.searchResult.selected = 1;
+      } else if (this.searchResult.collection.length) {
+        this.searchResult.selected = 2;
+      } else if (this.searchResult.user.length) {
+        this.searchResult.selected = 3;
+      } else {
+        this.searchResult.selected = 0;
+      }
+    });
+  }
+
   initMenu() {
     this.items = [
       {
@@ -103,17 +194,22 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
         items: [
           this.exploreList.map<MenuItem>(
             item => ({
-              items: [{label: item.name}]
+              items: [{label: item.title}]
             })
           )
         ],
       },
       {
         label: $localize`排行榜`,
-        command: console.log
+        command: () => {
+          this.router.navigate(['ranking-list']);
+        }
       },
       {
-        label: $localize`创造NFT`
+        label: $localize`创造NFT`,
+        command: () => {
+          this.router.navigate(['create', 'nft']);
+        }
       },
       {
         icon: 'pi pi-globe',
@@ -196,6 +292,15 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit {
       ) + 'px';
       this.menuContent.nativeElement.style.top = (headerHeight - bodyScroll) + 'px';
     }
+  }
+
+  /**
+   * 监听搜索框
+   **/
+  onListenSearchInput(event: Event) {
+    if (!event.target) return;
+    const inputTarget = event.target as HTMLInputElement;
+    console.log(inputTarget.value);
   }
 
 }
