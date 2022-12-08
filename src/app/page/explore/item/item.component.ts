@@ -7,6 +7,7 @@ type CollectionOriginal = {
 type exploreItem = {
   BannerImageUrl:string;
   CollectionOriginal: CollectionOriginal;
+  ImageUrl?:string;
 }
 @Component({
   selector: 'explore-item',
@@ -14,7 +15,15 @@ type exploreItem = {
   styleUrls: ['./item.component.scss']
 })
 export class ExploreItemComponent implements OnInit {
-  @Input() item?: exploreItem;
+  @Input() item: exploreItem={
+    BannerImageUrl:'',
+    CollectionOriginal: {
+      CollectionID: '',
+      Name:'',
+      Image: '',
+    },
+    ImageUrl:'',
+  };
   constructor() { }
 
   ngOnInit(): void {

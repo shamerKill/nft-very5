@@ -94,10 +94,10 @@ const routes: Routes = [
     component: AllNftComponent,
     path: 'nft',
   },
-  {
-    component: SearchComponent,
-    path: 'search',
-  },
+  // {
+  //   component: SearchComponent,
+  //   path: 'search',
+  // },
   {
     component: CollectionComponent,
     path: 'collection',

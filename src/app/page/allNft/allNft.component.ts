@@ -41,6 +41,9 @@ type filterObj = {
 export class AllNftComponent extends ToolClassAutoClosePipe implements OnInit {
   sortList:sortItem[]=[
     {
+      name: $localize`全部`,
+      id: ''
+    },{
       name: $localize`最近转移`,
       id: '1'
     },{

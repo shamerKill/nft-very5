@@ -158,6 +158,7 @@ export class NetService {
   /** 
    * v1/nft/list
    * creator 创建者
+   * owner 所有者
    * category 类别-多选(用"，"隔开"）
    * sellingType 挂单状态(1：一口价，2：拍卖，3：（拍卖，有出价)） 多选用","隔开
    * lowPrice 低价一价格筛选
@@ -168,9 +169,16 @@ export class NetService {
    * sort 排序(1最近转移,2最近上架,3最近创建，4最近卖出，5最近结束,6价格从低到高，7价格从高到低，8销售最高）
    * nft-列表(查询条件)
    * **/
-   getNftList$(creator:string,category:string,sellingType:string,lowPrice:string|number,highPrice:string|number,coinType:string,collectionName:string,sort:string,collectionID:string) {
-    return this.$get<TypeInterfaceNet>(`v1/nft/list?creator=${creator}&category=${category}&sellingType=${sellingType}&lowPrice=${lowPrice}&highPrice=${highPrice}&coinType=${coinType}&collectionName=${collectionName}&sort=${sort}&collectionID=${collectionID}`);
+   getNftList$(creator:string,category:string,sellingType:string,lowPrice:string|number,highPrice:string|number,coinType:string,collectionName:string,sort:string,collectionID:string,owner:string='') {
+    return this.$get<TypeInterfaceNet>(`v1/nft/list?creator=${creator}&category=${category}&sellingType=${sellingType}&lowPrice=${lowPrice}&highPrice=${highPrice}&coinType=${coinType}&collectionName=${collectionName}&sort=${sort}&collectionID=${collectionID}&owner=${owner}`);
   }
+  /**
+   * 获取用户信息
+   **/
+  getUserInfo$(address: string) {
+    return this.$get<TypeInterfaceNet>(`v1/account/${address}`);
+  }
+
   /**
    * 获取当前用户信息
    **/

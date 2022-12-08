@@ -1,3 +1,4 @@
+@import '../../styles/base.var.scss';
 .app-collection{
   &-top{
     width: 100%;
@@ -8,10 +9,17 @@
       width: 100%;
       height: 100%;
     }
+    @include media-phone {
+      height: 10rem;
+    }
     &-iconList{
       position: absolute;
       right: 2.7rem;
       top: 2.7rem;
+      @include media-phone {
+        right: 1rem;
+        top: 1rem;
+      }
       &-item{
         width: 2.6rem;
         height: 2.6rem;
@@ -22,6 +30,16 @@
         justify-content: center;
         margin-top: 1rem;
         cursor: pointer;
+        @include media-phone {
+          width: 2rem;
+          height: 2rem;
+          background: #FFFFFF;
+          border-radius: 1rem;
+          margin-top: 0.8rem;
+          .iconfont{
+            font-size: 1rem;
+          }
+        }
         .iconfont{
           font-size: 1.3rem;
           color: #000;
@@ -36,7 +54,13 @@
     width: 100%;
     padding-bottom: 1rem;
     padding-left: 10rem;
+    @include media-phone {
+      padding-left: 1rem;
+    }
     &-detail{
+      @include media-phone {
+        position: relative;
+      }
       &-head{
         width: 10rem;
         height: 10rem;
@@ -46,6 +70,12 @@
         overflow: hidden;
         border: 0.5rem solid #FFFFFF;
         margin-right: 1.5rem;
+        position: relative;
+        @include media-phone {
+          width: 6rem;
+          height: 6rem;
+          margin-top: -2rem;
+        }
         img{
           width: 100%;
           height: 100%;
@@ -53,26 +83,53 @@
       }
       &-title{
         width: 42rem;
+        @include media-phone {
+          width: 18rem;
+        }
+        .mobile{
+          @include media-phone {
+            flex-direction: column;
+            position: absolute;
+            width: 100%;
+            left: 0;
+          }
+        }
+        
         &-name{
           font-size: 2.25rem;
           color: #000;
           font-weight: bold;
           padding-top: 1rem;
+          @include media-phone {
+            font-size: 1.5rem;
+          }
         }
         &-symple{
           font-size: 1.1rem;
           color: #7456FF;
           padding-top: 0.5rem;
           font-weight: bold;
+          @include media-phone {
+            font-size: 1rem;
+          }
         }
         &-num{
           padding: 1rem 0;
+          @include media-phone {
+            flex-direction: column;
+          }
           &-item{
             font-size: 1rem;
             color: #666666;
             padding: 0 2rem;
             border-left: 1px solid #CED4D9;
             line-height: 1;
+            @include media-phone {
+              width: 100%;
+              padding: 0;
+              border: none;
+              padding: 0.3rem 0;
+            }
             &:first-child{
               padding-left: 0;
               border: none;
@@ -109,8 +166,17 @@
     }
     &-total{
       padding: 2rem 0.8rem;
+      @include media-phone {
+        width: 100%;
+        padding-top: 12rem;
+        flex-wrap: wrap;
+      }
       &-item{
         width: 8.75rem;
+        @include media-phone {
+          width: 45%;
+          padding: 1rem 0;
+        }
         &-num{
           font-size: 1.5rem;
           color: #000000;
@@ -133,8 +199,11 @@
   background-color: #F8FAFC;
   display: flex;
   .list-box{
-    width: 100%;
+    flex: 1;
     padding: 2rem 0 2rem 0;
+    @include media-phone {
+      padding: 1rem 0 1rem 0;
+    }
     &-tabbar{
       width: 100%;
       background: #FFFFFF;
@@ -163,6 +232,11 @@
           background: #FFFFFF;
           border-radius: 50%;
           cursor: pointer;
+          @include media-phone {
+            margin-right: 1rem;
+            width: 2rem;
+            height: 2rem;
+          }
           .iconfont{
             font-size: 1.5rem;
             color: #000000;
@@ -185,6 +259,16 @@
           img{
             width: 1.25rem;
             height: 1.25rem;
+          }
+          @include media-phone {
+            margin-right: 0.5rem;
+            margin-left: 0.5rem;
+            width: 2rem;
+            height: 2rem;
+            img{
+              width: 1rem;
+              height: 1rem;
+            }
           }
         }
       }

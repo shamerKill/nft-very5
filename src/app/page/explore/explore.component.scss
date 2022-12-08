@@ -1,17 +1,29 @@
+@import '../../styles/base.var.scss';
 .content-explore{
   background-image: url('../../../assets/images/explore/explorebg.png');
   background-size: 100% auto;
   background-repeat: no-repeat;
   padding: 6rem 0 0 3rem;
   background-color: #F8FAFC;
+  @include media-phone {
+    padding: 2rem 1rem;
+  }
   &-title{
     font-size: 2.5rem;
     color: #0D1035;
     font-weight: bold;
     user-select: none;
+    @include media-phone {
+      font-size: 1.5rem;
+    }
   }
   &-tabbar{
     height: 6.25rem;
+    @include media-phone {
+      width: 100%;
+      overflow-x: auto;
+      height: 3rem;
+    }
     &-item{
       padding: 1rem 0.3rem;
       margin: 0 2.5rem;
@@ -19,6 +31,11 @@
       font-weight: bold;
       cursor: pointer;
       user-select: none;
+      @include media-phone {
+        flex: none;
+        padding: 0.5rem 0.2rem;
+        margin: 0 1.5rem;
+      }
       &.actived{
         color: #7456FF;
         border-bottom: 0.25rem solid #7456FF;
