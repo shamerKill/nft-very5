@@ -1,5 +1,6 @@
 import { BaseMessageService } from './server/base-message.service';
 import { ToastModule } from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { StateService } from './server/state.service';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,6 +20,7 @@ import { DatabaseService } from './server/database.service';
     AppRoutingModule,
     HttpClientModule,
     ToastModule,
+    ConfirmDialogModule,
   ],
   providers: [DatabaseService, NetService, StateService, BaseMessageService],
   bootstrap: [AppComponent]

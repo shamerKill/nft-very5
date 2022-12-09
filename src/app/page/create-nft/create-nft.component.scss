@@ -15,6 +15,7 @@
     width: 10rem;
     height: 10rem;
     border: 1px solid var(--surface-100);
+    margin-bottom: 1rem;
     &.collection-selected {
       box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #c5aefb, 0 1px 2px 0 black;
       .collection-describe {

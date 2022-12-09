@@ -6,7 +6,14 @@
     <div class="flex flex-1 justify-content-end pr-2 pl-4">
       <label class="header-input p-input-icon-right w-full">
         <i class="pi pi-search"></i>
-        <input class="w-full" i18n-placeholder placeholder="搜索收藏品、合集、以及账户" type="text" pInputText [(ngModel)]="searchText" >
+        <input
+          #searchInput
+          class="w-full"
+          i18n-placeholder
+          placeholder="搜索收藏品、合集、以及账户"
+          type="text"
+          pInputText
+          [(ngModel)]="searchText" >
         <button class="header-input-search" type="submit"></button>
       </label>
     </div>
@@ -91,7 +98,7 @@
       </div>
       <div class="flex-1 overflow-scroll pl-4">
         <div *ngFor="let item of exploreList" class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus">
-          <p class="flex-1 px-2 font-bold text-xl" i18n>{{item.name}}</p>
+          <p class="flex-1 px-2 font-bold text-xl" i18n>{{item.title}}</p>
         </div>
       </div>
     </div>
@@ -110,3 +117,81 @@
 </ng-template>
 
 
+
+
+
+<p-overlayPanel
+  styleClass="no-from"
+  [baseZIndex]="10"
+  [style]="{width: searchTipWidth + 'px'}"
+  #searchTip>
+  <ng-template pTemplate>
+    <div class="search-content">
+      <p-accordion>
+        <p-accordionTab header="NFT" i18n-header [selected]="searchResult.selected === 1">
+          <div class="search-content-scroll">
+            <div
+              class="flex py-2 cursor-pointer align-items-center border-bottom-1 border-200"
+              *ngFor="let item of searchResult.nft">
+              <img
+              class="w-2rem h-2rem fit-contain"
+                [src]="item.logo"
+                [alt]="item.name">
+              <div class="w-1rem h-1rem"></div>
+              <div class="flex-1 text-right text-900 overflow-hidden">
+                <p class="text-900">
+                  {{item.name}}
+                </p>
+                <p class="text-sm text-600 white-space-nowrap text-overflow-ellipsis overflow-hidden w-full">
+                  {{item.describe}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab header="合集" i18n-header [selected]="searchResult.selected === 2">
+          <div class="search-content-scroll">
+            <div
+              class="flex py-2 cursor-pointer align-items-center border-bottom-1 border-200"
+              *ngFor="let item of searchResult.collection">
+              <img
+              class="w-2rem h-2rem fit-contain"
+                [src]="item.logo"
+                [alt]="item.name">
+              <div class="w-1rem h-1rem"></div>
+              <div class="flex-1 text-right text-900 overflow-hidden">
+                <p class="text-900">
+                  {{item.name}}
+                </p>
+                <p class="text-sm text-600 white-space-nowrap text-overflow-ellipsis overflow-hidden w-full">
+                  {{item.describe}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab header="用户" i18n-header [selected]="searchResult.selected === 3">
+          <div class="search-content-scroll">
+            <div
+              class="flex py-2 cursor-pointer align-items-center border-bottom-1 border-200"
+              *ngFor="let item of searchResult.user">
+              <img
+              class="w-2rem h-2rem fit-contain border-circle"
+                [src]="item.logo"
+                [alt]="item.name">
+              <div class="w-1rem h-1rem"></div>
+              <div class="flex-1 text-right text-900 overflow-hidden">
+                <p class="text-900">
+                  {{item.name}}
+                </p>
+                <p class="text-sm text-600 white-space-nowrap text-overflow-ellipsis overflow-hidden w-full">
+                  {{item.describe}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </ng-template>
+</p-overlayPanel>

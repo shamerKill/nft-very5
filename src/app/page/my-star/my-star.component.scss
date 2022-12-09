@@ -13,8 +13,11 @@
       padding: 0 0.5rem;
     }
   }
+  .card-header-center {
+    max-height: 14rem;
+    height: 40vw;
+  }
   .card-image {
-    object-fit: contain;
     border-radius: 0.5rem;
   }
   .collection-info {
