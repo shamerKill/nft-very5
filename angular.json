@@ -97,7 +97,9 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "proxyConfig": "proxy.config.js"
+            "proxyConfig": "proxy.config.js",
+            "host": "0.0.0.0",
+            "disableHostCheck": true
           }
         },
         "extract-i18n": {

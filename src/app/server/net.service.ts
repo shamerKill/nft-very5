@@ -97,7 +97,7 @@ export class NetService {
   getMyNFTList$() {
     return this.$get<TypeInterfaceNet>('v1/my/creatorNfts');
   }
-  /** 
+  /**
    * v1/collection/list
    * owner 地址
    * category 分类
@@ -106,7 +106,7 @@ export class NetService {
   getCollectionList$(owner:string,category:string) {
     return this.$get<TypeInterfaceNet>(`v1/collection/list?owner=${owner}&category=${category}`);
   }
-  /** 
+  /**
    * v1/search_collection/{search}
    * search 搜索
    * 搜索合集
@@ -114,7 +114,7 @@ export class NetService {
    getSearchCollectionList$(search:string) {
     return this.$get<TypeInterfaceNet>(`v1/search_collection/${search}`);
   }
-  /** 
+  /**
    * v1/collection/{search}
    * search id
    * 合集详情
@@ -122,7 +122,7 @@ export class NetService {
    getCollectionDetail$(search:string) {
     return this.$get<TypeInterfaceNet>(`v1/collection/${search}`);
   }
-  /** 
+  /**
    * v1/nft/evevt
    * collectionID 合集id
    * nftID nft id
@@ -133,7 +133,7 @@ export class NetService {
    getUserTrans$(collectionID:string,nftID:string,eventType:string,addr:string) {
     return this.$get<TypeInterfaceNet>(`v1/nft/event?collectionID=${collectionID}&nftID=${nftID}&eventType=${eventType}&addr=${addr}`);
   }
-  /** 
+  /**
    * v1/search_nft/{search}
    * search 搜索
    * 搜索nft
@@ -141,25 +141,25 @@ export class NetService {
    getSearchNftList$(search:string) {
     return this.$get<TypeInterfaceNet>(`v1/search_nft/${search}`);
   }
-  
-  /** 
+
+  /**
    * v1/user/add_focus/{collection_id}
-   * id 
+   * id
    * 收藏合集
    * **/
    postAddFocus$(id:string) {
     return this.$post('v1/user/add_focus/'+id);
   }
-  /** 
+  /**
    * v1/user/del_collect/{collect_id}
-   * id 
+   * id
    * 删除收藏合集
    * **/
    postDelFocus$(id:string) {
     return this.$post('v1/user/del_focus/'+id);
   }
 
-  /** 
+  /**
    * v1/nft/list
    * creator 创建者
    * category 类别-多选(用"，"隔开"）
@@ -280,7 +280,7 @@ export class NetService {
    * 创建新合集
    **/
   putNewCollection$(params: {
-    [key in 'name'|'image'|'banner_image'|'external_link'|'creator_rate'|'fee_recipient'|'category']: string
+    [key in 'name'|'image'|'banner_image'|'external_link'|'creator_rate'|'fee_recipient'|'category'|'description']: string
   }) {
     return this.$post('v1/my/collection', params);
   }

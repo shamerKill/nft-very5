@@ -34,6 +34,10 @@ export class CreateCollectionComponent extends ToolClassAutoClosePipe implements
    **/
   name = '';
   /**
+   * 合集描述
+   **/
+  describe = '';
+  /**
    * 个性化网址
    **/
   webSite = '';
@@ -140,14 +144,20 @@ export class CreateCollectionComponent extends ToolClassAutoClosePipe implements
     this.state.globalLoadingSwitch(true);
     // 上传图片
     this.uploadPic().subscribe(images => {
+      if (!images) {
+        this.state.globalLoadingSwitch(false);
+        this.message.warn($localize`图片上传失败`);
+        return;
+      }
       this.net.putNewCollection$({
         name: this.name,
-        image: images.mainImage,
-        banner_image: images.bannerBg,
+        image: images?.mainImage??'',
+        banner_image: images?.bannerBg??'',
         external_link: this.interactiveLink,
         creator_rate: this.profit.rate,
         fee_recipient: this.profit.address,
         category: this.typeSelected[0].key,
+        description: this.describe,
       }).pipe(this.pipeSwitch$()).subscribe(data => {
         this.state.globalLoadingSwitch(false);
         if (data.code !== 200) return this.message.warn(data.msg ?? $localize`创建失败`);
@@ -171,13 +181,14 @@ export class CreateCollectionComponent extends ToolClassAutoClosePipe implements
 
   // 上传图片
   uploadPic() {
-    const path$ = new Subject<{mainImage: string, bannerBg: string}>();
-    if (!this.mainImage || !this.bannerBg) return path$;
-    return zip([
-      this.net.postBaseImage$(this.mainImage),
-      this.net.postBaseImage$(this.bannerBg),
-    ]).pipe((sub) => {
-      sub.subscribe(data => {
+    const path$ = new Subject<{mainImage: string, bannerBg: string}|null>();
+    if (!this.mainImage || !this.bannerBg) {
+      setTimeout(() => path$.next(null), 0);
+    } else {
+      zip([
+        this.net.postBaseImage$(this.mainImage),
+        this.net.postBaseImage$(this.bannerBg),
+      ]).subscribe(data => {
         if (data[0].code === 200 && data[1].code === 200) {
           path$.next({
             mainImage: data[0].data,
@@ -185,7 +196,7 @@ export class CreateCollectionComponent extends ToolClassAutoClosePipe implements
           });
         }
       });
-      return path$;
-    });
+    }
+    return path$;
   }
 }

@@ -51,7 +51,7 @@ type outputObj = {
   styleUrls: ['./userDetail.component.scss']
 })
 export class UserDetailComponent extends ToolClassAutoClosePipe implements OnInit {
-  
+
   sortList:sortItem[]=[
     {
       name: $localize`最近转移`,

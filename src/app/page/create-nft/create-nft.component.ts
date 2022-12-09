@@ -156,10 +156,15 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
     // TODO: 需要判断数据是否可以执行
     this.state.globalLoadingSwitch(true);
     // 上传图片
-    this.uploadPic().subscribe(({path}) => {
+    this.uploadPic().subscribe((image) => {
+      if (!image) {
+        this.state.globalLoadingSwitch(false);
+        this.message.warn($localize`图片上传失败`);
+        return;
+      }
       this.net.putNewNFT$({
         name: this.name,
-        image: path,
+        image: image.path,
         external_link: this.interactiveLink,
         description: this.describe,
         attr: this.attributeList.map(({key, value}) => `${key}:${value}`).join(','),
@@ -188,13 +193,16 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
 
   // 上传图片
   uploadPic() {
-    const path$ = new Subject<{path: string}>();
-    if (!this.nftImage) return path$;
-    this.net.postBaseImage$(this.nftImage).subscribe(data => {
-      if (data.code === 200) {
-        path$.next({ path: data.data });
-      }
-    });
+    const path$ = new Subject<{path: string}|null>();
+    if (!this.nftImage) {
+      setTimeout(() => path$.next(null), 0);
+    } else {
+      this.net.postBaseImage$(this.nftImage).subscribe(data => {
+        if (data.code === 200) {
+          path$.next({ path: data.data });
+        }
+      });
+    }
     return path$;
   }
 
