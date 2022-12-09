@@ -1,11 +1,15 @@
+import { NetService } from './../../server/net.service';
+import { StateService } from './../../server/state.service';
+import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-show-nft',
   templateUrl: './show-nft.component.html',
   styleUrls: ['./show-nft.component.scss']
 })
-export class ShowNftComponent implements OnInit {
+export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit {
 
   // 收藏品ID
   productId: string = '';
@@ -95,9 +99,27 @@ export class ShowNftComponent implements OnInit {
     price: '1223',
   }));
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private state: StateService,
+    private net: NetService,
+  ) {
+    super();
+    this.route.params.pipe(this.pipeSwitch$()).subscribe(({id}) => {
+      this.productId = id;
+      this.getNftInfo();
+    });
+  }
 
   ngOnInit(): void {
+  }
+
+  // 获取nft信息
+  getNftInfo() {
+    this.state.globalLoadingSwitch(true);
+    this.net.getNftInfoById$(this.productId).subscribe(data => {
+      console.log(data);
+    });
   }
 
 }

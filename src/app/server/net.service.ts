@@ -70,6 +70,13 @@ export class NetService {
     return this.$get<TypeInterfaceNet>('v1/nft/list', queryParams)
   }
 
+  /**
+   * 获取nft详情
+   **/
+  getNftInfoById$(id: string) {
+    return this.$get('v1/nft/' + id);
+  }
+
 
   /**
    * 登录接口
