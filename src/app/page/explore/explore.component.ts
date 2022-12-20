@@ -22,6 +22,9 @@ type exploreItem = {
 export class ExploreComponent extends ToolClassAutoClosePipe implements OnInit {
   tabbar: tabbarItem = [
     {
+      name: $localize`全部`,
+      id: ''
+    },{
       name: $localize`热门`,
       id: '热门'
     },

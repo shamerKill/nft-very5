@@ -11,30 +11,32 @@
     </div>
     <div class="table-content-list-item flex align-items-center justify-content-between" *ngFor="let item of list">
       <div class="table-content-list-item-item flex align-items-center">
-        <span class="iconfont icon-paimai"></span>
-        <span>出价</span>
+        <span class="iconfont icon-chuangjiang" *ngIf="item.EventType =='create'"></span>
+        <span class="iconfont icon-jiaoyi" *ngIf="item.EventType =='successful'"></span>
+        <span class="iconfont icon-paimai" *ngIf="item.EventType =='cancelled'"></span>
+        <span>{{item.EventType =='create'?'创建':item.EventType =='successful'?'销售':item.EventType =='cancelled'?'取消':''}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center">
-        <img src="../../../../assets/images/explore/imgs.png" alt="">
-        <span>Brtod ww #566</span>
+        <img [src]="item.Nft.NftOriginal.Image" alt="">
+        <span>{{item.Nft.NftOriginal.Name}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center">
-        <img src="../../../../assets/images/explore/pc.png" alt="">
-        <span>1050</span>
+        <!-- <img src="../../../../assets/images/explore/pc.png" alt=""> -->
+        <span>{{item.TotalPrice}}{{item.PaymentToken}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center">
         1
       </div>
       <div class="table-content-list-item-item flex align-items-center">
-        <img src="../../../../assets/images/explore/imgs.png" alt="">
-        <span>Brtod ww #566</span>
+        <img [src]="item.FromAccount.Avator" alt="">
+        <span>{{item.FromAccount.Name}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center">
-        <img src="../../../../assets/images/explore/imgs.png" alt="">
-        <span>Brtod ww #566</span>
+        <img [src]="item.ToAccount.Avator" alt="">
+        <span>{{item.ToAccount.Name}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center">
-        1小时前
+        {{item.UpdateTime}}
       </div>
     </div>
   </div>

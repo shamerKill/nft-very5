@@ -26,6 +26,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {DropdownModule} from 'primeng/dropdown';
 import {ToastModule} from 'primeng/toast';
 import {ConfirmationService} from 'primeng/api';
+import {DialogModule} from 'primeng/dialog';
+
 
 import { ComponentsModule } from './components/components.module';
 import { AuctionComponent } from './page/auction/auction.component';
@@ -62,10 +64,20 @@ const routes: Routes = [
     component: CreateCollectionComponent,
     path: 'create/collection',
   },
+  // 修改合集
+  {
+    component: CreateCollectionComponent,
+    path: 'edit/collection/:id',
+  },
   // 创造收藏品
   {
     component: CreateNftComponent,
     path: 'create/nft',
+  },
+  // 修改收藏品
+  {
+    component: CreateNftComponent,
+    path: 'edit/nft/:id',
   },
   // nft展示
   {
@@ -95,10 +107,10 @@ const routes: Routes = [
     component: AllNftComponent,
     path: 'nft',
   },
-  {
-    component: SearchComponent,
-    path: 'search',
-  },
+  // {
+  //   component: SearchComponent,
+  //   path: 'search',
+  // },
   {
     component: CollectionComponent,
     path: 'collection',
@@ -156,6 +168,7 @@ const routes: Routes = [
     DropdownModule,
     ToastModule,
     PipeModule,
+    DialogModule,
     RouterModule.forRoot(routes),
   ],
   exports: [

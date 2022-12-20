@@ -24,11 +24,11 @@
                 </ng-template>
                 <ng-template pTemplate="body">
                   <div class="flex justify-content-between text-500">
-                    <p class="text-xs">{{item.name}}</p>
+                    <p class="text-xs">{{item.collectionInfo.name}}</p>
                     <i class="iconfont text-xl" [ngClass]="item.auctionInfo.inAuctioning ? 'icon-paimai' : 'icon-biaoq'"></i>
                   </div>
                   <p class="text-0 py-2">
-                    {{item.collectionInfo.name}} #{{item.id}}
+                    {{item.name}} #{{item.id}}
                   </p>
                   <div class="flex align-items-center pt-2">
                     <img class="w-1rem h-1rem border-circle" [src]="item.priceUnit.logo" [alt]="item.priceUnit.name">

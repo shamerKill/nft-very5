@@ -2,8 +2,15 @@
   <app-base-box class="overflow-visible">
     <h2
       class="text-4xl font-bold py-4 lg:py-6 px-4 lg:px-0"
+      *ngIf="productId === null"
       i18n>
       创建收藏品
+    </h2>
+    <h2
+      class="text-4xl font-bold py-4 lg:py-6 px-4 lg:px-0"
+      *ngIf="productId !== null"
+      i18n>
+      修改收藏品
     </h2>
     <div class="border-round-lg w-full surface-0 px-4 gl:px-6 py-4 lg:py-6 mb-4">
       <!--  -->
@@ -51,8 +58,8 @@
         <input
           class="w-9 lg:w-6 p-inputtext-lg text-base"
           type="text"
-          [(ngModel)]="name"
-          (input)="onListenData()"
+          [value]="name"
+          (input)="onListenName($event)"
           pInputText
           placeholder="好的名字能引发关联想象，吸引观众哦～"
           i18n-placeholder />
@@ -149,6 +156,7 @@
               name="nftNum"
               [value]="1"
               [(ngModel)]="selectedNum"
+              [disabled]="productId!==null"
               (ngModelChange)="onListenData()"></p-radioButton>
             <div class="ml-3">
               <p class="font-bold pb-1" i18n>单个</p>
@@ -162,6 +170,7 @@
               name="nftNum"
               [value]="selectedNum === 1 ? 2 : selectedNum"
               [(ngModel)]="selectedNum"
+              [disabled]="productId!==null"
               (ngModelChange)="onListenData()"></p-radioButton>
             <div *ngIf="selectedNum === 1" class="ml-3">
               <p class="font-bold pb-1" i18n>多个</p>
@@ -173,6 +182,7 @@
                 pInputText
                 placeholder="数量"
                 suffix="份"
+                [disabled]="productId!==null"
                 [(ngModel)]="selectedNum"
                 (input)="onListenData()"
                 (onBlur)="onListenData()"
@@ -203,7 +213,7 @@
             </div>
             <div class="w-1rem h-1rem"></div>
           </ng-container>
-          <a [routerLink]="['/create/collection']" [queryParams]="{back: 'nft'}">
+          <a *ngIf="productId === null" [routerLink]="['/create/collection']" [queryParams]="{back: 'nft'}">
             <div class="collection-create-item border-round-lg flex flex-column justify-content-center align-items-center">
               <img class="collection-create-icon w-2 h-2" src="../../../assets/images/create/add-s.png" alt="add">
               <p class="pt-3 text-sm text-900" i18n>创建新合集</p>
@@ -217,8 +227,9 @@
         [disabled]="!canCreate"
         (click)="onCreateNft()"
         class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
-        label="创建"
-        type="button"></button>
+        [label]="productId === null ? '创建' : '修改'"
+        type="button"
+        i18n-label></button>
     </div>
   </app-base-box>
 </app-page-bg-box>

@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 import { Subject } from 'rxjs';
@@ -7,6 +7,7 @@ import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { TypeFileEvent } from './../../components/choose-file/choose-file.component';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-nft',
@@ -14,6 +15,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-nft.component.scss']
 })
 export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit {
+
+  /**
+   * nft id 不为null表示为编辑
+   **/
+  productId: null|string = null;
 
   /**
    * 收藏品图片
@@ -66,12 +72,65 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
     private state: StateService,
     private confirm: ConfirmationService,
     private router: Router,
+    private route: ActivatedRoute,
+    private location: Location,
   ) {
     super();
+    this.route.params.pipe(this.pipeSwitch$()).subscribe(data => {
+      if (data['id']) {
+        this.productId = data['id'];
+        this.getEditNftInfo();
+      } else {
+        this.getMyCollection();
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.getMyCollection();
+  }
+  // 如果是编辑nft的话，获取nft信息
+  getEditNftInfo() {
+    this.state.globalLoadingSwitch(true);
+    this.state.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(data => {
+      this.state.globalLoadingSwitch(false);
+      if (!data.isLinking && data.accountAddress) {
+        this.state.globalLoadingSwitch(true);
+        this.net.getNftInfoById$(this.productId??'', data.accountAddress).pipe(this.pipeSwitch$()).subscribe(result => {
+          this.state.globalLoadingSwitch(false);
+          if (result.code !== 200) {
+            this.message.warn($localize`获取数据失败`);
+            return this.location.back();
+          } else {
+            const data = result.data.nft;
+            this.name = data.NftOriginal.Name;
+            this.nftImage = data.NftOriginal.Image;
+            this.describe = data.NftOriginal.Description;
+            this.selectedNum = data.CreatorNumber;
+            this.interactiveLink = data.NftOriginal.ExternalURL;
+            this.attributeList = data.NftOriginal.Attributes.split(',').map((item: string) => {
+              var li = item.split(':');
+              return {key: li[0], value: li[1]};
+            });
+            // 根据id获取合集信息
+            this.net.getCollectionDetail$(data.CollectionID).pipe(this.pipeSwitch$()).subscribe(collection => {
+              if (collection.code !== 200) {
+                this.message.warn($localize`获取数据失败`);
+                return this.location.back();
+              } else {
+                this.collectionList.push({
+                  id: data.CollectionID,
+                  image: collection.data.ImageUrl,
+                  name: collection.data.CollectionOriginal.Name,
+                  describe: collection.data.CollectionOriginal.Description,
+                  type: collection.data.collection,
+                });
+                this.selectedCollectionId = data.CollectionID;
+              }
+            });
+          }
+        });
+      }
+    });
   }
 
   // 获取我的合集
@@ -114,6 +173,7 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
   }
   // 选择合集
   changeCollection(id: string) {
+    if (this.productId) return;
     this.selectedCollectionId = id;
   }
 
@@ -132,6 +192,14 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
       this.nftImage = file.data;
       this.onListenData();
     }
+  }
+
+  /**
+   * 收藏品名字监听
+   **/
+  onListenName(event: Event) {
+    this.name = (event.target as HTMLInputElement)?.value;
+    this.onListenData();
   }
 
 
@@ -162,32 +230,11 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
         this.message.warn($localize`图片上传失败`);
         return;
       }
-      this.net.putNewNFT$({
-        name: this.name,
-        image: image.path,
-        external_link: this.interactiveLink,
-        description: this.describe,
-        attr: this.attributeList.map(({key, value}) => `${key}:${value}`).join(','),
-        number: this.selectedNum.toString(),
-        collection_id: this.selectedCollectionId??'',
-      }).pipe(this.pipeSwitch$()).subscribe(data => {
-        this.state.globalLoadingSwitch(false);
-        this.state.globalLoadingSwitch(false);
-        if (data.code !== 200) return this.message.warn(data.msg ?? $localize`创建失败`);
-        this.message.success($localize`创建成功`);
-        this.confirm.confirm({
-          header: $localize`创建提示`,
-          message: $localize`是否继续创建新的收藏品？`,
-          acceptLabel: $localize`确定`,
-          rejectLabel: $localize`取消`,
-          accept: () => {
-            this.name = '';
-            this.nftImage = '',
-            this.canCreate = false;
-          },
-          reject: () => this.router.navigate([]),
-        });
-      });
+      if (this.productId) {
+        this.editNft(image.path);
+      } else {
+        this.createNft(image.path);
+      }
     });
   }
 
@@ -196,6 +243,8 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
     const path$ = new Subject<{path: string}|null>();
     if (!this.nftImage) {
       setTimeout(() => path$.next(null), 0);
+    } else if (/^http/.test(this.nftImage)) {
+      setTimeout(() => path$.next({path: this.nftImage!}), 0);
     } else {
       this.net.postBaseImage$(this.nftImage).subscribe(data => {
         if (data.code === 200) {
@@ -204,6 +253,52 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
       });
     }
     return path$;
+  }
+
+  // 创建nft
+  createNft(image: string) {
+    this.net.putNewNFT$({
+      name: this.name,
+      image: image,
+      external_link: this.interactiveLink,
+      description: this.describe,
+      attr: this.attributeList.map(({key, value}) => `${key}:${value}`).join(','),
+      number: this.selectedNum.toString(),
+      collection_id: this.selectedCollectionId??'',
+    }).pipe(this.pipeSwitch$()).subscribe(data => {
+      this.state.globalLoadingSwitch(false);
+      if (data.code !== 200) return this.message.warn(data.msg ?? $localize`创建失败`);
+      this.message.success($localize`创建成功`);
+      this.confirm.confirm({
+        header: $localize`创建提示`,
+        message: $localize`是否继续创建新的收藏品？`,
+        acceptLabel: $localize`确定`,
+        rejectLabel: $localize`取消`,
+        accept: () => {
+          this.name = '';
+          this.nftImage = '',
+          this.canCreate = false;
+        },
+        reject: () => this.router.navigate(['user']),
+      });
+    });
+  }
+
+  // 修改nft
+  editNft(image: string) {
+    this.net.postEditNFT$({
+      id: this.productId??'',
+      name: this.name,
+      image: image,
+      external_link: this.interactiveLink,
+      description: this.describe,
+      attr: this.attributeList.map(({key, value}) => `${key}:${value}`).join(','),
+    }).pipe(this.pipeSwitch$()).subscribe(data => {
+      this.state.globalLoadingSwitch(false);
+      if (data.code !== 200) return this.message.warn(data.msg ?? $localize`修改失败`);
+      this.message.success($localize`修改成功`);
+      this.location.back();
+    });
   }
 
 }

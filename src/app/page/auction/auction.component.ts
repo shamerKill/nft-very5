@@ -64,12 +64,42 @@ export class AuctionComponent extends ToolClassAutoClosePipe implements OnInit {
   // 卖家定价
   sellerSet: {
     startPriceOfBaseToken: string,
-    startPriceOfDollar: string,
+    seller: string, // 售卖方
     remainingDays: Date,
   }[] = [
     {
       startPriceOfBaseToken: '1050',
-      startPriceOfDollar: '122.2',
+      seller: 'gx1gjxs8ygvlur2cekxajdnhkl4tkf2vl478w3ew0',
+      remainingDays: new Date(),
+    },
+    {
+      startPriceOfBaseToken: '1050',
+      seller: 'gx1gjxs8ygvlur2cekxajdnhkl4tkf2vl478w3ew0',
+      remainingDays: new Date(),
+    },
+    {
+      startPriceOfBaseToken: '1050',
+      seller: 'gx1gjxs8ygvlur2cekxajdnhkl4tkf2vl478w3ew0',
+      remainingDays: new Date(),
+    },
+    {
+      startPriceOfBaseToken: '1050',
+      seller: 'gx1gjxs8ygvlur2cekxajdnhkl4tkf2vl478w3ew0',
+      remainingDays: new Date(),
+    },
+    {
+      startPriceOfBaseToken: '1050',
+      seller: 'gx1gjxs8ygvlur2cekxajdnhkl4tkf2vl478w3ew0',
+      remainingDays: new Date(),
+    },
+    {
+      startPriceOfBaseToken: '1050',
+      seller: 'gx1gjxs8ygvlur2cekxajdnhkl4tkf2vl478w3ew0',
+      remainingDays: new Date(),
+    },
+    {
+      startPriceOfBaseToken: '1050',
+      seller: 'gx1gjxs8ygvlur2cekxajdnhkl4tkf2vl478w3ew0',
       remainingDays: new Date(),
     }
   ];

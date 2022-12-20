@@ -1,5 +1,15 @@
 @import '../../styles/base.var.scss';
 
+.show-nft {
+  ::ng-deep {
+    button.text-2xl {
+      .p-button-icon {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
 .show-nft-top {
   padding-top: 2rem;
   padding-bottom: 1rem;
@@ -56,6 +66,7 @@
         padding-top: 0.5rem;
         font-size: 0.9rem;
         color: var(--surface-600);
+        max-width: 70vw;
         .pi {
           color: var(--primary-color);
           margin-right: 0.5rem;
@@ -98,7 +109,7 @@
     }
     .market-btn-list {
       position: absolute;
-      top: -8rem;
+      top: -10rem;
       right: 0;
       display: flex;
       flex-direction: column;
@@ -109,7 +120,7 @@
         background-color: var(--surface-100);
         outline-color: var(--surface-100);
         margin: 0.4rem;
-        &[icon="pi pi-heart-fill"] {
+        &[ng-reflect-icon="pi pi-heart-fill"] {
           color: var(--primary-color);
           ::ng-deep {
             .p-button-icon {
@@ -209,4 +220,11 @@
     transition: bottom 0.3s;
     background-image: linear-gradient(to top, var(--surface-900), transparent);
   }
+}
+
+
+.outbox-icon {
+  position: absolute;
+  top: 0.3rem;
+  left: 0;
 }

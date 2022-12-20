@@ -63,6 +63,9 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
   
   sortList:sortItem[]=[
     {
+      name: $localize`全部`,
+      id: ''
+    },{
       name: $localize`最近转移`,
       id: '1'
     },{
@@ -143,6 +146,11 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
   tabActive:number=0;
   checkTab(i:number) {
     this.tabActive = i;
+    if (this.tabActive == 0) {
+      this.getNftList();
+    } else {
+      this.getTransList()
+    }
   };
   constructor(
     private net: NetService,

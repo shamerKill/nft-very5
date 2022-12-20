@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NetService } from '../../server/net.service';
 import { BaseMessageService } from '../../server/base-message.service';
 import { ToolClassAutoClosePipe } from '../../tools/classes/pipe-close';
+import { getLocalePluralCase } from '@angular/common';
 
 type sortItem = {name: string; id: string};
 type userInfo = {
@@ -20,9 +21,13 @@ type userInfo = {
   OwnerNft:number;
 }
 type exploreItem = {
-  BannerImageUrl:string;
-  IsFocus:boolean;
-  Category:string;
+  BannerImageUrl:string,
+  CollectionOriginal: {
+    CollectionID: string, // id
+    Name:string,
+    Image: string
+  };
+  ImageUrl?:string;
 }
 
 type NftOriginal= {
@@ -54,6 +59,9 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
 
   sortList:sortItem[]=[
     {
+      name: $localize`全部`,
+      id: ''
+    },{
       name: $localize`最近转移`,
       id: '1'
     },{
@@ -126,8 +134,18 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     $localize`交易历史`,
   ]
   tabActive:number=0;
+  transList: any[] = [];
   checkTab(i:number) {
     this.tabActive = i;
+    if (this.tabActive == 0) {
+      this.getNftList();
+    } else if (this.tabActive == 1) {
+      this.getNftList();
+    } else if (this.tabActive == 2) {
+      this.getCollectionList();
+    } else if (this.tabActive == 3) {
+      this.getTransList();
+    }
   };
   constructor(
     private net: NetService,
@@ -136,26 +154,44 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
   ) {
     super();
   }
-  collectionId: string='';
+  userAddress: string='';
   ngOnInit(): void {
-    this.collectionId = this.routerInfo.snapshot.queryParams['id'];
+    this.userAddress = this.routerInfo.snapshot.queryParams['id'];
     this.getList();
     this.getNftList();
   }
   getList() {
     // 获取数据
-    this.net.getNowUserInfo$().pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getUserInfo$(this.userAddress).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      console.log(data)
-      this.userInfo = data.info;
+      this.userInfo = data;
     });
   }
   getNftList() {
-    // 获取数据
-    this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,this.collectionId).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',this.userAddress).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       this.nftList = data
     });
   }
+  getNftList1() {
+    this.net.getNftList$(this.userAddress,this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+      if (code !== 200) return this.BaseMessage.warn(msg??'');
+      this.nftList = data
+    });
+}
+  getCollectionList() {
+    this.net.getCollectionList$(this.userAddress,this.filterObj.cate).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+      if (code !== 200) return this.BaseMessage.warn(msg??'');
+      this.exploreList = data;
+    });
+  }
+  getTransList() {
+    this.net.getUserTrans$('','',this.filterObj.sell,this.userAddress).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+      if (code !== 200) return this.BaseMessage.warn(msg??'');
+      console.log(data)
+      this.transList = data
+    });
+  }
+
 
 }

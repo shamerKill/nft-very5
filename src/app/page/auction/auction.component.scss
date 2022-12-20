@@ -62,6 +62,7 @@
         padding-top: 0.5rem;
         font-size: 0.9rem;
         color: var(--surface-600);
+        line-height: 1.5em;
         .pi {
           color: var(--primary-color);
           margin-right: 0.5rem;
@@ -214,6 +215,13 @@
     }
     &:focus {
       box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--surface-900), 0 1px 2px 0 var(--surface-900);
+    }
+  }
+}
+button.text-2xl.p-button-text {
+  ::ng-deep {
+    .p-button-icon {
+      font-size: 2rem;
     }
   }
 }

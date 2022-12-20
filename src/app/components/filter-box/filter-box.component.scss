@@ -1,3 +1,4 @@
+@import '../../styles/base.var.scss';
 .filter-box{
   min-height: 80rem;
   background-image: url('../../../assets/images/explore/filterbg.png');
@@ -17,6 +18,16 @@
     .filter-box-hide{
       display: block;
     }
+    @include media-phone {
+      max-width: 100%;
+      padding: 1.5rem 1rem;
+      .filter-box-show{
+        display: block;
+      }
+      .filter-box-hide{
+        display: none;
+      }
+    }
   }
   &.show{
     max-width: 100%;
@@ -26,6 +37,16 @@
     }
     .filter-box-hide{
       display: none;
+    }
+    @include media-phone {
+      max-width: 0;
+      padding: 1.5rem 2rem;
+      .filter-box-show{
+        display: none;
+      }
+      .filter-box-hide{
+        display: block;
+      }
     }
   }
   .tips{

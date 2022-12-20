@@ -11,15 +11,15 @@
           <div class="app-user-info-detail-title-name">
             {{userInfo.Name}}
           </div>
-          
+
           <div class="app-user-info-detail-title-introduce" [class]="showMore?'':'shot'">{{userInfo.Description}}</div>
           <div class="app-user-info-detail-title-btn flex align-items-center" (click)="clickMore()">
             <div *ngIf="showMore" class="flex align-items-center">
-              <span i18n>收起 </span> 
+              <span i18n>收起 </span>
               <span [class]="showMore?'down':''" class="iconfont icon-xiala"></span>
             </div>
             <div *ngIf="!showMore" class="flex align-items-center">
-              <span i18n>展开 </span> 
+              <span i18n>展开 </span>
               <span class="iconfont icon-xiala"></span>
             </div>
           </div>
@@ -73,7 +73,7 @@
             <div class="list-box-title-total-icon flex align-items-center justify-content-center">
               <span class="iconfont icon-shuaxin"></span>
             </div>
-            <div class="list-box-title-total-num">1,104,299<span i18n> 结果</span></div>
+            <div class="list-box-title-total-num">{{nftList.length}}<span i18n> 结果</span></div>
           </div>
           <div class="list-box-title-sort flex align-items-center">
             <p-dropdown [options]="sortList" optionLabel="name" placeholder="排 序" [style]="{'width': '100%'}">
@@ -89,16 +89,18 @@
           </div>
         </div>
         <div class="list-box-list flex align-items-center flex-wrap">
-          <nft-item [type]="listType"></nft-item>
+          <div *ngFor="let items of nftList">
+            <nft-item  [type]="listType" [item]="items"></nft-item>
+          </div>
         </div>
       </div>
       <div *ngIf="tabActive==2">
-        <div class="content-explore-list-item flex align-items-center">
-          <!-- <explore-item *ngFor="let items of exploreList" [item]="items"></explore-item> -->
+        <div class="content-explore-list-item flex align-items-center flex-wrap">
+          <explore-item *ngFor="let items of exploreList" [item]="items"></explore-item>
         </div>
       </div>
       <div *ngIf="tabActive==3">
-        <app-table></app-table>
+        <app-table [list]="transList"></app-table>
       </div>
     </div>
   </div>

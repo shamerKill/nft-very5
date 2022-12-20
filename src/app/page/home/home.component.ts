@@ -21,7 +21,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
     items: {
       image: string;
       name: string;
-      owner: string;
+      collectionName: string;
       id: string;
     }[];
 } = {
@@ -133,8 +133,8 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
     this.firstCards.items = input.map(item => ({
       image: item.NftOriginal.Image,
       name: item.NftOriginal.Name,
-      owner: item.Owner,
-      id: item.TokenID,
+      collectionName: item.CollectionName,
+      id: item.NftOriginal.NftID,
     }));
   }
   // 处理资产排行

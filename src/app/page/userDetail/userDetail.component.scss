@@ -1,3 +1,4 @@
+@import '../../styles/base.var.scss';
 .app-user{
   &-top{
     width: 100%;
@@ -6,12 +7,57 @@
       width: 100%;
       height: 100%;
     }
+    @include media-phone {
+      height: 10rem;
+    }&-iconList{
+      position: absolute;
+      right: 2.7rem;
+      top: 2.7rem;
+      @include media-phone {
+        right: 1rem;
+        top: 1rem;
+      }
+      &-item{
+        width: 2.6rem;
+        height: 2.6rem;
+        background: #FFFFFF;
+        border-radius: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+        cursor: pointer;
+        @include media-phone {
+          width: 2rem;
+          height: 2rem;
+          background: #FFFFFF;
+          border-radius: 1rem;
+          margin-top: 0.8rem;
+          .iconfont{
+            font-size: 1rem;
+          }
+        }
+        .iconfont{
+          font-size: 1.3rem;
+          color: #000;
+          &.icon-aixin1{
+            color: #7456FF;
+          }
+        }
+      }
+    }
   }
   &-info{
     width: 100%;
     padding-bottom: 1rem;
     padding-left: 10rem;
+    @include media-phone {
+      padding-left: 1rem;
+    }
     &-detail{
+      @include media-phone {
+        position: relative;
+      }
       &-head{
         width: 10rem;
         height: 10rem;
@@ -21,6 +67,12 @@
         overflow: hidden;
         border: 0.5rem solid #FFFFFF;
         margin-right: 1.5rem;
+        position: relative;
+        @include media-phone {
+          width: 6rem;
+          height: 6rem;
+          margin-top: -2rem;
+        }
         img{
           width: 100%;
           height: 100%;
@@ -28,11 +80,25 @@
       }
       &-title{
         width: 42rem;
+        @include media-phone {
+          width: 18rem;
+        }
+        .mobile{
+          @include media-phone {
+            flex-direction: column;
+            position: absolute;
+            width: 100%;
+            left: 0;
+          }
+        }
         &-name{
           font-size: 2.25rem;
           color: #000;
           font-weight: bold;
           padding-top: 1rem;
+          @include media-phone {
+            font-size: 1.5rem;
+          }
         }
         &-symple{
           font-size: 1.1rem;
@@ -108,13 +174,20 @@
   background-color: #F8FAFC;
   display: flex;
   .list-box{
+    // flex: 1;
     width: 100%;
     padding: 2rem 0 2rem 0;
+    @include media-phone {
+      padding: 1rem 0 1rem 0;
+    }
     &-tabbar{
       width: 100%;
       background: #FFFFFF;
       padding: 0 1.5rem;
       margin-bottom: 1.5rem;
+      @include media-phone {
+        overflow-x: auto;
+      }
       &-item{
         padding: 1.5rem 0;
         margin: 0 1.5rem;
@@ -123,6 +196,9 @@
         font-weight: bold;
         cursor: pointer;
         user-select: none;
+        @include media-phone {
+          flex: none;
+        }
         &.actived{
           color: #7456FF;
           border-bottom: 4px solid #7456FF;
@@ -138,6 +214,11 @@
           background: #FFFFFF;
           border-radius: 50%;
           cursor: pointer;
+          @include media-phone {
+            margin-right: 1rem;
+            width: 2rem;
+            height: 2rem;
+          }
           .iconfont{
             font-size: 1.5rem;
             color: #000000;
@@ -160,6 +241,16 @@
           img{
             width: 1.25rem;
             height: 1.25rem;
+          }
+          @include media-phone {
+            margin-right: 0.5rem;
+            margin-left: 0.5rem;
+            width: 2rem;
+            height: 2rem;
+            img{
+              width: 1rem;
+              height: 1rem;
+            }
           }
         }
       }
