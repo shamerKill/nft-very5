@@ -26,6 +26,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {DropdownModule} from 'primeng/dropdown';
 import {ToastModule} from 'primeng/toast';
 import {ConfirmationService} from 'primeng/api';
+import {MenuModule} from 'primeng/menu';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { ComponentsModule } from './components/components.module';
 import { AuctionComponent } from './page/auction/auction.component';
@@ -155,7 +157,9 @@ const routes: Routes = [
     TooltipModule,
     DropdownModule,
     ToastModule,
+    MenuModule,
     PipeModule,
+    ClipboardModule,
     RouterModule.forRoot(routes),
   ],
   exports: [

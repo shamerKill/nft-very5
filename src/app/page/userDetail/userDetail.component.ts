@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { NetService } from '../../server/net.service';
 import { BaseMessageService } from '../../server/base-message.service';
 import { ToolClassAutoClosePipe } from '../../tools/classes/pipe-close';
@@ -50,13 +51,22 @@ type outputObj = {
   coin: string;
   search: string;
 }
+type shareItem = {
+  label:string;
+  icon: string
+}
 @Component({
   selector: 'app-user',
   templateUrl: './userDetail.component.html',
   styleUrls: ['./userDetail.component.scss']
 })
 export class UserDetailComponent extends ToolClassAutoClosePipe implements OnInit {
-  
+  shareItems:shareItem[] = [
+    {label: $localize`复制链接`, icon: 'pi pi-copy'},
+    {label: $localize`Facebook`, icon: 'pi pi-facebook'},
+    {label: $localize`Twitter`, icon: 'pi pi-twitter'},
+  ]
+  shareShow:boolean=false;
   sortList:sortItem[]=[
     {
       name: $localize`全部`,
@@ -140,7 +150,7 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     if (this.tabActive == 0) {
       this.getNftList();
     } else if (this.tabActive == 1) {
-      this.getNftList();
+      this.getNftList1();
     } else if (this.tabActive == 2) {
       this.getCollectionList();
     } else if (this.tabActive == 3) {
@@ -150,7 +160,8 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
   constructor(
     private net: NetService,
     private BaseMessage: BaseMessageService,
-    private routerInfo: ActivatedRoute
+    private routerInfo: ActivatedRoute,
+    private clipboard: Clipboard
   ) {
     super();
   }
@@ -192,6 +203,24 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
       this.transList = data
     });
   }
-  
+  refresh() {
+    this.getList();
+    this.getNftList();
+  }
+  shareLink() {
+    this.shareShow = !this.shareShow
+  }
+  chooseShare(i:number) {
+    let nowUrl:string = window.location.href;
+    if (i == 0) {
+      this.clipboard.copy(nowUrl);
+      this.BaseMessage.success($localize`复制成功`)
+    } else if (i==1) {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${nowUrl}`)
+    } else if (i==2) {
+      window.open(`https://twitter.com/intent/tweet?text=Check out this item on Very5&url=${nowUrl}&via=Plugchainclub`)
+    }
+    this.shareShow = false;
+  }
 
 }

@@ -1,6 +1,20 @@
 <div class="app-user">
   <div class="app-user-top">
     <img [src]="userInfo.Conver?userInfo.Conver:'../../../assets/images/explore/very5bg.png'" alt="">
+    <div class="app-user-top-iconList">
+      <div class="app-user-top-iconList-item" (click)="refresh()">
+        <span class="iconfont icon-shuaxin"></span>
+      </div>
+      <div class="app-user-top-iconList-item" (click)="shareLink()">
+        <span class="iconfont icon-share"></span>
+      </div>
+    </div>
+    <div class="app-user-top-menu" *ngIf="shareShow">
+      <div class="app-user-top-menu-item" *ngFor="let item of shareItems; let i=index" (click)="chooseShare(i)">
+        <span class="icon" [class]="item.icon"></span>
+        <span>{{item.label}}</span>
+      </div>
+    </div>
   </div>
   <div class="app-user-info flex justify-content-between flex-wrap">
     <div class="app-user-info-detail flex">

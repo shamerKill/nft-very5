@@ -7,7 +7,6 @@ export const environment = {
   projectName: 'very5',
   signStr: 'very5',
   apiPath: '/proxy/',
-  // apiPath: 'http://192.168.3.117:3001/',
 };
 
 /*
