@@ -67,6 +67,7 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     {label: $localize`Twitter`, icon: 'pi pi-twitter'},
   ]
   shareShow:boolean=false;
+
   sortList:sortItem[]=[
     {
       name: $localize`全部`,
@@ -155,7 +156,7 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
       this.getCollectionList();
     } else if (this.tabActive == 3) {
       this.getTransList();
-    } 
+    }
   };
   constructor(
     private net: NetService,
@@ -189,7 +190,7 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       this.nftList = data
     });
-  }
+}
   getCollectionList() {
     this.net.getCollectionList$(this.userAddress,this.filterObj.cate).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
@@ -222,5 +223,6 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     }
     this.shareShow = false;
   }
+
 
 }

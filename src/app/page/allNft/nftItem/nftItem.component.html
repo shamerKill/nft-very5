@@ -1,14 +1,18 @@
-<div class="nft-items">
+<div class="nft-items ">
   <div class="nft-items-content" [class]="type == 2 ? 'mores' : ''">
-    <div class="nft-items-content-img">
-      <img [src]="item.NftOriginal.Image" alt="">
-    </div>
-    <div class="nft-items-content-title flex align-items-center justify-content-between">
-      <div class="nft-items-content-title-text">{{item.CollectionName}}</div>
-      <div class="nft-items-content-title-icon" *ngIf="item?.Sellinglype == 2">
-        <span class="iconfont icon-paimai"></span>
+    <a [routerLink]="['/show/nft/'+item.NftOriginal.NftID]">
+      <div class="nft-items-content-img">
+        <img [src]="item.NftOriginal.Image" alt="">
       </div>
-    </div>
+    </a>
+    <a [routerLink]="['/show/nft/'+item.NftOriginal.NftID]">
+      <div class="nft-items-content-title flex align-items-center justify-content-between">
+        <div class="nft-items-content-title-text">{{item.CollectionName}}</div>
+        <div class="nft-items-content-title-icon" *ngIf="item?.Sellinglype == 2">
+          <span class="iconfont icon-paimai"></span>
+        </div>
+      </div>
+    </a>
     <div class="nft-items-content-name">{{item.NftOriginal.Name}}</div>
     <div class="nft-items-content-price flex align-items-center justify-content-between">
       <div class="nft-items-content-price-num flex align-items-center">

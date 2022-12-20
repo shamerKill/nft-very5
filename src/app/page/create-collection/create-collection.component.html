@@ -2,8 +2,15 @@
   <app-base-box class="overflow-visible">
     <h2
       class="text-4xl font-bold py-4 lg:py-6 px-4 lg:px-0"
+      *ngIf="collectionId === null"
       i18n>
       创建新合集
+    </h2>
+    <h2
+      class="text-4xl font-bold py-4 lg:py-6 px-4 lg:px-0"
+      *ngIf="collectionId !== null"
+      i18n>
+      修改合集
     </h2>
     <div class="border-round-lg w-full surface-0 px-4 gl:px-6 py-4 lg:py-6 mb-4">
       <!--  -->
@@ -105,6 +112,23 @@
         <div class="flex align-items-center pb-5">
           <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
           <h3 class="text-xl" i18n>
+            合集描述
+          </h3>
+        </div>
+        <input
+          class="w-9 lg:w-6 p-inputtext-lg text-base"
+          type="text"
+          pInputText
+          [(ngModel)]="describe"
+          (input)="onListenData()"
+          placeholder="介绍你的合集，让更多人了解TA的价值"
+          i18n-placeholder />
+      </div>
+      <!--  -->
+      <!-- <div class="pb-5">
+        <div class="flex align-items-center pb-5">
+          <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
+          <h3 class="text-xl" i18n>
             自定义个性化网址
           </h3>
         </div>
@@ -115,7 +139,7 @@
           [(ngModel)]="webSite"
           placeholder="https://"
           i18n-placeholder />
-      </div>
+      </div> -->
       <!--  -->
       <div class="pb-5">
         <div class="flex align-items-center pb-5">
@@ -139,6 +163,8 @@
             pInputText
             suffix="%"
             placeholder="费率"
+            mode="decimal"
+            [maxFractionDigits]="2"
             [(ngModel)]="profit.rate"
             (onInput)="onListenData()"
             (onBlur)="onListenData()"
@@ -146,6 +172,68 @@
             [max]="100"
             i18n-placeholder>
           </p-inputNumber>
+        </div>
+      </div>
+      <!--  -->
+      <div class="pb-5">
+        <div class="flex align-items-center pb-5 w-full">
+          <div class="w-0-8 h-0-8 border-circle mr-3 bg-primary"></div>
+          <h3 class="text-xl flex-1" i18n>
+            可支付代币
+          </h3>
+        </div>
+        <div class="flex w-full">
+          <p-multiSelect
+            class="w-9 lg:w-6 p-inputtext-lg text-base"
+            styleClass="w-full"
+            [(ngModel)]="selectedBuyToken"
+            (onChange)="onListenData()"
+            [options]="buyTokens"
+            (onLazyLoad)="getTokenList($event)"
+            [virtualScroll]="true"
+            [virtualScrollItemSize]="46"
+            [lazy]="true"
+            [showHeader]="false"
+            dataKey="token"
+            placeholder="选择代币"
+            tooltipPosition="bottom"
+            optionLabel="name"
+            i18n-placeholder>
+            <ng-template pTemplate="selectedItems">
+              <div class="flex" *ngIf="selectedBuyToken.length < 3">
+                <div class="h-1rem"></div>
+                <div class="flex align-items-center pr-2" *ngFor="let item of selectedBuyToken">
+                  <img
+                    [src]="item.logo"
+                    class="w-1rem h-1rem" />
+                  <p class="pl-2">{{item.name}}</p>
+                  <p *ngIf="item.token" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
+                </div>
+              </div>
+              <div class="flex" *ngIf="selectedBuyToken.length >= 3 && selectedBuyToken.length < 6">
+                <div class="flex align-items-center pr-2" *ngFor="let item of selectedBuyToken">
+                  <img
+                    [src]="item.logo"
+                    class="w-1rem h-1rem" />
+                  <p class="pl-2">{{item.name}}</p>
+                </div>
+              </div>
+              <div class="flex" *ngIf="selectedBuyToken.length >= 6">
+                <div class="flex align-items-center pr-2" *ngFor="let item of selectedBuyToken">
+                  <p class="pl-2">{{item.name}}</p>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template let-item pTemplate="item">
+              <div class="flex align-items-center">
+                <img
+                  [src]="item.logo"
+                  class="w-1rem h-1rem" />
+                <p class="pl-2">{{item.name}}</p>
+                <p *ngIf="item.token" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
+              </div>
+            </ng-template>
+          </p-multiSelect>
         </div>
       </div>
       <!--  -->
@@ -161,24 +249,10 @@
           type="text"
           pInputText
           [(ngModel)]="interactiveLink"
+          (input)="onListenData()"
           placeholder="欢迎您链接到自己的网页"
           i18n-placeholder />
       </div>
-      <!--  -->
-      <!-- <div class="pb-5">
-        <div class="flex align-items-center pb-5">
-          <div class="w-0-8 h-0-8 bg-primary border-circle mr-3"></div>
-          <h3 class="text-xl" i18n>
-            付款代币 (多选)
-          </h3>
-        </div>
-        <p-multiSelect
-          styleClass="w-9 lg:w-6"
-          [options]="tokens"
-          tooltipPosition="bottom"
-          optionLabel="name">
-        </p-multiSelect>
-      </div> -->
       <!--  -->
       <div class="pb-5">
         <div class="flex align-items-center pb-5">
@@ -204,7 +278,7 @@
         pButton
         [disabled]="!canCreate"
         class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
-        label="创建"
+        [label]="collectionId === null ? '创建' : '修改'"
         (click)="onCreateCollection()"
         type="button"></button>
     </div>

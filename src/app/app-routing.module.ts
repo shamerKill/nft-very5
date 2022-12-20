@@ -28,6 +28,8 @@ import {ToastModule} from 'primeng/toast';
 import {ConfirmationService} from 'primeng/api';
 import {MenuModule} from 'primeng/menu';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import {DialogModule} from 'primeng/dialog';
+
 
 import { ComponentsModule } from './components/components.module';
 import { AuctionComponent } from './page/auction/auction.component';
@@ -64,10 +66,20 @@ const routes: Routes = [
     component: CreateCollectionComponent,
     path: 'create/collection',
   },
+  // 修改合集
+  {
+    component: CreateCollectionComponent,
+    path: 'edit/collection/:id',
+  },
   // 创造收藏品
   {
     component: CreateNftComponent,
     path: 'create/nft',
+  },
+  // 修改收藏品
+  {
+    component: CreateNftComponent,
+    path: 'edit/nft/:id',
   },
   // nft展示
   {
@@ -160,6 +172,7 @@ const routes: Routes = [
     MenuModule,
     PipeModule,
     ClipboardModule,
+    DialogModule,
     RouterModule.forRoot(routes),
   ],
   exports: [

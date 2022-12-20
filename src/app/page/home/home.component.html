@@ -24,10 +24,10 @@
             <img class="card-image" [src]="item.image" [alt]="item.name">
           </ng-template>
           <p class="card-name">
-            {{item.name}}
+            {{item.collectionName}}
           </p>
           <p class="card-described">
-            {{item.owner}} #{{item.id}}
+            {{item.name}} #{{item.id}}
           </p>
         </p-card>
       </ng-container>
@@ -50,10 +50,10 @@
               <img class="card-image" [src]="item.image" [alt]="item.name">
             </ng-template>
             <p class="card-name">
-              {{item.name}}
+              {{item.collectionName}}
             </p>
             <p class="card-described">
-              {{item.owner}} #{{item.id}}
+              {{item.name}} #{{item.id}}
             </p>
           </p-card>
         </ng-template>
@@ -109,7 +109,7 @@
 <!-- 顶级艺术家 -->
 <div class="top-artist">
   <h2 class="artist-title text-center" i18n>顶级合集</h2>
-  <app-base-box class="relative">
+  <app-base-box *ngIf="artistList.list.length" class="relative">
     <swiper
       [grabCursor]="true"
       [centeredSlides]="true"

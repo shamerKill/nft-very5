@@ -2,9 +2,13 @@
   <app-base-box class="py-2 md:py-4 px-2 md:px-0 flex justify-content-start">
     <div class="flex align-items-center cursor-pointer" (click)="location.back();">
       <i class="pi pi-angle-left text-xl"></i>
-      <img class="w-3rem h-3rem ml-2 border-round-lg" [src]="productInfo.image" [alt]="productInfo.name">
-      <div class="ml-2">
-        <p class="text-600 text-sm">{{productInfo.collection.name}}</p>
+      <img
+        *ngIf="productInfo.image"
+        class="w-3rem h-3rem ml-2 border-round-lg"
+        [src]="productInfo.image"
+        [alt]="productInfo.name">
+      <div class="ml-2" *ngIf="productInfo.name">
+        <p class="text-600 text-sm">{{productInfo.collection?.name}}</p>
         <p class="text-900">{{productInfo.name}} #{{productInfo.id}}</p>
       </div>
     </div>
@@ -33,7 +37,7 @@
                 (click)="onChangeSellType('fixed')"
                 class="flex-1 h-5rem border-round-xl flex flex-column align-items-center justify-content-center border-1 border-300 cursor-pointer"
                 [class]="sellType === 'fixed' ? 'border-primary text-primary bg-primary-50' : ''">
-                <i class="pi pi-tag border-1 border-400 block p-1 border-circle" [class]="sellType === 'fixed' ? 'border-primary' : ''"></i>
+                <i class="iconfont icon-biaoq block text-xl" [class]="sellType === 'fixed' ? 'border-primary' : ''"></i>
                 <p class="pt-2" i18n>固定价格</p>
               </button>
               <div class="w-1rem h-1rem"></div>
@@ -41,12 +45,12 @@
                 (click)="onChangeSellType('float')"
                 class="flex-1 h-5rem border-round-xl flex flex-column align-items-center justify-content-center border-1 border-300 cursor-pointer"
                 [class]="sellType === 'float' ? 'border-primary text-primary bg-primary-50' : ''">
-                <i class="pi pi-book border-1 border-400 block p-1 border-circle" [class]="sellType === 'float' ? 'border-primary' : ''"></i>
+                <i class="iconfont icon-paimai block text-xl" [class]="sellType === 'float' ? 'border-primary' : ''"></i>
                 <p class="pt-2" i18n>限时拍卖</p>
               </button>
             </div>
           </div>
-          <div class="pb-5">
+          <div class="pb-5" *ngIf="selectedBuyToken.length">
             <div class="flex align-items-center pb-5 w-full">
               <div class="w-0-8 h-0-8 border-circle mr-3 bg-primary"></div>
               <h3 class="text-xl flex-1" i18n>
@@ -63,21 +67,45 @@
             </div>
             <div class="flex w-full">
               <p-multiSelect
-                class="w-4"
+                class="w-4 lg:w-6 p-inputtext-lg text-base"
                 styleClass="w-full"
                 [(ngModel)]="selectedBuyToken"
                 (onChange)="changeBuyToken($event)"
                 [options]="buyTokens"
                 [showHeader]="false"
+                [virtualScroll]="true"
+                [virtualScrollItemSize]="46"
+                [lazy]="true"
                 placeholder="选择代币"
                 tooltipPosition="bottom"
                 optionLabel="name"
                 i18n-placeholder>
+                <ng-template pTemplate="selectedItems">
+                  <div class="flex align-items-center" *ngFor="let item of selectedBuyToken">
+                    <img
+                      [src]="item.logo"
+                      class="w-1rem h-1rem" />
+                    <p class="pl-2">{{item.name}}</p>
+                    <p *ngIf="item.token" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
+                  </div>
+                </ng-template>
+                <ng-template let-item pTemplate="item">
+                  <div class="flex align-items-center">
+                    <img
+                      [src]="item.logo"
+                      class="w-1rem h-1rem" />
+                    <p class="pl-2">{{item.name}}</p>
+                    <p *ngIf="item.token" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
+                  </div>
+                </ng-template>
               </p-multiSelect>
               <div class="w-1rem h-1rem"></div>
               <p-inputNumber
                 class="flex-1"
                 styleClass="w-full"
+                mode="decimal"
+                [maxFractionDigits]="selectedBuyToken[0].minLen"
+                [min]="0"
                 placeholder="金额"
                 i18n-placeholder
                 [(ngModel)]="startPrice"></p-inputNumber>
@@ -109,11 +137,11 @@
                   <div *ngIf="!sellTimeLine || sellTimeLine.length === 0" class="country-placeholder" i18n>
                     <i class="pi pi-calendar-minus pr-2"></i>持续时间
                   </div>
-                </ng-template>>
+                </ng-template>
               </p-multiSelect>
             </div>
           </div>
-          <div class="pb-5" *ngIf="sellType === 'fixed'">
+          <!-- <div class="pb-5" *ngIf="sellType === 'fixed'">
             <div class="flex align-items-center pb-5 w-full">
               <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
               <h3 class="text-xl flex-1" i18n>
@@ -135,7 +163,7 @@
                 placeholder="捆绑销售描述"
                 i18n-placeholder />
             </div>
-          </div>
+          </div> -->
           <div class="pb-5" *ngIf="sellType === 'fixed'">
             <div class="flex align-items-center pb-2 w-full">
               <div class="w-0-8 h-0-8 border-circle mr-3 surface-300"></div>
@@ -149,9 +177,30 @@
               <input
                 class="w-full p-inputtext-lg text-base"
                 type="text"
+                [(ngModel)]="fixedBuyer"
                 pInputText
                 placeholder="买家地址"
                 i18n-placeholder />
+            </div>
+          </div>
+          <div class="pb-5" *ngIf="sellType === 'fixed'">
+            <div class="flex align-items-center pb-5 w-full">
+              <div class="w-0-8 h-0-8 border-circle mr-3 bg-primary"></div>
+              <h3 class="text-xl flex-1" i18n>
+                出售数量
+                <span class="text-sm">（最多: {{productInfo.myNum}}）</span>
+              </h3>
+            </div>
+            <div class="flex w-full">
+              <p-inputNumber
+                class="w-full text-base p-0"
+                styleClass="w-full"
+                pInputText
+                [max]="productInfo.myNum||0"
+                [min]="1"
+                [(ngModel)]="sellNumber"
+                [placeholder]="'<=' + productInfo.myNum">
+              </p-inputNumber>
             </div>
           </div>
           <div class="pb-5">
@@ -172,11 +221,11 @@
             <div class="w-full">
               <div class="flex justify-content-between">
                 <p class="text-700" i18n>服务费</p>
-                <p>2.5%</p>
+                <p>{{productInfo.systemRate}}</p>
               </div>
               <div class="flex justify-content-between pt-2">
                 <p class="text-700" i18n>创作者 费用</p>
-                <p>0%</p>
+                <p>{{productInfo.incomeRate}}</p>
               </div>
             </div>
           </div>
@@ -193,13 +242,14 @@
           <div class="surface-900 p-3 border-round-xl">
             <div class="preview-image-box">
               <img
+                *ngIf="productInfo.image"
                 class="border-round-xl preview-image"
                 [src]="productInfo.image"
                 [alt]="productInfo.name">
             </div>
             <div class="flex pb-4 pt-3 justify-content-between">
               <div>
-                <p class="text-400 text-xs pb-2">{{productInfo.collection.name}}</p>
+                <p class="text-400 text-xs pb-2">{{productInfo.collection?.name}}</p>
                 <p class="text-0">{{productInfo.name}} #{{productInfo.id}}</p>
               </div>
               <div class="text-right">
@@ -213,7 +263,7 @@
       <!--  -->
       <button
         pButton
-        [disabled]="true"
+        (click)="onProductSell()"
         class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
         label="完成项目刊登"
         type="button"></button>

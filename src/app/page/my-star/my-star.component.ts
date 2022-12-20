@@ -147,7 +147,7 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
       if (data.code === 200 && data.data && data.data.length) {
         this.starTableData = data.data.map((item: any) => {
           return {
-            id: `${item.NftOriginal.ID}`,
+            id: `${item.NftOriginal.NftID}`,
             image: item.NftOriginal.Image,
             collectionInfo: {
               name: item.CollectionName,
@@ -180,7 +180,6 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
           };
         });
       }
-      console.log(data);
     });
   }
 
@@ -201,7 +200,8 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
     if (event.index === 2) type = 'collection';
     this.router.navigate(['my/star'], {
       queryParams: { type },
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
     });
   }
 

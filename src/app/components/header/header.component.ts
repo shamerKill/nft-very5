@@ -83,9 +83,6 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
       this.webMenuType = value;
       this.setWebMenuHeight();
     });
-    this.stateService.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(data => {
-      this.hadAccount = data.isLinked;
-    });
   }
 
   ngAfterViewInit(): void {
@@ -228,15 +225,11 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
    **/
   private async checkLoginType() {
     await ToolFuncTimeSleep(1);
-    const result = await ToolFuncLinkWallet(this.netService.signLogin$.bind(this.netService), true);
-    if (result?.accountAddress !== null) {
-      this.netService.getNowUserInfo$().pipe(this.pipeSwitch$()).subscribe(({code}) => {
-        if (code === 200 && result) {
-          result.isLinked = true;
-          this.stateService.linkedWallet$.next(result);
-        }
+    ToolFuncLinkWallet(this.netService.signLogin$.bind(this.netService), true).subscribe(data => {
+      if (data?.isLinked) this.netService.getNowUserInfo$().subscribe(({code}) => {
+        if (code === 200) this.stateService.linkedWallet$.next(data);
       });
-    }
+    });
   }
 
   /**
@@ -254,13 +247,16 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
   async onLinkWallet() {
     this.stateService.globalLoadingSwitch(true);
     // this指向修改
-    const result = await ToolFuncLinkWallet(this.netService.signLogin$.bind(this.netService));
-    this.stateService.globalLoadingSwitch(false);
-    if (result == null) {
-      this.BaseMessage.warn($localize`获取账户失败`);
-      return;
-    }
-    this.stateService.linkedWallet$.next(result);
+    ToolFuncLinkWallet(this.netService.signLogin$.bind(this.netService)).subscribe(data => {
+      if (data?.isLinking === false) {
+        this.stateService.globalLoadingSwitch(false);
+      }
+      if (data?.isLinked === false) {
+        this.BaseMessage.warn($localize`获取账户失败`);
+        return;
+      }
+      if (data) this.stateService.linkedWallet$.next(data);
+    });
   }
 
   /**

@@ -28,4 +28,12 @@ export class BaseMessageService {
       detail: message,
     });
   }
+
+  info(message: string) {
+    this.message.add({
+      severity: 'info',
+      summary: $localize`提示`,
+      detail: message,
+    });
+  }
 }

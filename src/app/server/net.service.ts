@@ -1,11 +1,11 @@
 import { DatabaseService } from './database.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, Subject, throttleTime } from 'rxjs';
+import { map, Observable, Subject, throttleTime, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 // 数据类型
-type TypeInterfaceNet<T=any> = {
+export type TypeInterfaceNet<T=any> = {
   code: number;
   data: T;
   msg?: string;
@@ -39,6 +39,21 @@ export class NetService {
     }
     return this.http.post<T>(this.$url(url), fd, { withCredentials: true });
   };
+  private $put = <T = TypeInterfaceNet>(
+    url: string,
+    body?: {
+      [key: string]: string|undefined,
+    }
+  ) => {
+    let fd: FormData|undefined;
+    if (body) {
+      fd = new FormData();
+      Object.keys(body).forEach(key => {
+        if (body[key]) fd?.append(key, body[key]!);
+      });
+    }
+    return this.http.put<T>(this.$url(url), fd, { withCredentials: true });
+  };
 
   constructor(
     private http: HttpClient,
@@ -70,6 +85,13 @@ export class NetService {
     return this.$get<TypeInterfaceNet>('v1/nft/list', queryParams)
   }
 
+  /**
+   * 获取nft详情
+   **/
+  getNftInfoById$(id: string, address: string) {
+    return this.$get('v1/nft/' + id, new HttpParams({fromObject: { address: address }}));
+  }
+
 
   /**
    * 登录接口
@@ -97,7 +119,7 @@ export class NetService {
   getMyNFTList$() {
     return this.$get<TypeInterfaceNet>('v1/my/creatorNfts');
   }
-  /** 
+  /**
    * v1/collection/list
    * owner 地址
    * category 分类
@@ -106,7 +128,7 @@ export class NetService {
   getCollectionList$(owner:string,category:string) {
     return this.$get<TypeInterfaceNet>(`v1/collection/list?owner=${owner}&category=${category}`);
   }
-  /** 
+  /**
    * v1/search_collection/{search}
    * search 搜索
    * 搜索合集
@@ -114,7 +136,7 @@ export class NetService {
    getSearchCollectionList$(search:string) {
     return this.$get<TypeInterfaceNet>(`v1/search_collection/${search}`);
   }
-  /** 
+  /**
    * v1/collection/{search}
    * search id
    * 合集详情
@@ -122,7 +144,7 @@ export class NetService {
    getCollectionDetail$(search:string) {
     return this.$get<TypeInterfaceNet>(`v1/collection/${search}`);
   }
-  /** 
+  /**
    * v1/nft/evevt
    * collectionID 合集id
    * nftID nft id
@@ -133,7 +155,7 @@ export class NetService {
    getUserTrans$(collectionID:string,nftID:string,eventType:string,addr:string) {
     return this.$get<TypeInterfaceNet>(`v1/nft/event?collectionID=${collectionID}&nftID=${nftID}&eventType=${eventType}&addr=${addr}`);
   }
-  /** 
+  /**
    * v1/search_nft/{search}
    * search 搜索
    * 搜索nft
@@ -141,25 +163,25 @@ export class NetService {
    getSearchNftList$(search:string) {
     return this.$get<TypeInterfaceNet>(`v1/search_nft/${search}`);
   }
-  
-  /** 
+
+  /**
    * v1/user/add_focus/{collection_id}
-   * id 
+   * id
    * 收藏合集
    * **/
    postAddFocus$(id:string) {
     return this.$post('v1/user/add_focus/'+id);
   }
-  /** 
+  /**
    * v1/user/del_collect/{collect_id}
-   * id 
+   * id
    * 删除收藏合集
    * **/
    postDelFocus$(id:string) {
     return this.$post('v1/user/del_focus/'+id);
   }
 
-  /** 
+  /**
    * v1/nft/list
    * creator 创建者
    * owner 所有者
@@ -288,18 +310,35 @@ export class NetService {
    * 创建新合集
    **/
   putNewCollection$(params: {
-    [key in 'name'|'image'|'banner_image'|'external_link'|'creator_rate'|'fee_recipient'|'category']: string
+    [key in 'name'|'image'|'banner_image'|'external_link'|'creator_rate'|'fee_recipient'|'category'|'description'|'allow_token']: string
   }) {
     return this.$post('v1/my/collection', params);
+  }
+  /**
+   * 修改合集
+   **/
+  postEditCollection$(params: {
+    [key in 'id'|'name'|'image'|'banner_image'|'external_link'|'creator_rate'|'fee_recipient'|'category'|'description'|'allow_token']: string
+  }) {
+    return this.$put('v1/my/collection', params);
   }
 
   /**
    * 创建新nft
    **/
-   putNewNFT$(params: {
+  putNewNFT$(params: {
     [key in 'name'|'image'|'external_link'|'description'|'attr'|'number'|'collection_id']: string
   }) {
     return this.$post('v1/my/nft', params);
+  }
+
+  /**
+   * 修改nft
+   **/
+  postEditNFT$(params: {
+    [key in 'id'|'name'|'image'|'external_link'|'description'|'attr']: string
+  }) {
+    return this.$put('v1/my/nft', params);
   }
 
   /**
@@ -307,6 +346,89 @@ export class NetService {
    **/
   getMyCollectionList$() {
     return this.$get('v1/my/collection');
+  }
+
+  /**
+   * 获取token列表
+   **/
+  getTokenList$(): Observable<TypeInterfaceNet<any>> {
+    const tokenList = [
+      { name: 'PC', minLen: 6, logo: '../../assets/images/logo/default-avatar.png', contract: '' },
+      { name: 'PUSD', minLen: 6, logo: '../../assets/images/logo/default-avatar.png', contract: 'gx1gjxs8ygvlur2cekxajdnhkl4tkf2vl478w3ew0' },
+    ];
+    this.$get('v1/nft/tokens').subscribe(data => {
+      console.log(data);
+    });
+    const sub = new BehaviorSubject<TypeInterfaceNet<any>>({
+      code: 200,
+      data: tokenList,
+    });
+    return sub.pipe();
+  }
+
+  /**
+   * 获取所有可以支付代币
+   **/
+  getPayTokenList$(page: number = 1) {
+    return this.$get('v1/nft/tokens', new HttpParams({fromObject: { page: page }}));
+  }
+
+  /**
+   * 获取挂卖交易手续费
+   **/
+  getSellFee$(collectionId: string) {
+    return this.$get('/v1/collection/basisPoints', new HttpParams({fromObject: {id: collectionId}}));
+  }
+
+  /**
+   * nft挂卖
+   **/
+  postSellNft$(input: {
+    id: string; // nft  ID
+    type: number; // 1定价 2拍卖
+    price: string; // 初始价格
+    fixedBuyer: string; // 特定买家
+    payContract: string; // 支付币合约
+    payTokenName: string; // 支付币名称
+    start: string; // 开始时间
+    end: string; // 结束时间
+    number: number; // 销售数量
+  }) {
+    return this.$post('v1/my/publish', {
+      type: input.type.toString(),
+      nft_id: input.id,
+      start_price: input.price,
+      assign_addr: input.fixedBuyer ? input.fixedBuyer : undefined,
+      token: input.payContract,
+      coin_type: input.payTokenName,
+      start_date: input.start,
+      stop_date: input.end,
+      number: input.number.toString(),
+    });
+  }
+
+  /**
+   * nft挂卖签名提交
+   **/
+  postSellNftSign$(orderId: string, signed: string) {
+    return this.$post('v1/my/addSign', {
+      type: orderId,
+      signature: signed,
+    });
+  }
+
+  /**
+   * 获取nft挂卖信息
+   **/
+  getNftSellingOrders$(id: string) {
+    return this.$get('v1/order/orders/' + id);
+  }
+
+  /**
+   * 获取nft的token_url元数据链接
+   **/
+  getNftSourceTokenUri$(id: string) {
+    return this.$get('v1/nft/uri', new HttpParams({fromObject: { 'token_id': id }}));
   }
 
 }

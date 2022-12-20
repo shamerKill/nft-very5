@@ -25,15 +25,15 @@
           <div class="app-user-info-detail-title-name">
             {{userInfo.Name}}
           </div>
-          
+
           <div class="app-user-info-detail-title-introduce" [class]="showMore?'':'shot'">{{userInfo.Description}}</div>
           <div class="app-user-info-detail-title-btn flex align-items-center" (click)="clickMore()">
             <div *ngIf="showMore" class="flex align-items-center">
-              <span i18n>收起 </span> 
+              <span i18n>收起 </span>
               <span [class]="showMore?'down':''" class="iconfont icon-xiala"></span>
             </div>
             <div *ngIf="!showMore" class="flex align-items-center">
-              <span i18n>展开 </span> 
+              <span i18n>展开 </span>
               <span class="iconfont icon-xiala"></span>
             </div>
           </div>

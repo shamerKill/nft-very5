@@ -23,6 +23,7 @@
     "@angular/router": "^14.2.0",
     "assert": "^2.0.0",
     "cosmo-wallet-tool": "0.0.46",
+    "dayjs": "^1.11.7",
     "ngx-clipboard": "^15.1.0",
     "primeflex": "^3.2.1",
     "primeicons": "^6.0.1",

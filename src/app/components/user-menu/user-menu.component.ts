@@ -24,7 +24,8 @@ export class UserMenuComponent extends ToolClassAutoClosePipe implements OnInit 
    **/
   userInfo = {
     avatar: '',
-    name: '--'
+    name: '--',
+    address: '',
   };
   /**
    * 币种信息
@@ -50,6 +51,9 @@ export class UserMenuComponent extends ToolClassAutoClosePipe implements OnInit 
     private database: DatabaseService,
   ) {
     super();
+    this.stateService.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(data => {
+      if (data.accountAddress) this.userInfo.address = data.accountAddress;
+    });
   }
 
   ngOnInit(): void {

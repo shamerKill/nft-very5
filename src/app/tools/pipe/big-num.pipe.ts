@@ -6,7 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class BigNumPipe implements PipeTransform {
 
-  transform(num: string|number, digits = 1): string {
+  transform(num?: string|number, digits = 1): string {
+    if (num === undefined) return '0';
     try {
       const _num = BigInt(num);
       const lookup = [

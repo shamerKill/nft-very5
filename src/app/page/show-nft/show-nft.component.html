@@ -1,6 +1,8 @@
-<div class="surface-100">
+<div *ngIf="userHadNftNum !== 0" class="surface-100">
   <app-base-box class="py-2 md:py-4 px-2 md:px-0 flex justify-content-end">
     <button
+      *ngIf="userCanEdit"
+      (click)="onEditNft()"
       pButton
       class="p-button-outlined px-6 md:px-8 py-1"
       label="编辑"
@@ -8,15 +10,24 @@
     <div class="w-1rem"></div>
     <button
       pButton
+      (click)="onSellNft()"
       class="px-6 md:px-8 py-1"
       label="出售"
+      i18n-label></button>
+    <div class="w-1rem"></div>
+    <button
+      pButton
+      (click)="showDialog()"
+      class="p-button-outlined px-6 md:px-8 py-1"
+      label="赠送"
       i18n-label></button>
   </app-base-box>
 </div>
 <app-page-bg-box class="show-nft pb-8 pt-4">
-  <app-base-box class="show-nft-top flex flex-column-reverse md:flex-row md:align-items-stretch">
+  <app-base-box class="show-nft-top flex flex-column-reverse md:flex-row md:align-items-stretch overflow-visible">
     <div class="top-image-box">
       <img
+        *ngIf="productInfo.image"
         class="top-image-img"
         [src]="productInfo.image"
         [alt]="productInfo.name">
@@ -24,27 +35,72 @@
     <div class="top-info-box flex-1 flex flex-column justify-content-between">
       <div class="info-info flex-1 pl-4 pr-6">
         <p class="info-user">
-          <i class="pi pi-book"></i>{{productInfo.owner}}
+          <i class="iconfont icon-paimai text-base pr-1"></i>{{productInfo.collection?.name}}
         </p>
         <h3 class="info-title">
           {{productInfo.name}} #{{productInfo.id}}
         </h3>
         <p class="info-followers">
-          <i class="pi pi-heart-fill"></i>{{productInfo.followerVol}} <span i18n>关注</span>
+          <i class="pi pi-heart-fill"></i>{{productInfo.followerVol|bigNum}} <span i18n>关注</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <i class="pi pi-users"></i>{{productInfo.ownerNum|bigNum}} <span i18n>拥有者</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <i class="pi pi-gift"></i><span i18n>已拥有</span> {{productInfo.myNum|bigNum}}
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <i class="pi pi-file"></i><span i18n>同质化</span> {{productInfo.createdNum|bigNum}}
         </p>
       </div>
       <div class="market-box flex align-items-center">
-        <p class="text-0 text-2xl md:text-3xl font-bold pl-6" i18n>尚未出售</p>
+        <ng-container *ngIf="sellerOrderList.length === 0">
+          <p class="text-0 text-2xl md:text-3xl font-bold pl-6" i18n>尚未出售</p>
+        </ng-container>
+        <ng-container *ngIf="sellerOrderList.length !== 0">
+          <div class="market-info flex-1 pl-4">
+            <p class="market-title" i18n>
+              最新成交价
+              <!-- <span class="market-title-describe pl-1">未达保留价</span> -->
+            </p>
+            <p class="market-price">
+              1 PC
+            </p>
+            <!-- <p class="market-price-supply">
+              &asymp;1
+            </p> -->
+          </div>
+          <div>
+            <ng-container>
+              <button
+                pButton
+                class="market-output-btn p-button-outlined mr-4"
+                label="限价购买"
+                i18n-label>
+              </button>
+              <br />
+            </ng-container>
+            <ng-container>
+              <br />
+                <button
+                pButton
+                class="market-output-btn mr-4"
+                label="竞拍出价"
+                i18n-label>
+              </button>
+            </ng-container>
+          </div>
+        </ng-container>
         <div class="market-btn-list">
           <button
             pButton
             pRipple
             type="button"
-            icon="pi pi-heart-fill"
+            icon="pi"
+            (click)="onFollowProduct()"
+            [icon]="isFollow ? 'pi pi-heart-fill' : 'pi pi-heart'"
             class="p-button-rounded market-btns-btn">
           </button>
           <button
             pButton
+            (click)="onReload()"
             pRipple
             type="button"
             icon="pi pi-replay"
@@ -59,20 +115,173 @@
           </button>
         </div>
       </div>
-      <div class="flex-1"></div>
+      <div class="info-time flex-1 px-4" *ngIf="downTimeData === undefined">
+        <p class="time-title" i18n>暂无出售</p>
+      </div>
+      <div class="info-time flex-1 md:px-4" *ngIf="downTimeData !== undefined">
+        <p class="time-title" i18n>距离竞拍结束</p>
+        <div class="time-show flex">
+          <div class="time-show-item">
+            <p class="time-show-text">
+              <span class="time-show-num">{{downTimeData.day[0]}}</span>
+              <span class="time-show-num">{{downTimeData.day[1]}}</span>
+            </p>
+            <p class="time-show-unit" i18n>天</p>
+          </div>
+          <div class="time-show-item">
+            <p class="time-show-text">
+              <span class="time-show-num">{{downTimeData.hour[0]}}</span>
+              <span class="time-show-num">{{downTimeData.hour[1]}}</span>
+            </p>
+            <p class="time-show-unit" i18n>时</p>
+          </div>
+          <div class="time-show-item">
+            <p class="time-show-text">
+              <span class="time-show-num">{{downTimeData.minute[0]}}</span>
+              <span class="time-show-num">{{downTimeData.minute[1]}}</span>
+            </p>
+            <p class="time-show-unit" i18n>分</p>
+          </div>
+          <div class="time-show-item">
+            <p class="time-show-text">
+              <span class="time-show-num">{{downTimeData.second[0]}}</span>
+              <span class="time-show-num">{{downTimeData.second[1]}}</span>
+            </p>
+            <p class="time-show-unit" i18n>秒</p>
+          </div>
+        </div>
+      </div>
     </div>
   </app-base-box>
   <app-base-box>
     <div class="flex-1 surface-0 border-round-xl border-1 border-100 overflow-hidden">
       <p-tabView>
         <p-tabPanel header="收藏品介绍" i18n-header>
-          <p class="info-"></p>
+          <div *ngIf="productInfo.creator?.name">
+            <p class="flex align-items-center">
+              <span class="text-600 pr-1">创建者: </span>
+              <img
+                class="w-2rem h-2rem border-circle mx-1"
+                [src]="productInfo.creator?.avatar"
+                [alt]="productInfo.creator?.name">
+              <a [routerLink]="['/user']" [queryParams]="{id: productInfo.creator?.address}" routerLinkActive="router-link-active">
+                <span class="font-bold text-primary">{{productInfo.creator?.name}}</span>
+              </a>
+            </p>
+            <p class="text-600 py-2">
+              <span i18n>创作者版税: </span><span>{{productInfo.incomeRate}}%</span>
+            </p>
+            <p class="line-height-3 pt-2">
+              {{productInfo.creator?.describe}}
+            </p>
+          </div>
         </p-tabPanel>
-        <p-tabPanel header="合计介绍" i18n-header>
+        <p-tabPanel header="属性" i18n-header>
+          <div class="flex flex-wrap align-items-center">
+            <div
+              *ngFor="let item of productInfo.attributes"
+              class="px-2 py-1 border-1 border-primary mx-2 mb-2 border-round-lg text-center">
+              <p class="text-600 text-sm pb-1">{{item.key}}</p>
+              <p class="text-xl text-primary">{{item.value}}</p>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="合集介绍" i18n-header>
+          <div class="flex">
+            <div class="w-3rem md:w-4rem flex justify-content-end">
+              <img
+                *ngIf="productInfo.collection?.mainBg"
+                class="w-2rem h-2rem border-circle mr-2"
+                [src]="productInfo.collection?.mainBg"
+                [alt]="productInfo.collection?.name" />
+            </div>
+            <div class="flex-1">
+              <a [routerLink]="['/collection']" [queryParams]="{id: productInfo.collection?.id}" routerLinkActive="router-link-active" >
+                <p class="text-lg font-bold text-primary line-height-3 pb-1">{{productInfo.collection?.name}}</p>
+              </a>
+              <p class="text-600">{{productInfo.collection?.describe}}</p>
+            </div>
+          </div>
         </p-tabPanel>
         <p-tabPanel header="链信息" i18n-header>
+          <div *ngIf="productInfo.infoInChain?.contractAddress" class="flex justify-content-between py-1">
+            <p i18n>合约地址</p>
+            <a
+              class="text-primary"
+              [href]="'https://www.plugchain.network/v2/addressDetail?id=' + productInfo.infoInChain?.sourceData"
+              target="_blank"
+              i18n>
+              {{productInfo.infoInChain?.contractAddress|centerSlice}}
+            </a>
+          </div>
+          <div class="flex justify-content-between py-1">
+            <p i18n>代币ID</p>
+            <p i18n>{{productInfo.infoInChain?.tokenId|centerSlice}}</p>
+          </div>
+          <div class="flex justify-content-between py-1">
+            <p i18n>元数据</p>
+            <a
+              class="text-primary"
+              [href]="productInfo.infoInChain?.sourceData"
+              target="_blank"
+              i18n>
+              {{productInfo.infoInChain?.sourceData|centerSlice}}
+            </a>
+          </div>
         </p-tabPanel>
       </p-tabView>
+    </div>
+  </app-base-box>
+  <div class="w-1rem h-1rem"></div>
+  <app-base-box>
+    <div class="surface-0 border-round-xl border-1 border-100 overflow-hidden">
+      <p class="table-title" i18n>卖家定价</p>
+      <p-table [value]="sellerOrderList" responsiveLayout="scroll" [scrollable]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="min-width: 4rem;" i18n>价格</th>
+            <th style="min-width: 4rem;" i18n>方式</th>
+            <th style="min-width: 12rem;" i18n>出售者</th>
+            <th style="min-width: 12rem;" i18n>过期时间</th>
+            <th style="min-width: 5rem;" alignFrozen="right" pFrozenColumn i18n>出价</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+          <tr>
+            <td style="min-width: 4rem;">
+              {{product.startPrice}}<span class="text-500 text-sm">&nbsp;&nbsp;{{product.tokenName}}</span>
+            </td>
+            <td style="min-width: 4rem;" i18n [ngClass]="[['text-primary font-bold', 'text-900', 'text-primary'][product.sellType]]">
+              <span [pTooltip]="product.fixedBuyer">
+                {{['预留', '定价', '竞价'][product.sellType]}}
+              </span>
+            </td>
+            <td style="min-width: 12rem;">
+              <span [pTooltip]="product.sellerAddress">{{product.sellerAddress|centerSlice}}</span>
+            </td>
+            <td style="min-width: 12rem;" class="text-sm">
+              <span class="white-space-nowrap">{{product.endTime}}</span>
+            </td>
+            <td style="min-width: 5rem;" alignFrozen="right" pFrozenColumn>
+              <button
+                pButton
+                (click)="showDialog(rowIndex)"
+                class="p-button-text p-button-rounded text-2xl"
+                [icon]="['iconfont icon-biaoq', 'iconfont icon-biaoq', 'iconfont icon-paimai'][product.sellType]"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="4">
+              <div class="mx-auto flex flex-column align-items-center py-6">
+                <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+                <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
   </app-base-box>
   <app-base-box>
@@ -172,3 +381,244 @@
     </div>
   </app-base-box>
 </app-page-bg-box>
+
+
+<p-dialog
+  [modal]="true"
+  [style]="{width: '80vw', maxWidth: '500px'}"
+  [(visible)]="buyOverview.overviewDisplay">
+  <ng-template pTemplate="header">
+    <h3 i18n>立即购买</h3>
+    <img
+      class="outbox-icon"
+      src="../../../assets/images/explore/icon1.png" />
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="flex align-items-center">
+      <img
+        *ngIf="productInfo.image"
+        class="w-4rem h-4rem border-round-lg"
+        [src]="productInfo.image"
+        [alt]="productInfo.name">
+      <div class="px-2">
+        <p class="text-600 pbfa-rotate-180">
+          {{productInfo.collection?.name}}
+        </p>
+        <h3 class="py-1">
+          {{productInfo.name}} #{{productInfo.id}}
+        </h3>
+        <p class="text-600 text-sm">
+          <span i18n>创作者版税: </span><span>{{productInfo.incomeRate}}%</span>
+          <button
+            class="w-2rem h-2rem surface-0 cursor-pointer"
+            pTooltip="合集的创作者将收到这个比例的销售额作为 版税，合集的拥有者可以调整版税"
+            tooltipPosition="top"
+            tooltipEvent="focus"
+            i18n-pTooltip>
+            <i class="iconfont icon-tishishuoming text-sm p-1"></i>
+          </button>
+        </p>
+      </div>
+    </div>
+    <div class="flex pt-4 justify-content-between">
+      <p class="font-bold">合计</p>
+      <p>
+        {{sellerOrderList[buyOverview.sellIndex].startPrice}}
+        <span class="text-sm text-600">
+          {{sellerOrderList[buyOverview.sellIndex].tokenName}}
+        </span>
+      </p>
+    </div>
+    <div class="flex pt-4 justify-content-between">
+      <p>账户余额</p>
+      <p>
+        {{buyOverview.balance}}
+        <span class="text-sm text-600">
+          {{sellerOrderList[buyOverview.sellIndex].tokenName}}
+        </span>
+      </p>
+    </div>
+    <button
+      pButton
+      (click)="onBuy()"
+      class="mt-6 w-full block"
+      label="支付"></button>
+  </ng-template>
+</p-dialog>
+
+
+
+<p-dialog
+  [modal]="true"
+  [style]="{width: '80vw', maxWidth: '500px'}"
+  [(visible)]="auctionOverview.overviewDisplay">
+  <ng-template pTemplate="header">
+    <h3 i18n>报价</h3>
+    <img
+      class="outbox-icon"
+      src="../../../assets/images/explore/icon1.png" />
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="flex align-items-center">
+      <img
+        *ngIf="productInfo.image"
+        class="w-4rem h-4rem border-round-lg"
+        [src]="productInfo.image"
+        [alt]="productInfo.name">
+      <div class="px-2">
+        <p class="text-600 pbfa-rotate-180">
+          {{productInfo.collection?.name}}
+        </p>
+        <h3 class="py-1">
+          {{productInfo.name}} #{{productInfo.id}}
+        </h3>
+        <p class="text-600 text-sm">
+          <span i18n>创作者版税: </span><span>{{productInfo.incomeRate}}%</span>
+          <button
+            class="w-2rem h-2rem surface-0 cursor-pointer"
+            pTooltip="合集的创作者将收到这个比例的销售额作为 版税，合集的拥有者可以调整版税"
+            tooltipPosition="top"
+            tooltipEvent="focus"
+            i18n-pTooltip>
+            <i class="iconfont icon-tishishuoming text-sm p-1"></i>
+          </button>
+        </p>
+      </div>
+    </div>
+    <p class="pt-4 font-bold" i18n>
+      <i class="iconfont icon-qian"></i>&nbsp;&nbsp;价格
+    </p>
+    <div class="flex w-full pt-2">
+      <input
+        class="w-6rem"
+        type="text"
+        disabled="true"
+        [value]="sellerOrderList[buyOverview.sellIndex].tokenName"
+        pInputText />
+      <div class="w-1rem h-1rem"></div>
+      <p-inputNumber
+        class="flex-1"
+        styleClass="w-full"
+        mode="decimal"
+        [min]="0"
+        placeholder="金额"
+        i18n-placeholder
+        [(ngModel)]="auctionOverview.outPrice"></p-inputNumber>
+    </div>
+    <p class="pt-4 font-bold" i18n>
+      <i class="iconfont icon-shijian"></i>&nbsp;&nbsp;有效期
+    </p>
+    <div class="flex w-full pt-2">
+      <p-multiSelect
+        class="w-full"
+        styleClass="w-full"
+        [(ngModel)]="auctionOverview.endTime"
+        (onChange)="changeSellTimeLine($event)"
+        [options]="dayList"
+        [showHeader]="false"
+        placeholder="持续时间"
+        tooltipPosition="bottom"
+        optionLabel="name"
+        i18n-placeholder>
+        <ng-template let-value pTemplate="selectedItems">
+          <div class="country-item country-item-value" *ngFor="let option of auctionOverview.endTime">
+            <i class="pi pi-calendar-minus pr-2"></i>{{option.name}}
+          </div>
+          <div *ngIf="!auctionOverview.endTime || auctionOverview.endTime.length === 0" class="country-placeholder" i18n>
+            <i class="pi pi-calendar-minus pr-2"></i>持续时间
+          </div>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+    <div class="flex pt-4 justify-content-between">
+      <p>账户余额</p>
+      <p>
+        {{buyOverview.balance}}
+        <span class="text-sm text-600">
+          {{sellerOrderList[buyOverview.sellIndex].tokenName}}
+        </span>
+      </p>
+    </div>
+    <button
+      pButton
+      (click)="onAuction()"
+      class="mt-6 w-full block"
+      label="支付"></button>
+  </ng-template>
+</p-dialog>
+
+
+
+
+
+
+<p-dialog
+  [modal]="true"
+  [style]="{width: '80vw', maxWidth: '500px'}"
+  [(visible)]="giftOverview.overviewDisplay">
+  <ng-template pTemplate="header">
+    <h3 i18n>赠送</h3>
+    <img
+      class="outbox-icon"
+      src="../../../assets/images/explore/icon1.png" />
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="flex align-items-center">
+      <img
+        *ngIf="productInfo.image"
+        class="w-4rem h-4rem border-round-lg"
+        [src]="productInfo.image"
+        [alt]="productInfo.name">
+      <div class="px-2">
+        <p class="text-600 pbfa-rotate-180">
+          {{productInfo.collection?.name}}
+        </p>
+        <h3 class="py-1">
+          {{productInfo.name}} #{{productInfo.id}}
+        </h3>
+        <p class="text-600 text-sm">
+          <span i18n>创作者版税: </span><span>{{productInfo.incomeRate}}%</span>
+          <button
+            class="w-2rem h-2rem surface-0 cursor-pointer"
+            pTooltip="合集的创作者将收到这个比例的销售额作为 版税，合集的拥有者可以调整版税"
+            tooltipPosition="top"
+            tooltipEvent="focus"
+            i18n-pTooltip>
+            <i class="iconfont icon-tishishuoming text-sm p-1"></i>
+          </button>
+        </p>
+      </div>
+    </div>
+    <p class="pt-4 font-bold" i18n>
+      受赠地址
+    </p>
+    <div class="flex w-full pt-2">
+      <input
+        pInputText
+        class="flex-1"
+        styleClass="w-full"
+        placeholder="请输入受赠者地址"
+        type="text"
+        [(ngModel)]="giftOverview.toAddress">
+    </div>
+    <p class="pt-4 font-bold" i18n>
+      赠送数量<span class="text-sm font-base text-600">&nbsp;&nbsp;(<={{userHadNftNum}})</span>
+    </p>
+    <div class="flex w-full pt-2">
+      <p-inputNumber
+        class="flex-1"
+        styleClass="w-full"
+        mode="decimal"
+        [min]="1"
+        [max]="userHadNftNum"
+        placeholder="数量"
+        i18n-placeholder
+        [(ngModel)]="auctionOverview.outPrice"></p-inputNumber>
+    </div>
+    <button
+      pButton
+      (click)="onGift()"
+      class="mt-6 w-full block"
+      label="赠送"></button>
+  </ng-template>
+</p-dialog>

@@ -49,7 +49,10 @@ export class StateService {
 
 // 判断是否已经连接账户
 export const accountStoreInit: {
+  // 是否已链接
   isLinked: boolean;
+  // 是否在链接中
+  isLinking: boolean;
 	// 是否是app钱包
 	isWallet: boolean;
 	// 是否是插件钱包
@@ -60,6 +63,7 @@ export const accountStoreInit: {
 	accountType?: 'PRC10'|'PRC20'
 } = {
   isLinked: false,
+  isLinking: true,
 	isWallet: false,
 	isWeb: false,
 };
