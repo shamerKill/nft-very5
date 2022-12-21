@@ -94,7 +94,9 @@ export class ExploreComponent extends ToolClassAutoClosePipe implements OnInit {
     // 获取数据
     this.net.getCollectionList$('',this.classId).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      this.exploreList = data
+      if (Array.isArray(data) && data.length) {
+        this.exploreList = data
+      }
     });
   }
 }

@@ -430,5 +430,18 @@ export class NetService {
   getNftSourceTokenUri$(id: string) {
     return this.$get('v1/nft/uri', new HttpParams({fromObject: { 'token_id': id }}));
   }
+  /**
+   * 获取nft购买一口价信息
+   */
+  getNftBuyOrderInfo$(id: string) {
+    return this.$post('v1/my/buy', { orderID: id });
+  }
 
+  /**
+   * nft竞拍
+   */
+  getNftOfferOrderInfo$(id: string,price:string) {
+    return this.$post('v1/my/offer', { orderID: id,price:price });
+  }
 }
+

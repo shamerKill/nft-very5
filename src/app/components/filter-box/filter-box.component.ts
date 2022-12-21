@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,OnChanges,SimpleChanges } from '@angular/core';
 type UnitItem = {name: string;logo:string;id:number}
 type chooseItem = {
   name:string;
@@ -18,7 +18,7 @@ type outputObj = {
   templateUrl: './filter-box.component.html',
   styleUrls: ['./filter-box.component.scss'],
 })
-export class FilterBoxComponent implements OnInit {
+export class FilterBoxComponent implements OnInit,OnChanges {
   constructor() { }
   @Input() collectionType?:number;
   @Output() change: EventEmitter<outputObj> = new EventEmitter<outputObj>();
@@ -174,6 +174,7 @@ export class FilterBoxComponent implements OnInit {
   priceState: boolean = false;
   changePrice() {
     this.priceState = !this.priceState;
+    this.setChange();
   };
   PriceUnit:UnitItem[]=[
     {
@@ -205,11 +206,14 @@ export class FilterBoxComponent implements OnInit {
   submitSearch() {
     this.priceSearch = true;
     setTimeout(() => this.priceSearch = false, 1000);
+    this.setChange();
   };
   changeNum() {
     this.numState = !this.numState;
   };
   ngOnInit(): void {
   }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+  }
 }

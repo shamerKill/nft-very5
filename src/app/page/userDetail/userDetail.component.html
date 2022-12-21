@@ -39,44 +39,9 @@
           </div>
       </div>
     </div>
-    <!-- <div class="app-user-info-total flex">
-      <div class="app-user-info-total-item">
-          <div class="app-user-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>407K</span>
-          </div>
-          <div class="app-user-info-total-item-tips" i18n>总交易额</div>
-      </div>
-      <div class="app-user-info-total-item">
-          <div class="app-user-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>13</span>
-          </div>
-          <div class="app-user-info-total-item-tips" i18n>地板价</div>
-      </div>
-      <div class="app-user-info-total-item">
-          <div class="app-user-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>0.09</span>
-          </div>
-          <div class="app-user-info-total-item-tips" i18n>最佳报价</div>
-      </div>
-      <div class="app-user-info-total-item">
-          <div class="app-user-info-total-item-num flex align-items-center">
-            <span>2%</span>
-          </div>
-          <div class="app-user-info-total-item-tips" i18n>已刊登</div>
-      </div>
-      <div class="app-user-info-total-item">
-          <div class="app-user-info-total-item-num flex align-items-center">
-            <span>12</span>
-          </div>
-          <div class="app-user-info-total-item-tips" i18n>持有者</div>
-      </div>
-    </div> -->
   </div>
   <div class="contents-nft">
-    <app-filter-box></app-filter-box>
+    <app-filter-box [collectionType]="(tabActive==0||tabActive==1) ? 1 : tabActive==3 ? 2 :tabActive == 2 ? 3 : 0 "></app-filter-box>
     <div class="list-box">
       <div class="list-box-tabbar flex align-items-center">
         <div class="list-box-tabbar-item flex justify-content-center align-items-center" *ngFor="let item of tabbar; let i=index" [class]="i==tabActive?'actived':''" (click)="checkTab(i)">{{item}}</div>

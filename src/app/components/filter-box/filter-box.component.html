@@ -123,6 +123,28 @@
         </div>
       </div>
     </div>
+    <div *ngIf="collectionType==3">
+      <div class="filter-box-item">
+        <div class="filter-box-item-title flex align-items-center justify-content-between" (click)="changeClass()">
+          <div class="filter-box-item-title-name flex align-items-center">
+            <span class="iconfont icon-sort"></span>
+            <span i18n>分类</span>
+          </div>
+          <div class="filter-box-item-title-tips" [class]="classState ? 'down': ''">
+            <span class="iconfont icon-xiala"></span>
+          </div>
+        </div>
+        <div class="filter-box-item-class"  [class]="classState ? '': 'hide'">
+          <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of classList; let i=index" (click)="changeClassIndex(i)">
+            <span i18n>{{item.name}}</span>
+            <div class="icon">
+              <img src="../../../assets/images/explore/choose.png" alt="" *ngIf="item.checked">
+              <img src="../../../assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   
   <div class="filter-box-hide">
@@ -130,16 +152,16 @@
     <div class="filter-box-title" (click)="showFilterMenu()">
       <span class="iconfont icon-liebiao"></span>
     </div>
-    <div class="filter-box-icon">
+    <div class="filter-box-icon" *ngIf="!collectionType||collectionType==1||collectionType==2">
       <span class="iconfont icon-shijian"></span>
     </div>
-    <div class="filter-box-icon">
+    <div class="filter-box-icon" *ngIf="!collectionType||collectionType==1">
       <span class="iconfont icon-qian"></span>
     </div>
-    <div class="filter-box-icon">
+    <div class="filter-box-icon" *ngIf="!collectionType">
       <span class="iconfont icon-wenjianjia"></span>
     </div>
-    <div class="filter-box-icon">
+    <div class="filter-box-icon" *ngIf="!collectionType||collectionType==3">
       <span class="iconfont icon-sort"></span>
     </div>
   </div>

@@ -68,22 +68,24 @@
             </p> -->
           </div>
           <div>
-            <ng-container>
+            <ng-container *ngIf="sellerOrderList[sellerOrderList.length-1].sellType==1">
               <button
                 pButton
                 class="market-output-btn p-button-outlined mr-4"
                 label="限价购买"
-                i18n-label>
+                i18n-label
+                (click)="showDialog(0)">
               </button>
               <br />
             </ng-container>
-            <ng-container>
+            <ng-container *ngIf="sellerOrderList[sellerOrderList.length-1].sellType==2">
               <br />
                 <button
                 pButton
                 class="market-output-btn mr-4"
                 label="竞拍出价"
-                i18n-label>
+                i18n-label
+                (click)="showDialog(0)">
               </button>
             </ng-container>
           </div>
@@ -108,11 +110,18 @@
           </button>
           <button
             pButton
+            (click)="showShare()"
             pRipple
             type="button"
             icon="pi pi-share-alt"
             class="p-button-rounded market-btns-btn">
           </button>
+          <div class="share-menu" *ngIf="shareShow">
+            <div class="share-menu-item" *ngFor="let item of shareItems; let i=index" (click)="chooseShare(i)">
+              <span class="icon" [class]="item.icon"></span>
+              <span>{{item.label}}</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="info-time flex-1 px-4" *ngIf="downTimeData === undefined">
@@ -613,7 +622,7 @@
         [max]="userHadNftNum"
         placeholder="数量"
         i18n-placeholder
-        [(ngModel)]="auctionOverview.outPrice"></p-inputNumber>
+        [(ngModel)]="giftOverview.number"></p-inputNumber>
     </div>
     <button
       pButton

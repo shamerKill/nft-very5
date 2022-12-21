@@ -194,14 +194,17 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     // 获取数据
     this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,this.collectionId).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      this.nftList = data
+      if (Array.isArray(data) && data.length) {
+        this.nftList = data
+      }
     });
   }
   getTransList() {
     this.net.getUserTrans$(this.collectionId,'',this.filterObj.sell,'').pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      console.log(data)
-      this.transList = data
+      if (Array.isArray(data) && data.length) {
+        this.transList = data
+      }
     });
   }
   refresh() {

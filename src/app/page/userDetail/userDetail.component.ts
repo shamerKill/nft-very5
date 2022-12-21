@@ -182,26 +182,33 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
   getNftList() {
     this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',this.userAddress).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      this.nftList = data
+      if (Array.isArray(data) && data.length) {
+        this.nftList = data
+      }
     });
   }
   getNftList1() {
     this.net.getNftList$(this.userAddress,this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      this.nftList = data
+      if (Array.isArray(data) && data.length) {
+        this.nftList = data
+      }
     });
 }
   getCollectionList() {
     this.net.getCollectionList$(this.userAddress,this.filterObj.cate).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      this.exploreList = data;
+      if (Array.isArray(data) && data.length) {
+        this.exploreList = data;
+      }
     });
   }
   getTransList() {
     this.net.getUserTrans$('','',this.filterObj.sell,this.userAddress).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      console.log(data)
-      this.transList = data
+      if (Array.isArray(data) && data.length) {
+        this.transList = data
+      }
     });
   }
   refresh() {
