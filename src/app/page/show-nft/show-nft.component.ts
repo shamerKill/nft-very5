@@ -557,6 +557,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
               this.state.globalLoadingSwitch(false);
             })
           } else {
+            // TODO: 改为contractSendRaw之后会报错
             cosmo.walletTool.contractSend(hexMarkenContractAddress,info).then(res => {
               this.state.globalLoadingSwitch(false);
               if (res) {
