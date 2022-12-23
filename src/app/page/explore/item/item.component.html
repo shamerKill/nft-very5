@@ -1,8 +1,10 @@
 <div class="explore-item">
-  <div class="explore-item-img">
-    <img [src]="item.BannerImageUrl" alt="" *ngIf="item.BannerImageUrl">
-    <img src="../../../../assets/images/explore/pic.png" alt="">
-  </div>
+  <a [routerLink]="['/collection']" [queryParams]="{id: item.CollectionOriginal.CollectionID}" routerLinkActive="router-link-active">
+    <div class="explore-item-img">
+      <img [src]="item.BannerImageUrl" alt="" *ngIf="item.BannerImageUrl">
+      <img src="../../../../assets/images/explore/pic.png" alt="">
+    </div>
+  </a>
   <div class="explore-item-info flex align-items-center">
     <div class="explore-item-info-img flex align-items-center justify-content-center">
       <img [src]="item.CollectionOriginal.Image?item.CollectionOriginal.Image:item.ImageUrl" alt="">

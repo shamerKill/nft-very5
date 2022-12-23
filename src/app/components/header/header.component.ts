@@ -3,7 +3,7 @@ import { DatabaseService, nftTypesArr } from './../../server/database.service';
 import { BehaviorSubject, debounceTime, fromEvent, zip } from 'rxjs';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
-import { StateService } from './../../server/state.service';
+import { StateService, accountStoreInit } from './../../server/state.service';
 import { ToolFuncLinkWallet } from 'src/app/tools/functions/wallet';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
@@ -146,7 +146,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
         this.searchResult.nft = nft.data.map((item: any) => {
           return {
             id: item.NftID,
-            logo: item.Image,
+            logo: item.Image||'../../assets/images/logo/default-avatar@2x.png',
             name: item.Name,
             describe: item.Description,
           };
@@ -156,7 +156,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
         this.searchResult.collection = collection.data.map((item: any) => {
           return {
             id: item.CollectionID,
-            logo: item.Image,
+            logo: item.Image||'../../assets/images/logo/default-avatar@2x.png',
             name: item.Name,
             describe: item.Description,
           };
@@ -166,7 +166,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
         this.searchResult.user = user.data.map((item: any) => {
           return {
             id: item.ID,
-            logo: item.Avator,
+            logo: item.Avator||'../../assets/images/logo/default-avatar@2x.png',
             name: item.Name,
             describe: item.Description,
           };
@@ -228,7 +228,9 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
     ToolFuncLinkWallet(this.netService.signLogin$.bind(this.netService), true).subscribe(data => {
       if (data?.isLinked) this.netService.getNowUserInfo$().subscribe(({code}) => {
         if (code === 200) this.stateService.linkedWallet$.next(data);
+        else this.stateService.linkedWallet$.next({...accountStoreInit, isLinking: false});
       });
+      else this.stateService.linkedWallet$.next({...accountStoreInit, isLinking: false});
     });
   }
 

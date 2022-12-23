@@ -139,7 +139,7 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
     this.net.getMyCollectionList$().pipe(this.pipeSwitch$()).subscribe(data => {
       this.state.globalLoadingSwitch(false);
       if (data.code === 200) {
-        if (data.data) {
+        if (data.data && data.data.length) {
           this.collectionList = data.data.map((item: any) => {
             return {
               id: item.CollectionOriginal.CollectionID,

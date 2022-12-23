@@ -1,8 +1,9 @@
+import { ConfirmationService } from 'primeng/api';
+import { stripHexPrefix, isAddress } from 'web3-utils';
 import { ToolFuncFormatTimeStr, TypeToolFuncDownTime } from './../../tools/functions/time';
 import { ManipulateType } from './../../../../node_modules/dayjs/esm/index.d';
 import { BaseMessageService } from './../../server/base-message.service';
-import { Clipboard } from '@angular/cdk/clipboard';
-import { combineLatest, interval } from 'rxjs';
+import { combineLatest, interval, Subscription } from 'rxjs';
 import { OnDestroy } from '@angular/core';
 import { NetService } from './../../server/net.service';
 import { StateService } from './../../server/state.service';
@@ -12,8 +13,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as dayjs from 'dayjs';
 import { environment } from 'src/environments/environment';
 import cosmo from 'cosmo-wallet-tool';
-const Web3 = require('web3');
-export const web3 = new Web3(new Web3.providers.HttpProvider("https://testapi.plugchain.network/ethraw/"));
+import { ClipboardService } from 'ngx-clipboard';
+import * as RelativeTime from 'dayjs/plugin/relativeTime';
+import web3Abi from 'web3-eth-abi';
+
+dayjs.extend(RelativeTime);
 
 type shareItem = {
   label:string;
@@ -37,6 +41,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
   ];
   // 倒计时时间对象
   downTimeData?: TypeToolFuncDownTime<string>;
+  downTimeSub?: Subscription;
 
   /**
    * 购买弹窗数据
@@ -45,6 +50,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     overviewDisplay: false, // 弹窗显示
     sellIndex: 0, // 购买的第几个
     balance: '0', // 对应的账户余额
+    dynamic: -1, // 代币精度
     paying: false, // 是否在支付中
   };
   /**
@@ -56,6 +62,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     balance: '0', // 对应的账户余额
     outPrice: '', // 报价
     endTime: [this.dayList[0]], // 有效期
+    dynamic: -1, // 代币精度
     paying: false, // 是否在支付中
   };
   /**
@@ -156,54 +163,49 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     fixedBuyer?: string; // 是否有指定购买
     startPrice: string; // 初始价格
     sellerAddress: string;  // 售卖地址
+    sellerAvatar: string; // 卖家头像
+    sellerName: string; // 卖家名称
     maxPrice: string; // 最高价
     id: string; // 订单id
+    sellNum: number; // 出售数量
   }[] = [];
 
 
-  // TODO: 未获取
   // 买家报价
   outputPriceList: {
-    priceOfBaseToken: string,
-    priceOfDollar: string,
+    priceOfBaseToken: string;
+    baseToken: string;
     // 剩余天数
-    remainingDays: string,
+    remainingDays: string;
     // 报价用户
     user: {
-      name: string,
-      logo: string,
-    }
-  }[] = Array(10).fill(0).map(() => ({
-    priceOfBaseToken: '1050',
-    priceOfDollar: '298.21',
-    remainingDays: '10',
-    user: {
-      name: 'other user',
-      logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-    }
-  }));
+      name: string;
+      logo: string;
+      address: string;
+    };
+    // 售卖用户
+    seller: {
+      name: string;
+      logo: string;
+      address: string;
+    };
+    sellNum: number; // 出售数量
+  }[] = [];
 
-  // TODO: 未获取
   // 交易历史
   marketHistoryList: {
     type: string, // 类型
     price: string, // 价格
+    tokenName: string, // 币种
     user: { // 操作用户
       name: string,
       logo: string,
+      address: string,
     },
     time: string, // 过去时间
-  }[] = Array(10).fill(0).map(() => ({
-    type: '出价',
-    price: '1223',
-    time: '10',
-    user: {
-      name: 'other user',
-      logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
-    }
-  }));
+    sellNum: number; // 出售数量
+  }[] = [];
 
-  // TODO: 未获取
   // 更多推荐
   moreRecommend: {
     image: string,
@@ -211,13 +213,8 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     creator: string,
     id: string,
     price: string,
-  }[] = Array(4).fill(0).map(() => ({
-    image: '../../../assets/images/cache/home/矩形 5.png',
-    creator: 'Dude',
-    name: 'Geek Dude',
-    id: '87534',
-    price: '1223',
-  }));
+  }[] = [];
+
   shareShow:boolean=false;
   shareItems:shareItem[] = [
     {label: $localize`复制链接`, icon: 'pi pi-copy'},
@@ -230,7 +227,8 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     private net: NetService,
     private message: BaseMessageService,
     private router: Router,
-    private clipboard: Clipboard
+    private clipboard: ClipboardService,
+    private confirm: ConfirmationService,
   ) {
     super();
     combineLatest([
@@ -243,6 +241,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
         this.productId = params['id'];
         this.userInfoAddress = wallet.accountAddress??'';
         this.getNftInfo();
+        this.getTransferListHistory();
       }
     });
   }
@@ -263,11 +262,12 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
       // 判断用户是否拥有nft
       if (result.code === 200) {
         const data = result.data;
-        console.log(data);
         this.checkNftOwner(data.nft.HaveNfts);
         this.checkNftEdit(data.nft);
         this.formatNftInfo(data);
         this.getNftSellInfo(this.productId);
+        this.getBuyerPriceOrder(this.productId);
+        this.getNowCollectionInfo(data.nft.CollectionID);
       } else {
         this.message.warn($localize`获取数据失败`);
       }
@@ -281,6 +281,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
       this.state.globalLoadingSwitch(false);
       if (result.code == 200) {
         const data = result.data;
+        this.sellerOrderList = [];
         if (Array.isArray(data) && data.length) {
           this.sellerOrderList = data.map((item: any) => {
             return {
@@ -292,14 +293,16 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
               fixedBuyer: item.AssignAddress??undefined,
               startPrice: item.StartPrice,
               sellerAddress: item.MakerAddr,
+              sellerAvatar: item.Maker.Avator||'../../assets/images/logo/default-avatar@2x.png',
+              sellerName: item.Maker.Name,
               // TODO: 最高价未获取
               maxPrice: item.StartPrice,
-              id: item.ID
+              id: item.ID,
+              sellNum: item.Number,
             };
           });
           this.changeEndTime(this.sellerOrderList[0].endTime);
         }
-        console.log(result.data);
       } else {
         this.message.warn(result.msg ?? $localize`获取数据失败`);
       }
@@ -339,7 +342,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     });
     this.productInfo.creator = {
       name: data.creator.Name,
-      avatar: data.creator.Avator,
+      avatar: data.creator.Avator||'../../assets/images/logo/default-avatar@2x.png',
       address: data.nft.Creator,
       describe: data.creator.Description,
     };
@@ -408,6 +411,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
           return this.message.warn(data.msg??$localize`取消关注失败`);
         } else {
           this.isFollow = false;
+          if (this.productInfo.followerVol) {
+            this.productInfo.followerVol -= 1;
+          }
           return this.message.success(data.msg??$localize`取消关注成功`);
         }
       });
@@ -417,7 +423,10 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
           this.isFollow = false;
           return this.message.warn(data.msg??$localize`关注失败`);
         } else {
-          this.isFollow = false;
+          this.isFollow = true;
+          if (this.productInfo.followerVol !== undefined) {
+            this.productInfo.followerVol += 1;
+          }
           return this.message.success(data.msg??$localize`关注成功`);
         }
       });
@@ -442,6 +451,20 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
         this.buyOverview.overviewDisplay = true;
       }
       this.chooseItem = item;
+      // 获取对应币种余额
+      this.state.globalLoadingSwitch(true);
+      this.net.getAccountCoinBalance$(item.tokenContract).pipe(this.pipeSwitch$()).subscribe(data => {
+        this.state.globalLoadingSwitch(false);
+        if (data.code === 200) {
+          if (item.sellType === 2) {
+            this.auctionOverview.balance = data.data.balance;
+            this.auctionOverview.dynamic = data.data.detail.Decimals;
+          } else {
+            this.buyOverview.balance = data.data.balance;
+            this.buyOverview.dynamic = data.data.detail.Decimals;
+          }
+        }
+      });
     }
   }
   // 修改竞拍持续时间
@@ -451,13 +474,14 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
 
   // 修改倒计时
   changeEndTime(endTime: string) {
+    this.downTimeSub?.unsubscribe();
     const hadTime = dayjs(endTime).diff(dayjs());
     this.downTimeData = ToolFuncFormatTimeStr(hadTime);
-    const timer = interval(1000).pipe(this.pipeSwitch$()).subscribe(() => {
+    this.downTimeSub = interval(1000).pipe(this.pipeSwitch$()).subscribe(() => {
       const hadTime = dayjs(endTime).diff(dayjs());
       if (hadTime <= 0) {
         this.downTimeData = undefined;
-        timer.unsubscribe();
+        this.downTimeSub?.unsubscribe();
       } else {
         this.downTimeData = ToolFuncFormatTimeStr(hadTime);
       }
@@ -465,189 +489,176 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
   }
 
   /**
-   * TODO: 未实现
    * 购买
    **/
-  onBuy() {
+  async onBuy() {
     this.state.globalLoadingSwitch(true);
     this.buyOverview.overviewDisplay = false;
-    // 数据在this.buyOverview
     // pc 不需要查询授权直接执行购买；其他代币需要执行授权查询
-    console.log(this.chooseItem)
+    const willPrice = BigInt(this.chooseItem.maxPrice) * BigInt(Math.pow(10,this.buyOverview.dynamic));
     if (this.chooseItem.tokenName == 'PC') {
-      this.submitBuy();
+      this.submitBuy(willPrice);
     } else {
-      this.queryAuth();
+      if (this.buyOverview.dynamic < 0) {
+        this.message.warn($localize`获取数据失败`);
+        return;
+      }
+      if (await this.queryAuth(willPrice))  {
+        this.submitBuy();
+      }
     }
   }
   // 查询授权之后执行授权或购买
-  queryAuth() {
+  async queryAuth(willPrice: BigInt): Promise<boolean> {
     if (this.state.linkedWallet$.value.isLinked) {
+      this.state.globalLoadingSwitch(true);
       let userAddress = cosmo.addressForBech32ToHex(this.state.linkedWallet$.value.accountAddress??'')
       let hexContractAddress = cosmo.addressForBech32ToHex(this.chooseItem.tokenContract)
       let hexMarkenContractAddress = cosmo.addressForBech32ToHex(this.marketContract)
-      cosmo.isChrome.then(res => {
+      const rawAllow = web3Abi.encodeFunctionSignature('allowance(address,address)') +
+                  stripHexPrefix(
+                    web3Abi.encodeParameters(
+                      ['address', 'address'],
+                      [userAddress, hexMarkenContractAddress]
+                    )
+                  );
+      let result: string = '0';
+      if (await cosmo.isChrome) {
+        result = (await cosmo.chromeTool.contractCallRaw(hexContractAddress, rawAllow, 0)) ?? '';
+      } else {
+		    result = (await cosmo.walletTool.contractCall(hexContractAddress, undefined, undefined, rawAllow))?.data ?? '';
+      }
+      if (result !== '0x') result = BigInt(result).toString();
+      // 判断是否足够
+      if (willPrice <= BigInt(result)) {
+        this.state.globalLoadingSwitch(false);
+        return true;
+      }
+      // 进行授权
+      const rawApprove = web3Abi.encodeFunctionSignature('approve(address,uint256)') +
+                  stripHexPrefix(
+                    web3Abi.encodeParameters(
+                      ['address', 'uint256'],
+                      [hexMarkenContractAddress, willPrice.toString()]
+                    )
+                  );
+      if (await cosmo.isChrome) {
+        const res = await cosmo.chromeTool.contractSendRaw(hexContractAddress, rawApprove);
         if (res) {
-          cosmo.chromeTool.contractCall(
-            hexContractAddress,
-            'allowance(address,address)',
-            [userAddress,hexMarkenContractAddress],
-          ).then((res:any) => {
-            if (res < parseFloat(this.chooseItem.maxPrice)*Math.pow(10,6)) {
-              cosmo.chromeTool.contractSend(
-                hexContractAddress,
-                'approve(address,uint256)',
-                [hexMarkenContractAddress,parseFloat(this.chooseItem.maxPrice)*Math.pow(10,6)]
-              ).then(res => {
-                this.submitBuy();
-              }).catch(() => {
-                this.state.globalLoadingSwitch(false);
-              })
-            } else {
-              this.submitBuy();
-            }
-          }).catch(() => {
-            this.state.globalLoadingSwitch(false);
-          })
-        } else {
-          cosmo.walletTool.contractCall(
-            hexContractAddress,
-            'allowance(address,address)',
-            [userAddress,hexMarkenContractAddress],
-          ).then((res:any) => {
-            let result = res.data
-            if (result !== '0x') result = web3.eth.abi.decodeParameter('uint256[]', result)[0];
-	          else result = '0';
-            if (result < parseFloat(this.chooseItem.maxPrice)*Math.pow(10,6)) {
-              cosmo.chromeTool.contractSend(
-                hexContractAddress,
-                'approve(address,uint256)',
-                [hexMarkenContractAddress,parseFloat(this.chooseItem.maxPrice)*Math.pow(10,6)]
-              ).then(res => {
-                this.submitBuy();
-              }).catch(() => {
-                this.state.globalLoadingSwitch(false);
-              })
-            } else {
-              this.submitBuy();
-            }
-          }).catch(() => {
-            this.state.globalLoadingSwitch(false);
-          })
+          this.state.globalLoadingSwitch(false);
+          return true;
         }
-      })
+      } else {
+        const res = await cosmo.walletTool.contractSend(hexContractAddress, undefined, undefined, rawApprove);
+        if (res?.data) {
+          this.state.globalLoadingSwitch(false);
+          return true;
+        }
+      }
+      this.state.globalLoadingSwitch(false);
+      return false;
     }
+    return false;
   }
-  submitBuy() {
-    this.net.getNftBuyOrderInfo$(this.chooseItem.id).subscribe(data => {
+  submitBuy(willPrice?: BigInt) {
+    this.net.getNftBuyOrderInfo$(this.chooseItem.id).subscribe(async data => {
       if (data.code !== 200) {
         return this.message.warn(data.msg??$localize`获取信息失败`);
       } else {
-        let info = data.data;
-        console.log(info)
+        let info = '0x' + data.data;
         let hexMarkenContractAddress = cosmo.addressForBech32ToHex(this.marketContract)
-        cosmo.isChrome.then(res => {
+        if (await cosmo.isChrome) {
+          const res = await cosmo.chromeTool.contractSendRaw(hexMarkenContractAddress,info, willPrice ? willPrice.toString() as any : undefined);
           if (res) {
-            cosmo.chromeTool.contractSendRaw(hexMarkenContractAddress,info).then(res => {
-              this.state.globalLoadingSwitch(false);
-              if (res) {
-                this.message.success($localize`等待区块确认`);
-              }
-            }).catch(() => {
-              this.state.globalLoadingSwitch(false);
-            })
-          } else {
-            // TODO: 改为contractSendRaw之后会报错
-            cosmo.walletTool.contractSend(hexMarkenContractAddress,info).then(res => {
-              this.state.globalLoadingSwitch(false);
-              if (res) {
-                this.message.success($localize`等待区块确认`);
-              }
-            }).catch(() => {
-              this.state.globalLoadingSwitch(false);
-            })
+            this.message.success($localize`等待区块确认`);
           }
-        }).catch(() => {
-          this.state.globalLoadingSwitch(false);
-        })
+        } else {
+          const res = await cosmo.walletTool.contractSend(hexMarkenContractAddress, undefined, undefined, info, willPrice ? willPrice.toString() : undefined);
+          if (res?.data) {
+            this.message.success($localize`等待区块确认`);
+          }
+        }
+        this.state.globalLoadingSwitch(false);
+        this.onReload();
       }
     })
   }
   /**
-   * TODO: 未实现
    * 竞拍
    **/
-  onAuction() {
-    // 数据在this.auctionOverview
+  async onAuction() {
     this.state.globalLoadingSwitch(true);
-    this.net.getNftOfferOrderInfo$(this.chooseItem.id,this.auctionOverview.outPrice).subscribe(data => {
-      this.state.globalLoadingSwitch(false);
-      if (data.code !== 200) {
-        return this.message.warn(data.msg??$localize`竞价失败`);
-      } else {
-        this.message.success($localize`竞价成功`);
-      }
-    })
+    const willPrice = BigInt(this.auctionOverview.outPrice) * BigInt(Math.pow(10,this.auctionOverview.dynamic));
+    if (await this.queryAuth(willPrice)) {
+      this.net.getNftOfferOrderInfo$(this.chooseItem.id,this.auctionOverview.outPrice).subscribe(data => {
+        this.state.globalLoadingSwitch(false);
+        if (data.code !== 200) {
+          return this.message.warn(data.msg??$localize`竞价失败`);
+        } else {
+          this.auctionOverview.overviewDisplay = false;
+          this.message.success($localize`竞价成功`);
+        }
+      })
+    }
   }
 
   /**
-   * TODO: 未实现
    * 赠送
    **/
-  onGift() {
-    // 数据在this.giftOverview
+  async onGift() {
     this.state.globalLoadingSwitch(true);
+    // 合约地
     let hexMarkenContractAddress = cosmo.addressForBech32ToHex(this.productInfo.contractAddress??'') // 合约地址需要核实
+    // 用户地址
     let userAddress = cosmo.addressForBech32ToHex(this.state.linkedWallet$.value.accountAddress??'')
+    // 传入地址
+    let toAddress = isAddress(this.giftOverview.toAddress) ? this.giftOverview.toAddress : cosmo.addressForBech32ToHex(this.giftOverview.toAddress);
+    let raw = '';
     if (this.productInfo.type == 'PRC1155') {
-      cosmo.isChrome.then(res => {
-        if (res) {
-          cosmo.chromeTool.contractSend(hexMarkenContractAddress,'safeTransferFrom(address,address,uint256,uint256,bytes)',[userAddress,this.giftOverview.toAddress,this.productInfo.id,this.giftOverview.number,'']).then(res => {
-            this.state.globalLoadingSwitch(false);
-            if (res) {
-              this.message.success($localize`等待区块确认`);
-            }
-          }).catch(() => {
-            this.state.globalLoadingSwitch(false);
-          })
-        } else {
-          cosmo.walletTool.contractSend(hexMarkenContractAddress,'safeTransferFrom(address,address,uint256,uint256,bytes)',[userAddress,this.giftOverview.toAddress,this.productInfo.id,this.giftOverview.number,'']).then(res => {
-            this.state.globalLoadingSwitch(false);
-            if (res) {
-              this.message.success($localize`等待区块确认`);
-            }
-          }).catch(() => {
-            this.state.globalLoadingSwitch(false);
-          })
-        }
-      }).catch(() => {
-        this.state.globalLoadingSwitch(false);
-      })
+      raw = web3Abi.encodeFunctionSignature('safeTransferFrom(address,address,uint256,uint256,bytes)') +
+        stripHexPrefix(
+            web3Abi.encodeParameters(
+              ['address', 'address', 'uint256', 'uint256', 'bytes'],
+              [
+                userAddress,
+                toAddress,
+                this.productInfo.infoInChain?.tokenId,
+                this.giftOverview.number,
+                '0x'
+              ]
+            )
+          );
     } else {
-      cosmo.isChrome.then(res => {
-        if (res) {
-          cosmo.chromeTool.contractSend(hexMarkenContractAddress,'safeTransferFrom(address,address,uint256,bytes)',[userAddress,this.giftOverview.toAddress,this.productInfo.id,'']).then(res => {
-            this.state.globalLoadingSwitch(false);
-            if (res) {
-              this.message.success($localize`等待区块确认`);
-            }
-          }).catch(() => {
-            this.state.globalLoadingSwitch(false);
-          })
-        } else {
-          cosmo.walletTool.contractSend(hexMarkenContractAddress,'safeTransferFrom(address,address,uint256,bytes)',[userAddress,this.giftOverview.toAddress,this.productInfo.id,'']).then(res => {
-            this.state.globalLoadingSwitch(false);
-            if (res) {
-              this.message.success($localize`等待区块确认`);
-            }
-          }).catch(() => {
-            this.state.globalLoadingSwitch(false);
-          })
-        }
-      }).catch(() => {
-        this.state.globalLoadingSwitch(false);
-      })
+      raw = web3Abi.encodeFunctionSignature('safeTransferFrom(address,address,uint256,bytes)') +
+        stripHexPrefix(
+          web3Abi.encodeParameters(
+            ['address', 'address', 'uint256', 'bytes'],
+            [
+              userAddress,
+              toAddress,
+              this.productInfo.infoInChain?.tokenId,
+              '0x'
+            ]
+          )
+        );
     }
+    if (raw) {
+      if (await cosmo.isChrome) {
+        const res = await cosmo.chromeTool.contractSendRaw(hexMarkenContractAddress, raw);
+        if (res) {
+          this.message.success($localize`等待区块确认`);
+        }
+      } else {
+        const res = await cosmo.walletTool.contractSend(hexMarkenContractAddress, undefined, undefined, raw);
+        if (res?.data) {
+          this.message.success($localize`等待区块确认`);
+        }
+      }
+    }
+    this.state.globalLoadingSwitch(false);
+    this.giftOverview.overviewDisplay = false;
+    this.onReload();
+    return;
   }
   showShare() {
     this.shareShow = !this.shareShow;
@@ -656,12 +667,110 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     let nowUrl:string = window.location.href;
     if (i == 0) {
       this.clipboard.copy(nowUrl);
-      this.message.success($localize`复制成功`)
     } else if (i==1) {
       window.open(`https://www.facebook.com/sharer/sharer.php?u=${nowUrl}`)
     } else if (i==2) {
       window.open(`https://twitter.com/intent/tweet?text=Check out this item on Very5&url=${nowUrl}&via=Plugchainclub`)
     }
     this.shareShow = false;
+  }
+
+  // 处理买家报价
+  getBuyerPriceOrder(id: string) {
+    this.net.getBuyerPriceOrder$(id).pipe(this.pipeSwitch$()).subscribe(result => {
+      this.outputPriceList = [];
+      if (result.code === 200 && result.data && result.data.length) {
+        this.outputPriceList = result.data.map((item: any) => {
+          return {
+            priceOfBaseToken: item.Amount,
+            baseToken: item.Order.CoinType,
+            remainingDays: dayjs(item.CreatedAt).fromNow(),
+            user: {
+              address: item.OfferAccount.Address,
+              name: item.OfferAccount.Name,
+              logo: item.OfferAccount.Avator||'../../assets/images/logo/default-avatar@2x.png',
+            },
+            seller: {
+              address: item.Order.Maker.Address,
+              name: item.Order.Maker.Name,
+              logo: item.Order.Maker.Avator||'../../assets/images/logo/default-avatar@2x.png',
+            },
+            sellNum: item.Order.Number,
+          };
+        });
+      }
+    });
+  }
+
+  // 获取交易历史
+  getTransferListHistory() {
+    this.net.getTransferListHistory$({
+      nftID: this.productId
+    }).pipe(this.pipeSwitch$()).subscribe(result => {
+      if (result.code !== 200) return;
+      this.marketHistoryList = [];
+      if (result.data && result.data.length) {
+        const typeShow: {[key in any]: string} = {
+          'create': $localize`挂售`,
+          'successful': $localize`交易成功`,
+          'cancelled': $localize`撤回`,
+        };
+        this.marketHistoryList = result.data.map((item: any) => {
+          return {
+            type: typeShow[item.EventType],
+            price: item.TotalPrice,
+            tokenName: item.PaymentToken,
+            user: {
+              name: item.FromAccount.Name,
+              logo: item.FromAccount.Avator||'../../assets/images/logo/default-avatar@2x.png',
+              address: item.FromAccount.Address,
+            },
+            time: dayjs(item.CreatedAt).fromNow(),
+          };
+        }).slice(0, 10);
+      }
+    });
+  }
+
+  // 获取当前合集列表
+  getNowCollectionInfo(collectionId: string) {
+    this.net.getNftListByCollectionId$(collectionId).pipe(this.pipeSwitch$()).subscribe(result => {
+      if (result.code === 200 && result.data && result.data.length) {
+        this.moreRecommend = result.data
+          .filter((item: any) => item.NftOriginal.NftID != this.productId)
+          .map((item: any) => {
+            return {
+              image: item.NftOriginal.Image,
+              name: item.NftOriginal.Name,
+              creator: item.Creator,
+              id: item.NftOriginal.NftID,
+              price: item.BeforePrice,
+            };
+          });
+      }
+    });
+  }
+
+  /**
+   * 撤回售卖
+   **/
+  onCancelOrder(index: number) {
+    const item = this.sellerOrderList[index];
+    this.confirm.confirm({
+      header: $localize`撤回提示`,
+      message: $localize`是否撤回当前挂卖？`,
+      acceptLabel: $localize`确定`,
+      rejectLabel: $localize`取消`,
+      accept: () => {
+        this.net.delSellOrder$(item.id).pipe(this.pipeSwitch$()).subscribe(res => {
+          if (res.code === 200) {
+            this.message.success($localize`撤回成功`);
+            this.onReload();
+          } else {
+            this.message.warn(res.msg||$localize`撤回失败`);
+          }
+        });
+      },
+    });
   }
 }

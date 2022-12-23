@@ -1,6 +1,7 @@
+import { StateService } from './../../server/state.service';
+import { ClipboardService } from 'ngx-clipboard';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Clipboard } from '@angular/cdk/clipboard';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
@@ -65,6 +66,9 @@ type shareItem = {
   styleUrls: ['./collection.component.scss']
 })
 export class CollectionComponent extends ToolClassAutoClosePipe implements OnInit {
+  // 是否可以编辑
+  canEdit = false;
+
   shareItems:shareItem[] = [
     {label: $localize`复制链接`, icon: 'pi pi-copy'},
     {label: $localize`Facebook`, icon: 'pi pi-facebook'},
@@ -166,7 +170,8 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     private net: NetService,
     private BaseMessage: BaseMessageService,
     private routerInfo: ActivatedRoute,
-    private clipboard: Clipboard
+    private clipboard: ClipboardService,
+    private state: StateService,
   ) {
     super();
   }
@@ -187,7 +192,11 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     this.net.getCollectionDetail$(this.collectionId).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       this.collectionDetail = data;
-      console.log(data)
+      this.state.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(({accountAddress}) => {
+        if (accountAddress === data.CreatorAccount.Address) {
+          this.canEdit = true;
+        }
+      });
     });
   }
   getNftList() {
@@ -221,7 +230,7 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
       this.net.postDelFocus$(this.collectionId).subscribe(res => {
         if (res.code !== 200) return this.BaseMessage.warn(res.msg??'');
         if (res.code === 200) {
-          this.BaseMessage.success($localize`收藏成功`);
+          this.BaseMessage.success($localize`取消成功`);
           // 更新数据
           this.getInfo();
         }
@@ -230,7 +239,7 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
       this.net.postAddFocus$(this.collectionId).subscribe(res => {
         if (res.code !== 200) return this.BaseMessage.warn(res.msg??'');
         if (res.code === 200) {
-          this.BaseMessage.success($localize`取消成功`);
+          this.BaseMessage.success($localize`收藏成功`);
           // 更新数据
           this.getInfo();
         }
@@ -244,7 +253,6 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     let nowUrl:string = window.location.href;
     if (i == 0) {
       this.clipboard.copy(nowUrl);
-      this.BaseMessage.success($localize`复制成功`)
     } else if (i==1) {
       window.open(`https://www.facebook.com/sharer/sharer.php?u=${nowUrl}`)
     } else if (i==2) {

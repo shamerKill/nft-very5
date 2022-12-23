@@ -53,7 +53,7 @@
           <p class="flex-1 px-2 font-bold" i18n>我的NFTs</p>
           <i class="pi pi-angle-right text-xl"></i>
         </div>
-        <div (click)="onGoToPage('my/star', {type: 'collection'})" class="flex py-4 align-items-center cursor-pointer top-border item-focus">
+        <div (click)="onGoToPage('user', { id: userInfo.address, type: 'collection' })" class="flex py-4 align-items-center cursor-pointer top-border item-focus">
           <i class="iconfont icon-wenjianjia text-xl"></i>
           <p class="flex-1 px-2 font-bold" i18n>我的合集</p>
           <i class="pi pi-angle-right text-xl"></i>

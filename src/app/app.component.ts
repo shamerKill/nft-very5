@@ -2,7 +2,7 @@ import { BaseMessageService } from './server/base-message.service';
 import { ToolClassAutoClosePipe } from './tools/classes/pipe-close';
 import { ClipboardService } from 'ngx-clipboard';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { PrimeNGConfig, MessageService } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',

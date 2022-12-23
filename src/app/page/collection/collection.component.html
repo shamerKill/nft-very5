@@ -50,11 +50,11 @@
           <div class="app-collection-info-detail-title-introduce" [class]="showMore?'':'shot'">{{collectionDetail.CollectionOriginal.Description}}</div>
           <div class="app-collection-info-detail-title-btn flex align-items-center" (click)="clickMore()">
             <div *ngIf="showMore" class="flex align-items-center">
-              <span i18n>收起 </span> 
+              <span i18n>收起 </span>
               <span [class]="showMore?'down':''" class="iconfont icon-xiala"></span>
             </div>
             <div *ngIf="!showMore" class="flex align-items-center">
-              <span i18n>展开 </span> 
+              <span i18n>展开 </span>
               <span class="iconfont icon-xiala"></span>
             </div>
           </div>
@@ -94,6 +94,14 @@
             <span>{{collectionDetail.HoldersNumber}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>持有者</div>
+      </div>
+      <div *ngIf="canEdit" class="app-collection-info-total-item">
+        <a [routerLink]="['/edit/collection', collectionDetail.CollectionOriginal.CollectionID]">
+          <button
+          pButton
+          label="编辑合集"
+          i18n-label></button>
+        </a>
       </div>
     </div>
   </div>

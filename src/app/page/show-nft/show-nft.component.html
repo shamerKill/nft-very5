@@ -124,8 +124,7 @@
           </div>
         </div>
       </div>
-      <div class="info-time flex-1 px-4" *ngIf="downTimeData === undefined">
-        <p class="time-title" i18n>暂无出售</p>
+      <div class="hidden md:block info-time flex-1 px-4" *ngIf="downTimeData === undefined">
       </div>
       <div class="info-time flex-1 md:px-4" *ngIf="downTimeData !== undefined">
         <p class="time-title" i18n>距离竞拍结束</p>
@@ -249,6 +248,7 @@
         <ng-template pTemplate="header">
           <tr>
             <th style="min-width: 4rem;" i18n>价格</th>
+            <th style="min-width: 4rem;" i18n>数量</th>
             <th style="min-width: 4rem;" i18n>方式</th>
             <th style="min-width: 12rem;" i18n>出售者</th>
             <th style="min-width: 12rem;" i18n>过期时间</th>
@@ -260,13 +260,26 @@
             <td style="min-width: 4rem;">
               {{product.startPrice}}<span class="text-500 text-sm">&nbsp;&nbsp;{{product.tokenName}}</span>
             </td>
+            <td style="min-width: 4rem;">
+              {{product.sellNum}}
+            </td>
             <td style="min-width: 4rem;" i18n [ngClass]="[['text-primary font-bold', 'text-900', 'text-primary'][product.sellType]]">
               <span [pTooltip]="product.fixedBuyer">
                 {{['预留', '定价', '竞价'][product.sellType]}}
               </span>
             </td>
             <td style="min-width: 12rem;">
-              <span [pTooltip]="product.sellerAddress">{{product.sellerAddress|centerSlice}}</span>
+              <a
+                class="flex align-items-center"
+                [routerLink]="['/user']"
+                [queryParams]="{id: product.sellerAddress}"
+                [pTooltip]="product.sellerAddress">
+                <img
+                  class="w-1rem h-1rem border-circle"
+                  [src]="product.sellerAvatar"
+                  [alt]="product.sellerName">
+                <p class="pl-1 text-primary">{{product.sellerName}}</p>
+              </a>
             </td>
             <td style="min-width: 12rem;" class="text-sm">
               <span class="white-space-nowrap">{{product.endTime}}</span>
@@ -274,9 +287,16 @@
             <td style="min-width: 5rem;" alignFrozen="right" pFrozenColumn>
               <button
                 pButton
+                *ngIf="product.sellerAddress !== userInfoAddress"
                 (click)="showDialog(rowIndex)"
                 class="p-button-text p-button-rounded text-2xl"
                 [icon]="['iconfont icon-biaoq', 'iconfont icon-biaoq', 'iconfont icon-paimai'][product.sellType]"></button>
+              <button
+                pButton
+                *ngIf="product.sellerAddress === userInfoAddress && product.sellType !== 2"
+                (click)="onCancelOrder(rowIndex)"
+                class="p-button-text p-button-rounded h-2rem"
+                label="撤回"></button>
             </td>
           </tr>
         </ng-template>
@@ -298,23 +318,47 @@
     <div class="surface-0 border-round-xl border-1 border-100 overflow-hidden">
       <p class="table-title" i18n>
         买家报价
-        <span class="text-xs text-600">10 条报价信息</span>
+        <span class="text-xs text-600">最新 {{outputPriceList.length}} 条历史</span>
       </p>
       <p-table [value]="outputPriceList" responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>
             <th i18n>价格</th>
-            <th i18n>USD价格</th>
-            <th i18n>过期时间</th>
-            <th i18n>发送方</th>
+            <th i18n>数量</th>
+            <th i18n>出价方</th>
+            <th i18n>出售者</th>
           </tr>
         </ng-template>
-        <ng-template *ngIf="outputPriceList.length !== 0" pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-product>
           <tr>
-            <td>{{product.priceOfBaseToken}}</td>
-            <td>{{product.priceOfDollar}}</td>
-            <td>{{product.remainingDays}}</td>
-            <td>{{product.user.name}}</td>
+            <td>
+              {{product.priceOfBaseToken}}<span class="text-500 text-sm">&nbsp;&nbsp;{{product.baseToken}}</span>
+            </td>
+            <td>{{product.sellNum}}</td>
+            <td>
+              <a
+                class="flex align-items-center"
+                [routerLink]="['/user']"
+                [queryParams]="{id: product.user.address}">
+                <img
+                  class="w-1rem h-1rem border-circle"
+                  [src]="product.user.logo"
+                  [alt]="product.user.name">
+                <p class="pl-1 text-primary">{{product.user.name}}</p>
+              </a>
+            </td>
+            <td>
+              <a
+                class="flex align-items-center"
+                [routerLink]="['/user']"
+                [queryParams]="{id: product.seller.address}">
+                <img
+                  class="w-1rem h-1rem border-circle"
+                  [src]="product.seller.logo"
+                  [alt]="product.seller.name">
+                <p class="pl-1 text-primary">{{product.seller.name}}</p>
+              </a>
+            </td>
           </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
@@ -335,7 +379,7 @@
     <div class="surface-0 border-round-xl border-1 border-100 overflow-hidden">
       <p class="table-title" i18n>
         交易历史
-        <span class="text-xs text-600">10 条报价信息</span>
+        <span class="text-xs text-600">最新 {{marketHistoryList.length}} 条历史</span>
       </p>
       <p-table [value]="marketHistoryList" responsiveLayout="scroll">
         <ng-template pTemplate="header">
@@ -346,11 +390,25 @@
             <th i18n>时间</th>
           </tr>
         </ng-template>
-        <ng-template *ngIf="marketHistoryList.length !== 0" pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-product>
           <tr>
             <td>{{product.type}}</td>
-            <td>{{product.price}}</td>
-            <td>{{product.user.name}}</td>
+            <td>
+              {{product.price}}
+              <span class="text-sm text-500">&nbsp;{{product.tokenName}}</span>
+            </td>
+            <td>
+              <a
+                class="flex align-items-center"
+                [routerLink]="['/user']"
+                [queryParams]="{id: product.user.address}">
+                <img
+                  class="w-1rem h-1rem border-circle"
+                  [src]="product.user.logo"
+                  [alt]="product.user.name">
+                <p class="pl-1 text-primary">{{product.user.name}}</p>
+              </a>
+            </td>
             <td>{{product.time}}</td>
           </tr>
         </ng-template>
@@ -369,19 +427,21 @@
   </app-base-box>
   <app-base-box class="pb-6">
     <p class="table-title" i18n>来自此系列的更多藏品</p>
-    <div class="auction-more flex flex-wrap justify-content-between" *ngIf="moreRecommend.length !== 0">
-      <div class="auction-more-outer" *ngFor="let item of moreRecommend">
-        <div class="auction-more-item">
-          <img class="auction-more-img" [src]="item.image" [alt]="item.name">
-          <div class="auction-more-info flex justify-content-between px-2 align-items-end">
-            <p class="auction-more-name">
-              {{item.name}}
-            </p>
-            <p class="auction-more-price">
-              {{item.price}}
-            </p>
+    <div class="auction-more flex flex-wrap" *ngIf="moreRecommend.length !== 0">
+      <div class="auction-more-outer px-2" *ngFor="let item of moreRecommend">
+        <a [routerLink]="['/show/nft', item.id]">
+          <div class="auction-more-item">
+            <img class="auction-more-img" [src]="item.image" [alt]="item.name">
+            <div class="auction-more-info flex justify-content-between px-2 align-items-end">
+              <p class="auction-more-name">
+                {{item.name}}
+              </p>
+              <p class="auction-more-price">
+                {{item.price}}
+              </p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
     <div class="auction-box flex flex-column align-items-center py-8" *ngIf="moreRecommend.length === 0">
@@ -514,7 +574,7 @@
         i18n-placeholder
         [(ngModel)]="auctionOverview.outPrice"></p-inputNumber>
     </div>
-    <p class="pt-4 font-bold" i18n>
+    <!-- <p class="pt-4 font-bold" i18n>
       <i class="iconfont icon-shijian"></i>&nbsp;&nbsp;有效期
     </p>
     <div class="flex w-full pt-2">
@@ -538,13 +598,13 @@
           </div>
         </ng-template>
       </p-multiSelect>
-    </div>
+    </div> -->
     <div class="flex pt-4 justify-content-between">
       <p>账户余额</p>
       <p>
-        {{buyOverview.balance}}
+        {{auctionOverview.balance}}
         <span class="text-sm text-600">
-          {{sellerOrderList[buyOverview.sellIndex].tokenName}}
+          {{sellerOrderList[auctionOverview.sellIndex].tokenName}}
         </span>
       </p>
     </div>
