@@ -443,5 +443,49 @@ export class NetService {
   getNftOfferOrderInfo$(id: string,price:string) {
     return this.$post('v1/my/offer', { orderID: id,price:price });
   }
+
+  /**
+   * 获取交易信息
+   */
+  getTransferListHistory$(query?: {
+    collectionID?: string; // 合集 ID
+    nftID?: string; // nft id
+    eventType?: ('create'|'successful'|'cancelled')[] // 创建成功取消
+    addr?: string; // 操作地址
+  }) {
+    if (query?.eventType) {
+      query.eventType = (query?.eventType.join(',') as any);
+    }
+    return this.$get('v1/nft/event', new HttpParams({fromObject: query}));
+  }
+
+  /**
+   * 获取账户余额
+   **/
+  getAccountCoinBalance$(token: string) {
+    return this.$get('v1/my/balance', new HttpParams({fromObject: {token}}));
+  }
+
+  /**
+   * 获取买家报价
+   **/
+  getBuyerPriceOrder$(id: string) {
+    return this.$get('v1/order/offers/' + id);
+  }
+
+  /**
+   * 根据合集获取nft列表
+   **/
+  getNftListByCollectionId$(collectionId: string) {
+    return this.$get('v1/nft/list', new HttpParams({fromObject: {collectionID: collectionId}}));
+  }
+
+  /**
+   * 取消挂卖
+   **/
+  delSellOrder$(id: string) {
+    return this.$post('v1/my/cancelOrder', { orderID: id })
+  }
+
 }
 

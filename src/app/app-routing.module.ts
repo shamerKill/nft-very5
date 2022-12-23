@@ -27,7 +27,6 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ToastModule} from 'primeng/toast';
 import {ConfirmationService} from 'primeng/api';
 import {MenuModule} from 'primeng/menu';
-import { ClipboardModule } from '@angular/cdk/clipboard';
 import {DialogModule} from 'primeng/dialog';
 
 
@@ -171,7 +170,6 @@ const routes: Routes = [
     ToastModule,
     MenuModule,
     PipeModule,
-    ClipboardModule,
     DialogModule,
     RouterModule.forRoot(routes),
   ],

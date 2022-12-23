@@ -1,6 +1,6 @@
+import { ClipboardService } from 'ngx-clipboard';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Clipboard } from '@angular/cdk/clipboard';
 import { NetService } from '../../server/net.service';
 import { BaseMessageService } from '../../server/base-message.service';
 import { ToolClassAutoClosePipe } from '../../tools/classes/pipe-close';
@@ -162,13 +162,16 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     private net: NetService,
     private BaseMessage: BaseMessageService,
     private routerInfo: ActivatedRoute,
-    private clipboard: Clipboard
+    private clipboard: ClipboardService
   ) {
     super();
   }
   userAddress: string='';
   ngOnInit(): void {
     this.userAddress = this.routerInfo.snapshot.queryParams['id'];
+    if (this.routerInfo.snapshot.queryParams['type'] === 'collection') {
+      this.checkTab(2);
+    }
     this.getList();
     this.getNftList();
   }
@@ -222,7 +225,6 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     let nowUrl:string = window.location.href;
     if (i == 0) {
       this.clipboard.copy(nowUrl);
-      this.BaseMessage.success($localize`复制成功`)
     } else if (i==1) {
       window.open(`https://www.facebook.com/sharer/sharer.php?u=${nowUrl}`)
     } else if (i==2) {

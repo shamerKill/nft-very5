@@ -118,7 +118,7 @@ export class MySettingComponent extends ToolClassAutoClosePipe implements OnInit
         if (res.code === 200) {
           this.message.success($localize`提交成功`);
           // 更新数据
-          this.net.getNowUserInfo$();
+          this.net.getNowUserInfo$().pipe(this.pipeSwitch$()).subscribe();
         }
       });
     });

@@ -1,4 +1,4 @@
-import { BehaviorSubject, interval, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, interval, Subscription, timer, debounceTime } from 'rxjs';
 import { StateService } from './../../server/state.service';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -43,7 +43,7 @@ export class LoadingComponent implements OnInit {
     if (this.initShow) {
       this.addLoading$.next(true);
     } else {
-      this.state.globalLoading$.subscribe(data => {
+      this.state.globalLoading$.pipe(debounceTime(200)).subscribe(data => {
         if (data > 0) {
           this.addLoading$.next(true);
         } else {

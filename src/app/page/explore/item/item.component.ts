@@ -27,7 +27,6 @@ export class ExploreItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
   }
 
 }

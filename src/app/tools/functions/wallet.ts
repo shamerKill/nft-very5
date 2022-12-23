@@ -60,7 +60,7 @@ export const ToolFuncLinkWallet = (login$: NetService['signLogin$'], init: boole
       return Promise.resolve(null);
     }
   }).then(async info => {
-    if (!info) return;
+    if (!info) return loginSub.next({...accountStoreInit, isLinking: false});
     if (init) {
       const [ accountType, accountAddress ] = info;
       loginSub.next({

@@ -32,7 +32,7 @@ export class CreateCollectionComponent extends ToolClassAutoClosePipe implements
     token: string;
   }[] = [];
   // 类别
-  types = nftTypesArr;
+  types = nftTypesArr.slice(1);
   /**
    * 合集主图
    **/
