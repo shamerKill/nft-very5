@@ -196,6 +196,8 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
+      } else {
+        this.nftList = []
       }
     });
   }
@@ -204,6 +206,8 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.transList = data
+      } else {
+        this.transList = []
       }
     });
   }

@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter,OnChanges,SimpleChanges } from '@angular/core';
-type UnitItem = {name: string;logo:string;id:number}
+import { nftTypesArr } from './../../server/database.service';
+import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { NetService } from './../../server/net.service';
+import { BaseMessageService } from './../../server/base-message.service';
+type UnitItem = {name: string;logo:string;id:number;contract:string;}
 type chooseItem = {
   name:string;
   id: string;
@@ -18,8 +22,13 @@ type outputObj = {
   templateUrl: './filter-box.component.html',
   styleUrls: ['./filter-box.component.scss'],
 })
-export class FilterBoxComponent implements OnInit,OnChanges {
-  constructor() { }
+export class FilterBoxComponent extends ToolClassAutoClosePipe implements OnInit,OnChanges {
+  constructor(
+    private message: BaseMessageService,
+    private net: NetService,
+  ) { 
+    super()
+  }
   @Input() collectionType?:number;
   @Output() change: EventEmitter<outputObj> = new EventEmitter<outputObj>();
   newFilterObj:outputObj = {
@@ -56,9 +65,10 @@ export class FilterBoxComponent implements OnInit,OnChanges {
       cate: cateArr.join(','),
       low: this.minPrice,
       high: this.maxPrice,
-      coin: this.PriceSelect.name,
+      coin: this.PriceSelect?this.PriceSelect.contract:'',
       search: this.searchName,
     }
+    console.log(this.newFilterObj)
     this.change.emit(this.newFilterObj);
   }
   showMore: boolean = true;
@@ -111,58 +121,11 @@ export class FilterBoxComponent implements OnInit,OnChanges {
   changeClass() {
     this.classState = !this.classState;
   };
-  classList: chooseItem[] = [
-    {
-      name: $localize`热门`,
-      id: '热门',
-      checked:false
-    },
-    {
-      name: $localize`最佳`,
-      id: '最佳',
-      checked:false
-    },
-    {
-      name: $localize`艺术`,
-      id: '艺术',
-      checked:false
-    },
-    {
-      name: $localize`收藏品`,
-      id: '收藏品',
-      checked:false
-    },
-    {
-      name: $localize`实用`,
-      id: '实用',
-      checked:false
-    },
-    {
-      name: $localize`卡片`,
-      id: '卡片',
-      checked:false
-    },
-    {
-      name: $localize`虚拟世界`,
-      id: '虚拟世界',
-      checked:false
-    },
-    {
-      name: $localize`音乐`,
-      id: '音乐',
-      checked:false
-    },
-    {
-      name: $localize`体育`,
-      id: '体育',
-      checked:false
-    },
-    {
-      name: $localize`域名`,
-      id: '域名',
-      checked:false
-    },
-  ]
+  classList: chooseItem[] = nftTypesArr.map(item => ({
+    name:item.title,
+    id: item.key,
+    checked:false
+  }))
   changeClassIndex(index:number) {
     this.classList[index].checked = !this.classList[index].checked
     this.setChange();
@@ -174,25 +137,27 @@ export class FilterBoxComponent implements OnInit,OnChanges {
   priceState: boolean = false;
   changePrice() {
     this.priceState = !this.priceState;
-    this.setChange();
   };
-  PriceUnit:UnitItem[]=[
-    {
-      name: 'PC',
-      logo: '../../../assets/images/explore/pc.png',
-      id: 2
-    },
-    {
-      name: 'USD',
-      logo: '../../../assets/images/explore/usd.png',
-      id: 1
-    }
-  ];
+  PriceUnit:UnitItem[]=[];
   PriceSelect: UnitItem={
     name: '',
     logo: '',
-    id: 0
+    id: 0,
+    contract: ''
   };
+  getTokenList() {
+    this.net.getPayTokenList$(1).pipe(this.pipeSwitch$()).subscribe(data => {
+      if (data.code === 200 && data.data && data.data.length) {
+        this.PriceUnit = data.data.map((item:{Decimals:number;ID:number;Logo:string;Name:string;Token:string;}) => ({
+          name: item.Name,
+          logo:item.Logo,
+          id:item.ID,
+          contract: item.Token
+        }))
+        console.log(this.PriceUnit)
+      }
+    })
+  }
   numState: boolean = false;
   minPrice: number|string = '';
   maxPrice: number|string = '';
@@ -204,14 +169,20 @@ export class FilterBoxComponent implements OnInit,OnChanges {
   searchName: string = '';
 
   submitSearch() {
+    this.setChange();
     this.priceSearch = true;
     setTimeout(() => this.priceSearch = false, 1000);
-    this.setChange();
   };
+  submitSearch1() {
+    this.setChange();
+    this.priceSearch = true;
+    setTimeout(() => this.priceSearch = false, 1000);
+  }
   changeNum() {
     this.numState = !this.numState;
   };
   ngOnInit(): void {
+    this.getTokenList();
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes)

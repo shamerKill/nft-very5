@@ -98,7 +98,8 @@ export class AllNftComponent extends ToolClassAutoClosePipe implements OnInit {
   }
   filterChange(event:filterObj) {
     this.filterObj = event;
-    this.getNftList
+    console.log(this.filterObj)
+    this.getNftList();
   }
   getNftList() {
     // 获取数据
@@ -106,6 +107,8 @@ export class AllNftComponent extends ToolClassAutoClosePipe implements OnInit {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
+      } else {
+        this.nftList = []
       }
     });
   }

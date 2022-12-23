@@ -117,7 +117,17 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
   }
   filterChange(event:outputObj) {
     this.filterObj = event;
-    this.getNftList
+    console.log(this.filterObj)
+    console.log(this.tabActive)
+    if (this.tabActive == 0) {
+      this.getNftList();
+    } else if (this.tabActive == 1) {
+      this.getNftList1();
+    } else if (this.tabActive == 2) {
+      this.getCollectionList();
+    } else if (this.tabActive == 3) {
+      this.getTransList();
+    }
   }
   exploreList: exploreItem[] = [];
   userInfo: userInfo = {
@@ -184,6 +194,8 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
+      } else {
+        this.nftList = []
       }
     });
   }
@@ -192,6 +204,8 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
+      } else {
+        this.nftList = []
       }
     });
 }
@@ -200,6 +214,8 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.exploreList = data;
+      } else {
+        this.exploreList = []
       }
     });
   }
@@ -208,6 +224,8 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.transList = data
+      } else {
+        this.transList = []
       }
     });
   }

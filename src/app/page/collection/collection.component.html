@@ -128,6 +128,10 @@
           <div *ngFor="let items of nftList">
             <nft-item  [type]="listType" [item]="items"></nft-item>
           </div>
+          <div class="mx-auto flex flex-column align-items-center py-6" *ngIf="nftList.length==0">
+            <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+            <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
+          </div>
         </div>
       </div>
       <div *ngIf="tabActive==1">

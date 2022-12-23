@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="contents-nft">
-    <app-filter-box [collectionType]="(tabActive==0||tabActive==1) ? 1 : tabActive==3 ? 2 :tabActive == 2 ? 3 : 0 "></app-filter-box>
+    <app-filter-box [collectionType]="(tabActive==0||tabActive==1) ? 1 : tabActive==3 ? 2 :tabActive == 2 ? 3 : 0 " (change)="filterChange($event)"></app-filter-box>
     <div class="list-box">
       <div class="list-box-tabbar flex align-items-center">
         <div class="list-box-tabbar-item flex justify-content-center align-items-center" *ngFor="let item of tabbar; let i=index" [class]="i==tabActive?'actived':''" (click)="checkTab(i)">{{item}}</div>
@@ -71,11 +71,19 @@
           <div *ngFor="let items of nftList">
             <nft-item  [type]="listType" [item]="items"></nft-item>
           </div>
+          <div class="mx-auto flex flex-column align-items-center py-6" *ngIf="nftList.length==0">
+            <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+            <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
+          </div>
         </div>
       </div>
       <div *ngIf="tabActive==2">
         <div class="content-explore-list-item flex align-items-center flex-wrap">
           <explore-item *ngFor="let items of exploreList" [item]="items"></explore-item>
+        </div>
+        <div class="mx-auto flex flex-column align-items-center py-6" *ngIf="exploreList.length==0">
+          <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+          <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
         </div>
       </div>
       <div *ngIf="tabActive==3">

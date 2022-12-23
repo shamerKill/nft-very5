@@ -268,7 +268,9 @@
     }
   }
 }
-
+.p-dropdown-items-wrapper{
+  max-height: 120px !important;
+}
 .p-autocomplete {
   .p-autocomplete-loader {
     right: 0.75rem;
