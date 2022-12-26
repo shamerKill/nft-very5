@@ -440,8 +440,8 @@ export class NetService {
   /**
    * nft竞拍
    */
-  getNftOfferOrderInfo$(id: string,price:string) {
-    return this.$post('v1/my/offer', { orderID: id,price:price });
+  getNftOfferOrderInfo$(id: string, price:string, sign: string) {
+    return this.$post('v1/my/offer', { orderID: id,price:price,sign });
   }
 
   /**

@@ -61,14 +61,15 @@
               <!-- <span class="market-title-describe pl-1">未达保留价</span> -->
             </p>
             <p class="market-price">
-              1 PC
+              {{productInfo.nowPrice}} USDT
             </p>
             <!-- <p class="market-price-supply">
               &asymp;1
             </p> -->
           </div>
           <div>
-            <ng-container *ngIf="sellerOrderList[sellerOrderList.length-1].sellType==1">
+            <ng-container
+              *ngIf="sellerOrderList[sellerOrderList.length-1].sellType==1 && sellerOrderList[sellerOrderList.length-1].sellerAddress !== userInfoAddress">
               <button
                 pButton
                 class="market-output-btn p-button-outlined mr-4"
@@ -78,7 +79,8 @@
               </button>
               <br />
             </ng-container>
-            <ng-container *ngIf="sellerOrderList[sellerOrderList.length-1].sellType==2">
+            <ng-container
+              *ngIf="sellerOrderList[sellerOrderList.length-1].sellType==2 && sellerOrderList[sellerOrderList.length-1].sellerAddress !== userInfoAddress">
               <br />
                 <button
                 pButton

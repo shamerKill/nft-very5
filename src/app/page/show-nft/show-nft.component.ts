@@ -1,3 +1,4 @@
+import { ToolFuncWalletSign } from 'src/app/tools/functions/wallet';
 import { ConfirmationService } from 'primeng/api';
 import { stripHexPrefix, isAddress } from 'web3-utils';
 import { ToolFuncFormatTimeStr, TypeToolFuncDownTime } from './../../tools/functions/time';
@@ -64,6 +65,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     endTime: [this.dayList[0]], // 有效期
     dynamic: -1, // 代币精度
     paying: false, // 是否在支付中
+    orderHash: '',
   };
   /**
    * 赠送弹窗数据
@@ -96,7 +98,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     startPrice: '',
     sellerAddress: '',
     maxPrice: '',
-    id: ''
+    id: '',
   }
 
   /**
@@ -127,6 +129,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     type: string; // PRC1155orPRC721
     contractAddress: string; // nft合约地址
     describe: string;
+    nowPrice: string; // 最新成交价
     followerVol: number; // 收藏者数量
     ownerNum: number; // 拥有者数量
     myNum: number; // 已拥有数量
@@ -168,6 +171,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     maxPrice: string; // 最高价
     id: string; // 订单id
     sellNum: number; // 出售数量
+    orderHash: string; // 订单hash
   }[] = [];
 
 
@@ -295,10 +299,10 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
               sellerAddress: item.MakerAddr,
               sellerAvatar: item.Maker.Avator||'../../assets/images/logo/default-avatar@2x.png',
               sellerName: item.Maker.Name,
-              // TODO: 最高价未获取
               maxPrice: item.StartPrice,
               id: item.ID,
               sellNum: item.Number,
+              orderHash: item.OrderHash,
             };
           });
           this.changeEndTime(this.sellerOrderList[0].endTime);
@@ -336,10 +340,11 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     this.productInfo.followerVol = data.collectPeople;
     this.productInfo.type = data.nft.Type;
     this.productInfo.contractAddress = data.nft.Token;
+    this.productInfo.nowPrice = data.nft.CurrentPrice;
     this.productInfo.attributes = data.nft.NftOriginal.Attributes.split(',').map((item: string) => {
       var li = item.split(':');
       return {key: li[0], value: li[1]};
-    });
+    }).filter((item: any) => item.key && item.value);
     this.productInfo.creator = {
       name: data.creator.Name,
       avatar: data.creator.Avator||'../../assets/images/logo/default-avatar@2x.png',
@@ -459,6 +464,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
           if (item.sellType === 2) {
             this.auctionOverview.balance = data.data.balance;
             this.auctionOverview.dynamic = data.data.detail.Decimals;
+            this.auctionOverview.orderHash = item.orderHash;
           } else {
             this.buyOverview.balance = data.data.balance;
             this.buyOverview.dynamic = data.data.detail.Decimals;
@@ -590,15 +596,24 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     this.state.globalLoadingSwitch(true);
     const willPrice = BigInt(this.auctionOverview.outPrice) * BigInt(Math.pow(10,this.auctionOverview.dynamic));
     if (await this.queryAuth(willPrice)) {
-      this.net.getNftOfferOrderInfo$(this.chooseItem.id,this.auctionOverview.outPrice).subscribe(data => {
+      // 进行签名
+      this.message.info($localize`需要使用您账户对数据签名`);
+      ToolFuncWalletSign(this.auctionOverview.orderHash+'_'+willPrice.toString()).subscribe(signed => {
         this.state.globalLoadingSwitch(false);
-        if (data.code !== 200) {
-          return this.message.warn(data.msg??$localize`竞价失败`);
-        } else {
-          this.auctionOverview.overviewDisplay = false;
-          this.message.success($localize`竞价成功`);
+        if (signed) {
+          this.state.globalLoadingSwitch(true);
+          this.net.getNftOfferOrderInfo$(this.chooseItem.id,this.auctionOverview.outPrice,signed).subscribe(data => {
+            this.state.globalLoadingSwitch(false);
+            if (data.code !== 200) {
+              return this.message.warn(data.msg??$localize`竞价失败`);
+            } else {
+              this.auctionOverview.overviewDisplay = false;
+              this.message.success($localize`竞价成功`);
+              this.onReload();
+            }
+          });
         }
-      })
+      });
     }
   }
 

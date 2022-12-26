@@ -262,7 +262,7 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
       image: image,
       external_link: this.interactiveLink,
       description: this.describe,
-      attr: this.attributeList.map(({key, value}) => `${key}:${value}`).join(','),
+      attr: this.attributeList.filter(item => item.key && item.value).map(({key, value}) => `${key}:${value}`).join(','),
       number: this.selectedNum.toString(),
       collection_id: this.selectedCollectionId??'',
     }).pipe(this.pipeSwitch$()).subscribe(data => {
