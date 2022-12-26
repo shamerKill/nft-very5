@@ -20,7 +20,8 @@
     <div class="list-content flex flex-wrap flex-row lg:flex-column">
       <a
         *ngFor="let item of list"
-        [href]="item.link"
+        style="cursor: pointer;"
+        (click)="goLink(item.link,item.type,item.key)"
         class="py-2 px-1 text-400 block flex w-6">
         {{item.title}}
       </a>

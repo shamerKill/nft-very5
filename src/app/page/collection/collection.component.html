@@ -29,7 +29,7 @@
         <div class="app-collection-info-detail-title-name">
           {{collectionDetail.CollectionOriginal.Name}}
         </div>
-        <div class="app-collection-info-detail-title-symple">
+        <div class="app-collection-info-detail-title-symple" (click)="goUser(collectionDetail.CreatorAccount.Address)">
           {{collectionDetail.CreatorAccount.Name}}
         </div>
         <div class="mobile">
@@ -44,7 +44,7 @@
             </div>
             <div class="app-collection-info-detail-title-num-item flex align-items-center">
               <span i18n>创作者费用</span>
-              <div class="app-collection-info-detail-title-num-num">7%</div>
+              <div class="app-collection-info-detail-title-num-num">{{collectionDetail.CollectionOriginal.SellerFeeBasisPoints/100}}%</div>
             </div>
           </div>
           <div class="app-collection-info-detail-title-introduce" [class]="showMore?'':'shot'">{{collectionDetail.CollectionOriginal.Description}}</div>

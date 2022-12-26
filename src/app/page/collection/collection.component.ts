@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { Router } from '@angular/router';
+import * as dayjs from 'dayjs';
 
 type sortItem = {name: string; id: string};
 type CollectionOriginal = {
@@ -14,11 +16,13 @@ type CollectionOriginal = {
   Description:string;
   Created:number;
   FeeRecipient:string;
-  CreatedAt: string;
+  CreatedAt: any;
+  SellerFeeBasisPoints:number;
 }
 type CreatorAccount = {
   Name: string;
   ID: number;
+  Address: string
 }
 type exploreItem = {
   BannerImageUrl:string;
@@ -133,11 +137,13 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
       Description:'',
       Created:0,
       FeeRecipient:'',
-      CreatedAt: ''
+      CreatedAt: '',
+      SellerFeeBasisPoints: 0
     },
     CreatorAccount: {
       Name: '',
-      ID: 0
+      ID: 0,
+      Address: ''
     },
     IsFocus:false,
     AssetCount:'',
@@ -172,6 +178,7 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     private routerInfo: ActivatedRoute,
     private clipboard: ClipboardService,
     private state: StateService,
+    private router: Router,
   ) {
     super();
   }
@@ -192,6 +199,7 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     this.net.getCollectionDetail$(this.collectionId).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       this.collectionDetail = data;
+      this.collectionDetail.CollectionOriginal.CreatedAt = dayjs.unix(this.collectionDetail.CollectionOriginal.Created).format('YYYY-MM-DD')
       this.state.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(({accountAddress}) => {
         if (accountAddress === data.CreatorAccount.Address) {
           this.canEdit = true;
@@ -259,5 +267,8 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
       window.open(`https://twitter.com/intent/tweet?text=Check out this item on Very5&url=${nowUrl}&via=Plugchainclub`)
     }
     this.shareShow = false;
+  }
+  goUser(address:string) {
+    this.router.navigate(['user'],{queryParams:{id: address}});
   }
 }

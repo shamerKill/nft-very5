@@ -9,6 +9,7 @@
         <span class="iconfont icon-share"></span>
       </div>
     </div>
+    <div class="app-user-top-edit" *ngIf="accountAddress==userInfo.Address" (click)="onGoToPage('my/setting')"><span i18n>编辑</span></div>
     <div class="app-user-top-menu" *ngIf="shareShow">
       <div class="app-user-top-menu-item" *ngFor="let item of shareItems; let i=index" (click)="chooseShare(i)">
         <span class="icon" [class]="item.icon"></span>
@@ -37,6 +38,21 @@
               <span class="iconfont icon-xiala"></span>
             </div>
           </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="app-user-info-total flex">
+      <div class="app-user-info-total-item">
+          <div class="app-user-info-total-item-num flex align-items-center">
+            <span>{{starNum}}</span>
+          </div>
+          <div class="app-user-info-total-item-tips" i18n>关注</div>
+      </div>
+      <div class="app-user-info-total-item">
+          <div class="app-user-info-total-item-num flex align-items-center">
+            <span>{{fouceNum}}</span>
+          </div>
+          <div class="app-user-info-total-item-tips" i18n>收藏</div>
       </div>
     </div>
   </div>
