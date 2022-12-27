@@ -5,5 +5,5 @@ export const environment = {
   // apiPath: 'http://192.168.3.117:3001/',
   // apiPath: 'http://124.248.67.122:9999/',
   apiPath: 'https://very5api.plugcoin.network/',
-  marketContract: 'gx123cyvm8lsxwcdkph70de26ew8w02d5j48d4dpa'
+  marketContract: 'gx1rzld99h0f8ex50wvs25v8m4gyeltmtjp6cqzll'
 };

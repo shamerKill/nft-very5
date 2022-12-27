@@ -207,7 +207,7 @@
                     [src]="item.logo"
                     class="w-1rem h-1rem" />
                   <p class="pl-2">{{item.name}}</p>
-                  <p *ngIf="item.token" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
+                  <p *ngIf="item.token&&item.token!='gx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq8rta3w'" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
                 </div>
               </div>
               <div class="flex" *ngIf="selectedBuyToken.length >= 3 && selectedBuyToken.length < 6">
@@ -230,7 +230,7 @@
                   [src]="item.logo"
                   class="w-1rem h-1rem" />
                 <p class="pl-2">{{item.name}}</p>
-                <p *ngIf="item.token" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
+                <p *ngIf="item.token&&item.token!='gx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq8rta3w'" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
               </div>
             </ng-template>
           </p-multiSelect>

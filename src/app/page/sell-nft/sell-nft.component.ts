@@ -29,7 +29,7 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
   }[] = [];
   // 日期列表
   dayList: {name: string, num: number, unit: ManipulateType}[] = [
-    {name: $localize`1 分`, num: 1, unit: 'm'},
+    {name: $localize`5 分`, num: 5, unit: 'm'},
     {name: $localize`1 天`, num: 1, unit: 'd'},
     {name: $localize`3 天`, num: 3, unit: 'd'},
     {name: $localize`7 天`, num: 7, unit: 'd'},

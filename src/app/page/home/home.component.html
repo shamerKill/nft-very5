@@ -11,8 +11,8 @@
       <span>A marketplace to explore marvelous NFTs and feast the charm of</span>
     </p>
     <div class="first-btn-group flex justify-content-center pt-4 pb-4">
-      <p-button styleClass="first-btn-full mr-4" i18n>探索</p-button>
-      <p-button styleClass="first-btn-outline" i18n>创造NFT</p-button>
+      <p-button styleClass="first-btn-full mr-4" [routerLink]="['explore']" i18n>探索</p-button>
+      <p-button styleClass="first-btn-outline" [routerLink]="['create/nft']" i18n>创造NFT</p-button>
     </div>
 
     <app-base-box *ngIf="firstCards.initiated" class="first-pic-pc hidden lg:block">
@@ -101,6 +101,7 @@
     pButton
     type="button"
     class="assets-more"
+    [routerLink]="['ranking-list']"
     i18n>
     更多
   </button>
@@ -287,6 +288,7 @@
         label="探索市场"
         i18n-label
         class="video-more"
+        [routerLink]="['explore']"
         ></button>
     </div>
   </app-base-box>

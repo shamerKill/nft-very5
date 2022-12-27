@@ -86,7 +86,7 @@
                       [src]="item.logo"
                       class="w-1rem h-1rem" />
                     <p class="pl-2">{{item.name}}</p>
-                    <p *ngIf="item.token" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
+                    <p *ngIf="item.token&&item.token!='gx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq8rta3w'" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
                   </div>
                 </ng-template>
                 <ng-template let-item pTemplate="item">
@@ -95,7 +95,7 @@
                       [src]="item.logo"
                       class="w-1rem h-1rem" />
                     <p class="pl-2">{{item.name}}</p>
-                    <p *ngIf="item.token" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
+                    <p *ngIf="item.token&&item.token!='gx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq8rta3w'" class="pl-2 text-sm text-600">({{item.token|centerSlice}})</p>
                   </div>
                 </ng-template>
               </p-multiSelect>
@@ -254,7 +254,7 @@
               </div>
               <div class="text-right">
                 <p class="text-400 text-xs pb-2" i18n>价格</p>
-                <p class="text-0">{{startPrice||'--'}}</p>
+                <p class="text-0">{{startPrice||'--'}}{{selectedBuyToken[0].name||''}}</p>
               </div>
             </div>
           </div>
