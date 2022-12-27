@@ -33,6 +33,7 @@
         }
         &:nth-child(3){
           width: 10.5rem;
+          overflow-x: auto;
           img{
             width: 1rem;
             margin-right: 0.75rem;
@@ -53,6 +54,10 @@
         &:nth-child(7){
           width: 11rem;
           color: #868686;
+        }
+        &.active{
+          color: #7456FF;
+          cursor: pointer;
         }
       }
     }

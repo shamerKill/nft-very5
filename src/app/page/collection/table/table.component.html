@@ -16,7 +16,7 @@
         <span class="iconfont icon-paimai" *ngIf="item.EventType =='cancelled'"></span>
         <span>{{item.EventType =='create'?'创建':item.EventType =='successful'?'销售':item.EventType =='cancelled'?'取消':''}}</span>
       </div>
-      <div class="table-content-list-item-item flex align-items-center">
+      <div class="table-content-list-item-item flex align-items-center" [routerLink]="['/show/nft/'+item.Nft.NftOriginal.NftID]">
         <img [src]="item.Nft.NftOriginal.Image" alt="">
         <span>{{item.Nft.NftOriginal.Name}}</span>
       </div>
@@ -27,11 +27,19 @@
       <div class="table-content-list-item-item flex align-items-center">
         1
       </div>
-      <div class="table-content-list-item-item flex align-items-center">
+      <div class="table-content-list-item-item flex align-items-center" *ngIf="item.FromAddress==item.Nft.Creator">
         <img [src]="item.FromAccount.Avator" alt="">
         <span>{{item.FromAccount.Name}}</span>
       </div>
-      <div class="table-content-list-item-item flex align-items-center">
+      <div class="table-content-list-item-item flex align-items-center active" *ngIf="item.FromAddress!=item.Nft.Creator" [routerLink]="['/user']" [queryParams]="{'id':item.FromAddress}">
+        <img [src]="item.FromAccount.Avator" alt="">
+        <span>{{item.FromAccount.Name}}</span>
+      </div>
+      <div class="table-content-list-item-item flex align-items-center" *ngIf="item.ToAddress==item.Nft.Creator">
+        <img [src]="item.ToAccount.Avator" alt="">
+        <span>{{item.ToAccount.Name}}</span>
+      </div>
+      <div class="table-content-list-item-item flex align-items-center active" *ngIf="item.ToAddress!=item.Nft.Creator" [routerLink]="['/user']" [queryParams]="{'id':item.ToAddress}">
         <img [src]="item.ToAccount.Avator" alt="">
         <span>{{item.ToAccount.Name}}</span>
       </div>

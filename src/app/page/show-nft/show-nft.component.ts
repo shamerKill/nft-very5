@@ -546,6 +546,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
       }
       if (result !== '0x') result = BigInt(result).toString();
       // 判断是否足够
+      console.log(result)
       if (willPrice <= BigInt(result)) {
         this.state.globalLoadingSwitch(false);
         return true;
@@ -579,6 +580,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
   submitBuy(willPrice?: BigInt) {
     this.net.getNftBuyOrderInfo$(this.chooseItem.id).subscribe(async data => {
       if (data.code !== 200) {
+        this.state.globalLoadingSwitch(false);
         return this.message.warn(data.msg??$localize`获取信息失败`);
       } else {
         let info = '0x' + data.data;

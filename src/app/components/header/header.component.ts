@@ -191,7 +191,14 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
         items: [
           this.exploreList.map<MenuItem>(
             item => ({
-              items: [{label: item.title}]
+              items: [
+                {
+                  label: item.title,
+                  command: () => {
+                    this.router.navigate(['explore'],{queryParams:{id: item.key}});
+                  }
+                }
+              ]
             })
           )
         ],
