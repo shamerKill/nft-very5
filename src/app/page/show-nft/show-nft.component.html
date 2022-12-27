@@ -38,7 +38,7 @@
           <i class="iconfont icon-paimai text-base pr-1"></i>{{productInfo.collection?.name}}
         </p>
         <h3 class="info-title">
-          {{productInfo.name}} #{{productInfo.id}}
+          {{productInfo.name}}
         </h3>
         <p class="info-followers">
           <i class="pi pi-heart-fill"></i>{{productInfo.followerVol|bigNum}} <span i18n>关注</span>
@@ -260,7 +260,7 @@
         <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
           <tr>
             <td style="min-width: 4rem;">
-              {{product.startPrice}}<span class="text-500 text-sm">&nbsp;&nbsp;{{product.tokenName}}</span>
+              {{product.maxPrice}}<span class="text-500 text-sm">&nbsp;&nbsp;{{product.tokenName}}</span>
             </td>
             <td style="min-width: 4rem;">
               {{product.sellNum}}
@@ -293,6 +293,12 @@
                 (click)="showDialog(rowIndex)"
                 class="p-button-text p-button-rounded text-2xl"
                 [icon]="['iconfont icon-biaoq', 'iconfont icon-biaoq', 'iconfont icon-paimai'][product.sellType]"></button>
+              <button
+                pButton
+                *ngIf="product.showAuctionBtn"
+                (click)="onAuctionSuccess(rowIndex)"
+                class="p-button-text p-button-rounded h-2rem"
+                label="成交"></button>
               <button
                 pButton
                 *ngIf="product.sellerAddress === userInfoAddress && product.sellType !== 2"
@@ -476,7 +482,7 @@
           {{productInfo.collection?.name}}
         </p>
         <h3 class="py-1">
-          {{productInfo.name}} #{{productInfo.id}}
+          {{productInfo.name}}
         </h3>
         <p class="text-600 text-sm">
           <span i18n>创作者版税: </span><span>{{productInfo.incomeRate}}%</span>
@@ -541,7 +547,7 @@
           {{productInfo.collection?.name}}
         </p>
         <h3 class="py-1">
-          {{productInfo.name}} #{{productInfo.id}}
+          {{productInfo.name}}
         </h3>
         <p class="text-600 text-sm">
           <span i18n>创作者版税: </span><span>{{productInfo.incomeRate}}%</span>
@@ -645,7 +651,7 @@
           {{productInfo.collection?.name}}
         </p>
         <h3 class="py-1">
-          {{productInfo.name}} #{{productInfo.id}}
+          {{productInfo.name}}
         </h3>
         <p class="text-600 text-sm">
           <span i18n>创作者版税: </span><span>{{productInfo.incomeRate}}%</span>

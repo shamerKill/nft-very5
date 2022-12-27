@@ -1,6 +1,6 @@
 import { ToolFuncWalletSign } from 'src/app/tools/functions/wallet';
 import { ConfirmationService } from 'primeng/api';
-import { stripHexPrefix, isAddress } from 'web3-utils';
+import { stripHexPrefix, isAddress, encodePacked } from 'web3-utils';
 import { ToolFuncFormatTimeStr, TypeToolFuncDownTime } from './../../tools/functions/time';
 import { ManipulateType } from './../../../../node_modules/dayjs/esm/index.d';
 import { BaseMessageService } from './../../server/base-message.service';
@@ -130,6 +130,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     contractAddress: string; // nft合约地址
     describe: string;
     nowPrice: string; // 最新成交价
+    nowPriceUnit: string; // 最新成交价单位
     followerVol: number; // 收藏者数量
     ownerNum: number; // 拥有者数量
     myNum: number; // 已拥有数量
@@ -172,6 +173,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     id: string; // 订单id
     sellNum: number; // 出售数量
     orderHash: string; // 订单hash
+    showAuctionBtn: boolean; // 是否展示报价成交按钮
   }[] = [];
 
 
@@ -288,6 +290,13 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
         this.sellerOrderList = [];
         if (Array.isArray(data) && data.length) {
           this.sellerOrderList = data.map((item: any) => {
+            // 判断订单是否到期
+            const outTime = dayjs(item.ExpirationTime).diff(dayjs()) <= 0;
+            // 判断是否有报价
+            let outPrice = 0;
+            if (item.Offers && item.Offers.length) {
+              if (parseFloat(item.Offers[0].Amount) >= parseFloat(item.StartPrice)) outPrice = parseFloat(item.Offers[0].Amount);
+            }
             return {
               tokenName: item.CoinType,
               tokenContract: item.Token,
@@ -299,10 +308,11 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
               sellerAddress: item.MakerAddr,
               sellerAvatar: item.Maker.Avator||'../../assets/images/logo/default-avatar@2x.png',
               sellerName: item.Maker.Name,
-              maxPrice: item.StartPrice,
+              maxPrice: item.CurrentPrice,
               id: item.ID,
               sellNum: item.Number,
               orderHash: item.OrderHash,
+              showAuctionBtn: (item.Maker.Address === this.userInfoAddress && outTime && outPrice > 0),
             };
           });
           this.changeEndTime(this.sellerOrderList[0].endTime);
@@ -597,8 +607,23 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     const willPrice = BigInt(this.auctionOverview.outPrice) * BigInt(Math.pow(10,this.auctionOverview.dynamic));
     if (await this.queryAuth(willPrice)) {
       // 进行签名
+      let signData = '';
+      const raw = web3Abi.encodeFunctionSignature('getVerifyAdvancedSignature(bytes32,uint256)') +
+                  stripHexPrefix(
+                    web3Abi.encodeParameters(
+                      ['bytes32', 'uint256'],
+                      [this.auctionOverview.orderHash, willPrice.toString()]
+                    )
+                  );
+      let hexMarkenContractAddress = cosmo.addressForBech32ToHex(this.marketContract);
+      if (await cosmo.isChrome) {
+        signData = await cosmo.chromeTool.contractCallRaw(hexMarkenContractAddress, raw, 0) || '';
+      } else {
+        signData = (await cosmo.walletTool.contractCall(hexMarkenContractAddress, undefined, undefined, raw))?.data || '';
+      }
+      signData = web3Abi.decodeParameter('bytes', signData) as any;
       this.message.info($localize`需要使用您账户对数据签名`);
-      ToolFuncWalletSign(this.auctionOverview.orderHash+'_'+willPrice.toString()).subscribe(signed => {
+      ToolFuncWalletSign(signData).subscribe(signed => {
         this.state.globalLoadingSwitch(false);
         if (signed) {
           this.state.globalLoadingSwitch(true);
@@ -783,6 +808,36 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
             this.onReload();
           } else {
             this.message.warn(res.msg||$localize`撤回失败`);
+          }
+        });
+      },
+    });
+  }
+
+  /**
+   * 定价成交
+   **/
+  onAuctionSuccess(index: number) {
+    const sellItem = this.sellerOrderList[index];
+    this.confirm.confirm({
+      header: $localize`成交提示`,
+      message: $localize`是否接受当前报价？`,
+      acceptLabel: $localize`确定`,
+      rejectLabel: $localize`取消`,
+      accept: () => {
+        this.net.getBuyerPrice$(sellItem.id).pipe(this.pipeSwitch$()).subscribe(async res => {
+          if (res.code === 200 && res.data) {
+            let hexMarkenContractAddress = cosmo.addressForBech32ToHex(this.marketContract);
+            const raw = '0x' + res.data;
+            let signData = '';
+            if (await cosmo.isChrome) {
+              signData = await cosmo.chromeTool.contractSendRaw(hexMarkenContractAddress, raw) || '';
+            } else {
+              signData = (await cosmo.walletTool.contractSend(hexMarkenContractAddress, undefined, undefined, raw))?.data || '';
+            }
+            console.log(signData);
+          } else {
+            this.message.warn(res.msg||$localize`接受报价失败`);
           }
         });
       },

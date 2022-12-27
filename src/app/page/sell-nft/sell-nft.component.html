@@ -9,7 +9,7 @@
         [alt]="productInfo.name">
       <div class="ml-2" *ngIf="productInfo.name">
         <p class="text-600 text-sm">{{productInfo.collection?.name}}</p>
-        <p class="text-900">{{productInfo.name}} #{{productInfo.id}}</p>
+        <p class="text-900">{{productInfo.name}}</p>
       </div>
     </div>
   </app-base-box>
@@ -250,7 +250,7 @@
             <div class="flex pb-4 pt-3 justify-content-between">
               <div>
                 <p class="text-400 text-xs pb-2">{{productInfo.collection?.name}}</p>
-                <p class="text-0">{{productInfo.name}} #{{productInfo.id}}</p>
+                <p class="text-0">{{productInfo.name}}</p>
               </div>
               <div class="text-right">
                 <p class="text-400 text-xs pb-2" i18n>价格</p>
