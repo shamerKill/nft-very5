@@ -194,7 +194,11 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
   filterChange(event:outputObj) {
     console.log(event)
     this.filterObj = event;
-    this.getNftList()
+    if (this.tabActive == 0) {
+      this.getNftList();
+    } else {
+      this.getTransList()
+    }
   }
   getInfo() {
     // 获取数据

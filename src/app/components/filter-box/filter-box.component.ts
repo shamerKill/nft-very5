@@ -3,6 +3,7 @@ import { nftTypesArr } from './../../server/database.service';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
+import '@angular/localize';
 type UnitItem = {name: string;logo:string;id:number;contract:string;}
 type chooseItem = {
   name:string;
@@ -81,30 +82,34 @@ export class FilterBoxComponent extends ToolClassAutoClosePipe implements OnInit
   };
   stateList: chooseItem[] = [
     {
-      name: '立即购买',
+      name: $localize`立即购买`,
       id: '1',
       checked:false
     },{
-      name: '拍卖中',
+      name: $localize`拍卖中`,
       id: '2',
       checked:false
     },{
-      name: '有出价',
+      name: $localize`有出价`,
       id: '3',
       checked:false
     }
   ]
   collectionTypeList: chooseItem[] = [
     {
-      name: '新的拍卖',
+      name: $localize`创建`,
+      id: 'make',
+      checked:false
+    },{
+      name: $localize`新的拍卖`,
       id: 'create',
       checked:false
     },{
-      name: '销售',
+      name: $localize`销售`,
       id: 'successful',
       checked:false
     },{
-      name: '职消的拍卖',
+      name: $localize`职消的拍卖`,
       id: 'cancelled',
       checked:false
     }

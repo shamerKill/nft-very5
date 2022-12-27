@@ -14,7 +14,8 @@
         <span class="iconfont icon-chuangjiang" *ngIf="item.EventType =='create'"></span>
         <span class="iconfont icon-jiaoyi" *ngIf="item.EventType =='successful'"></span>
         <span class="iconfont icon-paimai" *ngIf="item.EventType =='cancelled'"></span>
-        <span>{{item.EventType =='create'?'创建':item.EventType =='successful'?'销售':item.EventType =='cancelled'?'取消':''}}</span>
+        <span class="iconfont icon-shangjia" *ngIf="item.EventType =='make'"></span>
+        <span>{{item.EventType =='make'?'创建':item.EventType =='successful'?'销售':item.EventType =='cancelled'?'取消':item.EventType =='create'?'拍卖':''}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center" [routerLink]="['/show/nft/'+item.Nft.NftOriginal.NftID]">
         <img [src]="item.Nft.NftOriginal.Image" alt="">

@@ -109,6 +109,14 @@
         max-height: 0;
       }
     }
+    &-Type{
+      transition: 0.5s;
+      max-height: 14rem;
+      overflow: hidden;
+      &.hide{
+        max-height: 0;
+      }
+    }
     &-class{
       transition: 0.5s;
       max-height: 36rem;

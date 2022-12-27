@@ -15,7 +15,7 @@
             <span class="iconfont icon-xiala"></span>
           </div>
         </div>
-        <div class="filter-box-item-list"  [class]="stateState ? '': 'hide'">
+        <div class="filter-box-item-list "  [class]="stateState ? '': 'hide'">
           <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of stateList; let i=index" (click)="changeStateIndex(i)">
             <span i18n>{{item.name}}</span>
             <div class="icon">
@@ -112,7 +112,7 @@
             <span class="iconfont icon-xiala"></span>
           </div>
         </div>
-        <div class="filter-box-item-list"  [class]="collectionTypeState ? '': 'hide'">
+        <div class="filter-box-item-Type"  [class]="collectionTypeState ? '': 'hide'">
           <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of collectionTypeList; let i=index" (click)="changeCollectionIndex(i)">
             <span i18n>{{item.name}}</span>
             <div class="icon">
