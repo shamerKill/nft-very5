@@ -4,7 +4,7 @@ import { StateService } from './../../server/state.service';
 import { combineLatest } from 'rxjs';
 import { NetService } from './../../server/net.service';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
-import { formatDate, Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as dayjs from 'dayjs';
@@ -29,6 +29,7 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
   }[] = [];
   // 日期列表
   dayList: {name: string, num: number, unit: ManipulateType}[] = [
+    {name: $localize`1 分`, num: 1, unit: 'm'},
     {name: $localize`1 天`, num: 1, unit: 'd'},
     {name: $localize`3 天`, num: 3, unit: 'd'},
     {name: $localize`7 天`, num: 7, unit: 'd'},

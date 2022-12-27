@@ -27,7 +27,7 @@
             {{item.collectionName}}
           </p>
           <p class="card-described">
-            {{item.name}} #{{item.id}}
+            {{item.name}}
           </p>
         </p-card>
       </ng-container>
@@ -53,7 +53,7 @@
               {{item.collectionName}}
             </p>
             <p class="card-described">
-              {{item.name}} #{{item.id}}
+              {{item.name}}
             </p>
           </p-card>
         </ng-template>
@@ -260,7 +260,7 @@
                 <i class="card-sell-type iconfont" [ngClass]="{'icon-paimai': item.sellType === 2, 'icon-biaoq': item.sellType === 1}"></i>
               </div>
               <div class="card-info flex justify-content-between align-items-center">
-                <p class="card-info-name">{{item.name}} #{{item.id}}</p>
+                <p class="card-info-name">{{item.name}}</p>
                 <div class="card-info-price flex align-items-center">
                   <img class="card-price-unit" src="../../../assets/images/home/plug-logo.png" alt="plug">
                   <p class="card-price-num">{{item.price}}</p>

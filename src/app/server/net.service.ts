@@ -487,5 +487,12 @@ export class NetService {
     return this.$post('v1/my/cancelOrder', { orderID: id })
   }
 
+  /**
+   * 接受报价
+   **/
+  getBuyerPrice$(orderID: string) {
+    return this.$post('v1/my/match', { orderID });
+  }
+
 }
 
