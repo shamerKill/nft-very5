@@ -377,7 +377,7 @@ export class NetService {
    * 获取挂卖交易手续费
    **/
   getSellFee$(collectionId: string) {
-    return this.$get('/v1/collection/basisPoints', new HttpParams({fromObject: {id: collectionId}}));
+    return this.$get('v1/collection/basisPoints', new HttpParams({fromObject: {id: collectionId}}));
   }
 
   /**

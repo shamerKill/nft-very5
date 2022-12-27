@@ -279,7 +279,11 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
           this.nftImage = '',
           this.canCreate = false;
         },
-        reject: () => this.router.navigate(['user']),
+        reject: () => {
+          this.state.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(data => {
+            this.router.navigate(['user'],{queryParams:{id: data.accountAddress}})
+          })
+        },
       });
     });
   }
