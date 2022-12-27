@@ -30,9 +30,9 @@ type exploreItem = {
   CreatorAccount:CreatorAccount;
   IsFocus:boolean;
   Category:string;
-  AssetCount:string|number; // 资产总数量（包含的nft数量）"
+  AssetCount:number; // 资产总数量（包含的nft数量）"
   Topping:string|number; // ：置顶(数字越大比重越高）"
-  SellNumber:string|number; // 售卖数量
+  SellNumber:number; // 售卖数量
   HaveNumber:string|number; // 持有者数量"
   TransactionAmount:string; // 总交易额"
   HoldersNumber:string|number; // 持有人数量
@@ -146,9 +146,9 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
       Address: ''
     },
     IsFocus:false,
-    AssetCount:'',
+    AssetCount:0,
     Topping:'',
-    SellNumber:'',
+    SellNumber:0,
     HaveNumber:'',
     TransactionAmount:'',
     HoldersNumber:'',
@@ -222,7 +222,10 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     this.net.getUserTrans$(this.collectionId,'',this.filterObj.sell,'').pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
-        this.transList = data
+        this.transList = data;
+        this.transList.map(item => {
+          item.UpdateTime = dayjs.unix(item.Updated).format('YYYY-MM-DD')
+        })
       } else {
         this.transList = []
       }

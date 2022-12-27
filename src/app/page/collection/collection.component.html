@@ -64,34 +64,34 @@
     <div class="app-collection-info-total flex">
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/pc.png" alt="">
+            <img src="../../../assets/images/explore/usd.png" alt="">
             <span>{{collectionDetail.TransactionAmount|bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>总交易额</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>{{collectionDetail.LowestPrice}}</span>
+            <img src="../../../assets/images/explore/usd.png" alt="">
+            <span>{{collectionDetail.LowestPrice|bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>地板价</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/pc.png" alt="">
-            <span>{{collectionDetail.HighestPrice}}</span>
+            <img src="../../../assets/images/explore/usd.png" alt="">
+            <span>{{collectionDetail.HighestPrice|bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>最佳报价</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <span>2%</span>
+            <span>{{(collectionDetail.SellNumber/collectionDetail.AssetCount)*100}}%</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>已刊登</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <span>{{collectionDetail.HoldersNumber}}</span>
+            <span>{{collectionDetail.HaveNumber|bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>持有者</div>
       </div>

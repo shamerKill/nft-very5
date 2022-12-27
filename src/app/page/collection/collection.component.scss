@@ -238,11 +238,14 @@
 .contents-nft{
   background-color: #F8FAFC;
   display: flex;
+  max-width: 100%;
   .list-box{
     flex: 1;
+    width: 78%;
     padding: 2rem 0 2rem 0;
     @include media-phone {
       padding: 1rem 0 1rem 0;
+      width: 82%;
     }
     &-tabbar{
       width: 100%;
