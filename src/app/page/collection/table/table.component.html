@@ -27,7 +27,7 @@
       <div class="table-content-list-item-item flex align-items-center">
         1
       </div>
-      <div class="table-content-list-item-item flex align-items-center" *ngIf="item.FromAddress==item.Nft.Creator">
+      <div class="table-content-list-item-item flex align-items-center" *ngIf="item.FromAddress==item.Nft.Creator" [routerLink]="['/user']" [queryParams]="{'id':item.FromAddress}">
         <img [src]="item.FromAccount.Avator" alt="">
         <span>{{item.FromAccount.Name}}</span>
       </div>
@@ -35,7 +35,7 @@
         <img [src]="item.FromAccount.Avator" alt="">
         <span>{{item.FromAccount.Name}}</span>
       </div>
-      <div class="table-content-list-item-item flex align-items-center" *ngIf="item.ToAddress==item.Nft.Creator">
+      <div class="table-content-list-item-item flex align-items-center" *ngIf="item.ToAddress==item.Nft.Creator" [routerLink]="['/user']" [queryParams]="{'id':item.ToAddress}">
         <img [src]="item.ToAccount.Avator" alt="">
         <span>{{item.ToAccount.Name}}</span>
       </div>

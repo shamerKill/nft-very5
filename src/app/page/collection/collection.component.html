@@ -35,15 +35,15 @@
         <div class="mobile">
           <div class="app-collection-info-detail-title-num flex align-items-center">
             <div class="app-collection-info-detail-title-num-item flex align-items-center">
-              <span i18n>项目</span>
+              <span i18n>项目 </span>
               <div class="app-collection-info-detail-title-num-num">{{collectionDetail.AssetCount | bigNum}}</div>
             </div>
             <div class="app-collection-info-detail-title-num-item flex align-items-center">
-              <span i18n>创建日期</span>
+              <span i18n>创建日期 </span>
               <div class="app-collection-info-detail-title-num-num">{{collectionDetail.CollectionOriginal.CreatedAt}}</div>
             </div>
             <div class="app-collection-info-detail-title-num-item flex align-items-center">
-              <span i18n>创作者费用</span>
+              <span i18n>创作者费用 </span>
               <div class="app-collection-info-detail-title-num-num">{{collectionDetail.CollectionOriginal.SellerFeeBasisPoints/100}}%</div>
             </div>
           </div>
@@ -85,7 +85,7 @@
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <span>{{(collectionDetail.SellNumber/collectionDetail.AssetCount)*100}}%</span>
+            <span>{{(collectionDetail.SellingNumber/collectionDetail.AssetCount)*100}}%</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>已刊登</div>
       </div>

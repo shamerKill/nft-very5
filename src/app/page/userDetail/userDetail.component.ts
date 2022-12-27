@@ -7,6 +7,7 @@ import { StateService, accountStoreInit } from './../../server/state.service';
 import { ToolClassAutoClosePipe } from '../../tools/classes/pipe-close';
 import { Router } from '@angular/router';
 import { getLocalePluralCase } from '@angular/common';
+import * as dayjs from 'dayjs';
 
 type sortItem = {name: string; id: string};
 type userInfo = {
@@ -246,7 +247,10 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     this.net.getUserTrans$('','',this.filterObj.sell,this.userAddress).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
-        this.transList = data
+        this.transList = data;
+        this.transList.map(item => {
+          item.UpdateTime = dayjs.unix(item.Created).format('YYYY-MM-DD')
+        })
       } else {
         this.transList = []
       }

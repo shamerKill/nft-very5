@@ -1,7 +1,8 @@
 const PROXY_CONFIG = {
   "/proxy": {
       // "target": "http://124.248.67.122:9999/",
-      "target": "http://192.168.3.117:3001/",
+      // "target": "http://192.168.3.117:3001/",
+      "target": "https://very5api.plugcoin.network/",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {

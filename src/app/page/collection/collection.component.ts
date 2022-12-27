@@ -33,6 +33,7 @@ type exploreItem = {
   AssetCount:number; // 资产总数量（包含的nft数量）"
   Topping:string|number; // ：置顶(数字越大比重越高）"
   SellNumber:number; // 售卖数量
+  SellingNumber: number; // 正在售卖数量
   HaveNumber:string|number; // 持有者数量"
   TransactionAmount:string; // 总交易额"
   HoldersNumber:string|number; // 持有人数量
@@ -149,6 +150,7 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     AssetCount:0,
     Topping:'',
     SellNumber:0,
+    SellingNumber: 0,
     HaveNumber:'',
     TransactionAmount:'',
     HoldersNumber:'',
@@ -224,7 +226,7 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
       if (Array.isArray(data) && data.length) {
         this.transList = data;
         this.transList.map(item => {
-          item.UpdateTime = dayjs.unix(item.Updated).format('YYYY-MM-DD')
+          item.UpdateTime = dayjs.unix(item.Created).format('YYYY-MM-DD')
         })
       } else {
         this.transList = []
