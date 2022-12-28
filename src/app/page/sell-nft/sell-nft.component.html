@@ -71,14 +71,14 @@
                 styleClass="w-full"
                 [(ngModel)]="selectedBuyToken"
                 (onChange)="changeBuyToken($event)"
-                [options]="buyTokens"
+                [options]="sellType === 'fixed' ? buyTokens : auctionBuyTokens"
                 [showHeader]="false"
                 [virtualScroll]="true"
                 [virtualScrollItemSize]="46"
                 [lazy]="true"
+                optionLabel="token"
                 placeholder="选择代币"
                 tooltipPosition="bottom"
-                optionLabel="name"
                 i18n-placeholder>
                 <ng-template pTemplate="selectedItems">
                   <div class="flex align-items-center" *ngFor="let item of selectedBuyToken">
@@ -254,7 +254,7 @@
               </div>
               <div class="text-right">
                 <p class="text-400 text-xs pb-2" i18n>价格</p>
-                <p class="text-0">{{startPrice||'--'}}{{selectedBuyToken[0].name||''}}</p>
+                <p class="text-0">{{startPrice||'--'}}{{selectedBuyToken.length ? selectedBuyToken[0].name : ''}}</p>
               </div>
             </div>
           </div>

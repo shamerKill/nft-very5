@@ -27,6 +27,12 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
     logo: string;
     token: string;
   }[] = [];
+  auctionBuyTokens: {
+    name: string;
+    minLen: number;
+    logo: string;
+    token: string;
+  }[] = [];
   // 日期列表
   dayList: {name: string, num: number, unit: ManipulateType}[] = [
     {name: $localize`5 分`, num: 5, unit: 'm'},
@@ -103,12 +109,14 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
     private message: BaseMessageService,
   ) {
     super();
+    this.state.globalLoadingSwitch(true);
     combineLatest([
       this.route.params,
       this.state.linkedWallet$,
     ]).pipe(
       this.pipeSwitch$(),
     ).subscribe(([params, wallet]) => {
+      this.state.globalLoadingSwitch(false);
       if (wallet.isLinking === false) {
         this.productId = params['id'];
         this.userInfoAddress = wallet.accountAddress??'';
@@ -162,6 +170,7 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
         if (result.data.AllowToken) {
           try {
             this.buyTokens = JSON.parse(result.data.AllowToken);
+            this.auctionBuyTokens = this.buyTokens.filter(item => item.token !== 'gx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq8rta3w');
             if (this.buyTokens.length) {
               this.selectedBuyToken = [this.buyTokens[0]];
             }
@@ -201,6 +210,11 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
   // 切换类型
   onChangeSellType(type: string) {
     this.sellType = type;
+    if (this.sellType === 'float') {
+      if (this.selectedBuyToken[0].token === 'gx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq8rta3w') {
+        this.selectedBuyToken = [this.auctionBuyTokens[0]];
+      }
+    }
   }
   // 修改价格单位
   changeBuyToken(event: any) {
