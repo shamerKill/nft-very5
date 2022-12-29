@@ -165,7 +165,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
       if (user.code === 200 && user.data && user.data.length) {
         this.searchResult.user = user.data.map((item: any) => {
           return {
-            id: item.ID,
+            id: item.Address,
             logo: item.Avator||'../../assets/images/logo/default-avatar@2x.png',
             name: item.Name,
             describe: item.Description,
