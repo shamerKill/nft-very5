@@ -330,6 +330,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
         if (data[i].Owner === this.userInfoAddress) {
           this.userHadNftNum = data[i].Value;
           this.productInfo.myNum = data[i].Value;
+          break;
+        } else {
+          this.userHadNftNum = 0;
         }
       }
     }
@@ -338,6 +341,8 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
   checkNftEdit(data: any) {
     if (data.Creator === this.userInfoAddress && data.IsPlagFrom === true && data.SellFre === 0) {
       this.userCanEdit = true;
+    } else {
+      this.userCanEdit = false;
     }
   }
   // 对nft进行赋值
