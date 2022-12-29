@@ -208,6 +208,11 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
       logo: string,
       address: string,
     },
+    toUser: { // 接受用户
+      name: string;
+      logo: string;
+      address: string;
+    }
     time: string, // 过去时间
     sellNum: number; // 出售数量
   }[] = [];
@@ -762,6 +767,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
           'successful': $localize`交易成功`,
           'cancelled': $localize`撤回`,
         };
+        console.log(result.data);
         this.marketHistoryList = result.data.map((item: any) => {
           return {
             type: typeShow[item.EventType],
@@ -771,6 +777,11 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
               name: item.FromAccount.Name,
               logo: item.FromAccount.Avator||'../../assets/images/logo/default-avatar@2x.png',
               address: item.FromAccount.Address,
+            },
+            toUser: {
+              name: item.ToAccount.Name,
+              logo: item.ToAccount.Avator||'../../assets/images/logo/default-avatar@2x.png',
+              address: item.ToAccount.Address,
             },
             time: dayjs(item.CreatedAt).fromNow(),
           };
