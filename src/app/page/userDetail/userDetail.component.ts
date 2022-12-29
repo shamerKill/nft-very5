@@ -222,15 +222,18 @@ export class UserDetailComponent implements OnInit,OnDestroy {
   starNum:number=0;
   fouceNum:number=0;
   getInfo() {
-    console.log(11)
+    this.stateService.globalLoadingSwitch(true);
     // 获取数据
     this.net.getUserInfo$(this.userAddress).pipe().subscribe(({code, data, msg}) => {
+      this.stateService.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       this.userInfo = data;
     });
   }
   getNftList() {
+    this.stateService.globalLoadingSwitch(true);
     this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',this.userAddress).pipe().subscribe(({code, data, msg}) => {
+      this.stateService.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
@@ -240,7 +243,9 @@ export class UserDetailComponent implements OnInit,OnDestroy {
     });
   }
   getNftList1() {
+    this.stateService.globalLoadingSwitch(true);
     this.net.getNftList$(this.userAddress,this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',).pipe().subscribe(({code, data, msg}) => {
+      this.stateService.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
@@ -250,7 +255,9 @@ export class UserDetailComponent implements OnInit,OnDestroy {
     });
 }
   getCollectionList() {
+    this.stateService.globalLoadingSwitch(true);
     this.net.getCollectionList$(this.userAddress,this.filterObj.cate).pipe().subscribe(({code, data, msg}) => {
+      this.stateService.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.exploreList = data;
@@ -260,7 +267,9 @@ export class UserDetailComponent implements OnInit,OnDestroy {
     });
   }
   getTransList() {
+    this.stateService.globalLoadingSwitch(true);
     this.net.getUserTrans$('','',this.filterObj.sell,this.userAddress).pipe().subscribe(({code, data, msg}) => {
+      this.stateService.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.transList = data;

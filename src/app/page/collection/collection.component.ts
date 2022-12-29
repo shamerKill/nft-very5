@@ -210,8 +210,10 @@ export class CollectionComponent implements OnInit,OnDestroy {
     }
   }
   getInfo() {
+    this.state.globalLoadingSwitch(true);
     // 获取数据
     this.net.getCollectionDetail$(this.collectionId).pipe().subscribe(({code, data, msg}) => {
+      this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       this.collectionDetail = data;
       this.collectionDetail.CollectionOriginal.CreatedAt = dayjs.unix(this.collectionDetail.CollectionOriginal.Created).format('YYYY-MM-DD')
@@ -223,8 +225,10 @@ export class CollectionComponent implements OnInit,OnDestroy {
     });
   }
   getNftList() {
+    this.state.globalLoadingSwitch(true);
     // 获取数据
     this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,this.collectionId).pipe().subscribe(({code, data, msg}) => {
+      this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
@@ -234,7 +238,9 @@ export class CollectionComponent implements OnInit,OnDestroy {
     });
   }
   getTransList() {
+    this.state.globalLoadingSwitch(true);
     this.net.getUserTrans$(this.collectionId,'',this.filterObj.sell,'').pipe().subscribe(({code, data, msg}) => {
+      this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.transList = data;
@@ -253,7 +259,9 @@ export class CollectionComponent implements OnInit,OnDestroy {
   // postAddFocus$
   focusCollection() {
     if (this.collectionDetail.IsFocus) {
+      this.state.globalLoadingSwitch(true);
       this.net.postDelFocus$(this.collectionId).subscribe(res => {
+        this.state.globalLoadingSwitch(false);
         if (res.code !== 200) return this.BaseMessage.warn(res.msg??'');
         if (res.code === 200) {
           this.BaseMessage.success($localize`取消成功`);
@@ -262,7 +270,9 @@ export class CollectionComponent implements OnInit,OnDestroy {
         }
       });
     } else {
+      this.state.globalLoadingSwitch(true);
       this.net.postAddFocus$(this.collectionId).subscribe(res => {
+        this.state.globalLoadingSwitch(false);
         if (res.code !== 200) return this.BaseMessage.warn(res.msg??'');
         if (res.code === 200) {
           this.BaseMessage.success($localize`收藏成功`);

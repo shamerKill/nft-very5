@@ -3,6 +3,7 @@ import { Router,ActivatedRoute,NavigationEnd } from '@angular/router';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { nftTypesArr } from './../../server/database.service';
+import { StateService } from './../../server/state.service';
 import '@angular/localize';
 
 type tabbarItem = {name: string; id: string}[];
@@ -43,10 +44,12 @@ export class ExploreComponent implements OnInit,OnDestroy {
     private BaseMessage: BaseMessageService,
     private routerInfo: ActivatedRoute,
     private router: Router,
+    private state: StateService,
   ) {
   }
   navigationSubscription:any;
   ngOnInit(): void {
+    this.state.globalLoadingSwitch(true);
     this.tabbar.map((item,index) => {
       if (item.id == this.routerInfo.snapshot.queryParams['id']) {
         this.tabbarIndex = index
@@ -56,6 +59,7 @@ export class ExploreComponent implements OnInit,OnDestroy {
     this.getList();
     this.navigationSubscription = this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
+        this.state.globalLoadingSwitch(true);
         this.tabbar.map((item,index) => {
           if (item.id == this.routerInfo.snapshot.queryParams['id']) {
             this.tabbarIndex = index
@@ -72,6 +76,7 @@ export class ExploreComponent implements OnInit,OnDestroy {
   getList() {
     // 获取数据
     this.net.getCollectionList$('',this.classId).pipe().subscribe(({code, data, msg}) => {
+      this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.exploreList = data
