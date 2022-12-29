@@ -115,10 +115,12 @@ const routes: Routes = [
   {
     component: CollectionComponent,
     path: 'collection',
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
   },
   {
     component: UserDetailComponent,
     path: 'user',
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
   },
   {
     component: HomeComponent,
@@ -171,7 +173,7 @@ const routes: Routes = [
     MenuModule,
     PipeModule,
     DialogModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
   ],
   exports: [
     RouterModule,

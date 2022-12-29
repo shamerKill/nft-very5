@@ -1,12 +1,10 @@
 import { ClipboardService } from 'ngx-clipboard';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NetService } from '../../server/net.service';
 import { BaseMessageService } from '../../server/base-message.service';
 import { StateService, accountStoreInit } from './../../server/state.service';
-import { ToolClassAutoClosePipe } from '../../tools/classes/pipe-close';
-import { Router } from '@angular/router';
-import { getLocalePluralCase } from '@angular/common';
+import { Router,NavigationEnd } from '@angular/router';
 import * as dayjs from 'dayjs';
 
 type sortItem = {name: string; id: string};
@@ -63,7 +61,7 @@ type shareItem = {
   templateUrl: './userDetail.component.html',
   styleUrls: ['./userDetail.component.scss']
 })
-export class UserDetailComponent extends ToolClassAutoClosePipe implements OnInit {
+export class UserDetailComponent implements OnInit,OnDestroy {
   shareItems:shareItem[] = [
     {label: $localize`复制链接`, icon: 'pi pi-copy'},
     {label: $localize`Facebook`, icon: 'pi pi-facebook'},
@@ -178,41 +176,68 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     public stateService: StateService,
     private router: Router,
   ) {
-    super();
-    this.stateService.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(data => {
+    this.stateService.linkedWallet$.pipe().subscribe(data => {
       if (data.accountAddress) this.accountAddress = data.accountAddress;
     });
   }
   userAddress: string='';
+  navigationSubscription:any;
   ngOnInit(): void {
     this.userAddress = this.routerInfo.snapshot.queryParams['id'];
-    if (this.routerInfo.snapshot.queryParams['type'] === 'collection') {
-      this.checkTab(2);
-    }
     this.getInfo();
-    this.getNftList();
+    if (this.tabActive == 0) {
+      this.getNftList();
+    } else if (this.tabActive == 1) {
+      this.getNftList1();
+    } else if (this.tabActive == 2) {
+      this.getCollectionList();
+    } else if (this.tabActive == 3) {
+      this.getTransList();
+    }
+    this.navigationSubscription = this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.userAddress = this.routerInfo.snapshot.queryParams['id'];
+        if (this.routerInfo.snapshot.queryParams['type'] === 'collection') {
+          this.checkTab(2);
+        }
+        this.getInfo();
+        if (this.tabActive == 0) {
+          this.getNftList();
+        } else if (this.tabActive == 1) {
+          this.getNftList1();
+        } else if (this.tabActive == 2) {
+          this.getCollectionList();
+        } else if (this.tabActive == 3) {
+          this.getTransList();
+        }
+      }
+    });
+  }
+  ngOnDestroy():void{
+    this.navigationSubscription.unsubscribe()
   }
   starNum:number=0;
   fouceNum:number=0;
   getInfo() {
+    console.log(11)
     // 获取数据
-    this.net.getUserInfo$(this.userAddress).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getUserInfo$(this.userAddress).pipe().subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       this.userInfo = data;
     });
-    this.net.getUserStarList$().pipe(this.pipeSwitch$()).subscribe(data => {
+    this.net.getUserStarList$().pipe().subscribe(data => {
       if (data.code === 200 && data.data && data.data.length) {
         this.starNum = data.data.length;
       }
     })
-    this.net.getUserStarSellList$().pipe(this.pipeSwitch$()).subscribe(data => {
+    this.net.getUserStarSellList$().pipe().subscribe(data => {
       if (data.code === 200 && data.data && data.data.length) {
         this.fouceNum = data.data.length;
       }
     })
   }
   getNftList() {
-    this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',this.userAddress).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',this.userAddress).pipe().subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
@@ -222,7 +247,7 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     });
   }
   getNftList1() {
-    this.net.getNftList$(this.userAddress,this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getNftList$(this.userAddress,this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',).pipe().subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
@@ -232,7 +257,7 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     });
 }
   getCollectionList() {
-    this.net.getCollectionList$(this.userAddress,this.filterObj.cate).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getCollectionList$(this.userAddress,this.filterObj.cate).pipe().subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.exploreList = data;
@@ -242,7 +267,7 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
     });
   }
   getTransList() {
-    this.net.getUserTrans$('','',this.filterObj.sell,this.userAddress).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getUserTrans$('','',this.filterObj.sell,this.userAddress).pipe().subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.transList = data;
@@ -256,7 +281,15 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
   }
   refresh() {
     this.getInfo();
-    this.getNftList();
+    if (this.tabActive == 0) {
+      this.getNftList();
+    } else if (this.tabActive == 1) {
+      this.getNftList1();
+    } else if (this.tabActive == 2) {
+      this.getCollectionList();
+    } else if (this.tabActive == 3) {
+      this.getTransList();
+    }
   }
   shareLink() {
     this.shareShow = !this.shareShow
