@@ -69,7 +69,6 @@ export class FilterBoxComponent extends ToolClassAutoClosePipe implements OnInit
       coin: this.PriceSelect?this.PriceSelect.contract:'',
       search: this.searchName,
     }
-    console.log(this.newFilterObj)
     this.change.emit(this.newFilterObj);
   }
   showMore: boolean = true;
@@ -153,13 +152,18 @@ export class FilterBoxComponent extends ToolClassAutoClosePipe implements OnInit
   getTokenList() {
     this.net.getPayTokenList$(1).pipe(this.pipeSwitch$()).subscribe(data => {
       if (data.code === 200 && data.data && data.data.length) {
-        this.PriceUnit = data.data.map((item:{Decimals:number;ID:number;Logo:string;Name:string;Token:string;}) => ({
+        this.PriceUnit = [{
+          name: $localize`全部`,
+          logo:'',
+          id:0,
+          contract: ''
+        }]
+        this.PriceUnit = this.PriceUnit.concat(data.data.map((item:{Decimals:number;ID:number;Logo:string;Name:string;Token:string;}) => ({
           name: item.Name,
           logo:item.Logo,
           id:item.ID,
           contract: item.Token
-        }))
-        console.log(this.PriceUnit)
+        })))
       }
     })
   }

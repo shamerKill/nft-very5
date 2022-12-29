@@ -26,7 +26,7 @@
         <span>{{item.TotalPrice}}{{item.PaymentToken}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center">
-        1
+        {{item.BidAmount|bigNum}}
       </div>
       <div class="table-content-list-item-item flex align-items-center active" [routerLink]="['/user']" [queryParams]="{'id':item.FromAddress}">
         <img [src]="item.FromAccount.Avator" alt="">

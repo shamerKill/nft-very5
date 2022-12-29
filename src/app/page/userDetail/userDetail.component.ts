@@ -120,8 +120,6 @@ export class UserDetailComponent extends ToolClassAutoClosePipe implements OnIni
   }
   filterChange(event:outputObj) {
     this.filterObj = event;
-    console.log(this.filterObj)
-    console.log(this.tabActive)
     if (this.tabActive == 0) {
       this.getNftList();
     } else if (this.tabActive == 1) {
