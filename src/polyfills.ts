@@ -60,4 +60,4 @@ import 'zone.js';  // Included with Angular CLI.
   env: { DEBUG: undefined },
 };
 (window as any).global = window;
-window.Buffer = Buffer;
+(window as any).Buffer = Buffer;
