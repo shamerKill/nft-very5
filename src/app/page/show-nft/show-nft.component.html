@@ -395,6 +395,7 @@
             <th></th>
             <th i18n>价格</th>
             <th i18n>发送方</th>
+            <th i18n>接收方</th>
             <th i18n>时间</th>
           </tr>
         </ng-template>
@@ -415,6 +416,19 @@
                   [src]="product.user.logo"
                   [alt]="product.user.name">
                 <p class="pl-1 text-primary">{{product.user.name}}</p>
+              </a>
+            </td>
+            <td>
+              <a
+                *ngIf="product?.toUser?.address"
+                class="flex align-items-center"
+                [routerLink]="['/user']"
+                [queryParams]="{id: product.toUser.address}">
+                <img
+                  class="w-1rem h-1rem border-circle"
+                  [src]="product.toUser.logo"
+                  [alt]="product.toUser.name">
+                <p class="pl-1 text-primary">{{product.toUser.name}}</p>
               </a>
             </td>
             <td>{{product.time}}</td>
