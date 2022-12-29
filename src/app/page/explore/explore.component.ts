@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router,ActivatedRoute,NavigationEnd } from '@angular/router';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
-import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 import { nftTypesArr } from './../../server/database.service';
 import '@angular/localize';
 
@@ -20,7 +19,7 @@ type exploreItem = {
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss']
 })
-export class ExploreComponent extends ToolClassAutoClosePipe implements OnInit {
+export class ExploreComponent implements OnInit,OnDestroy {
   tabbar: tabbarItem = [
     {
       name: $localize`全部`,
@@ -42,11 +41,11 @@ export class ExploreComponent extends ToolClassAutoClosePipe implements OnInit {
   constructor(
     private net: NetService,
     private BaseMessage: BaseMessageService,
-    private routerInfo: ActivatedRoute
+    private routerInfo: ActivatedRoute,
+    private router: Router,
   ) {
-    super();
   }
-
+  navigationSubscription:any;
   ngOnInit(): void {
     this.tabbar.map((item,index) => {
       if (item.id == this.routerInfo.snapshot.queryParams['id']) {
@@ -55,10 +54,24 @@ export class ExploreComponent extends ToolClassAutoClosePipe implements OnInit {
     })
     this.classId = this.tabbar[this.tabbarIndex].id;
     this.getList();
+    this.navigationSubscription = this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.tabbar.map((item,index) => {
+          if (item.id == this.routerInfo.snapshot.queryParams['id']) {
+            this.tabbarIndex = index
+          }
+        })
+        this.classId = this.tabbar[this.tabbarIndex].id;
+        this.getList();
+      }
+    });
+  }
+  ngOnDestroy():void{
+    this.navigationSubscription.unsubscribe()
   }
   getList() {
     // 获取数据
-    this.net.getCollectionList$('',this.classId).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getCollectionList$('',this.classId).pipe().subscribe(({code, data, msg}) => {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.exploreList = data

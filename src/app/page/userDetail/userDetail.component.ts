@@ -184,6 +184,9 @@ export class UserDetailComponent implements OnInit,OnDestroy {
   navigationSubscription:any;
   ngOnInit(): void {
     this.userAddress = this.routerInfo.snapshot.queryParams['id'];
+    if (this.routerInfo.snapshot.queryParams['type'] === 'collection') {
+      this.checkTab(2);
+    }
     this.getInfo();
     if (this.tabActive == 0) {
       this.getNftList();
@@ -225,16 +228,6 @@ export class UserDetailComponent implements OnInit,OnDestroy {
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       this.userInfo = data;
     });
-    this.net.getUserStarList$().pipe().subscribe(data => {
-      if (data.code === 200 && data.data && data.data.length) {
-        this.starNum = data.data.length;
-      }
-    })
-    this.net.getUserStarSellList$().pipe().subscribe(data => {
-      if (data.code === 200 && data.data && data.data.length) {
-        this.fouceNum = data.data.length;
-      }
-    })
   }
   getNftList() {
     this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'',this.userAddress).pipe().subscribe(({code, data, msg}) => {

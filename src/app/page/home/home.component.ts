@@ -23,6 +23,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       name: string;
       collectionName: string;
       id: string;
+      ID:number;
     }[];
 } = {
     initiated: false,
@@ -135,6 +136,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       name: item.NftOriginal.Name,
       collectionName: item.CollectionName,
       id: item.NftOriginal.NftID,
+      ID: item.ID,
     }));
   }
   // 处理资产排行
@@ -163,7 +165,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       favorite: item.IsFocus || false,
       collectionNum: item.AssetCount,
       ownerNum: item.HaveNumber,
-      id: item.CollectionOriginal.ID,
+      id: item.CollectionOriginal.CollectionID,
       nftList: item.Nfts.map((nft: any) => ({
         logo: nft.NftOriginal.Image,
         id: nft.NftOriginal.NftID

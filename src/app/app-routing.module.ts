@@ -103,6 +103,7 @@ const routes: Routes = [
   {
     component: ExploreComponent,
     path: 'explore',
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
   },
   {
     component: AllNftComponent,

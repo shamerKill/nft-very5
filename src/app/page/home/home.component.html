@@ -19,7 +19,8 @@
       <ng-container *ngFor="let item of firstCards.items">
         <p-card
           class="first-pic-container"
-          styleClass="first-pic-card">
+          styleClass="first-pic-card"
+          [routerLink]="['/show/nft/'+item.id]">
           <ng-template pTemplate="header">
             <img class="card-image" [src]="item.image" [alt]="item.name">
           </ng-template>
@@ -46,7 +47,8 @@
           <p-card
             class="first-pic-container"
             styleClass="first-pic-card">
-            <ng-template pTemplate="header">
+            <ng-template pTemplate="header"
+            [routerLink]="['/show/nft/'+item.id]">
               <img class="card-image" [src]="item.image" [alt]="item.name">
             </ng-template>
             <p class="card-name">
@@ -80,7 +82,7 @@
   <p-tabView [activeIndex]="assetsRank.index" (onChange)="onChangeAssetsRankIndex($event.index)">
     <p-tabPanel *ngFor="let rank of assetsRank.list">
       <div class="rank-list flex flex-column flex-wrap justify-content-between w-full overflow-hidden">
-        <div class="rank-card flex align-items-center" *ngFor="let item of rank.data">
+        <div class="rank-card flex align-items-center" *ngFor="let item of rank.data" [routerLink]="['/show/nft/'+item.id]">
           <p class="card-number">{{item.number}}</p>
           <img class="card-logo" [src]="item.logo" [alt]="item.name" />
           <p class="card-name flex-1 pl-2">{{item.name}}</p>
@@ -126,7 +128,7 @@
         *ngFor="let item of artistList.list">
         <p-card styleClass="artist-item px-4 py-3">
           <ng-template pTemplate="header">
-            <div class="flex justify-content-center align-items-center">
+            <div class="flex justify-content-center align-items-center" [routerLink]="['collection']" [queryParams]="{'id':item.id}">
               <img
                 class="artist-logo"
                 [src]="item.logo"
@@ -137,7 +139,7 @@
           </ng-template>
           <div class="artist-show-list flex flex-column flex-wrap align-items-between justify-content-start">
             <div class="artist-show-item" *ngFor="let work of item.nftList">
-              <div class="artist-show-inner">
+              <div class="artist-show-inner" [routerLink]="['/show/nft/'+work.id]">
                 <div class="artist-show-center">
                   <img
                     class="artist-show-img"
@@ -161,7 +163,7 @@
                 i18n-data>
                 {{item.ownerNum}}
               </p>
-              <button class="artist-more">
+              <button class="artist-more" [routerLink]="['collection']" [queryParams]="{'id':item.id}">
                 <i class="pi pi-arrow-right"></i>
               </button>
             </div>
@@ -242,7 +244,7 @@
       <p-tabPanel *ngFor="let markets of exploreMarket.list">
         <div class="explore-list flex flex-wrap justify-content-between">
           <app-loading *ngIf="!markets.loaded" [init-show]="true" [hide-bg]="true"></app-loading>
-          <div class="explore-card flex align-items-center" *ngFor="let item of markets.data">
+          <div class="explore-card flex align-items-center" *ngFor="let item of markets.data" [routerLink]="['/show/nft/'+item.id]">
             <p-card
               class="explore-pic-container"
               styleClass="explore-pic-card">

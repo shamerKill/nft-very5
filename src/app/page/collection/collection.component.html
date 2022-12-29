@@ -1,6 +1,6 @@
 <div class="app-collection">
   <div class="app-collection-top">
-    <img [src]="collectionDetail.BannerImageUrl?collectionDetail.BannerImageUrl:'../../../assets/images/explore/very5bg.png'" alt="">
+    <img class="app-collection-top-banner" [src]="collectionDetail.BannerImageUrl?collectionDetail.BannerImageUrl:'../../../assets/images/explore/very5bg.png'" alt="">
     <div class="app-collection-top-iconList">
       <div class="app-collection-top-iconList-item" (click)="focusCollection()">
         <span class="iconfont icon-aixin" *ngIf="!collectionDetail.IsFocus"></span>
@@ -85,7 +85,7 @@
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <span>{{(collectionDetail.SellingNumber/collectionDetail.AssetCount)*100}}%</span>
+            <span>{{collectionDetail.SellingNumber?((collectionDetail.SellingNumber/collectionDetail.AssetCount)*100):0}}%</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>已刊登</div>
       </div>
