@@ -215,7 +215,6 @@ export class NetService {
         (data): TypeInterfaceNet => {
           if (!data.data) return data;
           const info = data.data.info;
-          const asset = data.data.asset;
           let link = {};
           try {
             link = JSON.parse(info.Link);
@@ -226,8 +225,14 @@ export class NetService {
             mainBg: info.Conver,
             describe: info.Description,
             link: link,
-            balance: asset.balance.amount
           };
+          this.getAccountCoinBalance$('gx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq8rta3w').subscribe(data => {
+            if (data.code === 200 && data.data) {
+              this.database.nowUserInfo = {
+                balance: data.data.balance,
+              };
+            }
+          });
           return data;
         }
       ),
@@ -346,24 +351,6 @@ export class NetService {
    **/
   getMyCollectionList$() {
     return this.$get('v1/my/collection');
-  }
-
-  /**
-   * 获取token列表
-   **/
-  getTokenList$(): Observable<TypeInterfaceNet<any>> {
-    const tokenList = [
-      { name: 'PC', minLen: 6, logo: '../../assets/images/logo/default-avatar.png', contract: '' },
-      { name: 'PUSD', minLen: 6, logo: '../../assets/images/logo/default-avatar.png', contract: 'gx1gjxs8ygvlur2cekxajdnhkl4tkf2vl478w3ew0' },
-    ];
-    this.$get('v1/nft/tokens').subscribe(data => {
-      console.log(data);
-    });
-    const sub = new BehaviorSubject<TypeInterfaceNet<any>>({
-      code: 200,
-      data: tokenList,
-    });
-    return sub.pipe();
   }
 
   /**
@@ -493,6 +480,5 @@ export class NetService {
   getBuyerPrice$(orderID: string) {
     return this.$post('v1/my/match', { orderID });
   }
-
 }
 
