@@ -726,7 +726,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     }
     this.shareShow = false;
   }
-
+  copyText(text?:string) {
+    this.clipboard.copy(text??'');
+  }
   // 处理买家报价
   getBuyerPriceOrder(id: string) {
     this.net.getBuyerPriceOrder$(id).pipe(this.pipeSwitch$()).subscribe(result => {

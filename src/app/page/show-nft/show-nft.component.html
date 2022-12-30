@@ -216,27 +216,36 @@
         <p-tabPanel header="链信息" i18n-header>
           <div *ngIf="productInfo.infoInChain?.contractAddress" class="flex justify-content-between py-1">
             <p i18n>合约地址</p>
-            <a
-              class="text-primary"
-              [href]="'https://www.plugchain.network/v2/addressDetail?id=' + productInfo.infoInChain?.sourceData"
-              target="_blank"
-              i18n>
-              {{productInfo.infoInChain?.contractAddress|centerSlice}}
-            </a>
+            <div class="flex align-items-center">
+              <a
+                class="text-primary"
+                [href]="'https://www.plugchain.network/v2/addressDetail?id=' + productInfo.infoInChain?.contractAddress"
+                target="_blank"
+                i18n>
+                {{productInfo.infoInChain?.contractAddress|centerSlice}}
+              </a>
+              <span class="pl-2 cursor-pointer iconfont icon-fuzhi1" (click)="copyText('https://www.plugchain.network/v2/addressDetail?id=' + productInfo.infoInChain?.contractAddress)"></span>
+            </div>
           </div>
           <div class="flex justify-content-between py-1">
             <p i18n>代币ID</p>
-            <p i18n>{{productInfo.infoInChain?.tokenId|centerSlice}}</p>
+            <div class="flex align-items-center">
+              <p i18n>{{productInfo.infoInChain?.tokenId|centerSlice}}</p>
+              <span class="pl-2 cursor-pointer iconfont icon-fuzhi1" (click)="copyText(productInfo.infoInChain?.tokenId)"></span>
+            </div>
           </div>
           <div class="flex justify-content-between py-1">
             <p i18n>元数据</p>
-            <a
-              class="text-primary"
-              [href]="productInfo.infoInChain?.sourceData"
-              target="_blank"
-              i18n>
-              {{productInfo.infoInChain?.sourceData|centerSlice}}
-            </a>
+            <div class="flex align-items-center">
+              <a
+                class="text-primary"
+                [href]="productInfo.infoInChain?.sourceData"
+                target="_blank"
+                i18n>
+                {{productInfo.infoInChain?.sourceData|centerSlice}}
+              </a>
+              <span class="pl-2 cursor-pointer iconfont icon-fuzhi1" (click)="copyText(productInfo.infoInChain?.sourceData)"></span>
+            </div>
           </div>
         </p-tabPanel>
       </p-tabView>
