@@ -155,7 +155,8 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
       contractAddress: string; // 合约地址
       tokenId: string; // 代币id
       sourceData: string; // 原始数据
-    }
+    };
+    SellingType: number;
   }> = {};
 
   // 卖家列表
@@ -362,7 +363,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     this.productInfo.type = data.nft.Type;
     this.productInfo.contractAddress = data.nft.Token;
     this.productInfo.nowPrice = data.nft.CurrentPrice;
+    this.productInfo.SellingType = data.nft.HaveNfts[0].SellingType;
     this.productInfo.attributes = data.nft.NftOriginal.Attributes.split(',').map((item: string) => {
+
       var li = item.split(':');
       return {key: li[0], value: li[1]};
     }).filter((item: any) => item.key && item.value);
@@ -419,6 +422,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
    * 出售nft
    **/
   onSellNft() {
+    if (this.productInfo.SellingType==2||this.productInfo.SellingType==3) return
     this.router.navigate(['sell/nft', this.productId]);
   }
   /**

@@ -216,6 +216,29 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       this.exploreMarket.index.next(index);
     }
   }
-
-
+  changeOwnData(item:any,index:number) {
+    if (item.favorite) {
+      this.net.putDelStar$('collection', item.id).subscribe(data => {
+        if (data.code !== 200) {
+          item.favorite = true;
+          this.BaseMessage.warn(data.msg??$localize`取消收藏失败`);
+        } else {
+          item.favorite = false;
+          this.BaseMessage.success(data.msg??$localize`取消收藏成功`);
+          this.artistList.list[index] = item;
+        }
+      });
+    } else {
+      this.net.putAddStar$('collection', item.id).subscribe(data => {
+        if (data.code !== 200) {
+          item.favorite = false;
+          this.BaseMessage.warn(data.msg??$localize`收藏失败`);
+        } else {
+          item.favorite = true;
+          this.BaseMessage.success(data.msg??$localize`收藏成功`);
+          this.artistList.list[index] = item;
+        }
+      });
+    }
+  }
 }

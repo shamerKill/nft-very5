@@ -12,6 +12,7 @@
       pButton
       (click)="onSellNft()"
       class="px-6 md:px-8 py-1"
+      [class]="(productInfo.SellingType==2||productInfo.SellingType==3)?'p-button-outlined p-button-plain':''"
       label="出售"
       i18n-label></button>
     <div class="w-1rem"></div>

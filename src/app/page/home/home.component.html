@@ -125,16 +125,17 @@
     >
       <ng-template
         swiperSlide
-        *ngFor="let item of artistList.list">
+        *ngFor="let item of artistList.list;let i=index">
         <p-card styleClass="artist-item px-4 py-3">
           <ng-template pTemplate="header">
-            <div class="flex justify-content-center align-items-center" [routerLink]="['collection']" [queryParams]="{'id':item.id}">
+            <div class="flex justify-content-center align-items-center">
               <img
                 class="artist-logo"
                 [src]="item.logo"
-                [alt]="item.name" />
-              <p class="artist-name flex-1 pl-2">{{item.name}}</p>
-              <i class="artist-collection-icon pi" [ngClass]="item.favorite ? 'pi-star-fill' : 'pi-star'"></i>
+                [alt]="item.name" 
+                [routerLink]="['collection']" [queryParams]="{'id':item.id}"/>
+              <p class="artist-name flex-1 pl-2" [routerLink]="['collection']" [queryParams]="{'id':item.id}">{{item.name}}</p>
+              <i class="artist-collection-icon pi" [ngClass]="item.favorite ? 'pi-star-fill' : 'pi-star'" (click)="changeOwnData(item,i)"></i>
             </div>
           </ng-template>
           <div class="artist-show-list flex flex-column flex-wrap align-items-between justify-content-start">
