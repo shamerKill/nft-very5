@@ -19,7 +19,7 @@
     &-menu{
       position: absolute;
       right: 5rem;
-      top: 12rem;
+      top: 8rem;
       background: #ffffff;
       border: 0 none;
       border-radius: 1rem;
@@ -28,7 +28,7 @@
       padding:0.5rem 0;
       @include media-phone {
         right: 3rem;
-        top: 7rem;
+        top: 1rem;
         border-radius: 0.5rem;
       }
       &-item{

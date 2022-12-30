@@ -413,6 +413,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
    **/
   onReload() {
     this.getNftInfo();
+    this.getTransferListHistory();
   }
   /**
    * 出售nft

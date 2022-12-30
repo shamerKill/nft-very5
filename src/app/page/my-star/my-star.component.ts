@@ -235,7 +235,7 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
               item.isFollow = false;
               return this.message.warn(data.msg??$localize`关注失败`);
             } else {
-              item.isFollow = false;
+              item.isFollow = true;
               return this.message.success(data.msg??$localize`关注成功`);
             }
           });
@@ -266,7 +266,7 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
               item.isFollow = false;
               return this.message.warn(data.msg??$localize`关注失败`);
             } else {
-              item.isFollow = false;
+              item.isFollow = true;
               return this.message.success(data.msg??$localize`关注成功`);
             }
           });
