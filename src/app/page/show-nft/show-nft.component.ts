@@ -1,3 +1,4 @@
+import { ToolFuncNumberMul } from './../../tools/functions/number';
 import { ToolFuncWalletSign } from 'src/app/tools/functions/wallet';
 import { ConfirmationService } from 'primeng/api';
 import { stripHexPrefix, isAddress, encodePacked } from 'web3-utils';
@@ -521,7 +522,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     this.state.globalLoadingSwitch(true);
     this.buyOverview.overviewDisplay = false;
     // pc 不需要查询授权直接执行购买；其他代币需要执行授权查询
-    const willPrice = BigInt(this.chooseItem.maxPrice) * BigInt(Math.pow(10,this.buyOverview.dynamic));
+    const willPrice = BigInt(ToolFuncNumberMul(this.chooseItem.maxPrice, Math.pow(10,this.buyOverview.dynamic).toString()));
     if (this.chooseItem.tokenName == 'PC') {
       this.submitBuy(willPrice);
     } else {
