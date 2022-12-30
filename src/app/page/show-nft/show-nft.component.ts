@@ -769,6 +769,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
           'create': $localize`挂售`,
           'successful': $localize`交易成功`,
           'cancelled': $localize`撤回`,
+          'make': $localize`创建`,
         };
         console.log(result.data);
         this.marketHistoryList = result.data.map((item: any) => {

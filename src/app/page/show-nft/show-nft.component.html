@@ -182,7 +182,8 @@
               <span i18n>创作者版税: </span><span>{{productInfo.incomeRate}}%</span>
             </p>
             <p class="line-height-3 pt-2">
-              {{productInfo.creator?.describe}}
+              <!-- {{productInfo.creator?.describe}} -->
+              {{productInfo.describe}}
             </p>
           </div>
         </p-tabPanel>
@@ -395,7 +396,7 @@
     <div class="w-1rem h-1rem"></div>
     <div class="surface-0 border-round-xl border-1 border-100 overflow-hidden">
       <p class="table-title" i18n>
-        交易历史
+        操作历史
         <span class="text-xs text-600">最新 {{marketHistoryList.length}} 条历史</span>
       </p>
       <p-table [value]="marketHistoryList" responsiveLayout="scroll">
