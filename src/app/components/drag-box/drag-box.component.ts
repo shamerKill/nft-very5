@@ -94,6 +94,7 @@ export class DragBoxComponent implements OnInit {
   onPaste(event: ClipboardEvent) {
     if (event.clipboardData && event.clipboardData.items.length) {
       const items = event.clipboardData.items;
+      console.log(items);
       if (items.length) {
         const item = items[0];
         this.getFileBase64(item).then(dropFile => {
