@@ -88,4 +88,46 @@ export class DragBoxComponent implements OnInit {
     event.preventDefault();
   }
 
+  /**
+   * 读取粘贴板方法
+   **/
+  onPaste(event: ClipboardEvent) {
+    if (event.clipboardData && event.clipboardData.items.length) {
+      const items = event.clipboardData.items;
+      if (items.length) {
+        const item = items[0];
+        this.getFileBase64(item).then(dropFile => {
+          if (dropFile) {
+            this.onDrop.emit({
+              error: null,
+              data: dropFile,
+            });
+          }
+        });
+      }
+    }
+  }
+
+  private async getFileBase64(input: DataTransferItem): Promise<string|undefined> {
+    const file = input.getAsFile();
+    if (!file) return;
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (reader.result instanceof ArrayBuffer) {
+          const buf = new Uint8Array(reader.result);
+          let baseResult = '';
+          for (let i = 0; i < buf.length; i++) {
+            baseResult += String.fromCharCode(buf[i]);
+          }
+          const base = `data:${file.type};base64,` + window.btoa(baseResult);
+          resolve(base);
+        } else {
+          return;
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    });
+  }
+
 }
