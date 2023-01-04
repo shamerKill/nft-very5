@@ -12,6 +12,7 @@
       pButton
       (click)="onSellNft()"
       class="px-6 md:px-8 py-1"
+      [class]="(productInfo.SellingType==2||productInfo.SellingType==3)?'p-button-outlined p-button-plain':''"
       label="出售"
       i18n-label></button>
     <div class="w-1rem"></div>
@@ -182,7 +183,8 @@
               <span i18n>创作者版税: </span><span>{{productInfo.incomeRate}}%</span>
             </p>
             <p class="line-height-3 pt-2">
-              {{productInfo.creator?.describe}}
+              <!-- {{productInfo.creator?.describe}} -->
+              {{productInfo.describe}}
             </p>
           </div>
         </p-tabPanel>
@@ -216,27 +218,36 @@
         <p-tabPanel header="链信息" i18n-header>
           <div *ngIf="productInfo.infoInChain?.contractAddress" class="flex justify-content-between py-1">
             <p i18n>合约地址</p>
-            <a
-              class="text-primary"
-              [href]="'https://www.plugchain.network/v2/addressDetail?id=' + productInfo.infoInChain?.sourceData"
-              target="_blank"
-              i18n>
-              {{productInfo.infoInChain?.contractAddress|centerSlice}}
-            </a>
+            <div class="flex align-items-center">
+              <a
+                class="text-primary"
+                [href]="'https://www.plugchain.network/v2/addressDetail?id=' + productInfo.infoInChain?.contractAddress"
+                target="_blank"
+                i18n>
+                {{productInfo.infoInChain?.contractAddress|centerSlice}}
+              </a>
+              <span class="pl-2 cursor-pointer iconfont icon-fuzhi1" (click)="copyText('https://www.plugchain.network/v2/addressDetail?id=' + productInfo.infoInChain?.contractAddress)"></span>
+            </div>
           </div>
           <div class="flex justify-content-between py-1">
             <p i18n>代币ID</p>
-            <p i18n>{{productInfo.infoInChain?.tokenId|centerSlice}}</p>
+            <div class="flex align-items-center">
+              <p i18n>{{productInfo.infoInChain?.tokenId|centerSlice}}</p>
+              <span class="pl-2 cursor-pointer iconfont icon-fuzhi1" (click)="copyText(productInfo.infoInChain?.tokenId)"></span>
+            </div>
           </div>
           <div class="flex justify-content-between py-1">
             <p i18n>元数据</p>
-            <a
-              class="text-primary"
-              [href]="productInfo.infoInChain?.sourceData"
-              target="_blank"
-              i18n>
-              {{productInfo.infoInChain?.sourceData|centerSlice}}
-            </a>
+            <div class="flex align-items-center">
+              <a
+                class="text-primary"
+                [href]="productInfo.infoInChain?.sourceData"
+                target="_blank"
+                i18n>
+                {{productInfo.infoInChain?.sourceData|centerSlice}}
+              </a>
+              <span class="pl-2 cursor-pointer iconfont icon-fuzhi1" (click)="copyText(productInfo.infoInChain?.sourceData)"></span>
+            </div>
           </div>
         </p-tabPanel>
       </p-tabView>
@@ -386,7 +397,7 @@
     <div class="w-1rem h-1rem"></div>
     <div class="surface-0 border-round-xl border-1 border-100 overflow-hidden">
       <p class="table-title" i18n>
-        交易历史
+        操作历史
         <span class="text-xs text-600">最新 {{marketHistoryList.length}} 条历史</span>
       </p>
       <p-table [value]="marketHistoryList" responsiveLayout="scroll">
@@ -431,7 +442,7 @@
                 <p class="pl-1 text-primary">{{product.toUser.name}}</p>
               </a>
             </td>
-            <td>{{product.time}}</td>
+            <td (click)="goWeb(product.hash)">{{product.time}}</td>
           </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">

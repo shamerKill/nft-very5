@@ -23,5 +23,8 @@ export class TableComponent extends ToolClassAutoClosePipe implements OnInit {
 
   ngOnInit(): void {
   }
-
+  goWeb(link:string) {
+    if (!link) return
+    window.open(`https://www.plugchain.network/v2/transDetail?id=${link}`)
+  }
 }

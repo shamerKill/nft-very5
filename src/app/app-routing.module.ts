@@ -28,6 +28,7 @@ import {ToastModule} from 'primeng/toast';
 import {ConfirmationService} from 'primeng/api';
 import {MenuModule} from 'primeng/menu';
 import {DialogModule} from 'primeng/dialog';
+import {PaginatorModule} from 'primeng/paginator';
 
 
 import { ComponentsModule } from './components/components.module';
@@ -103,22 +104,25 @@ const routes: Routes = [
   {
     component: ExploreComponent,
     path: 'explore',
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
   },
   {
     component: AllNftComponent,
     path: 'nft',
   },
-  // {
-  //   component: SearchComponent,
-  //   path: 'search',
-  // },
+  {
+    component: SearchComponent,
+    path: 'search',
+  },
   {
     component: CollectionComponent,
     path: 'collection',
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
   },
   {
     component: UserDetailComponent,
     path: 'user',
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange'
   },
   {
     component: HomeComponent,
@@ -171,7 +175,8 @@ const routes: Routes = [
     MenuModule,
     PipeModule,
     DialogModule,
-    RouterModule.forRoot(routes),
+    PaginatorModule,
+    RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
   ],
   exports: [
     RouterModule,

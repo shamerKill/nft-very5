@@ -1,104 +1,40 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import '@angular/localize';
+import { BehaviorSubject, debounceTime, fromEvent, zip } from 'rxjs';
 import SwiperCore, { Pagination } from "swiper";
 import { ActivatedRoute } from '@angular/router';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { StateService } from './../../server/state.service';
 
 SwiperCore.use([Pagination]);
 
-type sortItem = {name: string; id: number};
-type exploreItem = {
-  name: string;
-  headImg: string;
-  img: string;
-  id: string;
-}[]
-type NftOriginal= {
-  Name: string; // nft名称
-  NftID: string|number;
-  Image: string; // nft图片
-}
-type nftItem = {
-  Sellinglype:string; // 正在售卖类型（1：一口价,2拍卖）
-  CollectionName: string; // 集合名称
-  CollectionID: string|number;
-  NftOriginal: NftOriginal;
-  CurrentPrice: string|number;
-}
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent extends ToolClassAutoClosePipe implements OnInit {
-  sortList:sortItem[]=[
-    {
-      name: $localize`最近转移`,
-      id: 1
-    },{
-      name: $localize`最近上架`,
-      id: 2
-    },{
-      name: $localize`最近创建`,
-      id: 3
-    },{
-      name: $localize`最近卖出`,
-      id: 4
-    },{
-      name: $localize`最近结束`,
-      id: 5
-    },{
-      name: $localize`价格：从低到高`,
-      id: 6
-    },{
-      name: $localize`价格：从高到底`,
-      id: 7
-    },{
-      name: $localize`销售最高`,
-      id: 8
-    }
-  ];
-  exploreList: exploreItem = [
-    {
-      name: 'NFT Brtod',
-      headImg: '../../../assets/images/explore/imgs.png',
-      img: '../../../assets/images/explore/sb.jpeg',
-      id: '1'
-    },{
-      name: 'NFT Brtod',
-      headImg: '../../../assets/images/explore/imgs.png',
-      img: '../../../assets/images/explore/sb1.jpeg',
-      id: '2'
-    },{
-      name: 'NFT Brtod',
-      headImg: '../../../assets/images/explore/imgs.png',
-      img: '../../../assets/images/explore/sb1.jpeg',
-      id: '2'
-    },{
-      name: 'NFT Brtod',
-      headImg: '../../../assets/images/explore/imgs.png',
-      img: '../../../assets/images/explore/sb1.jpeg',
-      id: '2'
-    },{
-      name: 'NFT Brtod',
-      headImg: '../../../assets/images/explore/imgs.png',
-      img: '../../../assets/images/explore/sb1.jpeg',
-      id: '2'
-    },{
-      name: 'NFT Brtod',
-      headImg: '../../../assets/images/explore/imgs.png',
-      img: '../../../assets/images/explore/sb1.jpeg',
-      id: '2'
-    },{
-      name: 'NFT Brtod',
-      headImg: '../../../assets/images/explore/imgs.png',
-      img: '../../../assets/images/explore/sb1.jpeg',
-      id: '2'
-    }
-  ];
-  nftList: nftItem[] = [];
+export class SearchComponent extends ToolClassAutoClosePipe implements OnInit,AfterViewInit {
+  @ViewChild('searchInput')
+  searchContent?: ElementRef<HTMLInputElement>;
+
+  // 搜索结果
+  searchResult: {
+    [key in 'nft'|'collection'|'user']: {
+      id: string;
+      headImg: string;
+      name: string;
+      describe: string;
+      img: string;
+    }[];
+  } & {loading: boolean; selected: number;} = {
+    selected: 0,
+    loading: false,
+    nft: [],
+    collection: [],
+    user: [],
+  };
   listType:number=1;
   switchList(type:number) {
     this.listType = type;
@@ -106,24 +42,103 @@ export class SearchComponent extends ToolClassAutoClosePipe implements OnInit {
   constructor(
     private net: NetService,
     private BaseMessage: BaseMessageService,
-    private routerInfo: ActivatedRoute
+    private routerInfo: ActivatedRoute,
+    private state: StateService,
   ) {
     super();
   }
-  searchStr: string='';
+  searchText: string='';
   ngOnInit(): void {
-    this.searchStr = this.routerInfo.snapshot.queryParams['id'];
-    this.getList();
   }
-  getList() {
-    // 获取数据
-    this.net.getSearchNftList$(this.searchStr).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
-      if (code !== 200) return this.BaseMessage.warn(msg??'');
-      this.nftList = data
-    });
-    this.net.getSearchCollectionList$(this.searchStr).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
-      if (code !== 200) return this.BaseMessage.warn(msg??'');
-      console.log(data)
+  ngAfterViewInit(): void {
+    this.addSearchListen();
+  }
+
+  // 添加search监听
+  private addSearchListen() {
+    if (this.searchContent) {
+      let timer: number;
+      fromEvent(this.searchContent.nativeElement, 'input').pipe(
+        debounceTime(1000)
+      ).subscribe(data => {
+        const target = data.target as HTMLInputElement;
+        if (target.value === '') {
+          clearTimeout(timer);
+          this.searchResult = {
+            selected: 0,
+            loading: false,
+            nft: [],
+            collection: [],
+            user: []
+          };
+        }
+        if (this.searchResult.loading) {
+          clearTimeout(timer);
+          timer = setInterval(() => {
+            if (!this.searchResult.loading) {
+              this.searchFromNet(target.value);
+              clearTimeout(timer);
+            }
+          }, 1000) as unknown as number;
+        } else {
+          this.searchFromNet(target.value);
+        }
+      });
+    }
+  }
+  // 搜索内容
+  private searchFromNet(value: string) {
+    this.searchResult.loading = true;
+    this.state.globalLoadingSwitch(true);
+    zip([
+      this.net.getSearchContent$('nft', value),
+      this.net.getSearchContent$('collection', value),
+      this.net.getSearchContent$('user', value),
+    ]).subscribe(([nft, collection, user]) => {
+      this.searchResult.loading = false;
+      this.state.globalLoadingSwitch(false);
+      this.searchResult.nft = [];
+      this.searchResult.collection = [];
+      this.searchResult.user = [];
+      if (nft.code === 200 && nft.data && nft.data.length) {
+        this.searchResult.nft = nft.data.map((item: any) => {
+          return {
+            id: item.NftID,
+            headImg: item.Image||'../../assets/images/logo/default-avatar@2x.png',
+            name: item.Name,
+            describe: item.Description,
+          };
+        });
+      }
+      if (collection.code === 200 && collection.data && collection.data.length) {
+        this.searchResult.collection = collection.data.map((item: any) => {
+          return {
+            id: item.CollectionID,
+            headImg: item.Image||'../../assets/images/logo/default-avatar@2x.png',
+            name: item.Name,
+            describe: item.Description,
+          };
+        });
+      }
+      if (user.code === 200 && user.data && user.data.length) {
+        this.searchResult.user = user.data.map((item: any) => {
+          return {
+            id: item.Address,
+            headImg: item.Avator||'../../assets/images/logo/default-avatar@2x.png',
+            name: item.Name,
+            describe: item.Description,
+          };
+        });
+      }
+      if (this.searchResult.nft.length) {
+        this.searchResult.selected = 1;
+      } else if (this.searchResult.collection.length) {
+        this.searchResult.selected = 2;
+      } else if (this.searchResult.user.length) {
+        this.searchResult.selected = 3;
+      } else {
+        this.searchResult.selected = 0;
+      }
     });
   }
 }

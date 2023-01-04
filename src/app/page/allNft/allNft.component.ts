@@ -98,7 +98,6 @@ export class AllNftComponent extends ToolClassAutoClosePipe implements OnInit {
   }
   filterChange(event:filterObj) {
     this.filterObj = event;
-    console.log(this.filterObj)
     this.getNftList();
   }
   getNftList() {

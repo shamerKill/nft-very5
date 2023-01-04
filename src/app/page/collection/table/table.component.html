@@ -11,11 +11,12 @@
     </div>
     <div class="table-content-list-item flex align-items-center justify-content-between" *ngFor="let item of list">
       <div class="table-content-list-item-item flex align-items-center">
-        <span class="iconfont icon-chuangjiang" *ngIf="item.EventType =='create'"></span>
-        <span class="iconfont icon-jiaoyi" *ngIf="item.EventType =='successful'"></span>
-        <span class="iconfont icon-paimai" *ngIf="item.EventType =='cancelled'"></span>
-        <span class="iconfont icon-shangjia" *ngIf="item.EventType =='make'"></span>
-        <span>{{item.EventType =='make'?'创建':item.EventType =='successful'?'销售':item.EventType =='cancelled'?'取消':item.EventType =='create'?'拍卖':''}}</span>
+        <span class="iconfont icon-shangjia" *ngIf="item.EventType =='create'"></span>
+        <span class="iconfont icon-paimai" *ngIf="item.EventType =='successful'"></span>
+        <span class="iconfont icon-biaoq" *ngIf="item.EventType =='cancelled'"></span>
+        <span class="iconfont icon-jiaoyi" *ngIf="item.EventType =='transfer'"></span>
+        <span class="iconfont icon-chuangjiang" *ngIf="item.EventType =='make'"></span>
+        <span>{{item.EventType =='make'?'创建':item.EventType =='successful'?'销售':item.EventType =='cancelled'?'取消':item.EventType =='create'?'拍卖':item.EventType =='transfer'?'赠送':''}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center" [routerLink]="['/show/nft/'+item.Nft.NftOriginal.NftID]">
         <img [src]="item.Nft.NftOriginal.Image" alt="">
@@ -26,17 +27,17 @@
         <span>{{item.TotalPrice}}{{item.PaymentToken}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center">
-        1
+        {{item.BidAmount|bigNum}}
       </div>
       <div class="table-content-list-item-item flex align-items-center active" [routerLink]="['/user']" [queryParams]="{'id':item.FromAddress}">
-        <img [src]="item.FromAccount.Avator" alt="">
+        <img [src]="item.FromAccount.Avator" alt="" *ngIf="item.FromAddress">
         <span>{{item.FromAccount.Name}}</span>
       </div>
       <div class="table-content-list-item-item flex align-items-center active" [routerLink]="['/user']" [queryParams]="{'id':item.ToAddress}">
-        <img [src]="item.ToAccount.Avator" alt="">
+        <img [src]="item.ToAccount.Avator" alt="" *ngIf="item.ToAddress">
         <span>{{item.ToAccount.Name}}</span>
       </div>
-      <div class="table-content-list-item-item flex align-items-center">
+      <div class="table-content-list-item-item flex align-items-center" (click)="goWeb(item.Hash)">
         {{item.UpdateTime}}
       </div>
     </div>

@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router,ActivatedRoute,NavigationEnd } from '@angular/router';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
-import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
 import { nftTypesArr } from './../../server/database.service';
+import { StateService } from './../../server/state.service';
 import '@angular/localize';
-
+interface pageObj {
+  first: number,
+  page: number,
+  pageCount: number,
+  rows: number,
+}
 type tabbarItem = {name: string; id: string}[];
 type exploreItem = {
   BannerImageUrl:string,
@@ -20,7 +25,7 @@ type exploreItem = {
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss']
 })
-export class ExploreComponent extends ToolClassAutoClosePipe implements OnInit {
+export class ExploreComponent implements OnInit,OnDestroy {
   tabbar: tabbarItem = [
     {
       name: $localize`全部`,
@@ -34,20 +39,28 @@ export class ExploreComponent extends ToolClassAutoClosePipe implements OnInit {
   tabbarIndex: number = 0;
   exploreList: exploreItem[] = [];
   classId: string = '';
+  public total!: number;
+  public page!: number;
+  public pageSize!: number;
   changeIndex(i:number) {
     this.tabbarIndex = i;
     this.classId = this.tabbar[this.tabbarIndex].id;
+    this.pageSize = 10;
+    this.total = 0;
+    this.page = 1;
     this.getList();
   }
   constructor(
     private net: NetService,
     private BaseMessage: BaseMessageService,
-    private routerInfo: ActivatedRoute
+    private routerInfo: ActivatedRoute,
+    private router: Router,
+    private state: StateService,
   ) {
-    super();
   }
-
+  navigationSubscription:any;
   ngOnInit(): void {
+    this.state.globalLoadingSwitch(true);
     this.tabbar.map((item,index) => {
       if (item.id == this.routerInfo.snapshot.queryParams['id']) {
         this.tabbarIndex = index
@@ -55,10 +68,31 @@ export class ExploreComponent extends ToolClassAutoClosePipe implements OnInit {
     })
     this.classId = this.tabbar[this.tabbarIndex].id;
     this.getList();
+    this.navigationSubscription = this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.state.globalLoadingSwitch(true);
+        this.tabbar.map((item,index) => {
+          if (item.id == this.routerInfo.snapshot.queryParams['id']) {
+            this.tabbarIndex = index
+          }
+        })
+        this.classId = this.tabbar[this.tabbarIndex].id;
+        this.getList();
+      }
+    });
+  }
+  ngOnDestroy():void{
+    this.navigationSubscription.unsubscribe()
+  }
+  paginate(e:pageObj){
+    this.pageSize = e.rows;
+    this.page = e.page+1;
+    this.getList();
   }
   getList() {
     // 获取数据
-    this.net.getCollectionList$('',this.classId).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getCollectionList$('',this.classId,this.page,this.pageSize).pipe().subscribe(({code, data, msg}) => {
+      this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.exploreList = data

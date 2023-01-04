@@ -13,7 +13,7 @@
                 styleClass="surface-900 p-2"
                 class="surface-900">
                 <ng-template pTemplate="header">
-                  <div class="card-header-inner">
+                  <div class="card-header-inner" [routerLink]="['/show/nft/'+item.id]">
                     <div class="card-header-center">
                       <img
                         class="w-full h-full card-image fit-contain"
@@ -23,11 +23,11 @@
                   </div>
                 </ng-template>
                 <ng-template pTemplate="body">
-                  <div class="flex justify-content-between text-500">
+                  <div class="flex justify-content-between text-500" [routerLink]="['/collection']" [queryParams]="{'id':item.collectionInfo.id}">
                     <p class="text-xs">{{item.collectionInfo.name}}</p>
                     <i class="iconfont text-xl" [ngClass]="item.auctionInfo.inAuctioning ? 'icon-paimai' : 'icon-biaoq'"></i>
                   </div>
-                  <p class="text-0 py-2">
+                  <p class="text-0 py-2" [routerLink]="['/show/nft/'+item.id]">
                     {{item.name}}
                   </p>
                   <div class="flex align-items-center pt-2">
@@ -49,6 +49,10 @@
                   </div>
                 </ng-template>
               </p-card>
+            </div>
+            <div class="mx-auto flex flex-column align-items-center py-6" *ngIf="starTableData.length==0">
+              <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+              <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
             </div>
           </div>
         </p-tabPanel>
@@ -121,17 +125,17 @@
               class="w-full md:w-6 lg:w-3 px-2 pb-4"
               *ngFor="let item of collectionTableData">
               <div class="border-round-lg overflow-hidden">
-                <div class="w-full surface-200 h-7rem">
+                <div class="w-full surface-200 h-7rem" [routerLink]="['/collection']" [queryParams]="{'id':item.id}">
                   <img class="w-full h-7rem card-image" [src]="item.bgImage" [alt]="item.name">
                 </div>
                 <div class="collection-info flex justify-content-between align-items-end">
-                  <div class="border-circle border-0">
+                  <div class="border-circle border-0" [routerLink]="['/collection']" [queryParams]="{'id':item.id}">
                     <img
                       class="surface-200 w-3rem h-3rem border-circle"
                       [src]="item.mainImage"
                       [alt]="item.name">
                   </div>
-                  <div class="flex-1 overflow-hidden">
+                  <div class="flex-1 overflow-hidden" [routerLink]="['/collection']" [queryParams]="{'id':item.id}">
                     <p class="font-bold white-space-nowrap text-overflow-ellipsis w-full overflow-hidden line-height-4">
                       {{item.name}} - {{item.describe}}
                     </p>
@@ -144,6 +148,10 @@
                     [icon]="item.isFollow ? 'pi pi-heart-fill' : 'pi pi-heart'"></button>
                 </div>
               </div>
+            </div>
+            <div class="mx-auto flex flex-column align-items-center py-6" *ngIf="collectionTableData.length==0">
+              <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+              <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
             </div>
           </div>
         </p-tabPanel>

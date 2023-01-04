@@ -47,7 +47,7 @@
     <button
       pButton
       class="p-button-text"
-      icon="iconfont icon-sousuo"></button>
+      icon="iconfont icon-sousuo" [routerLink]="['/search']"></button>
     <button
       pButton
       (click)="onChangeWebMenuType(webMenuType === 0 ? 1 : 0)"
@@ -132,7 +132,7 @@
           <div class="search-content-scroll">
             <div
               class="flex py-2 cursor-pointer align-items-center border-bottom-1 border-200"
-              *ngFor="let item of searchResult.nft">
+              *ngFor="let item of searchResult.nft" [routerLink]="['/show/nft/'+item.id]">
               <img
               class="w-2rem h-2rem fit-contain"
                 [src]="item.logo"
@@ -153,7 +153,7 @@
           <div class="search-content-scroll">
             <div
               class="flex py-2 cursor-pointer align-items-center border-bottom-1 border-200"
-              *ngFor="let item of searchResult.collection">
+              *ngFor="let item of searchResult.collection" [routerLink]="['/collection']" [queryParams]="{'id':item.id}">
               <img
               class="w-2rem h-2rem fit-contain"
                 [src]="item.logo"
@@ -174,7 +174,7 @@
           <div class="search-content-scroll">
             <div
               class="flex py-2 cursor-pointer align-items-center border-bottom-1 border-200"
-              *ngFor="let item of searchResult.user">
+              *ngFor="let item of searchResult.user" [routerLink]="['/user']" [queryParams]="{'id':item.id}">
               <img
               class="w-2rem h-2rem fit-contain border-circle"
                 [src]="item.logo"

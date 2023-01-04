@@ -68,7 +68,7 @@ export class UserMenuComponent extends ToolClassAutoClosePipe implements OnInit 
     this.database.nowUserInfo$.pipe(this.pipeSwitch$()).subscribe(data => {
       if (data?.avatar) this.userInfo.avatar = data.avatar;
       if (data?.name) this.userInfo.name = data.name;
-      if (data?.balance) this.tokenNumber.base = ToolFuncNumberDiv(data.balance, (10**6).toString(), { places: 6 });
+      if (data?.balance) this.tokenNumber.base = data.balance;
       if (data?.balanceDollar) this.tokenNumber.usd = data.balanceDollar;
     });
   }

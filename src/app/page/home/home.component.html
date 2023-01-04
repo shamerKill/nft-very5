@@ -19,7 +19,8 @@
       <ng-container *ngFor="let item of firstCards.items">
         <p-card
           class="first-pic-container"
-          styleClass="first-pic-card">
+          styleClass="first-pic-card"
+          [routerLink]="['/show/nft/'+item.id]">
           <ng-template pTemplate="header">
             <img class="card-image" [src]="item.image" [alt]="item.name">
           </ng-template>
@@ -45,7 +46,8 @@
           *ngFor="let item of firstCards.items">
           <p-card
             class="first-pic-container"
-            styleClass="first-pic-card">
+            styleClass="first-pic-card"
+            [routerLink]="['/show/nft/'+item.id]">
             <ng-template pTemplate="header">
               <img class="card-image" [src]="item.image" [alt]="item.name">
             </ng-template>
@@ -81,10 +83,10 @@
     <p-tabPanel *ngFor="let rank of assetsRank.list">
       <div class="rank-list flex flex-column flex-wrap justify-content-between w-full overflow-hidden">
         <div class="rank-card flex align-items-center" *ngFor="let item of rank.data">
-          <p class="card-number">{{item.number}}</p>
-          <img class="card-logo" [src]="item.logo" [alt]="item.name" />
-          <p class="card-name flex-1 pl-2">{{item.name}}</p>
-          <div class="card-assets">
+          <p class="card-number" [routerLink]="['/show/nft/'+item.id]">{{item.number}}</p>
+          <img class="card-logo" [src]="item.logo" [alt]="item.name"  [routerLink]="['/show/nft/'+item.id]"/>
+          <p class="card-name flex-1 pl-2" [routerLink]="['/show/nft/'+item.id]">{{item.name}}</p>
+          <div class="card-assets" [routerLink]="['/show/nft/'+item.id]">
             <p class="card-change" [ngClass]="item.direction ? 'card-change-up' : 'card-change-down'">
               {{item.chgRate}}
             </p>
@@ -123,21 +125,22 @@
     >
       <ng-template
         swiperSlide
-        *ngFor="let item of artistList.list">
+        *ngFor="let item of artistList.list;let i=index">
         <p-card styleClass="artist-item px-4 py-3">
           <ng-template pTemplate="header">
             <div class="flex justify-content-center align-items-center">
               <img
                 class="artist-logo"
                 [src]="item.logo"
-                [alt]="item.name" />
-              <p class="artist-name flex-1 pl-2">{{item.name}}</p>
-              <i class="artist-collection-icon pi" [ngClass]="item.favorite ? 'pi-star-fill' : 'pi-star'"></i>
+                [alt]="item.name" 
+                [routerLink]="['collection']" [queryParams]="{'id':item.id}"/>
+              <p class="artist-name flex-1 pl-2" [routerLink]="['collection']" [queryParams]="{'id':item.id}">{{item.name}}</p>
+              <i class="artist-collection-icon pi" [ngClass]="item.favorite ? 'pi-star-fill' : 'pi-star'" (click)="changeOwnData(item,i)"></i>
             </div>
           </ng-template>
           <div class="artist-show-list flex flex-column flex-wrap align-items-between justify-content-start">
             <div class="artist-show-item" *ngFor="let work of item.nftList">
-              <div class="artist-show-inner">
+              <div class="artist-show-inner" [routerLink]="['/show/nft/'+work.id]">
                 <div class="artist-show-center">
                   <img
                     class="artist-show-img"
@@ -161,7 +164,7 @@
                 i18n-data>
                 {{item.ownerNum}}
               </p>
-              <button class="artist-more">
+              <button class="artist-more" [routerLink]="['collection']" [queryParams]="{'id':item.id}">
                 <i class="pi pi-arrow-right"></i>
               </button>
             </div>
@@ -247,7 +250,7 @@
               class="explore-pic-container"
               styleClass="explore-pic-card">
               <ng-template pTemplate="header">
-                <div class="card-header-inner">
+                <div class="card-header-inner" [routerLink]="['/show/nft/'+item.id]">
                   <div class="card-header-center">
                     <img
                       class="card-image"
@@ -256,11 +259,11 @@
                   </div>
                 </div>
               </ng-template>
-              <div class="card-owner flex justify-content-between align-items-center">
+              <div class="card-owner flex justify-content-between align-items-center" [routerLink]="['/show/nft/'+item.id]">
                 <p class="card-owner-name">{{item.collectionName}}</p>
                 <i class="card-sell-type iconfont" [ngClass]="{'icon-paimai': item.sellType === 2, 'icon-biaoq': item.sellType === 1}"></i>
               </div>
-              <div class="card-info flex justify-content-between align-items-center">
+              <div class="card-info flex justify-content-between align-items-center" [routerLink]="['/show/nft/'+item.id]">
                 <p class="card-info-name">{{item.name}}</p>
                 <div class="card-info-price flex align-items-center">
                   <img class="card-price-unit" src="../../../assets/images/home/plug-logo.png" alt="plug">

@@ -5,9 +5,13 @@
     height: 17.5rem;
     position: relative;
     background: #CED4D9;
-    img{
+    overflow: hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    &-banner{
       width: 100%;
-      height: 100%;
+      // height: 100%;
     }
     @include media-phone {
       height: 10rem;
@@ -15,7 +19,7 @@
     &-menu{
       position: absolute;
       right: 5rem;
-      top: 12rem;
+      top: 8rem;
       background: #ffffff;
       border: 0 none;
       border-radius: 1rem;
@@ -24,7 +28,7 @@
       padding:0.5rem 0;
       @include media-phone {
         right: 3rem;
-        top: 7rem;
+        top: 1rem;
         border-radius: 0.5rem;
       }
       &-item{

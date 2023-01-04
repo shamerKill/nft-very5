@@ -72,7 +72,8 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
       contractAddress: string; // 合约地址
       tokenId: string; // 代币id
       sourceData: string; // 原始数据
-    }
+    };
+    SellingType:number;
   }> = {};
 
   // 出售类型 fixed / float
@@ -152,6 +153,7 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
         this.productInfo.createdNum = data.nft.CreatorNumber;
         this.productInfo.followerVol = data.collectPeople;
         this.productInfo.ownerNum = data.havePeople;
+        this.productInfo.SellingType = data.nft.HaveNfts[0].SellingType;
         this.checkNftOwner(data.nft.HaveNfts);
         this.getTransferFee(data.nft.CollectionID);
         this.getCollectionInfo(data.nft.CollectionID);
@@ -209,6 +211,7 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
 
   // 切换类型
   onChangeSellType(type: string) {
+    if (this.productInfo.SellingType == 1 && type == 'float') return
     this.sellType = type;
     if (this.sellType === 'float') {
       if (this.selectedBuyToken[0].token === 'gx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq8rta3w') {
@@ -258,6 +261,7 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
             this.state.globalLoadingSwitch(false);
             if (res.code === 200) {
               this.message.success($localize`挂售成功`);
+              this.location.back();
             } else {
               this.message.warn(res.msg??$localize`挂售失败`);
             }

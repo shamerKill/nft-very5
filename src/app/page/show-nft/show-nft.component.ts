@@ -155,7 +155,8 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
       contractAddress: string; // 合约地址
       tokenId: string; // 代币id
       sourceData: string; // 原始数据
-    }
+    };
+    SellingType: number;
   }> = {};
 
   // 卖家列表
@@ -216,6 +217,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     }
     time: string, // 过去时间
     sellNum: number; // 出售数量
+    hash:string; // 交易哈希
   }[] = [];
 
   // 更多推荐
@@ -362,7 +364,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     this.productInfo.type = data.nft.Type;
     this.productInfo.contractAddress = data.nft.Token;
     this.productInfo.nowPrice = data.nft.CurrentPrice;
+    this.productInfo.SellingType = data.nft.HaveNfts[0].SellingType;
     this.productInfo.attributes = data.nft.NftOriginal.Attributes.split(',').map((item: string) => {
+
       var li = item.split(':');
       return {key: li[0], value: li[1]};
     }).filter((item: any) => item.key && item.value);
@@ -413,11 +417,13 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
    **/
   onReload() {
     this.getNftInfo();
+    this.getTransferListHistory();
   }
   /**
    * 出售nft
    **/
   onSellNft() {
+    if (this.productInfo.SellingType==2||this.productInfo.SellingType==3) return
     this.router.navigate(['sell/nft', this.productId]);
   }
   /**
@@ -727,7 +733,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     }
     this.shareShow = false;
   }
-
+  copyText(text?:string) {
+    this.clipboard.copy(text??'');
+  }
   // 处理买家报价
   getBuyerPriceOrder(id: string) {
     this.net.getBuyerPriceOrder$(id).pipe(this.pipeSwitch$()).subscribe(result => {
@@ -767,6 +775,8 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
           'create': $localize`挂售`,
           'successful': $localize`交易成功`,
           'cancelled': $localize`撤回`,
+          'make': $localize`创建`,
+          'transfer': $localize`赠送`,
         };
         console.log(result.data);
         this.marketHistoryList = result.data.map((item: any) => {
@@ -785,6 +795,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
               address: item.ToAccount.Address,
             },
             time: dayjs(item.CreatedAt).fromNow(),
+            hash: item.Hash
           };
         }).slice(0, 10);
       }
@@ -861,5 +872,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
         });
       },
     });
+  }
+  goWeb(link:string) {
+    if (!link) return
+    window.open(`https://www.plugchain.network/v2/transDetail?id=${link}`)
   }
 }

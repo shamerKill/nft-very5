@@ -338,6 +338,7 @@
       height: $cardHeight;
       box-sizing: border-box;
       max-width: 20rem;
+      cursor: pointer;
     }
     .card {
       &-number {

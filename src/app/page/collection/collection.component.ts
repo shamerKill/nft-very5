@@ -1,11 +1,10 @@
 import { StateService } from './../../server/state.service';
 import { ClipboardService } from 'ngx-clipboard';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
-import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
-import { Router } from '@angular/router';
+import { Router,NavigationEnd } from '@angular/router';
 import * as dayjs from 'dayjs';
 
 type sortItem = {name: string; id: string};
@@ -70,7 +69,7 @@ type shareItem = {
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss']
 })
-export class CollectionComponent extends ToolClassAutoClosePipe implements OnInit {
+export class CollectionComponent implements OnInit,OnDestroy {
   // 是否可以编辑
   canEdit = false;
 
@@ -182,17 +181,27 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     private state: StateService,
     private router: Router,
   ) {
-    super();
   }
   collectionId: string='';
+  navigationSubscription:any;
   ngOnInit(): void {
     this.collectionId = this.routerInfo.snapshot.queryParams['id'];
     this.getInfo();
     this.getNftList();
     this.getTransList()
+    this.navigationSubscription = this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.collectionId = this.routerInfo.snapshot.queryParams['id'];
+        this.getInfo();
+        this.getNftList();
+        this.getTransList()
+      }
+    })
+  }
+  ngOnDestroy():void{
+    this.navigationSubscription.unsubscribe()
   }
   filterChange(event:outputObj) {
-    console.log(event)
     this.filterObj = event;
     if (this.tabActive == 0) {
       this.getNftList();
@@ -201,12 +210,14 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     }
   }
   getInfo() {
+    this.state.globalLoadingSwitch(true);
     // 获取数据
-    this.net.getCollectionDetail$(this.collectionId).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getCollectionDetail$(this.collectionId).pipe().subscribe(({code, data, msg}) => {
+      this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       this.collectionDetail = data;
       this.collectionDetail.CollectionOriginal.CreatedAt = dayjs.unix(this.collectionDetail.CollectionOriginal.Created).format('YYYY-MM-DD')
-      this.state.linkedWallet$.pipe(this.pipeSwitch$()).subscribe(({accountAddress}) => {
+      this.state.linkedWallet$.pipe().subscribe(({accountAddress}) => {
         if (accountAddress === data.CreatorAccount.Address) {
           this.canEdit = true;
         }
@@ -214,8 +225,10 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     });
   }
   getNftList() {
+    this.state.globalLoadingSwitch(true);
     // 获取数据
-    this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,this.collectionId).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,this.collectionId).pipe().subscribe(({code, data, msg}) => {
+      this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.nftList = data
@@ -225,7 +238,9 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
     });
   }
   getTransList() {
-    this.net.getUserTrans$(this.collectionId,'',this.filterObj.sell,'').pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.state.globalLoadingSwitch(true);
+    this.net.getUserTrans$(this.collectionId,'',this.filterObj.sell,'').pipe().subscribe(({code, data, msg}) => {
+      this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {
         this.transList = data;
@@ -244,7 +259,9 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
   // postAddFocus$
   focusCollection() {
     if (this.collectionDetail.IsFocus) {
+      this.state.globalLoadingSwitch(true);
       this.net.postDelFocus$(this.collectionId).subscribe(res => {
+        this.state.globalLoadingSwitch(false);
         if (res.code !== 200) return this.BaseMessage.warn(res.msg??'');
         if (res.code === 200) {
           this.BaseMessage.success($localize`取消成功`);
@@ -253,7 +270,9 @@ export class CollectionComponent extends ToolClassAutoClosePipe implements OnIni
         }
       });
     } else {
+      this.state.globalLoadingSwitch(true);
       this.net.postAddFocus$(this.collectionId).subscribe(res => {
+        this.state.globalLoadingSwitch(false);
         if (res.code !== 200) return this.BaseMessage.warn(res.msg??'');
         if (res.code === 200) {
           this.BaseMessage.success($localize`收藏成功`);

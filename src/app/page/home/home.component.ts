@@ -23,6 +23,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       name: string;
       collectionName: string;
       id: string;
+      ID:number;
     }[];
 } = {
     initiated: false,
@@ -135,6 +136,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       name: item.NftOriginal.Name,
       collectionName: item.CollectionName,
       id: item.NftOriginal.NftID,
+      ID: item.ID,
     }));
   }
   // 处理资产排行
@@ -163,7 +165,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       favorite: item.IsFocus || false,
       collectionNum: item.AssetCount,
       ownerNum: item.HaveNumber,
-      id: item.CollectionOriginal.ID,
+      id: item.CollectionOriginal.CollectionID,
       nftList: item.Nfts.map((nft: any) => ({
         logo: nft.NftOriginal.Image,
         id: nft.NftOriginal.NftID
@@ -214,6 +216,29 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
       this.exploreMarket.index.next(index);
     }
   }
-
-
+  changeOwnData(item:any,index:number) {
+    if (item.favorite) {
+      this.net.putDelStar$('collection', item.id).subscribe(data => {
+        if (data.code !== 200) {
+          item.favorite = true;
+          this.BaseMessage.warn(data.msg??$localize`取消收藏失败`);
+        } else {
+          item.favorite = false;
+          this.BaseMessage.success(data.msg??$localize`取消收藏成功`);
+          this.artistList.list[index] = item;
+        }
+      });
+    } else {
+      this.net.putAddStar$('collection', item.id).subscribe(data => {
+        if (data.code !== 200) {
+          item.favorite = false;
+          this.BaseMessage.warn(data.msg??$localize`收藏失败`);
+        } else {
+          item.favorite = true;
+          this.BaseMessage.success(data.msg??$localize`收藏成功`);
+          this.artistList.list[index] = item;
+        }
+      });
+    }
+  }
 }

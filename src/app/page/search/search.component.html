@@ -1,66 +1,117 @@
 <div class="content-nft">
-  <!-- <app-filter-box></app-filter-box> -->
   <div class="list-box">
-    <div class="list-box-name" i18n>合集结果</div>
-    <div class="list-box-swiper">
-      <swiper
-        [slidesPerView]="'auto'"
-        [spaceBetween]="30"
-        [pagination]="{
-          clickable: true
-        }"
-        class="artist-swiper"
-      >
-        <ng-template
-          swiperSlide
-          *ngFor="let item of exploreList">
-          <gather-item [item]="item"></gather-item>
-        </ng-template>
-      </swiper>
+    <div class="flex flex-1 justify-content-end pb-4">
+      <label class="header-input p-input-icon-right w-full">
+        <i class="pi pi-search"></i>
+        <input
+          #searchInput
+          class="w-full"
+          i18n-placeholder
+          placeholder="搜索收藏品、合集、以及账户"
+          type="text"
+          pInputText
+          [(ngModel)]="searchText" >
+        <button class="header-input-search" type="submit"></button>
+      </label>
     </div>
-    <div class="list-box-name" i18n>用户结果</div>
-    <div class="list-box-swiper">
-      <swiper
-        [slidesPerView]="'auto'"
-        [spaceBetween]="30"
-        [pagination]="{
-          clickable: true
-        }"
-        class="user-swiper"
-      >
-        <ng-template
-          swiperSlide
-          class="user-slide"
-          *ngFor="let item of exploreList">
-          <app-user></app-user>
-        </ng-template>
-      </swiper>
-    </div>
-    <div class="list-box-name" i18n>收藏品结果</div>
-    <div class="list-box-title flex align-items-center justify-content-between">
-      <div class="list-box-title-total flex align-items-center">
-        <div class="list-box-title-total-icon flex align-items-center justify-content-center">
-          <span class="iconfont icon-shuaxin"></span>
-        </div>
-        <div class="list-box-title-total-num">1,104,299<span i18n> 结果</span></div>
-      </div>
-      <div class="list-box-title-sort flex align-items-center">
-        <p-dropdown [options]="sortList" optionLabel="name" placeholder="排 序" [style]="{'width': '100%'}">
-        </p-dropdown>
-        <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(1)">
-          <img src="../../../assets/images/explore/sige.png" alt="" *ngIf="listType == 1">
-          <img src="../../../assets/images/explore/sige1.png" alt="" *ngIf="listType == 2">
-        </div>
-        <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(2)">
-          <img src="../../../assets/images/explore/jiuge.png" alt="" *ngIf="listType == 1">
-          <img src="../../../assets/images/explore/jiuge1.png" alt="" *ngIf="listType == 2">
-        </div>
+    <div *ngIf="searchResult.collection.length>0">
+      <div class="list-box-name" i18n>合集结果</div>
+      <!-- <div class="list-box-swiper">
+        <swiper
+          [slidesPerView]="'auto'"
+          [spaceBetween]="30"
+          [pagination]="{
+            clickable: true
+          }"
+          class="artist-swiper"
+        >
+          <ng-template
+            swiperSlide
+            *ngFor="let item of searchResult.collection">
+            <gather-item [item]="item"></gather-item>
+          </ng-template>
+        </swiper>
+      </div> -->
+      <div class="list-box-swiper">
+        <swiper
+          [slidesPerView]="'auto'"
+          [spaceBetween]="30"
+          [pagination]="{
+            clickable: true
+          }"
+          class="user-swiper"
+        >
+          <ng-template
+            swiperSlide
+            class="user-slide"
+            *ngFor="let item of searchResult.collection">
+            <div [routerLink]="['/collection']" [queryParams]="{'id':item.id}">
+              <app-search-user [item]="item"></app-search-user>
+            </div>
+          </ng-template>
+        </swiper>
       </div>
     </div>
-    <div class="list-box-list flex align-items-center flex-wrap">
-      <div *ngFor="let items of nftList">
-        <nft-item  [type]="listType" [item]="items"></nft-item>
+    <div *ngIf="searchResult.user.length>0">
+      <div class="list-box-name" i18n>用户结果</div>
+      <div class="list-box-swiper">
+        <swiper
+          [slidesPerView]="'auto'"
+          [spaceBetween]="30"
+          [pagination]="{
+            clickable: true
+          }"
+          class="user-swiper"
+        >
+          <ng-template
+            swiperSlide
+            class="user-slide"
+            *ngFor="let item of searchResult.user">
+            <div [routerLink]="['/user']" [queryParams]="{'id':item.id}">
+              <app-search-user [item]="item"></app-search-user>
+            </div>
+          </ng-template>
+        </swiper>
       </div>
+    </div>
+    <div *ngIf="searchResult.nft.length>0">
+      <div class="list-box-name" i18n>收藏品结果</div>
+      <!-- <div class="list-box-title flex align-items-center justify-content-between">
+        <div class="list-box-title-total flex align-items-center">
+          <div class="list-box-title-total-icon flex align-items-center justify-content-center">
+            <span class="iconfont icon-shuaxin"></span>
+          </div>
+          <div class="list-box-title-total-num">1,104,299<span i18n> 结果</span></div>
+        </div>
+      </div>
+      <div class="list-box-list flex align-items-center flex-wrap">
+        <div *ngFor="let items of searchResult.nft">
+          <nft-item  [type]="listType" [item]="items"></nft-item>
+        </div>
+      </div> -->
+      <div class="list-box-swiper">
+        <swiper
+          [slidesPerView]="'auto'"
+          [spaceBetween]="30"
+          [pagination]="{
+            clickable: true
+          }"
+          class="user-swiper"
+        >
+          <ng-template
+            swiperSlide
+            class="user-slide"
+            *ngFor="let item of searchResult.nft">
+            <div [routerLink]="['/show/nft/'+item.id]">
+              <app-search-user [item]="item"></app-search-user>
+            </div>
+          </ng-template>
+        </swiper>
+      </div>
+    </div>
+    <div class="mx-auto flex flex-column align-items-center py-6" *ngIf="searchResult.nft.length==0&&searchResult.collection.length==0&&searchResult.user.length==0">
+      <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+      <p class="pt-2 text-400 text-sm" i18n>暂无结果</p>
     </div>
   </div>
 </div>
