@@ -1,3 +1,5 @@
-<div [ngClass]="class" (drop)="onDropHandle($event)" (dragover)="onDropOverHandle($event)">
-  <ng-content></ng-content>
+<div [ngClass]="class" (drop)="onDropHandle($event)" (dragover)="onDropOverHandle($event)" (paste)="onPaste($event)">
+  <div class="drop-inner">
+    <ng-content></ng-content>
+  </div>
 </div>
