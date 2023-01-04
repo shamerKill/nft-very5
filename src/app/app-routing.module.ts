@@ -28,6 +28,7 @@ import {ToastModule} from 'primeng/toast';
 import {ConfirmationService} from 'primeng/api';
 import {MenuModule} from 'primeng/menu';
 import {DialogModule} from 'primeng/dialog';
+import {PaginatorModule} from 'primeng/paginator';
 
 
 import { ComponentsModule } from './components/components.module';
@@ -174,6 +175,7 @@ const routes: Routes = [
     MenuModule,
     PipeModule,
     DialogModule,
+    PaginatorModule,
     RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
   ],
   exports: [

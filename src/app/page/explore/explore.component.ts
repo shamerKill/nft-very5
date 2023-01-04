@@ -5,7 +5,12 @@ import { BaseMessageService } from './../../server/base-message.service';
 import { nftTypesArr } from './../../server/database.service';
 import { StateService } from './../../server/state.service';
 import '@angular/localize';
-
+interface pageObj {
+  first: number,
+  page: number,
+  pageCount: number,
+  rows: number,
+}
 type tabbarItem = {name: string; id: string}[];
 type exploreItem = {
   BannerImageUrl:string,
@@ -34,9 +39,15 @@ export class ExploreComponent implements OnInit,OnDestroy {
   tabbarIndex: number = 0;
   exploreList: exploreItem[] = [];
   classId: string = '';
+  public total!: number;
+  public page!: number;
+  public pageSize!: number;
   changeIndex(i:number) {
     this.tabbarIndex = i;
     this.classId = this.tabbar[this.tabbarIndex].id;
+    this.pageSize = 10;
+    this.total = 0;
+    this.page = 1;
     this.getList();
   }
   constructor(
@@ -73,9 +84,14 @@ export class ExploreComponent implements OnInit,OnDestroy {
   ngOnDestroy():void{
     this.navigationSubscription.unsubscribe()
   }
+  paginate(e:pageObj){
+    this.pageSize = e.rows;
+    this.page = e.page+1;
+    this.getList();
+  }
   getList() {
     // 获取数据
-    this.net.getCollectionList$('',this.classId).pipe().subscribe(({code, data, msg}) => {
+    this.net.getCollectionList$('',this.classId,this.page,this.pageSize).pipe().subscribe(({code, data, msg}) => {
       this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data) && data.length) {

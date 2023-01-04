@@ -442,7 +442,7 @@
                 <p class="pl-1 text-primary">{{product.toUser.name}}</p>
               </a>
             </td>
-            <td>{{product.time}}</td>
+            <td (click)="goWeb(product.hash)">{{product.time}}</td>
           </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">

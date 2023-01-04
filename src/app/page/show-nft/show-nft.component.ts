@@ -217,6 +217,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     }
     time: string, // 过去时间
     sellNum: number; // 出售数量
+    hash:string; // 交易哈希
   }[] = [];
 
   // 更多推荐
@@ -775,6 +776,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
           'successful': $localize`交易成功`,
           'cancelled': $localize`撤回`,
           'make': $localize`创建`,
+          'transfer': $localize`赠送`,
         };
         console.log(result.data);
         this.marketHistoryList = result.data.map((item: any) => {
@@ -793,6 +795,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
               address: item.ToAccount.Address,
             },
             time: dayjs(item.CreatedAt).fromNow(),
+            hash: item.Hash
           };
         }).slice(0, 10);
       }
@@ -869,5 +872,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
         });
       },
     });
+  }
+  goWeb(link:string) {
+    if (!link) return
+    window.open(`https://www.plugchain.network/v2/transDetail?id=${link}`)
   }
 }
