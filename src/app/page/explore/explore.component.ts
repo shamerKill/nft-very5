@@ -93,9 +93,11 @@ export class ExploreComponent implements OnInit,OnDestroy {
     // 获取数据
     this.net.getCollectionList$('',this.classId,this.page,this.pageSize).pipe().subscribe(({code, data, msg}) => {
       this.state.globalLoadingSwitch(false);
+      console.log(code)
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      if (Array.isArray(data) && data.length) {
-        this.exploreList = data
+      if (Array.isArray(data.collections) && data.collections.length) {
+        this.exploreList = data.collections
+        this.total = data.count
       } else {
         this.exploreList = []
       }

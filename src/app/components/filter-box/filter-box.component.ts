@@ -64,8 +64,8 @@ export class FilterBoxComponent extends ToolClassAutoClosePipe implements OnInit
     this.newFilterObj = {
       sell: stateArr.join(','),
       cate: cateArr.join(','),
-      low: this.minPrice,
-      high: this.maxPrice,
+      low: this.minPrice??'',
+      high: this.maxPrice??'',
       coin: this.PriceSelect?this.PriceSelect.contract:'',
       search: this.searchName,
     }

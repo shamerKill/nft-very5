@@ -18,5 +18,5 @@
     </div>
 
   </div>
-  <p-paginator [rows]="pageSize" (onPageChange)="paginate($event)"></p-paginator>
+  <p-paginator [rows]="pageSize" [totalRecords]="total" [rowsPerPageOptions]="[10,20,30]" (onPageChange)="paginate($event)"></p-paginator>
 </div>

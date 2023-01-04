@@ -479,8 +479,10 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
       if (item.sellType === 2) {
         this.auctionOverview.overviewDisplay = true;
         this.auctionOverview.outPrice = item.maxPrice;
+        this.auctionOverview.sellIndex = index;
       } else {
         this.buyOverview.overviewDisplay = true;
+        this.buyOverview.sellIndex = index;
       }
       this.chooseItem = item;
       // 获取对应币种余额
@@ -778,7 +780,6 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
           'make': $localize`创建`,
           'transfer': $localize`赠送`,
         };
-        console.log(result.data);
         this.marketHistoryList = result.data.map((item: any) => {
           return {
             type: typeShow[item.EventType],

@@ -259,8 +259,8 @@ export class UserDetailComponent implements OnInit,OnDestroy {
     this.net.getCollectionList$(this.userAddress,this.filterObj.cate).pipe().subscribe(({code, data, msg}) => {
       this.stateService.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      if (Array.isArray(data) && data.length) {
-        this.exploreList = data;
+      if (Array.isArray(data.collections) && data.collections.length) {
+        this.exploreList = data.collections;
       } else {
         this.exploreList = []
       }

@@ -47,10 +47,10 @@
             </p-dropdown>
           </div>
           <div class="filter-box-item-options flex align-items-center justify-content-between">
-            <p-inputNumber [(ngModel)]="minPrice" inputId="min" mode="decimal" [size]="10">
+            <p-inputNumber [(ngModel)]="minPrice" inputId="min" mode="decimal" [size]="10" [minFractionDigits]="0" [maxFractionDigits]="6">
             </p-inputNumber>
             <span>-</span>
-            <p-inputNumber [(ngModel)]="maxPrice" inputId="max" mode="decimal" [size]="10">
+            <p-inputNumber [(ngModel)]="maxPrice" inputId="max" mode="decimal" [size]="10" [minFractionDigits]="0" [maxFractionDigits]="6">
             </p-inputNumber>
           </div>
           <div class="filter-box-item-options flex align-items-center justify-content-between">

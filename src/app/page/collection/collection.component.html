@@ -85,7 +85,7 @@
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <span>{{collectionDetail.SellingNumber?((collectionDetail.SellingNumber/collectionDetail.AssetCount)*100):0}}%</span>
+            <span>{{collectionDetail.SellingNumber?((collectionDetail.SellingNumber/collectionDetail.AssetCount)*100).toFixed():0}}%</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>已刊登</div>
       </div>
@@ -114,7 +114,7 @@
       <div *ngIf="tabActive==0">
         <div class="list-box-title flex align-items-center justify-content-between">
           <div class="list-box-title-total flex align-items-center">
-            <div class="list-box-title-total-icon flex align-items-center justify-content-center">
+            <div class="list-box-title-total-icon flex align-items-center justify-content-center" (click)="getNftList()">
               <span class="iconfont icon-shuaxin"></span>
             </div>
             <div class="list-box-title-total-num">{{nftList.length}}<span i18n> 结果</span></div>
