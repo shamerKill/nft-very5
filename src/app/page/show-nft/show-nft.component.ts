@@ -324,6 +324,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
             };
           });
           this.changeEndTime(this.sellerOrderList[0].endTime);
+        } else {
+          this.downTimeData = undefined;
+          this.downTimeSub?.unsubscribe();
         }
       } else {
         this.message.warn(result.msg ?? $localize`获取数据失败`);
@@ -393,7 +396,7 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
         this.productInfo.incomeRate = (result.data.CollectionOriginal.SellerFeeBasisPoints / 100).toString();
         this.productInfo.collection = {
           name: result.data.CollectionOriginal.Name,
-          id: result.data.CollectionOriginal.CollectionID,
+          id: result.data.ID,
           describe: result.data.CollectionOriginal.Description,
           mainBg: result.data.ImageUrl,
         };

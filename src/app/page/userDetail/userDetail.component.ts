@@ -24,6 +24,7 @@ type userInfo = {
 }
 type exploreItem = {
   BannerImageUrl:string,
+  ID: string;
   CollectionOriginal: {
     CollectionID: string, // id
     Name:string,

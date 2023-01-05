@@ -142,7 +142,7 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
         if (data.data && data.data.length) {
           this.collectionList = data.data.map((item: any) => {
             return {
-              id: item.CollectionOriginal.CollectionID,
+              id: item.ID,
               image: item.ImageUrl,
               name: item.CollectionOriginal.Name,
               describe: item.CollectionOriginal.Description,

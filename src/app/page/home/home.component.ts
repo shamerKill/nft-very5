@@ -160,12 +160,12 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
   // 顶级合集
   private formatArtist(input: any) {
     this.artistList.list = input.map((item: any) => ({
-      name: item.CollectionOriginal.Name,
+      name: item.CollectionOriginal.Name||'',
       logo: item.ImageUrl,
       favorite: item.IsFocus || false,
       collectionNum: item.AssetCount,
       ownerNum: item.HaveNumber,
-      id: item.CollectionOriginal.CollectionID,
+      id: item.ID,
       nftList: item.Nfts.map((nft: any) => ({
         logo: nft.NftOriginal.Image,
         id: nft.NftOriginal.NftID
@@ -176,7 +176,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
   // 获取探索市场数据
   getExploreData(input: number) {
     const key = this.exploreMarket.list[input].key;
-    this.net.getNefListByFilter$({category: key}).pipe(this.pipeSwitch$()).subscribe(data => {
+    this.net.getNefListByFilter$({category: key=='热门'?'':key, hot: key=='热门'?'1':''}).pipe(this.pipeSwitch$()).subscribe(data => {
       this.exploreMarket.list[input].loaded = true;
       if (data.code === 200 && data.data) {
         this.exploreMarket.list[input].data = data.data.map((item: any) => ({

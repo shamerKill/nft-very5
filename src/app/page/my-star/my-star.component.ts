@@ -171,7 +171,7 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
       if (data.code === 200 && data.data && data.data.length) {
         this.collectionTableData = data.data.map((item: any) => {
           return {
-            id: item.CollectionOriginal.CollectionID,
+            id: item.ID,
             mainImage: item.ImageUrl,
             bgImage: item.BannerImageUrl,
             name: item.CollectionOriginal.Name,

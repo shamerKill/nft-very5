@@ -1,5 +1,5 @@
 <div class="explore-item">
-  <a [routerLink]="['/collection']" [queryParams]="{id: item.CollectionOriginal.CollectionID}" routerLinkActive="router-link-active">
+  <a [routerLink]="['/collection']" [queryParams]="{id: item.ID}" routerLinkActive="router-link-active">
     <div class="explore-item-img">
       <img [src]="item.BannerImageUrl" alt="" *ngIf="item.BannerImageUrl">
       <img src="../../../../assets/images/explore/pic.png" alt="">

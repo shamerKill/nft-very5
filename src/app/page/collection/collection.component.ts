@@ -38,6 +38,7 @@ type exploreItem = {
   HoldersNumber:string|number; // 持有人数量
   LowestPrice:string; // 最低价
   HighestPrice:string; // 最高价
+  ID:string;
 }
 
 type NftOriginal= {
@@ -155,6 +156,7 @@ export class CollectionComponent implements OnInit,OnDestroy {
     HoldersNumber:'',
     LowestPrice:'',
     HighestPrice:'',
+    ID: ''
   };
   showMore:boolean=false;
   clickMore() {

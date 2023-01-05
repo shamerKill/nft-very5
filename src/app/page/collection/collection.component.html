@@ -65,21 +65,21 @@
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
             <img src="../../../assets/images/explore/usd.png" alt="">
-            <span>{{collectionDetail.TransactionAmount?collectionDetail.TransactionAmount:'0'}}</span>
+            <span>{{collectionDetail.TransactionAmount | bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>总交易额</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
             <img src="../../../assets/images/explore/usd.png" alt="">
-            <span>{{collectionDetail.LowestPrice?collectionDetail.LowestPrice:'0'}}</span>
+            <span>{{collectionDetail.LowestPrice | bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>地板价</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
             <img src="../../../assets/images/explore/usd.png" alt="">
-            <span>{{collectionDetail.HighestPrice?collectionDetail.HighestPrice:'0'}}</span>
+            <span>{{collectionDetail.HighestPrice | bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>最佳报价</div>
       </div>

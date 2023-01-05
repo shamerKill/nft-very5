@@ -4,7 +4,7 @@
 export const ToolFuncGetChg = (before: string, now: string) => {
   const beforeNum = parseFloat(before) || 0;
   const nowNum = parseFloat(now) || 0;
-  const chgNum = (nowNum - beforeNum) / beforeNum || 0;
+  const chgNum = beforeNum == 0 ? 0 : ((nowNum - beforeNum) / beforeNum);
   const perStr = ToolFuncNumberToPercentage(chgNum.toFixed(4));
   return {
     str: perStr,

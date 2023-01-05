@@ -125,8 +125,8 @@ export class NetService {
    * category 分类
    * 合集-列表(查询条件)
    * **/
-  getCollectionList$(owner:string,category:string,page:number=1,size:number=100) {
-    return this.$get<TypeInterfaceNet>(`v1/collection/list?owner=${owner}&category=${category}&page=${page}&page_size=${size}`);
+  getCollectionList$(owner:string,category:string,page:number=1,size:number=100,hot:string='') {
+    return this.$get<TypeInterfaceNet>(`v1/collection/list?owner=${owner}&category=${category}&page=${page}&page_size=${size}&hot=${hot}`);
   }
   /**
    * v1/search_collection/{search}

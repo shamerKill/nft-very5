@@ -8,6 +8,7 @@ type exploreItem = {
   BannerImageUrl:string;
   CollectionOriginal: CollectionOriginal;
   ImageUrl?:string;
+  ID:string;
 }
 @Component({
   selector: 'explore-item',
@@ -17,6 +18,7 @@ type exploreItem = {
 export class ExploreItemComponent implements OnInit {
   @Input() item: exploreItem={
     BannerImageUrl:'',
+    ID: '',
     CollectionOriginal: {
       CollectionID: '',
       Name:'',
