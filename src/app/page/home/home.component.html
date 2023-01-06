@@ -81,7 +81,7 @@
   </div>
   <p-tabView [activeIndex]="assetsRank.index" (onChange)="onChangeAssetsRankIndex($event.index)">
     <p-tabPanel *ngFor="let rank of assetsRank.list">
-      <div class="rank-list flex flex-column flex-wrap justify-content-between w-full overflow-hidden">
+      <div class="rank-list flex flex-column flex-wrap w-full overflow-hidden">
         <div class="rank-card flex align-items-center" *ngFor="let item of rank.data">
           <p class="card-number" [routerLink]="['/show/nft/'+item.id]">{{item.number}}</p>
           <img class="card-logo" [src]="item.logo" [alt]="item.name"  [routerLink]="['/show/nft/'+item.id]"/>
