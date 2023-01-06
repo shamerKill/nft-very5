@@ -12,7 +12,7 @@
         </div>
         <div class="flex">
           <app-drag-box (onDrop)="onGetAvatar($event)">
-            <div #avatar draggable="true" class="surface-100 h-10rem w-10rem border-circle flex flex-column justify-content-center align-items-center text-center text-400 relative overflow-hidden">
+            <div class="surface-100 h-10rem w-10rem border-circle flex flex-column justify-content-center align-items-center text-center text-400 relative overflow-hidden">
               <p class="pi pi-cloud-upload text-5xl pb-2"></p>
               <p class="text-base" i18n>个人头像</p>
               <div *ngIf="userAvatar" class="w-full h-full absolute z-1 surface-0">
@@ -72,6 +72,7 @@
                 pButton
                 type="button"
                 label="选择文件"
+                style="pointer-events: all;"
                 class="p-button-outlined h-2rem"></button>
             </app-choose-file>
           </div>

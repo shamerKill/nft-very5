@@ -138,7 +138,7 @@ export class MySettingComponent extends ToolClassAutoClosePipe implements OnInit
         });
       }
       sub.subscribe(data => {
-        if (this.avatarChanged && this.mainBg) {
+        if (this.avatarChanged && this.mainChanged) {
           const [avatar, main] = data;
           if (avatar.code === 200 && main.code === 200) {
             path$.next({
@@ -153,7 +153,7 @@ export class MySettingComponent extends ToolClassAutoClosePipe implements OnInit
               avatar: avatar.data,
             });
           }
-        } else if (this.mainBg) {
+        } else if (this.mainChanged) {
           const [main] = data;
           if (main.code === 200) {
             path$.next({

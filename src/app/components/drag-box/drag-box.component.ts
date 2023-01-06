@@ -94,17 +94,22 @@ export class DragBoxComponent implements OnInit {
   onPaste(event: ClipboardEvent) {
     if (event.clipboardData && event.clipboardData.items.length) {
       const items = event.clipboardData.items;
-      console.log(items);
       if (items.length) {
-        const item = items[0];
-        this.getFileBase64(item).then(dropFile => {
-          if (dropFile) {
-            this.onDrop.emit({
-              error: null,
-              data: dropFile,
+        for (let i = 0; i < items.length; i++) {
+          const element = items[i];
+          console.log(element.type);
+          if (element.type.match('image')) {
+            this.getFileBase64(element).then(dropFile => {
+              if (dropFile) {
+                this.onDrop.emit({
+                  error: null,
+                  data: dropFile,
+                });
+              }
             });
+            break;
           }
-        });
+        }
       }
     }
   }
