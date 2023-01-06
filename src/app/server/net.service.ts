@@ -480,5 +480,12 @@ export class NetService {
   getBuyerPrice$(orderID: string) {
     return this.$post('v1/my/match', { orderID });
   }
+
+  /**
+   * 获取排行榜
+   **/
+  getRankList$() {
+    return this.$get('v1/nft/rankingList');
+  }
 }
 

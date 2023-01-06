@@ -9,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as dayjs from 'dayjs';
 import { ToolFuncWalletSign } from 'src/app/tools/functions/wallet';
+import web3Abi from 'web3-eth-abi';
+import cosmo from 'cosmo-wallet-tool';
+import { stripHexPrefix, isAddress, encodePacked } from 'web3-utils';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sell-nft',
@@ -16,6 +20,7 @@ import { ToolFuncWalletSign } from 'src/app/tools/functions/wallet';
   styleUrls: ['./sell-nft.component.scss']
 })
 export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
+  marketContract = environment.marketContract;
   /**
    * 账户地址
    **/
@@ -74,6 +79,7 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
       sourceData: string; // 原始数据
     };
     SellingType:number;
+    token: string; // nftToken
   }> = {};
 
   // 出售类型 fixed / float
@@ -141,6 +147,7 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
         return;
       } else {
         const data = result.data;
+        this.productInfo.token = data.nft.Token;
         this.productInfo.image = data.nft.NftOriginal.Image;
         this.productInfo.name = data.nft.NftOriginal.Name;
         this.productInfo.id = data.nft.NftOriginal.NftID;
@@ -231,8 +238,58 @@ export class SellNftComponent extends ToolClassAutoClosePipe implements OnInit {
   /**
    * 项目发售
    **/
-  onProductSell() {
+  async onProductSell() {
     this.state.globalLoadingSwitch(true);
+    if (this.productInfo.token != 'gx1gm4ejecxk77cpmdnpyy4nwjh54swruauyau2ga') {
+      if (this.state.linkedWallet$.value.isLinked) {
+        let userAddress = cosmo.addressForBech32ToHex(this.state.linkedWallet$.value.accountAddress??'')
+        let hexContractAddress = cosmo.addressForBech32ToHex(this.productInfo.token??'')
+        let hexMarkenContractAddress = cosmo.addressForBech32ToHex(this.marketContract)
+        const rawAllow = web3Abi.encodeFunctionSignature('isApprovedForAll(address,address)') +
+        stripHexPrefix(
+          web3Abi.encodeParameters(
+            ['address', 'address'],
+            [userAddress, hexMarkenContractAddress]
+          )
+        );
+        let result;
+        if (await cosmo.isChrome) {
+          result = (await cosmo.chromeTool.contractCallRaw(hexContractAddress, rawAllow, 0)) ?? '';
+        } else {
+          result = (await cosmo.walletTool.contractCall(hexContractAddress, undefined, undefined, rawAllow))?.data ?? '';
+        }
+        if (Number(result)) {
+          this.SubmitProductSell();
+        } else {
+          const rawApprove = web3Abi.encodeFunctionSignature('setApprovalForAll(address,bool)') +
+                  stripHexPrefix(
+                    web3Abi.encodeParameters(
+                      ['address', 'bool'],
+                      [hexMarkenContractAddress, true]
+                    )
+                  );
+          if (await cosmo.isChrome) {
+            const res = await cosmo.chromeTool.contractSendRaw(hexContractAddress, rawApprove);
+            if (res) {
+              this.SubmitProductSell();
+            } else {
+              this.state.globalLoadingSwitch(false);
+            }
+          } else {
+            const res = await cosmo.walletTool.contractSend(hexContractAddress, undefined, undefined, rawApprove);
+            if (res?.data) {
+              this.SubmitProductSell();
+            } else {
+              this.state.globalLoadingSwitch(false);
+            }
+          }
+        }
+      }
+    } else {
+      this.SubmitProductSell();
+    }
+  }
+  SubmitProductSell() {
     this.net.postSellNft$({
       id: this.productId,
       type: this.sellType === 'fixed' ? 1 : 2,

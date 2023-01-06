@@ -8,6 +8,7 @@ export class BigNumPipe implements PipeTransform {
 
   transform(num?: string|number, digits = 1): string {
     if (num === undefined) return '0';
+    if (!num) return '0';
     if (num < 1000) {
       return parseFloat(num.toString()).toString()
     } else {

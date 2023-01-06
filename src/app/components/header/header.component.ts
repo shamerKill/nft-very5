@@ -226,7 +226,14 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
       },
     ];
   }
-
+  goLink(type:string) {
+    if (type == '1') {
+      this.router.navigate(['ranking-list']);
+    } else {
+      this.router.navigate(['create', 'nft']);
+    }
+    this.webMenuType = 0
+  }
   /**
    * 判断是否已经登录
    **/

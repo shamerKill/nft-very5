@@ -367,11 +367,9 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     this.productInfo.type = data.nft.Type;
     this.productInfo.contractAddress = data.nft.Token;
     this.productInfo.nowPrice = data.nft.CurrentPrice;
-    this.productInfo.SellingType = data.nft.HaveNfts[0].SellingType;
-    this.productInfo.attributes = data.nft.NftOriginal.Attributes.split(',').map((item: string) => {
-
-      var li = item.split(':');
-      return {key: li[0], value: li[1]};
+    this.productInfo.SellingType = data.nft.HaveNfts?.[0].SellingType;
+    this.productInfo.attributes = JSON.parse(data.nft.NftOriginal.Attributes).map((item: any) => {
+      return {key: item.trait_type, value: item.value};
     }).filter((item: any) => item.key && item.value);
     this.productInfo.creator = {
       name: data.creator.Name,
@@ -568,7 +566,6 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
       }
       if (result !== '0x') result = BigInt(result).toString();
       // 判断是否足够
-      console.log(result)
       if (willPrice <= BigInt(result)) {
         this.state.globalLoadingSwitch(false);
         return true;
