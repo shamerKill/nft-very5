@@ -32,6 +32,8 @@ type shareItem = {
   styleUrls: ['./show-nft.component.scss']
 })
 export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, OnDestroy {
+  // 展开放大图片显示
+  showNftBig = false;
   marketContract = environment.marketContract;
   // 日期列表
   dayList: {name: string, num: number, unit: ManipulateType}[] = [
