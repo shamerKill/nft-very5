@@ -141,6 +141,7 @@ export class CreateCollectionComponent extends ToolClassAutoClosePipe implements
                 this.selectedBuyToken = JSON.parse(result.data.AllowToken);
               } catch (_) {}
             }
+            this.onListenData();
           }
         });
       }
@@ -212,8 +213,7 @@ export class CreateCollectionComponent extends ToolClassAutoClosePipe implements
     // 判定数据是否不为空
     if (
       this.mainImage && this.bannerBg &&
-      this.name && this.profit.address &&
-      this.profit.rate && this.typeSelected.length &&
+      this.name && this.typeSelected.length &&
       this.selectedBuyToken.length
     ) {
       this.canCreate = true;

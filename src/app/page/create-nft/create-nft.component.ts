@@ -257,12 +257,13 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
 
   // 创建nft
   createNft(image: string) {
+    let traitArr = this.attributeList.filter(item => item.key && item.value).map(({key, value}) => {return {trait_type: key,value:value}});
     this.net.putNewNFT$({
       name: this.name,
       image: image,
       external_link: this.interactiveLink,
       description: this.describe,
-      attr: this.attributeList.filter(item => item.key && item.value).map(({key, value}) => `${key}:${value}`).join(','),
+      attr: JSON.stringify(traitArr),
       number: this.selectedNum.toString(),
       collection_id: this.selectedCollectionId??'',
     }).pipe(this.pipeSwitch$()).subscribe(data => {

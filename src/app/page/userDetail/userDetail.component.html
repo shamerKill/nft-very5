@@ -65,7 +65,7 @@
       <div *ngIf="tabActive==0||tabActive==1">
         <div class="list-box-title flex align-items-center justify-content-between">
           <div class="list-box-title-total flex align-items-center">
-            <div class="list-box-title-total-icon flex align-items-center justify-content-center">
+            <div class="list-box-title-total-icon flex align-items-center justify-content-center" (click)="refresh()">
               <span class="iconfont icon-shuaxin"></span>
             </div>
             <div class="list-box-title-total-num">{{nftList.length}}<span i18n> 结果</span></div>
