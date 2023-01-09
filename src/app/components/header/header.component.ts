@@ -154,7 +154,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
         this.searchResult.nft = nft.data.map((item: any) => {
           return {
             id: item.NftID,
-            logo: item.Image||'../../assets/images/logo/default-avatar@2x.png',
+            logo: item.Image||'assets/images/logo/default-avatar@2x.png',
             name: item.Name,
             describe: item.Description,
           };
@@ -164,7 +164,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
         this.searchResult.collection = collection.data.map((item: any) => {
           return {
             id: item.CollectionID,
-            logo: item.Image||'../../assets/images/logo/default-avatar@2x.png',
+            logo: item.Image||'assets/images/logo/default-avatar@2x.png',
             name: item.Name,
             describe: item.Description,
           };
@@ -174,7 +174,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
         this.searchResult.user = user.data.map((item: any) => {
           return {
             id: item.Address,
-            logo: item.Avator||'../../assets/images/logo/default-avatar@2x.png',
+            logo: item.Avator||'assets/images/logo/default-avatar@2x.png',
             name: item.Name,
             describe: item.Description,
           };

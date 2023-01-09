@@ -16,7 +16,7 @@
     <div class="nft-items-content-name">{{item.NftOriginal.Name}}</div>
     <div class="nft-items-content-price flex align-items-center justify-content-between">
       <div class="nft-items-content-price-num flex align-items-center">
-        <img [src]="item.SellCoinType?returnInfo(item.SellCoinType):'../../../../assets/images/explore/usd.png'" alt="">
+        <img [src]="item.SellCoinType?returnInfo(item.SellCoinType):'assets/images/explore/usd.png'" alt="">
         <span>{{item.SellCoinNumber?item.SellCoinNumber:item.CurrentPrice}}</span>
         <span class="pl-2" *ngIf="item.SellCoinType">{{returnInfo(item.SellCoinType,1)}}</span>
       </div>

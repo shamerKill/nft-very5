@@ -40,13 +40,13 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
   // Array(4).fill(0).map((_, index) => ({
   //   id: `${index + 1}`,
   //   user: {
-  //     logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
+  //     logo: 'assets/images/cache/home/矩形 12 拷贝.png',
   //     name: 'BOOLEAN',
   //   },
   //   minPrice: '99,999',
   //   minPriceUnit: {
   //     name: 'PC',
-  //     logo: '../../../assets/images/home/plug-logo.png'
+  //     logo: 'assets/images/home/plug-logo.png'
   //   },
   //   chgInWeek: '-10.5%',
   //   chgInWeekDirection: false,
@@ -84,7 +84,7 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
   }[] = [];
   // Array(5).fill(0).map((_, index) => ({
   //   id: `${index + 1}`,
-  //   image: '../../../assets/images/cache/home/矩形 5.png',
+  //   image: 'assets/images/cache/home/矩形 5.png',
   //   collectionInfo: {
   //     name: 'BUTTON',
   //     id: '12',
@@ -93,7 +93,7 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
   //   price: '9951',
   //   priceUnit: {
   //     name: 'PC',
-  //     logo: '../../../assets/images/home/plug-logo.png'
+  //     logo: 'assets/images/home/plug-logo.png'
   //   },
   //   isFollow: Math.random() < 0.5,
   //   auctionInfo: {
@@ -120,8 +120,8 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
   }[] = [];
   // Array(4).fill(0).map((_, index) => ({
   //   id: `${index + 1}`,
-  //   mainImage: '../../../assets/images/cache/home/矩形 5.png',
-  //   bgImage: '../../../assets/images/explore/sb.jpeg',
+  //   mainImage: 'assets/images/cache/home/矩形 5.png',
+  //   bgImage: 'assets/images/explore/sb.jpeg',
   //   name: 'BUTTONS',
   //   describe: 'THIS IS BUTTONS',
   //   isFollow: true,
@@ -157,7 +157,7 @@ export class MyStarComponent extends ToolClassAutoClosePipe implements OnInit {
             price: item.CurrentPrice,
             priceUnit: {
               name: 'PC',
-              logo: '../../../assets/images/home/plug-logo.png',
+              logo: 'assets/images/home/plug-logo.png',
             },
             isFollow: true,
             auctionInfo: {

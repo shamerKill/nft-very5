@@ -1,7 +1,7 @@
 <app-base-box class="com-header">
   <header class="hidden pc-header lg:flex py-3 align-items-center">
     <a [routerLink]="['']">
-      <img class="w-8rem" src="../../../assets/images/logo/very5-B@2x.png" />
+      <img class="w-8rem" src="assets/images/logo/very5-B@2x.png" />
     </a>
     <div class="flex flex-1 justify-content-end pr-2 pl-4">
       <label class="header-input p-input-icon-right w-full">
@@ -30,7 +30,7 @@
           <div *ngIf="hadAccount" class="pl-2">
             <button class="avatar-button cursor-pointer" (click)="onSwitchUserMenu()">
               <p-avatar
-                [image]="accountAvatar === undefined ? '../../../assets/images/logo/default-avatar@2x.png' : accountAvatar"
+                [image]="accountAvatar === undefined ? 'assets/images/logo/default-avatar@2x.png' : accountAvatar"
                 pBadge
                 shape="circle"></p-avatar>
             </button>
@@ -41,7 +41,7 @@
   </header>
   <header #comHeader class="flex web-header lg:hidden py-2 px-2 align-items-center" [ngClass]="{'white-bg': webMenuType !== 0}">
     <a [routerLink]="['']">
-      <img class="w-8rem" src="../../../assets/images/logo/very5-B@2x.png" />
+      <img class="w-8rem" src="assets/images/logo/very5-B@2x.png" />
     </a>
     <div class="flex-1"></div>
     <button

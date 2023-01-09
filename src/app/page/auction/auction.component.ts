@@ -16,7 +16,7 @@ export class AuctionComponent extends ToolClassAutoClosePipe implements OnInit {
   productId: string = '';
   // nft信息
   productInfo = {
-    image: '../../../assets/images/cache/home/矩形 5.png',
+    image: 'assets/images/cache/home/矩形 5.png',
     name: 'Geek Dude',
     owner: 'Dude',
     id: '87534',
@@ -26,7 +26,7 @@ export class AuctionComponent extends ToolClassAutoClosePipe implements OnInit {
     // 创建者
     creator: {
       name: 'BAYCTRONICS',
-      logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
+      logo: 'assets/images/cache/home/矩形 12 拷贝.png',
     },
     // 创建者抽成
     incomeRate: '0.1%',
@@ -121,7 +121,7 @@ export class AuctionComponent extends ToolClassAutoClosePipe implements OnInit {
     remainingDays: '10',
     user: {
       name: 'other user',
-      logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
+      logo: 'assets/images/cache/home/矩形 12 拷贝.png',
     }
   }));
 
@@ -140,7 +140,7 @@ export class AuctionComponent extends ToolClassAutoClosePipe implements OnInit {
     time: '10',
     user: {
       name: 'other user',
-      logo: '../../../assets/images/cache/home/矩形 12 拷贝.png',
+      logo: 'assets/images/cache/home/矩形 12 拷贝.png',
     }
   }));
 
@@ -152,7 +152,7 @@ export class AuctionComponent extends ToolClassAutoClosePipe implements OnInit {
     id: string,
     price: string,
   }[] = Array(4).fill(0).map(() => ({
-    image: '../../../assets/images/cache/home/矩形 5.png',
+    image: 'assets/images/cache/home/矩形 5.png',
     creator: 'Dude',
     name: 'Geek Dude',
     id: '87534',

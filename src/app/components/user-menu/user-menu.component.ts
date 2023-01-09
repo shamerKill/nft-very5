@@ -32,7 +32,7 @@ export class UserMenuComponent extends ToolClassAutoClosePipe implements OnInit 
    **/
   tokenInfo = {
     name: 'PC',
-    logo: '../../../assets/images/home/plug-logo.png',
+    logo: 'assets/images/home/plug-logo.png',
   };
   /**
    * 持币数量

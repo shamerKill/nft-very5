@@ -1,6 +1,6 @@
 <div class="filter-box" [ngClass]="showMore ? 'show':'hide'">
   <div class="filter-box-show">
-    <img src="../../../assets/images/explore/icon1.png" alt="" class="tips">
+    <img src="assets/images/explore/icon1.png" alt="" class="tips">
     <div class="filter-box-title" (click)="showFilterMenu()">
       <span class="iconfont icon-liebiao"></span>
     </div>
@@ -19,8 +19,8 @@
           <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of stateList; let i=index" (click)="changeStateIndex(i)">
             <span i18n>{{item.name}}</span>
             <div class="icon">
-              <img src="../../../assets/images/explore/choose.png" alt="" *ngIf="item.checked">
-              <img src="../../../assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
+              <img src="assets/images/explore/choose.png" alt="" *ngIf="item.checked">
+              <img src="assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@
           <div class="filter-box-item-options flex align-items-center justify-content-between">
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input type="text" pInputText [(ngModel)]="searchName" placeholder="合集名称">         
+              <input type="text" pInputText [(ngModel)]="searchName" placeholder="合集名称">
             </span>
           </div>
           <div class="filter-box-item-options flex align-items-center justify-content-between">
@@ -94,8 +94,8 @@
           <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of classList; let i=index" (click)="changeClassIndex(i)">
             <span i18n>{{item.name}}</span>
             <div class="icon">
-              <img src="../../../assets/images/explore/choose.png" alt="" *ngIf="item.checked">
-              <img src="../../../assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
+              <img src="assets/images/explore/choose.png" alt="" *ngIf="item.checked">
+              <img src="assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
             </div>
           </div>
         </div>
@@ -116,8 +116,8 @@
           <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of collectionTypeList; let i=index" (click)="changeCollectionIndex(i)">
             <span i18n>{{item.name}}</span>
             <div class="icon">
-              <img src="../../../assets/images/explore/choose.png" alt="" *ngIf="item.checked">
-              <img src="../../../assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
+              <img src="assets/images/explore/choose.png" alt="" *ngIf="item.checked">
+              <img src="assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
             </div>
           </div>
         </div>
@@ -138,17 +138,17 @@
           <div class="filter-box-item-options flex align-items-center justify-content-between" *ngFor="let item of classList; let i=index" (click)="changeClassIndex(i)">
             <span i18n>{{item.name}}</span>
             <div class="icon">
-              <img src="../../../assets/images/explore/choose.png" alt="" *ngIf="item.checked">
-              <img src="../../../assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
+              <img src="assets/images/explore/choose.png" alt="" *ngIf="item.checked">
+              <img src="assets/images/explore/unchoose.png" alt="" *ngIf="!item.checked">
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="filter-box-hide">
-    <img src="../../../assets/images/explore/icon1.png" alt="" class="tips">
+    <img src="assets/images/explore/icon1.png" alt="" class="tips">
     <div class="filter-box-title" (click)="showFilterMenu()">
       <span class="iconfont icon-liebiao"></span>
     </div>

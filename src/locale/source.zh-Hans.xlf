@@ -1,14 +1,2344 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US">
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="zh">
   <file id="ngi18n" original="ng.template">
-    <unit id="3426497293769476612">
+    <unit id="148159185113467246">
       <notes>
-        <note category="location">src/app/components/footer/footer.component.ts:20</note>
-        <note category="description">this yi shu</note>
-        <note category="meaning">do it</note>
+        <note category="location">src/app/app.component.ts:31</note>
       </notes>
       <segment>
-        <source>这是艺术中文</source>
+        <source>复制成功</source>
+      </segment>
+    </unit>
+    <unit id="1309954010963783301">
+      <notes>
+        <note category="location">src/app/app.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>复制失败</source>
+      </segment>
+    </unit>
+    <unit id="945863999624144498">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:12</note>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:109</note>
+      </notes>
+      <segment>
+        <source>状态</source>
+      </segment>
+    </unit>
+    <unit id="187187500641108332">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:20</note>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:95</note>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:117</note>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:139</note>
+        <note category="location">src/app/components/header/header.component.html:101,102</note>
+        <note category="location">src/app/components/header/header.component.html:112,113</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:227,228</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{item.name}}"/></source>
+      </segment>
+    </unit>
+    <unit id="7736133669499195519">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:32</note>
+        <note category="location">src/app/page/auction/auction.component.html:128</note>
+        <note category="location">src/app/page/auction/auction.component.html:161</note>
+        <note category="location">src/app/page/auction/auction.component.html:196</note>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:256</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:251</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:327</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:389</note>
+      </notes>
+      <segment>
+        <source>价格</source>
+      </segment>
+    </unit>
+    <unit id="3398471299079623205">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:65</note>
+        <note category="location">src/app/components/header/header.component.html:152</note>
+        <note category="location">src/app/page/my-star/my-star.component.html:118</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:144</note>
+      </notes>
+      <segment>
+        <source>合集</source>
+      </segment>
+    </unit>
+    <unit id="4811716423198843602">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:87</note>
+        <note category="location">src/app/components/filter-box/filter-box.component.html:131</note>
+      </notes>
+      <segment>
+        <source>分类</source>
+      </segment>
+    </unit>
+    <unit id="958352091862521732">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:116</note>
+        <note category="location">src/app/page/explore/explore.component.ts:28</note>
+        <note category="location">src/app/server/database.service.ts:61</note>
+      </notes>
+      <segment>
+        <source>热门</source>
+      </segment>
+    </unit>
+    <unit id="1690303630484724971">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:121</note>
+        <note category="location">src/app/page/explore/explore.component.ts:32</note>
+      </notes>
+      <segment>
+        <source>最佳</source>
+      </segment>
+    </unit>
+    <unit id="5177945454232122931">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:126</note>
+        <note category="location">src/app/page/explore/explore.component.ts:36</note>
+        <note category="location">src/app/server/database.service.ts:65</note>
+      </notes>
+      <segment>
+        <source>艺术</source>
+      </segment>
+    </unit>
+    <unit id="8099481697259690702">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:131</note>
+        <note category="location">src/app/page/collection/collection.component.ts:157</note>
+        <note category="location">src/app/page/explore/explore.component.ts:40</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:142</note>
+        <note category="location">src/app/server/database.service.ts:69</note>
+      </notes>
+      <segment>
+        <source>收藏品</source>
+      </segment>
+    </unit>
+    <unit id="8371669188088819151">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:136</note>
+        <note category="location">src/app/page/explore/explore.component.ts:44</note>
+        <note category="location">src/app/server/database.service.ts:81</note>
+      </notes>
+      <segment>
+        <source>实用</source>
+      </segment>
+    </unit>
+    <unit id="8823688824623624889">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:141</note>
+        <note category="location">src/app/page/explore/explore.component.ts:48</note>
+      </notes>
+      <segment>
+        <source>卡片</source>
+      </segment>
+    </unit>
+    <unit id="2904189072147247140">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:146</note>
+        <note category="location">src/app/page/explore/explore.component.ts:52</note>
+        <note category="location">src/app/server/database.service.ts:73</note>
+      </notes>
+      <segment>
+        <source>虚拟世界</source>
+      </segment>
+    </unit>
+    <unit id="9119702885964229726">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:151</note>
+        <note category="location">src/app/page/explore/explore.component.ts:56</note>
+        <note category="location">src/app/server/database.service.ts:77</note>
+      </notes>
+      <segment>
+        <source>音乐</source>
+      </segment>
+    </unit>
+    <unit id="788867261009236959">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:156</note>
+        <note category="location">src/app/page/explore/explore.component.ts:60</note>
+        <note category="location">src/app/server/database.service.ts:85</note>
+      </notes>
+      <segment>
+        <source>体育</source>
+      </segment>
+    </unit>
+    <unit id="1328529422060472419">
+      <notes>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:161</note>
+        <note category="location">src/app/page/explore/explore.component.ts:64</note>
+        <note category="location">src/app/server/database.service.ts:89</note>
+      </notes>
+      <segment>
+        <source>域名</source>
+      </segment>
+    </unit>
+    <unit id="8998219673817064665">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:16</note>
+        <note category="location">src/app/components/header/header.component.html:68</note>
+        <note category="location">src/app/components/header/header.component.ts:190,189</note>
+        <note category="location">src/app/page/home/home.component.html:14</note>
+      </notes>
+      <segment>
+        <source>探索</source>
+      </segment>
+    </unit>
+    <unit id="6728111234977276519">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:22</note>
+        <note category="location">src/app/components/header/header.component.html:131</note>
+      </notes>
+      <segment>
+        <source>NFT</source>
+      </segment>
+    </unit>
+    <unit id="3671084061978077356">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:25</note>
+      </notes>
+      <segment>
+        <source>创建</source>
+      </segment>
+    </unit>
+    <unit id="4739456952454331786">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:29</note>
+      </notes>
+      <segment>
+        <source>推荐</source>
+      </segment>
+    </unit>
+    <unit id="5990567104903005837">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:33</note>
+        <note category="location">src/app/components/header/header.component.html:73</note>
+        <note category="location">src/app/components/header/header.component.ts:200,199</note>
+      </notes>
+      <segment>
+        <source>排行榜</source>
+      </segment>
+    </unit>
+    <unit id="4178120462594301418">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:37</note>
+        <note category="location">src/app/page/auction/auction.component.html:191</note>
+        <note category="location">src/app/page/collection/collection.component.ts:158</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:145</note>
+      </notes>
+      <segment>
+        <source>交易历史</source>
+      </segment>
+    </unit>
+    <unit id="7565716024468232322">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:42</note>
+      </notes>
+      <segment>
+        <source>Links</source>
+      </segment>
+    </unit>
+    <unit id="8183509968207601316">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:45</note>
+      </notes>
+      <segment>
+        <source>Plug Chain</source>
+      </segment>
+    </unit>
+    <unit id="5339703907387406545">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:49</note>
+      </notes>
+      <segment>
+        <source>ONP</source>
+      </segment>
+    </unit>
+    <unit id="3618113761309540743">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:53</note>
+      </notes>
+      <segment>
+        <source>Telegram</source>
+      </segment>
+    </unit>
+    <unit id="3403467584673021054">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:57</note>
+      </notes>
+      <segment>
+        <source>CMC</source>
+      </segment>
+    </unit>
+    <unit id="2994543364079367658">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:13,14</note>
+      </notes>
+      <segment>
+        <source>搜索收藏品、合集、以及账户</source>
+      </segment>
+    </unit>
+    <unit id="287333266719822847">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:28,29</note>
+        <note category="description">按钮</note>
+      </notes>
+      <segment>
+        <source> 关联钱包 </source>
+      </segment>
+    </unit>
+    <unit id="3663724213369234204">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:76,77</note>
+        <note category="location">src/app/components/header/header.component.ts:206,205</note>
+        <note category="location">src/app/page/home/home.component.html:15</note>
+      </notes>
+      <segment>
+        <source>创造NFT</source>
+      </segment>
+    </unit>
+    <unit id="720166362468454188">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:81</note>
+      </notes>
+      <segment>
+        <source>语言</source>
+      </segment>
+    </unit>
+    <unit id="4199974976797924336">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:90</note>
+      </notes>
+      <segment>
+        <source>链接钱包</source>
+      </segment>
+    </unit>
+    <unit id="6017875986165040324">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:96,99</note>
+      </notes>
+      <segment>
+        <source><pc id="0" equivStart="START_ITALIC_TEXT" equivEnd="CLOSE_ITALIC_TEXT" type="fmt" dispStart="pi-angle-left text-2xl&quot;&gt;" dispEnd="探索"></pc> 探索 </source>
+      </segment>
+    </unit>
+    <unit id="2383095038473338228">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:107,110</note>
+      </notes>
+      <segment>
+        <source><pc id="0" equivStart="START_ITALIC_TEXT" equivEnd="CLOSE_ITALIC_TEXT" type="fmt" dispStart="pi-angle-left text-2xl&quot;&gt;" dispEnd="语言"></pc> 语言 </source>
+      </segment>
+    </unit>
+    <unit id="5359661928089271827">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:173</note>
+      </notes>
+      <segment>
+        <source>用户</source>
+      </segment>
+    </unit>
+    <unit id="5866254605255506989">
+      <notes>
+        <note category="location">src/app/components/header/header.component.ts:215</note>
+      </notes>
+      <segment>
+        <source>English</source>
+      </segment>
+    </unit>
+    <unit id="1520664020879989316">
+      <notes>
+        <note category="location">src/app/components/header/header.component.ts:216</note>
+      </notes>
+      <segment>
+        <source>简体中文</source>
+      </segment>
+    </unit>
+    <unit id="4429954177750855285">
+      <notes>
+        <note category="location">src/app/components/header/header.component.ts:257</note>
+      </notes>
+      <segment>
+        <source>获取账户失败</source>
+      </segment>
+    </unit>
+    <unit id="3288314798219390694">
+      <notes>
+        <note category="location">src/app/components/user-menu/user-menu.component.html:53,54</note>
+      </notes>
+      <segment>
+        <source>我的NFTs</source>
+      </segment>
+    </unit>
+    <unit id="8252668584479042020">
+      <notes>
+        <note category="location">src/app/components/user-menu/user-menu.component.html:59</note>
+      </notes>
+      <segment>
+        <source>我的合集</source>
+      </segment>
+    </unit>
+    <unit id="1448024350780678803">
+      <notes>
+        <note category="location">src/app/components/user-menu/user-menu.component.html:64</note>
+      </notes>
+      <segment>
+        <source>我的关注</source>
+      </segment>
+    </unit>
+    <unit id="1133636729557061267">
+      <notes>
+        <note category="location">src/app/components/user-menu/user-menu.component.html:69</note>
+      </notes>
+      <segment>
+        <source>设置</source>
+      </segment>
+    </unit>
+    <unit id="7721158684375114186">
+      <notes>
+        <note category="location">src/app/components/user-menu/user-menu.component.html:75</note>
+      </notes>
+      <segment>
+        <source>登出</source>
+      </segment>
+    </unit>
+    <unit id="2751668730037404657">
+      <notes>
+        <note category="location">src/app/components/user-menu/user-menu.component.ts:134</note>
+      </notes>
+      <segment>
+        <source>退出成功</source>
+      </segment>
+    </unit>
+    <unit id="6352034988909405263">
+      <notes>
+        <note category="location">src/app/components/user-menu/user-menu.component.ts:138</note>
+      </notes>
+      <segment>
+        <source>退出失败</source>
+      </segment>
+    </unit>
+    <unit id="3371764271837320551">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.html:9</note>
+        <note category="location">src/app/page/collection/collection.component.html:120</note>
+        <note category="location">src/app/page/search/search.component.html:45</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.html:55</note>
+      </notes>
+      <segment>
+        <source> 结果</source>
+      </segment>
+    </unit>
+    <unit id="6313993506672907169">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.ts:44</note>
+        <note category="location">src/app/page/collection/collection.component.ts:80</note>
+        <note category="location">src/app/page/explore/explore.component.ts:25</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:73</note>
+      </notes>
+      <segment>
+        <source>全部</source>
+      </segment>
+    </unit>
+    <unit id="4367785968690067381">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.ts:47</note>
+        <note category="location">src/app/page/collection/collection.component.ts:83</note>
+        <note category="location">src/app/page/search/search.component.ts:38</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:76</note>
+      </notes>
+      <segment>
+        <source>最近转移</source>
+      </segment>
+    </unit>
+    <unit id="2926688364009783695">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.ts:50</note>
+        <note category="location">src/app/page/collection/collection.component.ts:86</note>
+        <note category="location">src/app/page/search/search.component.ts:41</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:79</note>
+      </notes>
+      <segment>
+        <source>最近上架</source>
+      </segment>
+    </unit>
+    <unit id="3169986844509696349">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.ts:53</note>
+        <note category="location">src/app/page/collection/collection.component.ts:89</note>
+        <note category="location">src/app/page/search/search.component.ts:44</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:82</note>
+      </notes>
+      <segment>
+        <source>最近创建</source>
+      </segment>
+    </unit>
+    <unit id="8123575555114872845">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.ts:56</note>
+        <note category="location">src/app/page/collection/collection.component.ts:92</note>
+        <note category="location">src/app/page/search/search.component.ts:47</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:85</note>
+      </notes>
+      <segment>
+        <source>最近卖出</source>
+      </segment>
+    </unit>
+    <unit id="132391356181131379">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.ts:59</note>
+        <note category="location">src/app/page/collection/collection.component.ts:95</note>
+        <note category="location">src/app/page/search/search.component.ts:50</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:88</note>
+      </notes>
+      <segment>
+        <source>最近结束</source>
+      </segment>
+    </unit>
+    <unit id="7497938575508856902">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.ts:62</note>
+        <note category="location">src/app/page/collection/collection.component.ts:98</note>
+        <note category="location">src/app/page/search/search.component.ts:53</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:91</note>
+      </notes>
+      <segment>
+        <source>价格：从低到高</source>
+      </segment>
+    </unit>
+    <unit id="6589793804270050684">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.ts:65</note>
+        <note category="location">src/app/page/collection/collection.component.ts:101</note>
+        <note category="location">src/app/page/search/search.component.ts:56</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:94</note>
+      </notes>
+      <segment>
+        <source>价格：从高到底</source>
+      </segment>
+    </unit>
+    <unit id="6204533196630539915">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.ts:68</note>
+        <note category="location">src/app/page/collection/collection.component.ts:104</note>
+        <note category="location">src/app/page/search/search.component.ts:59</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:97</note>
+      </notes>
+      <segment>
+        <source>销售最高</source>
+      </segment>
+    </unit>
+    <unit id="1816821038832145609">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:18</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:44,45</note>
+      </notes>
+      <segment>
+        <source>关注</source>
+      </segment>
+    </unit>
+    <unit id="5802017036924681432">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:20</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:46,47</note>
+      </notes>
+      <segment>
+        <source>拥有者</source>
+      </segment>
+    </unit>
+    <unit id="168875663791529485">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:22</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:48</note>
+      </notes>
+      <segment>
+        <source>已拥有</source>
+      </segment>
+    </unit>
+    <unit id="7617523935317679799">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:24</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:50</note>
+      </notes>
+      <segment>
+        <source>同质化</source>
+      </segment>
+    </unit>
+    <unit id="4121422709510005673">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:29,31</note>
+      </notes>
+      <segment>
+        <source> 最高出价 <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span class=&quot;market-title-describe pl-1&quot;&gt;" dispEnd="&lt;/span&gt;">未达保留价</pc></source>
+      </segment>
+    </unit>
+    <unit id="3941473382986540317">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:43</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:87</note>
+      </notes>
+      <segment>
+        <source>竞拍出价</source>
+      </segment>
+    </unit>
+    <unit id="261546163296077880">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:71</note>
+      </notes>
+      <segment>
+        <source>竞拍已结束</source>
+      </segment>
+    </unit>
+    <unit id="560255344292734696">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:74</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:130,131</note>
+      </notes>
+      <segment>
+        <source>距离竞拍结束</source>
+      </segment>
+    </unit>
+    <unit id="7035465873059402938">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:81</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:138</note>
+        <note category="location">src/app/tools/functions/time.ts:39</note>
+      </notes>
+      <segment>
+        <source>天</source>
+      </segment>
+    </unit>
+    <unit id="712823126429952860">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:88</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:145</note>
+        <note category="location">src/app/tools/functions/time.ts:40</note>
+      </notes>
+      <segment>
+        <source>时</source>
+      </segment>
+    </unit>
+    <unit id="6250624601727531879">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:95</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:152</note>
+        <note category="location">src/app/tools/functions/time.ts:41</note>
+      </notes>
+      <segment>
+        <source>分</source>
+      </segment>
+    </unit>
+    <unit id="7921460243653576145">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:102</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:159</note>
+        <note category="location">src/app/tools/functions/time.ts:42</note>
+      </notes>
+      <segment>
+        <source>秒</source>
+      </segment>
+    </unit>
+    <unit id="2022439892376702047">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:111</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:167</note>
+      </notes>
+      <segment>
+        <source>收藏品介绍</source>
+      </segment>
+    </unit>
+    <unit id="3916839086124292567">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:114</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:197</note>
+      </notes>
+      <segment>
+        <source>合集介绍</source>
+      </segment>
+    </unit>
+    <unit id="3389676158695591870">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:116</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:214</note>
+      </notes>
+      <segment>
+        <source>链信息</source>
+      </segment>
+    </unit>
+    <unit id="5186831517533448612">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:124</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:247</note>
+      </notes>
+      <segment>
+        <source>卖家定价</source>
+      </segment>
+    </unit>
+    <unit id="1293042933852334977">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:129</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:254</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:330</note>
+      </notes>
+      <segment>
+        <source>出售者</source>
+      </segment>
+    </unit>
+    <unit id="5282215776117657344">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:130</note>
+        <note category="location">src/app/page/auction/auction.component.html:163</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:254,255</note>
+      </notes>
+      <segment>
+        <source>过期时间</source>
+      </segment>
+    </unit>
+    <unit id="6773163598317824564">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:131</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:256</note>
+      </notes>
+      <segment>
+        <source>出价</source>
+      </segment>
+    </unit>
+    <unit id="2370992337348109348">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:157</note>
+      </notes>
+      <segment>
+        <source>买家报价</source>
+      </segment>
+    </unit>
+    <unit id="6759412300615139970">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:162</note>
+      </notes>
+      <segment>
+        <source>USD价格</source>
+      </segment>
+    </unit>
+    <unit id="2946205399320507052">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:164</note>
+        <note category="location">src/app/page/auction/auction.component.html:197</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:390</note>
+      </notes>
+      <segment>
+        <source>发送方</source>
+      </segment>
+    </unit>
+    <unit id="8036181925851410124">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:180</note>
+        <note category="location">src/app/page/auction/auction.component.html:214</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:309</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:370</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:421</note>
+      </notes>
+      <segment>
+        <source>暂无数据</source>
+      </segment>
+    </unit>
+    <unit id="7916650317126777762">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:198</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:391</note>
+      </notes>
+      <segment>
+        <source>时间</source>
+      </segment>
+    </unit>
+    <unit id="6004916905802586042">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:223</note>
+      </notes>
+      <segment>
+        <source>更多藏品</source>
+      </segment>
+    </unit>
+    <unit id="1987414003925334833">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:241</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:449,450</note>
+      </notes>
+      <segment>
+        <source>没有更多信息</source>
+      </segment>
+    </unit>
+    <unit id="7599760601119051106">
+      <notes>
+        <note category="location">src/app/page/auction/auction.component.html:246</note>
+      </notes>
+      <segment>
+        <source>查看合集</source>
+      </segment>
+    </unit>
+    <unit id="8693694008807946688">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:38</note>
+      </notes>
+      <segment>
+        <source>项目</source>
+      </segment>
+    </unit>
+    <unit id="5562293235200383361">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:42</note>
+      </notes>
+      <segment>
+        <source>创建日期</source>
+      </segment>
+    </unit>
+    <unit id="1742713370399329516">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:46</note>
+      </notes>
+      <segment>
+        <source>创作者费用</source>
+      </segment>
+    </unit>
+    <unit id="8495276359932757596">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:53</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.html:32</note>
+      </notes>
+      <segment>
+        <source>收起 </source>
+      </segment>
+    </unit>
+    <unit id="7173046622963023231">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:57</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.html:36</note>
+      </notes>
+      <segment>
+        <source>展开 </source>
+      </segment>
+    </unit>
+    <unit id="3568630646445966190">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:70</note>
+      </notes>
+      <segment>
+        <source>总交易额</source>
+      </segment>
+    </unit>
+    <unit id="1127267118307330435">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:77</note>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:13</note>
+      </notes>
+      <segment>
+        <source>地板价</source>
+      </segment>
+    </unit>
+    <unit id="7987891145806055695">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:84</note>
+      </notes>
+      <segment>
+        <source>最佳报价</source>
+      </segment>
+    </unit>
+    <unit id="1491067319500991535">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:90</note>
+      </notes>
+      <segment>
+        <source>已刊登</source>
+      </segment>
+    </unit>
+    <unit id="1298223502626657622">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:96</note>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:14</note>
+      </notes>
+      <segment>
+        <source>持有者</source>
+      </segment>
+    </unit>
+    <unit id="5674855936906390867">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.html:102</note>
+      </notes>
+      <segment>
+        <source>编辑合集</source>
+      </segment>
+    </unit>
+    <unit id="1678226626970798756">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.ts:73</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:220</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:65</note>
+      </notes>
+      <segment>
+        <source>复制链接</source>
+      </segment>
+    </unit>
+    <unit id="8790918354594417962">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.ts:74</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:221</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:66</note>
+      </notes>
+      <segment>
+        <source>Facebook</source>
+      </segment>
+    </unit>
+    <unit id="1715373473261069991">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.ts:75</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:222</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:67</note>
+      </notes>
+      <segment>
+        <source>Twitter</source>
+      </segment>
+    </unit>
+    <unit id="5727309507023438297">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.ts:229</note>
+      </notes>
+      <segment>
+        <source>取消成功</source>
+      </segment>
+    </unit>
+    <unit id="7199316140908658902">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.ts:238</note>
+      </notes>
+      <segment>
+        <source>收藏成功</source>
+      </segment>
+    </unit>
+    <unit id="1605931622666794079">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:7,8</note>
+      </notes>
+      <segment>
+        <source> 创建新合集 </source>
+      </segment>
+    </unit>
+    <unit id="4029980681629645923">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:13,14</note>
+      </notes>
+      <segment>
+        <source> 修改合集 </source>
+      </segment>
+    </unit>
+    <unit id="7122349861941049214">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:21</note>
+      </notes>
+      <segment>
+        <source> 上传图片 </source>
+      </segment>
+    </unit>
+    <unit id="5916960395768605022">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:30</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:40</note>
+      </notes>
+      <segment>
+        <source>合集主图</source>
+      </segment>
+    </unit>
+    <unit id="3840440619782243462">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:41,45</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:32,38</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:28,34</note>
+      </notes>
+      <segment>
+        <source> 支持JPG、PNG、GIF <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> 推荐尺寸 400 x 400px <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> 大小在1M以内 </source>
+      </segment>
+    </unit>
+    <unit id="2979536706534549876">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:63</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:73</note>
+      </notes>
+      <segment>
+        <source>横幅背景</source>
+      </segment>
+    </unit>
+    <unit id="1546346482435165298">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:74,78</note>
+      </notes>
+      <segment>
+        <source> 支持JPG、PNG、GIF <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> 推荐尺寸 1920 x 280px <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> 大小在1M以内 </source>
+      </segment>
+    </unit>
+    <unit id="1246188092045573846">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:98,100</note>
+      </notes>
+      <segment>
+        <source> 合集名称 <pc id="0" equivStart="START_SUPERSCRIPT" equivEnd="CLOSE_SUPERSCRIPT" type="other" dispStart="&lt;sup&gt;" dispEnd="&lt;/sup&gt;">*</pc></source>
+      </segment>
+    </unit>
+    <unit id="3856062028072147656">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:105,106</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:64</note>
+      </notes>
+      <segment>
+        <source>好的名字能引发关联想象，吸引观众哦～</source>
+      </segment>
+    </unit>
+    <unit id="5501189997536203048">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:115</note>
+      </notes>
+      <segment>
+        <source> 合集描述 </source>
+      </segment>
+    </unit>
+    <unit id="5599439855685167408">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:124,125</note>
+      </notes>
+      <segment>
+        <source>介绍你的合集，让更多人了解TA的价值</source>
+      </segment>
+    </unit>
+    <unit id="8097253410655281837">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:148</note>
+      </notes>
+      <segment>
+        <source> 创作者收益 </source>
+      </segment>
+    </unit>
+    <unit id="584513089201396467">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:157</note>
+      </notes>
+      <segment>
+        <source>收益地址</source>
+      </segment>
+    </unit>
+    <unit id="731293179638927751">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:166</note>
+      </notes>
+      <segment>
+        <source>费率</source>
+      </segment>
+    </unit>
+    <unit id="8194660208742174066">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:182</note>
+      </notes>
+      <segment>
+        <source> 可支付代币 </source>
+      </segment>
+    </unit>
+    <unit id="8967949773137877543">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:199</note>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:79</note>
+      </notes>
+      <segment>
+        <source>选择代币</source>
+      </segment>
+    </unit>
+    <unit id="1768277505666772060">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:244</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:71,73</note>
+      </notes>
+      <segment>
+        <source> 社交链接 </source>
+      </segment>
+    </unit>
+    <unit id="7779838779331879561">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:253,254</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:80</note>
+      </notes>
+      <segment>
+        <source>欢迎您链接到自己的网页</source>
+      </segment>
+    </unit>
+    <unit id="409055432166802721">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:261</note>
+      </notes>
+      <segment>
+        <source> 类别 </source>
+      </segment>
+    </unit>
+    <unit id="5857273842178092539">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:268</note>
+      </notes>
+      <segment>
+        <source>选择</source>
+      </segment>
+    </unit>
+    <unit id="8842440326874999848">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:126</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:101</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:117</note>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:130</note>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:180</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:272</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:307</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:503</note>
+      </notes>
+      <segment>
+        <source>获取数据失败</source>
+      </segment>
+    </unit>
+    <unit id="7314248660741097196">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:183</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:198</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:187</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.ts:83</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.ts:98</note>
+      </notes>
+      <segment>
+        <source>请检查图片尺寸</source>
+      </segment>
+    </unit>
+    <unit id="2265870539342013383">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:185</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:200</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:189</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.ts:85</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.ts:100</note>
+      </notes>
+      <segment>
+        <source>请检查文件类型</source>
+      </segment>
+    </unit>
+    <unit id="1562716989834631472">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:235</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:230</note>
+      </notes>
+      <segment>
+        <source>图片上传失败</source>
+      </segment>
+    </unit>
+    <unit id="451617954359341136">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:252</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:298</note>
+      </notes>
+      <segment>
+        <source>修改失败</source>
+      </segment>
+    </unit>
+    <unit id="5975968864529295182">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:253</note>
+      </notes>
+      <segment>
+        <source>修改合集成功</source>
+      </segment>
+    </unit>
+    <unit id="8373416978745647244">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:270</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:270</note>
+      </notes>
+      <segment>
+        <source>创建失败</source>
+      </segment>
+    </unit>
+    <unit id="6784108346931218640">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:271</note>
+      </notes>
+      <segment>
+        <source>创建合集成功</source>
+      </segment>
+    </unit>
+    <unit id="8664060283396535928">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:278,277</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:273</note>
+      </notes>
+      <segment>
+        <source>创建提示</source>
+      </segment>
+    </unit>
+    <unit id="6991346107550805248">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:279,277</note>
+      </notes>
+      <segment>
+        <source>是否返回继续创建收藏品？</source>
+      </segment>
+    </unit>
+    <unit id="4084906370576746110">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:280,277</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:275</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:762,759</note>
+      </notes>
+      <segment>
+        <source>确定</source>
+      </segment>
+    </unit>
+    <unit id="5601254587589034652">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:281,277</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:276</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:763,759</note>
+      </notes>
+      <segment>
+        <source>取消</source>
+      </segment>
+    </unit>
+    <unit id="1236674547322853105">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:6,8</note>
+      </notes>
+      <segment>
+        <source> 创建收藏品 </source>
+      </segment>
+    </unit>
+    <unit id="538569169197301313">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:12,14</note>
+      </notes>
+      <segment>
+        <source> 修改收藏品 </source>
+      </segment>
+    </unit>
+    <unit id="2244358113383136935">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:21</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:31</note>
+      </notes>
+      <segment>
+        <source>收藏品文件</source>
+      </segment>
+    </unit>
+    <unit id="2833842994095308075">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:54,55</note>
+      </notes>
+      <segment>
+        <source> 收藏品名称 <pc id="0" equivStart="START_SUPERSCRIPT" equivEnd="CLOSE_SUPERSCRIPT" type="other" dispStart="&lt;sup&gt;" dispEnd="&lt;/sup&gt;">*</pc></source>
+      </segment>
+    </unit>
+    <unit id="6083708073852289371">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:87,89</note>
+      </notes>
+      <segment>
+        <source> 描述 </source>
+      </segment>
+    </unit>
+    <unit id="7196887153002257935">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:96</note>
+      </notes>
+      <segment>
+        <source>介绍你的作品，让更多人了解TA的价值</source>
+      </segment>
+    </unit>
+    <unit id="6881952945604768654">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:103,105</note>
+      </notes>
+      <segment>
+        <source> 属性 (选填) </source>
+      </segment>
+    </unit>
+    <unit id="884322506255680019">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:107,109</note>
+      </notes>
+      <segment>
+        <source> 多适用于系列作品，用以突出系列中单个收藏品的特点，例如加密猫属性，眼睛：异瞳； 独立收藏品无需设置，可直接跳过本步骤； </source>
+      </segment>
+    </unit>
+    <unit id="2074877920515585124">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:117</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:187</note>
+      </notes>
+      <segment>
+        <source>属性</source>
+      </segment>
+    </unit>
+    <unit id="6981227828840639514">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:125</note>
+      </notes>
+      <segment>
+        <source>值</source>
+      </segment>
+    </unit>
+    <unit id="5573260758599979795">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:148,150</note>
+      </notes>
+      <segment>
+        <source> 收藏品副本数量 </source>
+      </segment>
+    </unit>
+    <unit id="6501008908955062034">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:162</note>
+      </notes>
+      <segment>
+        <source>单个</source>
+      </segment>
+    </unit>
+    <unit id="639374450759454557">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:163</note>
+      </notes>
+      <segment>
+        <source>此收藏品独一无二</source>
+      </segment>
+    </unit>
+    <unit id="3132127488450909647">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:176</note>
+      </notes>
+      <segment>
+        <source>多个</source>
+      </segment>
+    </unit>
+    <unit id="3781633875199028858">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:177</note>
+      </notes>
+      <segment>
+        <source>此收藏品可售出多份</source>
+      </segment>
+    </unit>
+    <unit id="661105073458440608">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:183</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:252</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:328</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:684</note>
+      </notes>
+      <segment>
+        <source>数量</source>
+      </segment>
+    </unit>
+    <unit id="480972691002447290">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:184</note>
+      </notes>
+      <segment>
+        <source>份</source>
+      </segment>
+    </unit>
+    <unit id="6540603143805514818">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:201,203</note>
+      </notes>
+      <segment>
+        <source> 选择合集 </source>
+      </segment>
+    </unit>
+    <unit id="373364375348888037">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:219</note>
+      </notes>
+      <segment>
+        <source>创建新合集</source>
+      </segment>
+    </unit>
+    <unit id="4439540465152831086">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:155</note>
+      </notes>
+      <segment>
+        <source>获取合集失败</source>
+      </segment>
+    </unit>
+    <unit id="4617507342803771929">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:271</note>
+      </notes>
+      <segment>
+        <source>创建成功</source>
+      </segment>
+    </unit>
+    <unit id="6117018914128081560">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:274</note>
+      </notes>
+      <segment>
+        <source>是否继续创建新的收藏品？</source>
+      </segment>
+    </unit>
+    <unit id="1252737366462064807">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:299</note>
+      </notes>
+      <segment>
+        <source>修改成功</source>
+      </segment>
+    </unit>
+    <unit id="6217499529887174807">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:8,10</note>
+      </notes>
+      <segment>
+        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="Create" dispEnd="&lt;/span&gt;">Create Discover and <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br/&gt;"/> Trade NFTs</pc></source>
+      </segment>
+    </unit>
+    <unit id="1537943631852613472">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:11,13</note>
+      </notes>
+      <segment>
+        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="A mark" dispEnd="&lt;/span&gt;">A marketplace to explore marvelous NFTs and feast the charm of</pc></source>
+      </segment>
+    </unit>
+    <unit id="7746528793236176234">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:68,69</note>
+      </notes>
+      <segment>
+        <source> NFT资产排行榜 </source>
+      </segment>
+    </unit>
+    <unit id="548854576840330298">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:106</note>
+      </notes>
+      <segment>
+        <source> 更多 </source>
+      </segment>
+    </unit>
+    <unit id="8451074960265922961">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:111,112</note>
+      </notes>
+      <segment>
+        <source>顶级合集</source>
+      </segment>
+    </unit>
+    <unit id="1108180858595286288">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:175,176</note>
+      </notes>
+      <segment>
+        <source>探索very5的世界</source>
+      </segment>
+    </unit>
+    <unit id="6934725311611862605">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:181,182</note>
+      </notes>
+      <segment>
+        <source>设置Pando Wallet</source>
+      </segment>
+    </unit>
+    <unit id="2427750540791397968">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:184,185</note>
+      </notes>
+      <segment>
+        <source> 设置好Pando Wallet钱包并将其连接至very5 </source>
+      </segment>
+    </unit>
+    <unit id="2960387848227808543">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:187,188</note>
+      </notes>
+      <segment>
+        <source> 开启你的NFT探索之旅 </source>
+      </segment>
+    </unit>
+    <unit id="4263099990935244946">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:195,196</note>
+      </notes>
+      <segment>
+        <source>探索NFT世界</source>
+      </segment>
+    </unit>
+    <unit id="311928548292448096">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:198,199</note>
+      </notes>
+      <segment>
+        <source> 在vrey5的世界中，你可以自由的探索、寻找并交易各种类型NFT。 </source>
+      </segment>
+    </unit>
+    <unit id="8453674733548743011">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:206,207</note>
+      </notes>
+      <segment>
+        <source>创建你的NFT</source>
+      </segment>
+    </unit>
+    <unit id="6540775925582806608">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:209,210</note>
+      </notes>
+      <segment>
+        <source> 上传作品并填写名称和描述，制作只属于你自己的NFT。 </source>
+      </segment>
+    </unit>
+    <unit id="7462009202723320760">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:217,218</note>
+      </notes>
+      <segment>
+        <source>出售你的NFT</source>
+      </segment>
+    </unit>
+    <unit id="4552852115724053738">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:220,221</note>
+      </notes>
+      <segment>
+        <source> 你可以自由选择出售 NFT 的方式，我们会帮助您出售它们！ </source>
+      </segment>
+    </unit>
+    <unit id="7933384439770878424">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:228,229</note>
+        <note category="location">src/app/page/home/home.component.html:288</note>
+      </notes>
+      <segment>
+        <source>探索市场</source>
+      </segment>
+    </unit>
+    <unit id="1267115972709799512">
+      <notes>
+        <note category="location">src/app/page/home/home.component.html:278,279</note>
+      </notes>
+      <segment>
+        <source>了解very5</source>
+      </segment>
+    </unit>
+    <unit id="7475670004273215298">
+      <notes>
+        <note category="location">src/app/page/home/home.component.ts:51,50</note>
+      </notes>
+      <segment>
+        <source>24小时</source>
+      </segment>
+    </unit>
+    <unit id="4531937244894801389">
+      <notes>
+        <note category="location">src/app/page/home/home.component.ts:55,54</note>
+      </notes>
+      <segment>
+        <source>7天</source>
+      </segment>
+    </unit>
+    <unit id="867805189595982035">
+      <notes>
+        <note category="location">src/app/page/home/home.component.ts:59,58</note>
+      </notes>
+      <segment>
+        <source>30天</source>
+      </segment>
+    </unit>
+    <unit id="103337942364318410">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:3</note>
+      </notes>
+      <segment>
+        <source>设置个人信息</source>
+      </segment>
+    </unit>
+    <unit id="3282820109699316160">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source> 头像 </source>
+      </segment>
+    </unit>
+    <unit id="6141632181598305795">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:17</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:27</note>
+      </notes>
+      <segment>
+        <source>个人头像</source>
+      </segment>
+    </unit>
+    <unit id="8587151648540706658">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:51,53</note>
+      </notes>
+      <segment>
+        <source> 主页封面图 </source>
+      </segment>
+    </unit>
+    <unit id="3656527970111290936">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:65,67</note>
+      </notes>
+      <segment>
+        <source> 支持JPG、PNG、GIF， 推荐尺寸 1200 x 175px， 大小在3M以内 </source>
+      </segment>
+    </unit>
+    <unit id="3273056207231570063">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:84,86</note>
+      </notes>
+      <segment>
+        <source> 用户名 </source>
+      </segment>
+    </unit>
+    <unit id="5227826779122428519">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:94</note>
+      </notes>
+      <segment>
+        <source>4-60个字符，支持中英文、数字、下划线和减号</source>
+      </segment>
+    </unit>
+    <unit id="4786967860038701941">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:101,103</note>
+      </notes>
+      <segment>
+        <source> 简介 </source>
+      </segment>
+    </unit>
+    <unit id="3637654686068161302">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:110</note>
+      </notes>
+      <segment>
+        <source>请输入个人简介</source>
+      </segment>
+    </unit>
+    <unit id="7012871252936152193">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:117,119</note>
+      </notes>
+      <segment>
+        <source> 添加链接 </source>
+      </segment>
+    </unit>
+    <unit id="6980993257481352242">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:128</note>
+      </notes>
+      <segment>
+        <source>网站</source>
+      </segment>
+    </unit>
+    <unit id="689076266536832231">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:140</note>
+      </notes>
+      <segment>
+        <source>https://twitter.com/</source>
+      </segment>
+    </unit>
+    <unit id="2679799485222559592">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:152</note>
+      </notes>
+      <segment>
+        <source>https://t.me/</source>
+      </segment>
+    </unit>
+    <unit id="1637744306155296942">
+      <notes>
+        <note category="location">src/app/page/my-setting/my-setting.component.ts:119</note>
+      </notes>
+      <segment>
+        <source>提交成功</source>
+      </segment>
+    </unit>
+    <unit id="7693182472857430781">
+      <notes>
+        <note category="location">src/app/page/my-star/my-star.component.html:3</note>
+      </notes>
+      <segment>
+        <source>我的关注/收藏</source>
+      </segment>
+    </unit>
+    <unit id="4831060547917524832">
+      <notes>
+        <note category="location">src/app/page/my-star/my-star.component.html:7</note>
+      </notes>
+      <segment>
+        <source>收藏</source>
+      </segment>
+    </unit>
+    <unit id="7708270344948043036">
+      <notes>
+        <note category="location">src/app/page/my-star/my-star.component.html:38,42</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:222,224</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:236,238</note>
+      </notes>
+      <segment>
+        <source> <ph id="0" equiv="INTERPOLATION" disp="{{
+                        item.auctionInfo.inAuctioning ? (&apos;还剩&apos; + item.auctionInfo.showTime) : &apos;&apos;
+                      }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="8355407617046690701">
+      <notes>
+        <note category="location">src/app/page/my-star/my-star.component.ts:226</note>
+        <note category="location">src/app/page/my-star/my-star.component.ts:257</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:411</note>
+      </notes>
+      <segment>
+        <source>取消关注失败</source>
+      </segment>
+    </unit>
+    <unit id="996094555385511336">
+      <notes>
+        <note category="location">src/app/page/my-star/my-star.component.ts:229</note>
+        <note category="location">src/app/page/my-star/my-star.component.ts:260</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:417</note>
+      </notes>
+      <segment>
+        <source>取消关注成功</source>
+      </segment>
+    </unit>
+    <unit id="4421504189973542830">
+      <notes>
+        <note category="location">src/app/page/my-star/my-star.component.ts:236</note>
+        <note category="location">src/app/page/my-star/my-star.component.ts:267</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:424</note>
+      </notes>
+      <segment>
+        <source>关注失败</source>
+      </segment>
+    </unit>
+    <unit id="2958615782346885755">
+      <notes>
+        <note category="location">src/app/page/my-star/my-star.component.ts:239</note>
+        <note category="location">src/app/page/my-star/my-star.component.ts:270</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:430</note>
+      </notes>
+      <segment>
+        <source>关注成功</source>
+      </segment>
+    </unit>
+    <unit id="9188422910460352444">
+      <notes>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:2</note>
+      </notes>
+      <segment>
+        <source>NFT资产排行</source>
+      </segment>
+    </unit>
+    <unit id="3109283995100333368">
+      <notes>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:3</note>
+      </notes>
+      <segment>
+        <source>热门NFT资产成交量实时排名，发现流行趋势</source>
+      </segment>
+    </unit>
+    <unit id="4883727524555084392">
+      <notes>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:8</note>
+      </notes>
+      <segment>
+        <source>热门合集</source>
+      </segment>
+    </unit>
+    <unit id="29046191451672705">
+      <notes>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:9</note>
+      </notes>
+      <segment>
+        <source>成交额</source>
+      </segment>
+    </unit>
+    <unit id="5655006435177751655">
+      <notes>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:10</note>
+      </notes>
+      <segment>
+        <source>1日 %</source>
+      </segment>
+    </unit>
+    <unit id="1182729962985396853">
+      <notes>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:11</note>
+      </notes>
+      <segment>
+        <source>7日 %</source>
+      </segment>
+    </unit>
+    <unit id="5821953735914096199">
+      <notes>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:12</note>
+      </notes>
+      <segment>
+        <source>日内均价</source>
+      </segment>
+    </unit>
+    <unit id="6626539406047330724">
+      <notes>
+        <note category="location">src/app/page/ranking-list/ranking-list.component.html:15</note>
+      </notes>
+      <segment>
+        <source>资产总数</source>
+      </segment>
+    </unit>
+    <unit id="6059479882975986377">
+      <notes>
+        <note category="location">src/app/page/search/search.component.html:4</note>
+      </notes>
+      <segment>
+        <source>合集结果</source>
+      </segment>
+    </unit>
+    <unit id="7193655631217638375">
+      <notes>
+        <note category="location">src/app/page/search/search.component.html:21</note>
+      </notes>
+      <segment>
+        <source>用户结果</source>
+      </segment>
+    </unit>
+    <unit id="5500447432094211985">
+      <notes>
+        <note category="location">src/app/page/search/search.component.html:39</note>
+      </notes>
+      <segment>
+        <source>收藏品结果</source>
+      </segment>
+    </unit>
+    <unit id="929644299585552432">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:21,23</note>
+      </notes>
+      <segment>
+        <source> 待售项目列表 </source>
+      </segment>
+    </unit>
+    <unit id="9162601036772446435">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:31,33</note>
+      </notes>
+      <segment>
+        <source> 类型 </source>
+      </segment>
+    </unit>
+    <unit id="7423302872239060552">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:41</note>
+      </notes>
+      <segment>
+        <source>固定价格</source>
+      </segment>
+    </unit>
+    <unit id="5764621009484951466">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:49</note>
+      </notes>
+      <segment>
+        <source>限时拍卖</source>
+      </segment>
+    </unit>
+    <unit id="2651233488315291043">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:56,58</note>
+      </notes>
+      <segment>
+        <source> 价格 </source>
+      </segment>
+    </unit>
+    <unit id="7326142044940090509">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:61</note>
+      </notes>
+      <segment>
+        <source>刊登项目后，无法编辑标价和项目刊登时间。您需要取消项目刊登，并使用更新的价格和日期重新刊登项目</source>
+      </segment>
+    </unit>
+    <unit id="9144979935144873245">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:109</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:574</note>
+      </notes>
+      <segment>
+        <source>金额</source>
+      </segment>
+    </unit>
+    <unit id="1052613931607348576">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:117,119</note>
+      </notes>
+      <segment>
+        <source> 持续时间 </source>
+      </segment>
+    </unit>
+    <unit id="4264533020967276501">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:129</note>
+      </notes>
+      <segment>
+        <source>持续时间</source>
+      </segment>
+    </unit>
+    <unit id="1265045520021552068">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:138,139</note>
+      </notes>
+      <segment>
+        <source><pc id="0" equivStart="START_ITALIC_TEXT" equivEnd="CLOSE_ITALIC_TEXT" type="fmt" dispStart="&lt;i class=&quot;pi pi-calendar-minus pr-2&quot;&gt;" dispEnd="&lt;/i&gt;"></pc>持续时间 </source>
+      </segment>
+    </unit>
+    <unit id="5406365291756227597">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:170,172</note>
+      </notes>
+      <segment>
+        <source> 为特定买家预留 </source>
+      </segment>
+    </unit>
+    <unit id="1974264814259054696">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:175</note>
+      </notes>
+      <segment>
+        <source>此项目在刊登后可立即购买</source>
+      </segment>
+    </unit>
+    <unit id="7384505430890528146">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:182</note>
+      </notes>
+      <segment>
+        <source>买家地址</source>
+      </segment>
+    </unit>
+    <unit id="4911977921689274172">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:189,191</note>
+      </notes>
+      <segment>
+        <source> 出售数量 <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span class=&quot;text-sm&quot;&gt;" dispEnd="&lt;/span&gt;">（最多: <ph id="1" equiv="INTERPOLATION" disp="{{productInfo.myNum}}"/>）</pc></source>
+      </segment>
+    </unit>
+    <unit id="1717457792991766727">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:209,211</note>
+      </notes>
+      <segment>
+        <source> 费用 </source>
+      </segment>
+    </unit>
+    <unit id="5007820625606043425">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:214</note>
+      </notes>
+      <segment>
+        <source>项目刊登是免费的。一旦出售将扣除以下费用</source>
+      </segment>
+    </unit>
+    <unit id="985734946906161807">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:223</note>
+      </notes>
+      <segment>
+        <source>服务费</source>
+      </segment>
+    </unit>
+    <unit id="8872964543224526807">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:227</note>
+      </notes>
+      <segment>
+        <source>创作者 费用</source>
+      </segment>
+    </unit>
+    <unit id="899652937853427423">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:238,240</note>
+      </notes>
+      <segment>
+        <source> 预览 </source>
+      </segment>
+    </unit>
+    <unit id="3603103875765921006">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:32</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:36</note>
+      </notes>
+      <segment>
+        <source>1 天</source>
+      </segment>
+    </unit>
+    <unit id="512812319654163594">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:33</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:37</note>
+      </notes>
+      <segment>
+        <source>3 天</source>
+      </segment>
+    </unit>
+    <unit id="4650969978350920114">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:34</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:38</note>
+      </notes>
+      <segment>
+        <source>7 天</source>
+      </segment>
+    </unit>
+    <unit id="971344134124547257">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:35</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:39</note>
+      </notes>
+      <segment>
+        <source>1 个月</source>
+      </segment>
+    </unit>
+    <unit id="2647303071911059441">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:36</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:40</note>
+      </notes>
+      <segment>
+        <source>3 个月</source>
+      </segment>
+    </unit>
+    <unit id="2129652991162336931">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:230</note>
+      </notes>
+      <segment>
+        <source>刊登失败</source>
+      </segment>
+    </unit>
+    <unit id="313024114318233932">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:237</note>
+      </notes>
+      <segment>
+        <source>需要使用您账户对数据签名</source>
+      </segment>
+    </unit>
+    <unit id="2302469346733257592">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:245</note>
+      </notes>
+      <segment>
+        <source>挂售成功</source>
+      </segment>
+    </unit>
+    <unit id="6754827532804801692">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.ts:247</note>
+      </notes>
+      <segment>
+        <source>挂售失败</source>
+      </segment>
+    </unit>
+    <unit id="6441654809894181260">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:9</note>
+      </notes>
+      <segment>
+        <source>编辑</source>
+      </segment>
+    </unit>
+    <unit id="8425052213187113048">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:16</note>
+      </notes>
+      <segment>
+        <source>出售</source>
+      </segment>
+    </unit>
+    <unit id="360400753666595950">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:23</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:630</note>
+      </notes>
+      <segment>
+        <source>赠送</source>
+      </segment>
+    </unit>
+    <unit id="5127591672059742865">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:56</note>
+      </notes>
+      <segment>
+        <source>尚未出售</source>
+      </segment>
+    </unit>
+    <unit id="1242319295993384060">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:60</note>
+      </notes>
+      <segment>
+        <source> 最新成交价 </source>
+      </segment>
+    </unit>
+    <unit id="4862708731810755765">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:76</note>
+      </notes>
+      <segment>
+        <source>限价购买</source>
+      </segment>
+    </unit>
+    <unit id="7751067856855174683">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:180</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:480</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:545</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:649</note>
+      </notes>
+      <segment>
+        <source>创作者版税: </source>
+      </segment>
+    </unit>
+    <unit id="2555854363564671189">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:217</note>
+      </notes>
+      <segment>
+        <source>合约地址</source>
+      </segment>
+    </unit>
+    <unit id="4239151877154039478">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:227</note>
+      </notes>
+      <segment>
+        <source>代币ID</source>
+      </segment>
+    </unit>
+    <unit id="4818914400420234451">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:231</note>
+      </notes>
+      <segment>
+        <source>元数据</source>
+      </segment>
+    </unit>
+    <unit id="6686621343007246556">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:253</note>
+      </notes>
+      <segment>
+        <source>方式</source>
+      </segment>
+    </unit>
+    <unit id="372461311882753312">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:267,270</note>
+      </notes>
+      <segment>
+        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="tip]=&quot;product.fixedBuyer&quot;&gt;" dispEnd="&lt;/span&gt;"> <ph id="1" equiv="INTERPOLATION" disp="{{[&apos;预留&apos;, &apos;定价&apos;, &apos;竞价&apos;][product.sellType]}}"/> </pc></source>
+      </segment>
+    </unit>
+    <unit id="1223288074839210985">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:320,323</note>
+      </notes>
+      <segment>
+        <source> 买家报价 <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span class=&quot;text-xs text-600&quot;&gt;" dispEnd="&lt;/span&gt;">最新 <ph id="1" equiv="INTERPOLATION" disp="{{outputPriceList.length}}"/> 条历史</pc></source>
+      </segment>
+    </unit>
+    <unit id="6638461277250590795">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:329</note>
+      </notes>
+      <segment>
+        <source>出价方</source>
+      </segment>
+    </unit>
+    <unit id="4799980948810629466">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:381,384</note>
+      </notes>
+      <segment>
+        <source> 交易历史 <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span class=&quot;text-xs text-600&quot;&gt;" dispEnd="&lt;/span&gt;">最新 <ph id="1" equiv="INTERPOLATION" disp="{{marketHistoryList.length}}"/> 条历史</pc></source>
+      </segment>
+    </unit>
+    <unit id="4069850735511907039">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:429,430</note>
+      </notes>
+      <segment>
+        <source>来自此系列的更多藏品</source>
+      </segment>
+    </unit>
+    <unit id="1801371781196274830">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:460,461</note>
+      </notes>
+      <segment>
+        <source>立即购买</source>
+      </segment>
+    </unit>
+    <unit id="2480291329489063002">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:483,484</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:548,549</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:652,653</note>
+      </notes>
+      <segment>
+        <source>合集的创作者将收到这个比例的销售额作为 版税，合集的拥有者可以调整版税</source>
+      </segment>
+    </unit>
+    <unit id="1518238371400381237">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:526</note>
+      </notes>
+      <segment>
+        <source>报价</source>
+      </segment>
+    </unit>
+    <unit id="1233879686282962897">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:558,560</note>
+      </notes>
+      <segment>
+        <source><pc id="0" equivStart="START_ITALIC_TEXT" equivEnd="CLOSE_ITALIC_TEXT" type="fmt" dispStart="onfont icon-qian&quot;&gt;" dispEnd="&amp;nbsp;&amp;nbsp;价格"></pc>  价格 </source>
+      </segment>
+    </unit>
+    <unit id="2129042102031937937">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:662,663</note>
+      </notes>
+      <segment>
+        <source> 受赠地址 </source>
+      </segment>
+    </unit>
+    <unit id="6513770809315770864">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:674,676</note>
+      </notes>
+      <segment>
+        <source> 赠送数量<pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span class=&quot;text-sm font-base text-600&quot;&gt;" dispEnd="&lt;/span&gt;">  (&lt;=<ph id="1" equiv="INTERPOLATION" disp="{{userHadNftNum}}"/>)</pc></source>
+      </segment>
+    </unit>
+    <unit id="6370005795385201857">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:566</note>
+      </notes>
+      <segment>
+        <source>获取信息失败</source>
+      </segment>
+    </unit>
+    <unit id="4027285996225863739">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:573</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:578</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:649</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:654</note>
+      </notes>
+      <segment>
+        <source>等待区块确认</source>
+      </segment>
+    </unit>
+    <unit id="3267672272062295878">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:596</note>
+      </notes>
+      <segment>
+        <source>竞价失败</source>
+      </segment>
+    </unit>
+    <unit id="3882839758226452060">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:599</note>
+      </notes>
+      <segment>
+        <source>竞价成功</source>
+      </segment>
+    </unit>
+    <unit id="5216110928472289986">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:714,713</note>
+      </notes>
+      <segment>
+        <source>挂售</source>
+      </segment>
+    </unit>
+    <unit id="8539377779940501509">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:715,713</note>
+      </notes>
+      <segment>
+        <source>交易成功</source>
+      </segment>
+    </unit>
+    <unit id="8074334884446094229">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:716</note>
+      </notes>
+      <segment>
+        <source>撤回</source>
+      </segment>
+    </unit>
+    <unit id="5968037016658292818">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:760,759</note>
+      </notes>
+      <segment>
+        <source>撤回提示</source>
+      </segment>
+    </unit>
+    <unit id="4248582543338658384">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:761,759</note>
+      </notes>
+      <segment>
+        <source>是否撤回当前挂卖？</source>
+      </segment>
+    </unit>
+    <unit id="6556956365710026804">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:767</note>
+      </notes>
+      <segment>
+        <source>撤回成功</source>
+      </segment>
+    </unit>
+    <unit id="526661967860535961">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:770</note>
+      </notes>
+      <segment>
+        <source>撤回失败</source>
+      </segment>
+    </unit>
+    <unit id="8189676194844032904">
+      <notes>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:143</note>
+      </notes>
+      <segment>
+        <source>创建的</source>
+      </segment>
+    </unit>
+    <unit id="2714523871337169162">
+      <notes>
+        <note category="location">src/app/server/base-message.service.ts:19</note>
+        <note category="location">src/app/server/base-message.service.ts:27</note>
+        <note category="location">src/app/server/base-message.service.ts:35</note>
+      </notes>
+      <segment>
+        <source>提示</source>
       </segment>
     </unit>
   </file>

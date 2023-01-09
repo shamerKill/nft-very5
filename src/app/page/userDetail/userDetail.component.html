@@ -1,6 +1,6 @@
 <div class="app-user">
   <div class="app-user-top">
-    <img [src]="userInfo.Conver?userInfo.Conver:'../../../assets/images/explore/very5bg.png'" alt="">
+    <img [src]="userInfo.Conver?userInfo.Conver:'assets/images/explore/very5bg.png'" alt="">
     <div class="app-user-top-iconList">
       <div class="app-user-top-iconList-item" (click)="refresh()">
         <span class="iconfont icon-shuaxin"></span>
@@ -20,7 +20,7 @@
   <div class="app-user-info flex justify-content-between flex-wrap">
     <div class="app-user-info-detail flex">
       <div class="app-user-info-detail-head">
-        <img [src]="userInfo.Avator||'../../assets/images/logo/default-avatar@2x.png'" alt="">
+        <img [src]="userInfo.Avator||'assets/images/logo/default-avatar@2x.png'" alt="">
       </div>
       <div class="app-user-info-detail-title">
           <div class="app-user-info-detail-title-name">
@@ -74,12 +74,12 @@
             <p-dropdown [options]="sortList" optionLabel="name" placeholder="排 序" [style]="{'width': '100%'}">
             </p-dropdown>
             <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(1)">
-              <img src="../../../assets/images/explore/sige.png" alt="" *ngIf="listType == 1">
-              <img src="../../../assets/images/explore/sige1.png" alt="" *ngIf="listType == 2">
+              <img src="assets/images/explore/sige.png" alt="" *ngIf="listType == 1">
+              <img src="assets/images/explore/sige1.png" alt="" *ngIf="listType == 2">
             </div>
             <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(2)">
-              <img src="../../../assets/images/explore/jiuge.png" alt="" *ngIf="listType == 1">
-              <img src="../../../assets/images/explore/jiuge1.png" alt="" *ngIf="listType == 2">
+              <img src="assets/images/explore/jiuge.png" alt="" *ngIf="listType == 1">
+              <img src="assets/images/explore/jiuge1.png" alt="" *ngIf="listType == 2">
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@
             <nft-item  [type]="listType" [item]="items"></nft-item>
           </div>
           <div class="mx-auto flex flex-column align-items-center py-6" *ngIf="nftList.length==0">
-            <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+            <img class="w-6rem" src="assets/images/home/no-data.png" alt="no-data">
             <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
           </div>
         </div>
@@ -98,7 +98,7 @@
           <explore-item *ngFor="let items of exploreList" [item]="items"></explore-item>
         </div>
         <div class="mx-auto flex flex-column align-items-center py-6" *ngIf="exploreList.length==0">
-          <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+          <img class="w-6rem" src="assets/images/home/no-data.png" alt="no-data">
           <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
         </div>
       </div>

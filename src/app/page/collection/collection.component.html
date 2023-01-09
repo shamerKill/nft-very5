@@ -1,6 +1,6 @@
 <div class="app-collection">
   <div class="app-collection-top">
-    <img class="app-collection-top-banner" [src]="collectionDetail.BannerImageUrl?collectionDetail.BannerImageUrl:'../../../assets/images/explore/very5bg.png'" alt="">
+    <img class="app-collection-top-banner" [src]="collectionDetail.BannerImageUrl?collectionDetail.BannerImageUrl:'assets/images/explore/very5bg.png'" alt="">
     <div class="app-collection-top-iconList">
       <div class="app-collection-top-iconList-item" (click)="focusCollection()">
         <span class="iconfont icon-aixin" *ngIf="!collectionDetail.IsFocus"></span>
@@ -64,21 +64,21 @@
     <div class="app-collection-info-total flex">
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/usd.png" alt="">
+            <img src="assets/images/explore/usd.png" alt="">
             <span>{{collectionDetail.TransactionAmount | bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>总交易额</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/usd.png" alt="">
+            <img src="assets/images/explore/usd.png" alt="">
             <span>{{collectionDetail.LowestPrice | bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>地板价</div>
       </div>
       <div class="app-collection-info-total-item">
           <div class="app-collection-info-total-item-num flex align-items-center">
-            <img src="../../../assets/images/explore/usd.png" alt="">
+            <img src="assets/images/explore/usd.png" alt="">
             <span>{{collectionDetail.HighestPrice | bigNum}}</span>
           </div>
           <div class="app-collection-info-total-item-tips" i18n>最佳报价</div>
@@ -123,12 +123,12 @@
             <p-dropdown [options]="sortList" optionLabel="name" placeholder="排 序" [style]="{'width': '100%'}">
             </p-dropdown>
             <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(1)">
-              <img src="../../../assets/images/explore/sige.png" alt="" *ngIf="listType == 1">
-              <img src="../../../assets/images/explore/sige1.png" alt="" *ngIf="listType == 2">
+              <img src="assets/images/explore/sige.png" alt="" *ngIf="listType == 1">
+              <img src="assets/images/explore/sige1.png" alt="" *ngIf="listType == 2">
             </div>
             <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(2)">
-              <img src="../../../assets/images/explore/jiuge.png" alt="" *ngIf="listType == 1">
-              <img src="../../../assets/images/explore/jiuge1.png" alt="" *ngIf="listType == 2">
+              <img src="assets/images/explore/jiuge.png" alt="" *ngIf="listType == 1">
+              <img src="assets/images/explore/jiuge1.png" alt="" *ngIf="listType == 2">
             </div>
           </div>
         </div>
@@ -137,7 +137,7 @@
             <nft-item  [type]="listType" [item]="items"></nft-item>
           </div>
           <div class="mx-auto flex flex-column align-items-center py-6" *ngIf="nftList.length==0">
-            <img class="w-6rem" src="../../../assets/images/home/no-data.png" alt="no-data">
+            <img class="w-6rem" src="assets/images/home/no-data.png" alt="no-data">
             <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
           </div>
         </div>

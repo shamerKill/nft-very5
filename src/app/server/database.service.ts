@@ -47,7 +47,7 @@ export class DatabaseService {
     }
   }
   #nowUserInfo$ =  new BehaviorSubject<TypeSubUserInfo>({
-    avatar: '../../assets/images/logo/default-avatar@2x.png',
+    avatar: 'assets/images/logo/default-avatar@2x.png',
   });
   constructor() { }
 }
