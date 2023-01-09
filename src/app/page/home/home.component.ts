@@ -40,8 +40,9 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
         name: string, // 名字
         logo: string, // 用户logo
         assets: string, // 当前资产
-        chgRate: string, // 涨跌幅
-        direction: boolean, // 方向, true涨，false跌
+        DayIncrease: string,
+        WeekIncrease: string,
+        MonthIncrease: string,
         id: string, // id
       }[], // 列表数据
     }[],
@@ -142,14 +143,14 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
   // 处理资产排行
   private formatAssertRanking(input: any) {
     const _doMap = (item: any, index: number) => {
-      const { str, dir } = ToolFuncGetChg(item.BeforePrice, item.CurrentPrice);
       return {
         number: index + 1,
         name: item.NftOriginal.Name,
         logo: item.NftOriginal.Image,
         assets: item.CurrentPrice,
-        chgRate: str,
-        direction: dir,
+        DayIncrease: parseFloat(Number(item.DayIncrease).toFixed(2)),
+        WeekIncrease: parseFloat(Number(item.WeekIncrease).toFixed(2)),
+        MonthIncrease: parseFloat(Number(item.MonthIncrease).toFixed(2)),
         id: item.NftOriginal.NftID,
       };
     };
@@ -240,5 +241,8 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
         }
       });
     }
+  }
+  getDirection(input:string) {
+    return parseFloat(input) >= 0;
   }
 }
