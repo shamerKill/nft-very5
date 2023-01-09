@@ -2,7 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { ToolClassAutoClosePipe } from './../../tools/classes/pipe-close';
+import { StateService } from './../../server/state.service';
 import '@angular/localize';
+interface pageObj {
+  first: number,
+  page: number,
+  pageCount: number,
+  rows: number,
+}
 
 type sortItem = {name: string; id: string};
 type NftOriginal= {
@@ -86,26 +93,40 @@ export class AllNftComponent extends ToolClassAutoClosePipe implements OnInit {
     coin: '',
     search: '',
   }
+  public total!: number;
+  public page!: number;
+  public pageSize!: number;
   constructor(
     private net: NetService,
     private BaseMessage: BaseMessageService,
+    private state: StateService,
   ) {
     super();
   }
 
   ngOnInit(): void {
+    this.state.globalLoadingSwitch(true);
+    this.getNftList();
+  }
+  paginate(e:pageObj){
+    this.pageSize = e.rows;
+    this.page = e.page+1;
+    this.state.globalLoadingSwitch(true);
     this.getNftList();
   }
   filterChange(event:filterObj) {
     this.filterObj = event;
+    this.state.globalLoadingSwitch(true);
     this.getNftList();
   }
   getNftList() {
     // 获取数据
-    this.net.getNftList$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'').pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+    this.net.getNftListNew$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'','',this.page,this.pageSize).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
+      this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      if (Array.isArray(data) && data.length) {
-        this.nftList = data
+      if (Array.isArray(data.nfts) && data.nfts.length) {
+        this.nftList = data.nfts
+        this.total = data.count
       } else {
         this.nftList = []
       }

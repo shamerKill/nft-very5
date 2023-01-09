@@ -44,10 +44,18 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
   webMenuType$ = new BehaviorSubject(0);
   webMenuType = this.webMenuType$.value;
 
-  exploreList: TypeLinkList = nftTypesArr.map(item => ({
-    ...item,
-    link: '',
-  }));
+  exploreList: TypeLinkList = [
+    {
+      title: $localize`所有NFT`,
+      key: '',
+      link: '',
+    }
+  ].concat(
+    nftTypesArr.map(item => ({
+      ...item,
+      link: '',
+    }))
+  );
 
   // 搜索结果
   searchResult: {
@@ -195,13 +203,17 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
                 {
                   label: item.title,
                   command: () => {
-                    this.router.navigate(['explore'],{queryParams:{id: item.key}});
+                    if (item.key) {
+                      this.router.navigate(['explore'],{queryParams:{id: item.key}});
+                    } else {
+                      this.router.navigate(['nft']);
+                    }
                   }
                 }
               ]
             })
           )
-        ],
+        ]
       },
       {
         label: $localize`排行榜`,

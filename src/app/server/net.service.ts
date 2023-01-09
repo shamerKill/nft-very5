@@ -195,8 +195,11 @@ export class NetService {
    * sort 排序(1最近转移,2最近上架,3最近创建，4最近卖出，5最近结束,6价格从低到高，7价格从高到低，8销售最高）
    * nft-列表(查询条件)
    * **/
-   getNftList$(creator:string,category:string,sellingType:string,lowPrice:string|number,highPrice:string|number,coinType:string,collectionName:string,sort:string,collectionID:string,owner:string='') {
-    return this.$get<TypeInterfaceNet>(`v1/nft/list?creator=${creator}&category=${category}&sellingType=${sellingType}&lowPrice=${lowPrice}&highPrice=${highPrice}&coinType=${coinType}&collectionName=${collectionName}&sort=${sort}&collectionID=${collectionID}&owner=${owner}`);
+   getNftList$(creator:string,category:string,sellingType:string,lowPrice:string|number,highPrice:string|number,coinType:string,collectionName:string,sort:string,collectionID:string,owner:string='',page:number=1,limit:number=1000) {
+    return this.$get<TypeInterfaceNet>(`v1/nft/list?creator=${creator}&category=${category}&sellingType=${sellingType}&lowPrice=${lowPrice}&highPrice=${highPrice}&coinType=${coinType}&collectionName=${collectionName}&sort=${sort}&collectionID=${collectionID}&owner=${owner}&page=${page}&page_size=${limit}`);
+  }
+  getNftListNew$(creator:string,category:string,sellingType:string,lowPrice:string|number,highPrice:string|number,coinType:string,collectionName:string,sort:string,collectionID:string,owner:string='',page:number=1,limit:number=10) {
+    return this.$get<TypeInterfaceNet>(`v1/nft/listc?creator=${creator}&category=${category}&sellingType=${sellingType}&lowPrice=${lowPrice}&highPrice=${highPrice}&coinType=${coinType}&collectionName=${collectionName}&sort=${sort}&collectionID=${collectionID}&owner=${owner}&page=${page}&page_size=${limit}`);
   }
   /**
    * 获取用户信息
@@ -486,6 +489,13 @@ export class NetService {
    **/
   getRankList$() {
     return this.$get('v1/nft/rankingList');
+  }
+
+  /**
+   * 获取所有可以支付代币
+   **/
+  getCoinList$() {
+    return this.$get('v1/nft/tokens?page_size=100');
   }
 }
 

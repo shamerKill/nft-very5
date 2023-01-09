@@ -68,6 +68,9 @@ export class ExploreComponent implements OnInit,OnDestroy {
       }
     })
     this.classId = this.tabbar[this.tabbarIndex].id;
+    this.pageSize = 10;
+    this.total = 0;
+    this.page = 1;
     this.getList();
     this.navigationSubscription = this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
@@ -94,7 +97,6 @@ export class ExploreComponent implements OnInit,OnDestroy {
     // 获取数据
     this.net.getCollectionList$('',this.classId=='热门'? '' : this.classId,this.page,this.pageSize,this.classId=='热门'?'1':'').pipe().subscribe(({code, data, msg}) => {
       this.state.globalLoadingSwitch(false);
-      console.log(code)
       if (code !== 200) return this.BaseMessage.warn(msg??'');
       if (Array.isArray(data.collections) && data.collections.length) {
         this.exploreList = data.collections

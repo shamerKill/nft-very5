@@ -10,6 +10,8 @@ type nftItem = {
   CollectionID: string|number;
   NftOriginal: NftOriginal;
   CurrentPrice: string|number;
+  SellCoinType?:string;
+  SellCoinNumber?:string;
 }
 
 @Component({
@@ -34,5 +36,30 @@ export class NftItemComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-
+  returnInfo(coin:string,type:number=0) {
+    if (!coin) return '';
+    let coinList:any = JSON.parse(window.localStorage.getItem('coinList')??'');
+    let hasCoin = false;
+    let coinInfo = {
+      Decimals: 0,
+      ID: 0,
+      Logo: '',
+      Name: '',
+      Token: ''
+    }
+    coinList.map((item:any) => {
+      if (item.Token == coin) {
+        hasCoin = true;
+        coinInfo = item;
+      }
+    })
+    if (hasCoin) {
+      if (type==1) {
+        return coinInfo.Name
+      } else {
+        return coinInfo.Logo
+      }
+    }
+    else return ''
+  }
 }

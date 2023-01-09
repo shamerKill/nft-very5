@@ -1,4 +1,5 @@
 import { BaseMessageService } from './server/base-message.service';
+import { NetService } from './server/net.service'
 import { ToolClassAutoClosePipe } from './tools/classes/pipe-close';
 import { ClipboardService } from 'ngx-clipboard';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
@@ -15,6 +16,7 @@ export class AppComponent extends ToolClassAutoClosePipe implements OnInit {
     private primengConfig: PrimeNGConfig,
     private clipboard: ClipboardService,
     private BaseMessage: BaseMessageService,
+    private net:NetService
   ) {
     super();
   }
@@ -22,6 +24,7 @@ export class AppComponent extends ToolClassAutoClosePipe implements OnInit {
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.listenClipboard();
+    this.getCoinList();
   }
 
   // 监听复制弹窗
@@ -33,5 +36,13 @@ export class AppComponent extends ToolClassAutoClosePipe implements OnInit {
         this.BaseMessage.warn($localize`复制失败`);
       }
     });
+  }
+  private getCoinList() {
+    this.net.getCoinList$().subscribe(data => {
+      console.log(data)
+      if (data.code==200) {
+        window.localStorage.setItem('coinList', JSON.stringify(data.data))
+      }
+    })
   }
 }

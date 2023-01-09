@@ -30,5 +30,8 @@
         <p class="pt-2 text-400 text-sm" i18n>暂无数据</p>
       </div>
     </div>
+    <div *ngIf="total>10">
+      <p-paginator [rows]="pageSize" [totalRecords]="total" [rowsPerPageOptions]="[10,20,30]" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
   </div>
 </div>
