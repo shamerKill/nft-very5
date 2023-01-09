@@ -157,7 +157,7 @@ export class MySettingComponent extends ToolClassAutoClosePipe implements OnInit
           const [main] = data;
           if (main.code === 200) {
             path$.next({
-              avatar: main.data,
+              main: main.data,
             });
           }
         }

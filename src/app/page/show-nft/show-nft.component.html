@@ -31,7 +31,8 @@
         *ngIf="productInfo.image"
         class="top-image-img"
         [src]="productInfo.image"
-        [alt]="productInfo.name">
+        [alt]="productInfo.name"
+        (click)="showNftBig = true">
     </div>
     <div class="top-info-box flex-1 flex flex-column justify-content-between">
       <div class="info-info flex-1 pl-4 pr-6">
@@ -482,6 +483,9 @@
       <p class="pt-2 text-400 text-sm" i18n>没有更多信息</p>
     </div>
   </app-base-box>
+  <div class="big-img-box" (click)="showNftBig = false" [ngClass]="{'big-img-show': showNftBig}">
+    <img class="big-img" [src]="productInfo.image" [alt]="productInfo.name">
+  </div>
 </app-page-bg-box>
 
 

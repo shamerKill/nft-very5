@@ -48,4 +48,10 @@
   &-list{
     padding-bottom: 2rem;
   }
+
+  ::ng-deep {
+    .p-paginator {
+      background-color: transparent;
+    }
+  }
 }

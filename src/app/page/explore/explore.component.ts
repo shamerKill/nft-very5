@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router,ActivatedRoute,NavigationEnd } from '@angular/router';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
@@ -26,7 +26,11 @@ type exploreItem = {
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss']
 })
-export class ExploreComponent implements OnInit,OnDestroy {
+export class ExploreComponent implements OnInit,OnDestroy,AfterViewInit {
+  // 页面元素
+  @ViewChild('page')
+  pageContent?: ElementRef<HTMLDivElement>;
+
   tabbar: tabbarItem = [
     {
       name: $localize`全部`,
@@ -88,6 +92,9 @@ export class ExploreComponent implements OnInit,OnDestroy {
   ngOnDestroy():void{
     this.navigationSubscription.unsubscribe()
   }
+  ngAfterViewInit(): void {
+    this.formatPageHeightInit();
+  }
   paginate(e:pageObj){
     this.pageSize = e.rows;
     this.page = e.page+1;
@@ -105,5 +112,16 @@ export class ExploreComponent implements OnInit,OnDestroy {
         this.exploreList = []
       }
     });
+  }
+
+  // 处理页面高度
+  private formatPageHeightInit() {
+    // 获取宿主元素
+    const mainContent = document.querySelector('#root-content');
+    if (!mainContent) return;
+    // 获取页面元素
+    const pageContent = this.pageContent?.nativeElement;
+    if (!pageContent) return;
+    pageContent.style.minHeight = `${mainContent.clientHeight}px`;
   }
 }
