@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { DatabaseService, nftTypesArr } from './../../server/database.service';
 import { BehaviorSubject, debounceTime, fromEvent, zip } from 'rxjs';
@@ -79,6 +80,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
     private BaseMessage: BaseMessageService,
     private netService: NetService,
     private router: Router,
+    private location: Location,
   ) {
     super();
   }
@@ -231,8 +233,18 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
         icon: 'pi pi-globe',
         items: [
           [
-            { items: [{label: $localize`English`}] },
-            { items: [{label: $localize`简体中文`}] },
+            { items: [{
+              label: $localize`English`,
+              command: () => {
+                window.location.href = window.location.origin + '/en-US';
+              }
+            }] },
+            { items: [{
+              label: $localize`简体中文`,
+              command: () => {
+                window.location.href = window.location.origin + '/zh-Hans';
+              }
+            }] },
           ]
         ]
       },

@@ -319,7 +319,7 @@
         <note category="location">src/app/components/header/header.component.ts:216</note>
       </notes>
       <segment>
-        <source>Simplified Chinese</source>
+        <source>简体中文</source>
       </segment>
     </unit>
     <unit id="4429954177750855285">
@@ -1358,7 +1358,7 @@
         <source>Modification succeeded</source>
       </segment>
     </unit>
-    <unit id="4360829614742536299">
+    <unit id="5434429150370018605">
       <notes>
         <note category="location">src/app/page/home/home.component.html:8,10</note>
       </notes>
@@ -1680,7 +1680,7 @@
       </notes>
       <segment>
         <source> <ph id="0" equiv="INTERPOLATION" disp="{{
-                        item.auctionInfo.inAuctioning ? (&apos;还剩&apos; + item.auctionInfo.showTime) : &apos;&apos;
+                        item.auctionInfo.inAuctioning ? (&apos;surplus&apos; + item.auctionInfo.showTime) : &apos;&apos;
                       }}"/> </source>
       </segment>
     </unit>

@@ -1363,12 +1363,12 @@
         <source>修改成功</source>
       </segment>
     </unit>
-    <unit id="4360829614742536299">
+    <unit id="5434429150370018605">
       <notes>
         <note category="location">src/app/page/home/home.component.html:8,10</note>
       </notes>
       <segment>
-        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="创建 发现" dispEnd="&lt;/span&gt;">创建 发现 交易 NFT</pc></source>
+        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="创建 发现" dispEnd="&lt;/span&gt;">创建 发现 <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br/&gt;"/> 交易 NFT</pc></source>
       </segment>
     </unit>
     <unit id="4259079485893713907">

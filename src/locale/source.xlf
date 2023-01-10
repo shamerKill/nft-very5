@@ -104,7 +104,7 @@
       <notes>
         <note category="location">src/app/components/filter-box/filter-box.component.ts:99</note>
         <note category="location">src/app/components/footer/footer.component.ts:27</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:782,778</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:788,784</note>
       </notes>
       <segment>
         <source>创建</source>
@@ -1062,7 +1062,7 @@
         <note category="location">src/app/page/sell-nft/sell-nft.component.ts:199</note>
         <note category="location">src/app/page/show-nft/show-nft.component.ts:288</note>
         <note category="location">src/app/page/show-nft/show-nft.component.ts:334</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:541</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:547</note>
       </notes>
       <segment>
         <source>获取数据失败</source>
@@ -1156,8 +1156,8 @@
       <notes>
         <note category="location">src/app/page/create-collection/create-collection.component.ts:280,277</note>
         <note category="location">src/app/page/create-nft/create-nft.component.ts:276</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:835,832</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:858,855</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:841,838</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:864,861</note>
       </notes>
       <segment>
         <source>确定</source>
@@ -1167,8 +1167,8 @@
       <notes>
         <note category="location">src/app/page/create-collection/create-collection.component.ts:281,277</note>
         <note category="location">src/app/page/create-nft/create-nft.component.ts:277</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:836,832</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:859,855</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:842,838</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:865,861</note>
       </notes>
       <segment>
         <source>取消</source>
@@ -1363,12 +1363,12 @@
         <source>修改成功</source>
       </segment>
     </unit>
-    <unit id="4360829614742536299">
+    <unit id="5434429150370018605">
       <notes>
         <note category="location">src/app/page/home/home.component.html:8,10</note>
       </notes>
       <segment>
-        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="创建 发现" dispEnd="&lt;/span&gt;">创建 发现 交易 NFT</pc></source>
+        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="创建 发现" dispEnd="&lt;/span&gt;">创建 发现 <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br/&gt;"/> 交易 NFT</pc></source>
       </segment>
     </unit>
     <unit id="4259079485893713907">
@@ -1694,7 +1694,7 @@
       <notes>
         <note category="location">src/app/page/my-star/my-star.component.ts:226</note>
         <note category="location">src/app/page/my-star/my-star.component.ts:257</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:446</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:452</note>
       </notes>
       <segment>
         <source>取消关注失败</source>
@@ -1704,7 +1704,7 @@
       <notes>
         <note category="location">src/app/page/my-star/my-star.component.ts:229</note>
         <note category="location">src/app/page/my-star/my-star.component.ts:260</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:452</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:458</note>
       </notes>
       <segment>
         <source>取消关注成功</source>
@@ -1714,7 +1714,7 @@
       <notes>
         <note category="location">src/app/page/my-star/my-star.component.ts:236</note>
         <note category="location">src/app/page/my-star/my-star.component.ts:267</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:459</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:465</note>
       </notes>
       <segment>
         <source>关注失败</source>
@@ -1724,7 +1724,7 @@
       <notes>
         <note category="location">src/app/page/my-star/my-star.component.ts:239</note>
         <note category="location">src/app/page/my-star/my-star.component.ts:270</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:465</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:471</note>
       </notes>
       <segment>
         <source>关注成功</source>
@@ -2051,7 +2051,7 @@
     <unit id="313024114318233932">
       <notes>
         <note category="location">src/app/page/sell-nft/sell-nft.component.ts:312</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:648</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:654</note>
       </notes>
       <segment>
         <source>需要使用您账户对数据签名</source>
@@ -2094,7 +2094,7 @@
       <notes>
         <note category="location">src/app/page/show-nft/show-nft.component.html:24</note>
         <note category="location">src/app/page/show-nft/show-nft.component.html:667</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:783</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:789</note>
       </notes>
       <segment>
         <source>赠送</source>
@@ -2259,7 +2259,7 @@
     </unit>
     <unit id="6370005795385201857">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:605</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:611</note>
       </notes>
       <segment>
         <source>获取信息失败</source>
@@ -2267,10 +2267,10 @@
     </unit>
     <unit id="4027285996225863739">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:612</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:617</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:712</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:717</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:618</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:623</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:718</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:723</note>
       </notes>
       <segment>
         <source>等待区块确认</source>
@@ -2278,7 +2278,7 @@
     </unit>
     <unit id="3267672272062295878">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:656</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:662</note>
       </notes>
       <segment>
         <source>竞价失败</source>
@@ -2286,7 +2286,7 @@
     </unit>
     <unit id="3882839758226452060">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:659</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:665</note>
       </notes>
       <segment>
         <source>竞价成功</source>
@@ -2294,7 +2294,7 @@
     </unit>
     <unit id="5216110928472289986">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:779,778</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:785,784</note>
       </notes>
       <segment>
         <source>挂售</source>
@@ -2302,7 +2302,7 @@
     </unit>
     <unit id="8539377779940501509">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:780,778</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:786,784</note>
       </notes>
       <segment>
         <source>交易成功</source>
@@ -2310,7 +2310,7 @@
     </unit>
     <unit id="8074334884446094229">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:781,778</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:787,784</note>
       </notes>
       <segment>
         <source>撤回</source>
@@ -2318,7 +2318,7 @@
     </unit>
     <unit id="5968037016658292818">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:833,832</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:839,838</note>
       </notes>
       <segment>
         <source>撤回提示</source>
@@ -2326,7 +2326,7 @@
     </unit>
     <unit id="4248582543338658384">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:834,832</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:840,838</note>
       </notes>
       <segment>
         <source>是否撤回当前挂卖？</source>
@@ -2334,7 +2334,7 @@
     </unit>
     <unit id="6556956365710026804">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:840</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:846</note>
       </notes>
       <segment>
         <source>撤回成功</source>
@@ -2342,7 +2342,7 @@
     </unit>
     <unit id="526661967860535961">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:843</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:849</note>
       </notes>
       <segment>
         <source>撤回失败</source>
@@ -2350,7 +2350,7 @@
     </unit>
     <unit id="2832831829739477279">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:856,855</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:862,861</note>
       </notes>
       <segment>
         <source>成交提示</source>
@@ -2358,7 +2358,7 @@
     </unit>
     <unit id="7162345159524225787">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:857,855</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:863,861</note>
       </notes>
       <segment>
         <source>是否接受当前报价？</source>
@@ -2366,7 +2366,7 @@
     </unit>
     <unit id="8553011377935108064">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:873</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:879</note>
       </notes>
       <segment>
         <source>接受报价失败</source>
