@@ -18,6 +18,7 @@ for (let i = 0; i < keys.length; i++) {
   const key = keys[i];
   if (oldValue[key] !== currentValue[key]) {
     changeKeys.push(key);
+    console.log(currentValue[key]);
   }
 }
 console.log(changeKeys, changeKeys.length);

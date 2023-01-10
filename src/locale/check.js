@@ -4,7 +4,7 @@ const path = require('path');
 
 
 const en = fs.readFileSync(path.join(__dirname, './source.en-US.xlf'), 'utf-8');
-const zh = fs.readFileSync(path.join(__dirname, './source.zh-Hans.xlf'), 'utf-8');
+const zh = fs.readFileSync(path.join(__dirname, './source.xlf'), 'utf-8');
 
 
 const enValue = getUnitArr(en);
