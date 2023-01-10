@@ -39,7 +39,6 @@ export class AppComponent extends ToolClassAutoClosePipe implements OnInit {
   }
   private getCoinList() {
     this.net.getCoinList$().subscribe(data => {
-      console.log(data)
       if (data.code==200) {
         window.localStorage.setItem('coinList', JSON.stringify(data.data))
       }

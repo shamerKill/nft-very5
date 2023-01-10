@@ -406,7 +406,12 @@ export class NetService {
       signature: signed,
     });
   }
-
+  /**
+   * 通过类型和 ID 来标记更新合集或者 nft的 原始数据
+   */
+  getNewOriginal$(nftId: string) {
+    return this.$get('v1/user/renew_original/'+nftId);
+  }
   /**
    * 获取nft挂卖信息
    **/

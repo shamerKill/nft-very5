@@ -418,6 +418,12 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
   /**
    * 刷新数据
    **/
+  Refresh() {
+    // this.onReload();
+    this.net.getNewOriginal$(this.productId).subscribe(data => {
+      if (data.code == 200) this.message.warn(data.msg??'success');
+    })
+  }
   onReload() {
     this.getNftInfo();
     this.getTransferListHistory();
