@@ -1358,7 +1358,7 @@
         <source>Modification succeeded</source>
       </segment>
     </unit>
-    <unit id="6217499529887174807">
+    <unit id="4360829614742536299">
       <notes>
         <note category="location">src/app/page/home/home.component.html:8,10</note>
       </notes>
@@ -1366,7 +1366,7 @@
         <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="Create" dispEnd="&lt;/span&gt;">Create Discover and <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br/&gt;"/> Trade NFTs</pc></source>
       </segment>
     </unit>
-    <unit id="1537943631852613472">
+    <unit id="4259079485893713907">
       <notes>
         <note category="location">src/app/page/home/home.component.html:11,13</note>
       </notes>
