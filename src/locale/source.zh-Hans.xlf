@@ -329,6 +329,14 @@
         <source>简体中文</source>
       </segment>
     </unit>
+    <unit id="5492256166747391648">
+      <notes>
+        <note category="location">src/app/components/header/header.component.ts:296</note>
+      </notes>
+      <segment>
+        <source>不支持PRC10地址</source>
+      </segment>
+    </unit>
     <unit id="4429954177750855285">
       <notes>
         <note category="location">src/app/components/header/header.component.ts:295</note>
