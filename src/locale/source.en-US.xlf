@@ -101,7 +101,11 @@
     </unit>
     <unit id="3671084061978077356">
       <notes>
-        <note category="location">src/app/components/footer/footer.component.ts:25</note>
+        <note category="location">src/app/components/filter-box/filter-box.component.ts:99</note>
+        <note category="location">src/app/components/footer/footer.component.ts:27</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:287</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:234</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:786,782</note>
       </notes>
       <segment>
         <source>Create</source>
@@ -322,6 +326,14 @@
         <source>简体中文</source>
       </segment>
     </unit>
+    <unit id="5492256166747391648">
+      <notes>
+        <note category="location">src/app/components/header/header.component.ts:296</note>
+      </notes>
+      <segment>
+        <source>PRC10 address is not supported</source>
+      </segment>
+    </unit>
     <unit id="4429954177750855285">
       <notes>
         <note category="location">src/app/components/header/header.component.ts:257</note>
@@ -395,6 +407,16 @@
       </notes>
       <segment>
         <source> Result</source>
+      </segment>
+    </unit>
+    <unit id="6012719622158994396">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.html:12</note>
+        <note category="location">src/app/page/collection/collection.component.html:123</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.html:74</note>
+      </notes>
+      <segment>
+        <source>SORT</source>
       </segment>
     </unit>
     <unit id="8036181925851410124">
@@ -925,6 +947,18 @@
         <source> Support JPG、PNG、GIF <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> Recommended size 400 x 400px <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> The size is within 1M </source>
       </segment>
     </unit>
+    <unit id="6561996339751875931">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:54</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:88</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:45</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:41</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:75</note>
+      </notes>
+      <segment>
+        <source>Choose File</source>
+      </segment>
+    </unit>
     <unit id="2979536706534549876">
       <notes>
         <note category="location">src/app/page/create-collection/create-collection.component.html:63</note>
@@ -1048,6 +1082,15 @@
       </notes>
       <segment>
         <source>Select</source>
+      </segment>
+    </unit>
+    <unit id="6715149511305058301">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:297</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:244</note>
+      </notes>
+      <segment>
+        <source>Edit</source>
       </segment>
     </unit>
     <unit id="8842440326874999848">
@@ -1174,7 +1217,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.html:6,8</note>
       </notes>
       <segment>
-        <source> Create Collections </source>
+        <source> Create NFT </source>
       </segment>
     </unit>
     <unit id="538569169197301313">
@@ -1182,7 +1225,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.html:12,14</note>
       </notes>
       <segment>
-        <source> Modify Collections </source>
+        <source> Edit NFT </source>
       </segment>
     </unit>
     <unit id="2244358113383136935">
@@ -1191,7 +1234,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.html:31</note>
       </notes>
       <segment>
-        <source>Collection Files</source>
+        <source>NFt File</source>
       </segment>
     </unit>
     <unit id="2833842994095308075">
@@ -1199,7 +1242,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.html:54,55</note>
       </notes>
       <segment>
-        <source> Collection name<pc id="0" equivStart="START_SUPERSCRIPT" equivEnd="CLOSE_SUPERSCRIPT" type="other" dispStart="&lt;sup&gt;" dispEnd="&lt;/sup&gt;">*</pc></source>
+        <source> NFT Name<pc id="0" equivStart="START_SUPERSCRIPT" equivEnd="CLOSE_SUPERSCRIPT" type="other" dispStart="&lt;sup&gt;" dispEnd="&lt;/sup&gt;">*</pc></source>
       </segment>
     </unit>
     <unit id="6083708073852289371">
@@ -1231,7 +1274,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.html:107,109</note>
       </notes>
       <segment>
-        <source> It is mostly used for series works to highlight the features of a single collection in the series, such as encrypted cat attributes, eyes: Heteropupil; Independent collections do not need to be set, and you can skip this step directly; </source>
+        <source> It is mostly used for series works to highlight the features of a single NFT in the series, such as encrypted cat attributes, eyes: Heteropupil; Independent NFT do not need to be set, and you can skip this step directly; </source>
       </segment>
     </unit>
     <unit id="2074877920515585124">
@@ -1251,12 +1294,20 @@
         <source>value</source>
       </segment>
     </unit>
+    <unit id="662727637384257976">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:140</note>
+      </notes>
+      <segment>
+        <source>ADD</source>
+      </segment>
+    </unit>
     <unit id="5573260758599979795">
       <notes>
         <note category="location">src/app/page/create-nft/create-nft.component.html:148,150</note>
       </notes>
       <segment>
-        <source> Number of collections copies </source>
+        <source> Number of NFT copies </source>
       </segment>
     </unit>
     <unit id="6501008908955062034">
@@ -1272,7 +1323,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.html:163</note>
       </notes>
       <segment>
-        <source>This collection is unique</source>
+        <source>This NFT is unique</source>
       </segment>
     </unit>
     <unit id="3132127488450909647">
@@ -1288,7 +1339,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.html:177</note>
       </notes>
       <segment>
-        <source>This collection can be sold in multiple copies</source>
+        <source>This NFT can be sold in multiple copies</source>
       </segment>
     </unit>
     <unit id="661105073458440608">
@@ -1347,7 +1398,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.ts:274</note>
       </notes>
       <segment>
-        <source>Do you want to continue creating new collection?</source>
+        <source>Do you want to continue creating new NFT?</source>
       </segment>
     </unit>
     <unit id="1252737366462064807">
@@ -1675,8 +1726,8 @@
     <unit id="7708270344948043036">
       <notes>
         <note category="location">src/app/page/my-star/my-star.component.html:38,42</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:222,224</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:236,238</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:228,229</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:248,249</note>
       </notes>
       <segment>
         <source> <ph id="0" equiv="INTERPOLATION" disp="{{
@@ -2113,6 +2164,14 @@
       </notes>
       <segment>
         <source>Limited price purchase</source>
+      </segment>
+    </unit>
+    <unit id="57305366787613733">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:174,175</note>
+      </notes>
+      <segment>
+        <source>Creator: </source>
       </segment>
     </unit>
     <unit id="7751067856855174683">

@@ -104,7 +104,9 @@
       <notes>
         <note category="location">src/app/components/filter-box/filter-box.component.ts:99</note>
         <note category="location">src/app/components/footer/footer.component.ts:27</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:782,778</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:287</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:234</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:786,782</note>
       </notes>
       <segment>
         <source>创建</source>
@@ -150,7 +152,7 @@
       <notes>
         <note category="location">src/app/components/footer/footer.component.ts:17</note>
         <note category="location">src/app/components/header/header.component.html:68</note>
-        <note category="location">src/app/components/header/header.component.ts:198,197</note>
+        <note category="location">src/app/components/header/header.component.ts:200,199</note>
         <note category="location">src/app/page/home/home.component.html:14</note>
       </notes>
       <segment>
@@ -178,7 +180,7 @@
       <notes>
         <note category="location">src/app/components/footer/footer.component.ts:37</note>
         <note category="location">src/app/components/header/header.component.html:73</note>
-        <note category="location">src/app/components/header/header.component.ts:219,218</note>
+        <note category="location">src/app/components/header/header.component.ts:221,220</note>
       </notes>
       <segment>
         <source>排行榜</source>
@@ -256,7 +258,7 @@
     <unit id="3663724213369234204">
       <notes>
         <note category="location">src/app/components/header/header.component.html:76,77</note>
-        <note category="location">src/app/components/header/header.component.ts:225,224</note>
+        <note category="location">src/app/components/header/header.component.ts:227,226</note>
         <note category="location">src/app/page/home/home.component.html:15</note>
       </notes>
       <segment>
@@ -305,7 +307,7 @@
     </unit>
     <unit id="2410429120541392681">
       <notes>
-        <note category="location">src/app/components/header/header.component.ts:49,48</note>
+        <note category="location">src/app/components/header/header.component.ts:50,49</note>
       </notes>
       <segment>
         <source>所有NFT</source>
@@ -313,7 +315,7 @@
     </unit>
     <unit id="5866254605255506989">
       <notes>
-        <note category="location">src/app/components/header/header.component.ts:234</note>
+        <note category="location">src/app/components/header/header.component.ts:237,236</note>
       </notes>
       <segment>
         <source>English</source>
@@ -321,15 +323,23 @@
     </unit>
     <unit id="1520664020879989316">
       <notes>
-        <note category="location">src/app/components/header/header.component.ts:235</note>
+        <note category="location">src/app/components/header/header.component.ts:243,242</note>
       </notes>
       <segment>
         <source>简体中文</source>
       </segment>
     </unit>
+    <unit id="5492256166747391648">
+      <notes>
+        <note category="location">src/app/components/header/header.component.ts:296</note>
+      </notes>
+      <segment>
+        <source>不支持PRC10地址</source>
+      </segment>
+    </unit>
     <unit id="4429954177750855285">
       <notes>
-        <note category="location">src/app/components/header/header.component.ts:283</note>
+        <note category="location">src/app/components/header/header.component.ts:295</note>
       </notes>
       <segment>
         <source>获取账户失败</source>
@@ -399,6 +409,16 @@
       </notes>
       <segment>
         <source> 结果</source>
+      </segment>
+    </unit>
+    <unit id="6012719622158994396">
+      <notes>
+        <note category="location">src/app/page/allNft/allNft.component.html:12</note>
+        <note category="location">src/app/page/collection/collection.component.html:123</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.html:74</note>
+      </notes>
+      <segment>
+        <source>排 序</source>
       </segment>
     </unit>
     <unit id="8036181925851410124">
@@ -815,6 +835,7 @@
     <unit id="1298223502626657622">
       <notes>
         <note category="location">src/app/page/collection/collection.component.html:96</note>
+        <note category="location">src/app/page/home/home.component.html:164</note>
       </notes>
       <segment>
         <source>持有者</source>
@@ -861,6 +882,7 @@
     <unit id="8099481697259690702">
       <notes>
         <note category="location">src/app/page/collection/collection.component.ts:166</note>
+        <note category="location">src/app/page/home/home.component.html:158</note>
         <note category="location">src/app/page/userDetail/userDetail.component.ts:152</note>
         <note category="location">src/app/server/database.service.ts:69</note>
       </notes>
@@ -928,10 +950,22 @@
         <source> 支持JPG、PNG、GIF <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> 推荐尺寸 400 x 400px <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> 大小在1M以内 </source>
       </segment>
     </unit>
+    <unit id="6561996339751875931">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:54</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:88</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:45</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:41</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:75</note>
+      </notes>
+      <segment>
+        <source>选择文件</source>
+      </segment>
+    </unit>
     <unit id="2979536706534549876">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:63</note>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:73</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:64</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:74</note>
       </notes>
       <segment>
         <source>横幅背景</source>
@@ -939,7 +973,7 @@
     </unit>
     <unit id="1546346482435165298">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:74,78</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:75,79</note>
       </notes>
       <segment>
         <source> 支持JPG、PNG、GIF <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> 推荐尺寸 1920 x 280px <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br /&gt;"/> 大小在1M以内 </source>
@@ -947,7 +981,7 @@
     </unit>
     <unit id="1246188092045573846">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:98,100</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:100,102</note>
       </notes>
       <segment>
         <source> 合集名称 <pc id="0" equivStart="START_SUPERSCRIPT" equivEnd="CLOSE_SUPERSCRIPT" type="other" dispStart="&lt;sup&gt;" dispEnd="&lt;/sup&gt;">*</pc></source>
@@ -955,8 +989,8 @@
     </unit>
     <unit id="3856062028072147656">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:105,106</note>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:64</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:107,108</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:65</note>
       </notes>
       <segment>
         <source>好的名字能引发关联想象，吸引观众哦～</source>
@@ -964,7 +998,7 @@
     </unit>
     <unit id="5501189997536203048">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:115</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:117</note>
       </notes>
       <segment>
         <source> 合集描述 </source>
@@ -972,7 +1006,7 @@
     </unit>
     <unit id="5599439855685167408">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:124,125</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:126,127</note>
       </notes>
       <segment>
         <source>介绍你的合集，让更多人了解TA的价值</source>
@@ -980,7 +1014,7 @@
     </unit>
     <unit id="8097253410655281837">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:148</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:150</note>
       </notes>
       <segment>
         <source> 创作者收益 </source>
@@ -988,7 +1022,7 @@
     </unit>
     <unit id="584513089201396467">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:157</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:159</note>
       </notes>
       <segment>
         <source>收益地址</source>
@@ -996,7 +1030,7 @@
     </unit>
     <unit id="731293179638927751">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:166</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:168</note>
       </notes>
       <segment>
         <source>费率</source>
@@ -1004,7 +1038,7 @@
     </unit>
     <unit id="8194660208742174066">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:182</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:184</note>
       </notes>
       <segment>
         <source> 可支付代币 </source>
@@ -1012,7 +1046,7 @@
     </unit>
     <unit id="8967949773137877543">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:199</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:201</note>
         <note category="location">src/app/page/sell-nft/sell-nft.component.html:81</note>
       </notes>
       <segment>
@@ -1021,8 +1055,8 @@
     </unit>
     <unit id="1768277505666772060">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:244</note>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:71,73</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:246</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:72,74</note>
       </notes>
       <segment>
         <source> 社交链接 </source>
@@ -1030,8 +1064,8 @@
     </unit>
     <unit id="7779838779331879561">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:253,254</note>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:80</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:255,256</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:81</note>
       </notes>
       <segment>
         <source>欢迎您链接到自己的网页</source>
@@ -1039,7 +1073,7 @@
     </unit>
     <unit id="409055432166802721">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:261</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:263</note>
       </notes>
       <segment>
         <source> 类别 </source>
@@ -1047,10 +1081,19 @@
     </unit>
     <unit id="5857273842178092539">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:268</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:270</note>
       </notes>
       <segment>
         <source>选择</source>
+      </segment>
+    </unit>
+    <unit id="6715149511305058301">
+      <notes>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:297</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:244</note>
+      </notes>
+      <segment>
+        <source>修改</source>
       </segment>
     </unit>
     <unit id="8842440326874999848">
@@ -1062,7 +1105,7 @@
         <note category="location">src/app/page/sell-nft/sell-nft.component.ts:199</note>
         <note category="location">src/app/page/show-nft/show-nft.component.ts:288</note>
         <note category="location">src/app/page/show-nft/show-nft.component.ts:334</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:541</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:545</note>
       </notes>
       <segment>
         <source>获取数据失败</source>
@@ -1156,8 +1199,8 @@
       <notes>
         <note category="location">src/app/page/create-collection/create-collection.component.ts:280,277</note>
         <note category="location">src/app/page/create-nft/create-nft.component.ts:276</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:835,832</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:858,855</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:839,836</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:862,859</note>
       </notes>
       <segment>
         <source>确定</source>
@@ -1167,8 +1210,8 @@
       <notes>
         <note category="location">src/app/page/create-collection/create-collection.component.ts:281,277</note>
         <note category="location">src/app/page/create-nft/create-nft.component.ts:277</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:836,832</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:859,855</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:840,836</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:863,859</note>
       </notes>
       <segment>
         <source>取消</source>
@@ -1201,7 +1244,7 @@
     </unit>
     <unit id="2833842994095308075">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:54,55</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:55,56</note>
       </notes>
       <segment>
         <source> 收藏品名称 <pc id="0" equivStart="START_SUPERSCRIPT" equivEnd="CLOSE_SUPERSCRIPT" type="other" dispStart="&lt;sup&gt;" dispEnd="&lt;/sup&gt;">*</pc></source>
@@ -1209,7 +1252,7 @@
     </unit>
     <unit id="6083708073852289371">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:87,89</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:88,90</note>
       </notes>
       <segment>
         <source> 描述 </source>
@@ -1217,7 +1260,7 @@
     </unit>
     <unit id="7196887153002257935">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:96</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:97</note>
       </notes>
       <segment>
         <source>介绍你的作品，让更多人了解TA的价值</source>
@@ -1225,7 +1268,7 @@
     </unit>
     <unit id="6881952945604768654">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:103,105</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:104,106</note>
       </notes>
       <segment>
         <source> 属性 (选填) </source>
@@ -1233,7 +1276,7 @@
     </unit>
     <unit id="884322506255680019">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:107,109</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:108,110</note>
       </notes>
       <segment>
         <source> 多适用于系列作品，用以突出系列中单个收藏品的特点，例如加密猫属性，眼睛：异瞳； 独立收藏品无需设置，可直接跳过本步骤； </source>
@@ -1241,7 +1284,7 @@
     </unit>
     <unit id="2074877920515585124">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:117</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:118</note>
         <note category="location">src/app/page/show-nft/show-nft.component.html:192</note>
       </notes>
       <segment>
@@ -1250,15 +1293,23 @@
     </unit>
     <unit id="6981227828840639514">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:125</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:126</note>
       </notes>
       <segment>
         <source>值</source>
       </segment>
     </unit>
+    <unit id="662727637384257976">
+      <notes>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:140</note>
+      </notes>
+      <segment>
+        <source>添加</source>
+      </segment>
+    </unit>
     <unit id="5573260758599979795">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:148,150</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:150,152</note>
       </notes>
       <segment>
         <source> 收藏品副本数量 </source>
@@ -1266,7 +1317,7 @@
     </unit>
     <unit id="6501008908955062034">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:162</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:164</note>
       </notes>
       <segment>
         <source>单个</source>
@@ -1274,7 +1325,7 @@
     </unit>
     <unit id="639374450759454557">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:163</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:165</note>
       </notes>
       <segment>
         <source>此收藏品独一无二</source>
@@ -1282,7 +1333,7 @@
     </unit>
     <unit id="3132127488450909647">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:176</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:178</note>
       </notes>
       <segment>
         <source>多个</source>
@@ -1290,7 +1341,7 @@
     </unit>
     <unit id="3781633875199028858">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:177</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:179</note>
       </notes>
       <segment>
         <source>此收藏品可售出多份</source>
@@ -1298,7 +1349,7 @@
     </unit>
     <unit id="661105073458440608">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:183</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:185</note>
         <note category="location">src/app/page/show-nft/show-nft.component.html:266</note>
         <note category="location">src/app/page/show-nft/show-nft.component.html:348</note>
         <note category="location">src/app/page/show-nft/show-nft.component.html:721</note>
@@ -1309,7 +1360,7 @@
     </unit>
     <unit id="480972691002447290">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:184</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:186</note>
       </notes>
       <segment>
         <source>份</source>
@@ -1317,7 +1368,7 @@
     </unit>
     <unit id="6540603143805514818">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:201,203</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:203,205</note>
       </notes>
       <segment>
         <source> 选择合集 </source>
@@ -1325,7 +1376,7 @@
     </unit>
     <unit id="373364375348888037">
       <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:219</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:221</note>
       </notes>
       <segment>
         <source>创建新合集</source>
@@ -1575,7 +1626,7 @@
     </unit>
     <unit id="8587151648540706658">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:51,53</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:52,54</note>
       </notes>
       <segment>
         <source> 主页封面图 </source>
@@ -1583,7 +1634,7 @@
     </unit>
     <unit id="3656527970111290936">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:65,67</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:66,68</note>
       </notes>
       <segment>
         <source> 支持JPG、PNG、GIF， 推荐尺寸 1200 x 175px， 大小在3M以内 </source>
@@ -1591,7 +1642,7 @@
     </unit>
     <unit id="3273056207231570063">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:85,87</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:87,89</note>
       </notes>
       <segment>
         <source> 用户名 </source>
@@ -1599,7 +1650,7 @@
     </unit>
     <unit id="2259490051697194505">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:96</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:98</note>
       </notes>
       <segment>
         <source>4-18个字符，支持中英文、数字、下划线和减号</source>
@@ -1607,7 +1658,7 @@
     </unit>
     <unit id="4786967860038701941">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:103,105</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:105,107</note>
       </notes>
       <segment>
         <source> 简介 </source>
@@ -1615,7 +1666,7 @@
     </unit>
     <unit id="3637654686068161302">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:112</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:114</note>
       </notes>
       <segment>
         <source>请输入个人简介</source>
@@ -1623,7 +1674,7 @@
     </unit>
     <unit id="7012871252936152193">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:119,121</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:121,123</note>
       </notes>
       <segment>
         <source> 添加链接 </source>
@@ -1631,7 +1682,7 @@
     </unit>
     <unit id="6980993257481352242">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:130</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:132</note>
       </notes>
       <segment>
         <source>网站</source>
@@ -1639,7 +1690,7 @@
     </unit>
     <unit id="689076266536832231">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:142</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:144</note>
       </notes>
       <segment>
         <source>https://twitter.com/</source>
@@ -1647,7 +1698,7 @@
     </unit>
     <unit id="2679799485222559592">
       <notes>
-        <note category="location">src/app/page/my-setting/my-setting.component.html:154</note>
+        <note category="location">src/app/page/my-setting/my-setting.component.html:156</note>
       </notes>
       <segment>
         <source>https://t.me/</source>
@@ -1694,7 +1745,7 @@
       <notes>
         <note category="location">src/app/page/my-star/my-star.component.ts:226</note>
         <note category="location">src/app/page/my-star/my-star.component.ts:257</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:446</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:450</note>
       </notes>
       <segment>
         <source>取消关注失败</source>
@@ -1704,7 +1755,7 @@
       <notes>
         <note category="location">src/app/page/my-star/my-star.component.ts:229</note>
         <note category="location">src/app/page/my-star/my-star.component.ts:260</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:452</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:456</note>
       </notes>
       <segment>
         <source>取消关注成功</source>
@@ -1714,7 +1765,7 @@
       <notes>
         <note category="location">src/app/page/my-star/my-star.component.ts:236</note>
         <note category="location">src/app/page/my-star/my-star.component.ts:267</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:459</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:463</note>
       </notes>
       <segment>
         <source>关注失败</source>
@@ -1724,7 +1775,7 @@
       <notes>
         <note category="location">src/app/page/my-star/my-star.component.ts:239</note>
         <note category="location">src/app/page/my-star/my-star.component.ts:270</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:465</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:469</note>
       </notes>
       <segment>
         <source>关注成功</source>
@@ -2051,7 +2102,7 @@
     <unit id="313024114318233932">
       <notes>
         <note category="location">src/app/page/sell-nft/sell-nft.component.ts:312</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:648</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:652</note>
       </notes>
       <segment>
         <source>需要使用您账户对数据签名</source>
@@ -2094,7 +2145,7 @@
       <notes>
         <note category="location">src/app/page/show-nft/show-nft.component.html:24</note>
         <note category="location">src/app/page/show-nft/show-nft.component.html:667</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:783</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:787</note>
       </notes>
       <segment>
         <source>赠送</source>
@@ -2122,6 +2173,14 @@
       </notes>
       <segment>
         <source>限价购买</source>
+      </segment>
+    </unit>
+    <unit id="57305366787613733">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:174,175</note>
+      </notes>
+      <segment>
+        <source>创建者: </source>
       </segment>
     </unit>
     <unit id="7751067856855174683">
@@ -2259,7 +2318,7 @@
     </unit>
     <unit id="6370005795385201857">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:605</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:609</note>
       </notes>
       <segment>
         <source>获取信息失败</source>
@@ -2267,10 +2326,10 @@
     </unit>
     <unit id="4027285996225863739">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:612</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:617</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:712</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:717</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:616</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:621</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:716</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:721</note>
       </notes>
       <segment>
         <source>等待区块确认</source>
@@ -2278,7 +2337,7 @@
     </unit>
     <unit id="3267672272062295878">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:656</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:660</note>
       </notes>
       <segment>
         <source>竞价失败</source>
@@ -2286,7 +2345,7 @@
     </unit>
     <unit id="3882839758226452060">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:659</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:663</note>
       </notes>
       <segment>
         <source>竞价成功</source>
@@ -2294,7 +2353,7 @@
     </unit>
     <unit id="5216110928472289986">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:779,778</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:783,782</note>
       </notes>
       <segment>
         <source>挂售</source>
@@ -2302,7 +2361,7 @@
     </unit>
     <unit id="8539377779940501509">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:780,778</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:784,782</note>
       </notes>
       <segment>
         <source>交易成功</source>
@@ -2310,7 +2369,7 @@
     </unit>
     <unit id="8074334884446094229">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:781,778</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:785,782</note>
       </notes>
       <segment>
         <source>撤回</source>
@@ -2318,7 +2377,7 @@
     </unit>
     <unit id="5968037016658292818">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:833,832</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:837,836</note>
       </notes>
       <segment>
         <source>撤回提示</source>
@@ -2326,7 +2385,7 @@
     </unit>
     <unit id="4248582543338658384">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:834,832</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:838,836</note>
       </notes>
       <segment>
         <source>是否撤回当前挂卖？</source>
@@ -2334,7 +2393,7 @@
     </unit>
     <unit id="6556956365710026804">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:840</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:844</note>
       </notes>
       <segment>
         <source>撤回成功</source>
@@ -2342,7 +2401,7 @@
     </unit>
     <unit id="526661967860535961">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:843</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:847</note>
       </notes>
       <segment>
         <source>撤回失败</source>
@@ -2350,7 +2409,7 @@
     </unit>
     <unit id="2832831829739477279">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:856,855</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:860,859</note>
       </notes>
       <segment>
         <source>成交提示</source>
@@ -2358,7 +2417,7 @@
     </unit>
     <unit id="7162345159524225787">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:857,855</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:861,859</note>
       </notes>
       <segment>
         <source>是否接受当前报价？</source>
@@ -2366,7 +2425,7 @@
     </unit>
     <unit id="8553011377935108064">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:873</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:877</note>
       </notes>
       <segment>
         <source>接受报价失败</source>

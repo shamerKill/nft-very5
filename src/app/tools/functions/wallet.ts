@@ -61,8 +61,8 @@ export const ToolFuncLinkWallet = (login$: NetService['signLogin$'], init: boole
     }
   }).then(async info => {
     if (!info) return loginSub.next({...accountStoreInit, isLinking: false});
+    const [ accountType, accountAddress ] = info;
     if (init) {
-      const [ accountType, accountAddress ] = info;
       loginSub.next({
         isLinked: true,
         isLinking: false,
@@ -71,6 +71,10 @@ export const ToolFuncLinkWallet = (login$: NetService['signLogin$'], init: boole
         accountAddress: accountAddress??'',
         accountType: accountType === 'PRC20' ? 'PRC20' : 'PRC10'
       });
+      return;
+    }
+    if (accountType !== 'PRC20') {
+      loginSub.next({...accountStoreInit, accountType: 'PRC10', isLinking: false});
       return;
     }
     // 进行签名

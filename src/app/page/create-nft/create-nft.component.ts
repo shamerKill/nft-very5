@@ -139,7 +139,7 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
       this.state.globalLoadingSwitch(false);
       if (data.code === 200) {
         if (data.data && data.data.length) {
-          this.collectionList = data.data.map((item: any) => {
+          this.collectionList = data.data.filter((item: any) => item.IsPlagFrom).map((item: any) => {
             return {
               id: item.ID,
               image: item.ImageUrl,

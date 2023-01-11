@@ -51,7 +51,8 @@
                   pButton
                   type="button"
                   label="选择文件"
-                  class="p-button-outlined mb-4"></button>
+                  class="p-button-outlined mb-4"
+                  i18n-label></button>
               </app-choose-file>
             </div>
           </div>
@@ -84,7 +85,8 @@
                   pButton
                   type="button"
                   label="选择文件"
-                  class="p-button-outlined mb-4"></button>
+                  class="p-button-outlined mb-4"
+                  i18n-label></button>
               </app-choose-file>
             </div>
           </div>
@@ -275,12 +277,25 @@
       </div>
       <!--  -->
       <button
+        *ngIf="collectionId === null"
         pButton
         [disabled]="!canCreate"
-        class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
-        [label]="collectionId === null ? '创建' : '修改'"
         (click)="onCreateCollection()"
-        type="button"></button>
+        class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
+        type="button"
+        label="创建"
+        i18n-label>
+      </button>
+      <button
+        *ngIf="collectionId !== null"
+        pButton
+        [disabled]="!canCreate"
+        (click)="onCreateCollection()"
+        class="w-9 lg:w-6 block mt-4 lg:mx-0 mx-auto"
+        type="button"
+        label="修改"
+        i18n-label>
+      </button>
     </div>
   </app-base-box>
 </app-page-bg-box>

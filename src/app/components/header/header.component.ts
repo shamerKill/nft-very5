@@ -292,7 +292,11 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
         this.stateService.globalLoadingSwitch(false);
       }
       if (data?.isLinked === false) {
-        this.BaseMessage.warn($localize`获取账户失败`);
+        if (data.accountType) {
+          this.BaseMessage.warn($localize`不支持PRC10地址`);
+        } else {
+          this.BaseMessage.warn($localize`获取账户失败`);
+        }
         return;
       }
       if (data) this.stateService.linkedWallet$.next(data);

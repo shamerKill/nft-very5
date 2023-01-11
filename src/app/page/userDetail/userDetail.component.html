@@ -71,7 +71,7 @@
             <div class="list-box-title-total-num">{{nftList.length}}<span i18n> 结果</span></div>
           </div>
           <div class="list-box-title-sort flex align-items-center">
-            <p-dropdown [options]="sortList" optionLabel="name" placeholder="排 序" [style]="{'width': '100%'}">
+            <p-dropdown [options]="sortList" optionLabel="name" placeholder="排 序" [style]="{'width': '100%'}" i18n-placeholder>
             </p-dropdown>
             <div class="list-box-title-sort-icon flex align-items-center justify-content-center" (click)="switchList(1)">
               <img src="assets/images/explore/sige.png" alt="" *ngIf="listType == 1">
