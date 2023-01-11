@@ -107,10 +107,9 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
             this.describe = data.NftOriginal.Description;
             this.selectedNum = data.CreatorNumber;
             this.interactiveLink = data.NftOriginal.ExternalURL;
-            this.attributeList = data.NftOriginal.Attributes.split(',').map((item: string) => {
-              var li = item.split(':');
-              return {key: li[0], value: li[1]};
-            });
+            this.attributeList = JSON.parse(data.NftOriginal.Attributes).map((item: any) => {
+              return {key: item.trait_type, value: item.value};
+            }).filter((item: any) => item.key && item.value);
             // 根据id获取合集信息
             this.net.getCollectionDetail$(data.CollectionID).pipe(this.pipeSwitch$()).subscribe(collection => {
               if (collection.code !== 200) {

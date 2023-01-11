@@ -95,6 +95,8 @@ export class CreateCollectionComponent extends ToolClassAutoClosePipe implements
       if (data['id']) {
         this.collectionId = data['id'];
         this.getEditCollectionInfo();
+      } else {
+        this.onListenData();
       }
     });
   }
