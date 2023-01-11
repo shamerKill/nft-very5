@@ -126,6 +126,7 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
                   type: collection.data.collection,
                 });
                 this.selectedCollectionId = data.CollectionID;
+                this.onListenData();
               }
             });
           }

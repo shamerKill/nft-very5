@@ -2275,6 +2275,14 @@
         <source>The creator of the collection will receive this percentage of sales as royalties, and the collection&apos;s owner of the collection can adjust the royalties.</source>
       </segment>
     </unit>
+    <unit id="3863181258168496688">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:552</note>
+      </notes>
+      <segment>
+        <source>Pay</source>
+      </segment>
+    </unit>
     <unit id="1518238371400381237">
       <notes>
         <note category="location">src/app/page/show-nft/show-nft.component.html:526</note>

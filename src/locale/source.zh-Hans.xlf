@@ -2284,6 +2284,14 @@
         <source>合集的创作者将收到这个比例的销售额作为 版税，合集的拥有者可以调整版税</source>
       </segment>
     </unit>
+    <unit id="3863181258168496688">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:552</note>
+      </notes>
+      <segment>
+        <source>支付</source>
+      </segment>
+    </unit>
     <unit id="1518238371400381237">
       <notes>
         <note category="location">src/app/page/show-nft/show-nft.component.html:563</note>
