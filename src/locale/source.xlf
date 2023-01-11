@@ -104,6 +104,8 @@
       <notes>
         <note category="location">src/app/components/filter-box/filter-box.component.ts:99</note>
         <note category="location">src/app/components/footer/footer.component.ts:27</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:287</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:234</note>
         <note category="location">src/app/page/show-nft/show-nft.component.ts:786,782</note>
       </notes>
       <segment>
@@ -1077,16 +1079,13 @@
         <source>选择</source>
       </segment>
     </unit>
-    <unit id="7708270344948043036">
+    <unit id="6715149511305058301">
       <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.html:286,288</note>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:233,235</note>
-        <note category="location">src/app/page/my-star/my-star.component.html:38,42</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:228,229</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:248,249</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.html:297</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:244</note>
       </notes>
       <segment>
-        <source> <ph id="0" equiv="INTERPOLATION" disp="{{collectionId === null ? &apos;创建&apos; : &apos;修改&apos;}}"/> </source>
+        <source>修改</source>
       </segment>
     </unit>
     <unit id="8842440326874999848">
@@ -1720,6 +1719,18 @@
       </notes>
       <segment>
         <source>收藏</source>
+      </segment>
+    </unit>
+    <unit id="7708270344948043036">
+      <notes>
+        <note category="location">src/app/page/my-star/my-star.component.html:38,42</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:228,229</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:248,249</note>
+      </notes>
+      <segment>
+        <source> <ph id="0" equiv="INTERPOLATION" disp="{{
+                        item.auctionInfo.inAuctioning ? (&apos;还剩&apos; + item.auctionInfo.showTime) : &apos;&apos;
+                      }}"/> </source>
       </segment>
     </unit>
     <unit id="8355407617046690701">
