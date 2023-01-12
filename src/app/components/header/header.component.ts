@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { DatabaseService, nftTypesArr } from './../../server/database.service';
-import { BehaviorSubject, debounceTime, fromEvent, zip } from 'rxjs';
+import { BehaviorSubject, debounceTime, filter, fromEvent, zip } from 'rxjs';
 import { NetService } from './../../server/net.service';
 import { BaseMessageService } from './../../server/base-message.service';
 import { StateService, accountStoreInit } from './../../server/state.service';
@@ -80,7 +80,7 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
     private BaseMessage: BaseMessageService,
     private netService: NetService,
     private router: Router,
-    private location: Location,
+    private route: ActivatedRoute,
   ) {
     super();
   }
@@ -92,6 +92,9 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
     this.webMenuType$.pipe(this.pipeSwitch$()).subscribe((value) => {
       this.webMenuType = value;
       this.setWebMenuHeight();
+    });
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(url => {
+      this.onChangeWebMenuType(0);
     });
   }
 
