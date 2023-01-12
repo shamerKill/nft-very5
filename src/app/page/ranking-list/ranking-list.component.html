@@ -5,14 +5,14 @@
     <p-table [value]="listData" responsiveLayout="scroll">
       <ng-template pTemplate="header">
         <tr class="h-4rem">
-          <th class="text-600 text-center white-space-nowrap" i18n>热门NFT</th>
-          <th class="text-600 text-center white-space-nowrap" i18n>成交额</th>
-          <th class="text-600 text-center white-space-nowrap" i18n>1日 %</th>
-          <th class="text-600 text-center white-space-nowrap" i18n>7日 %</th>
-          <th class="text-600 text-center white-space-nowrap" i18n>30日 %</th>
-          <th class="text-600 text-center white-space-nowrap" i18n>现价</th>
-          <th class="text-600 text-center white-space-nowrap" i18n>地板价</th>
-          <th class="text-600 text-center white-space-nowrap" i18n>最高价</th>
+          <th class="text-600 pl-6 white-space-nowrap" i18n>热门NFT</th>
+          <th class="text-600 white-space-nowrap" i18n>成交额</th>
+          <th class="text-600 white-space-nowrap" i18n>1日 %</th>
+          <th class="text-600 white-space-nowrap" i18n>7日 %</th>
+          <th class="text-600 white-space-nowrap" i18n>30日 %</th>
+          <th class="text-600 white-space-nowrap" i18n>现价</th>
+          <th class="text-600 white-space-nowrap" i18n>地板价</th>
+          <th class="text-600 white-space-nowrap" i18n>最高价</th>
           <!-- <th class="text-600 text-center white-space-nowrap" i18n>持有者</th>
           <th class="text-600 text-center white-space-nowrap" i18n>资产总数</th> -->
         </tr>
@@ -30,7 +30,7 @@
             </div>
           </td>
           <td>
-            <div class="flex align-items-center justify-content-center">
+            <div class="flex align-items-center justify-content-start">
               <img class="w-1rem h-1rem mr-1" src="assets/images/explore/usd.png" alt="plug">
               <p class="font-bold">{{product.businessVolumeOfBaseToken|bigNum}}</p>
             </div>
@@ -45,19 +45,19 @@
             {{changePrenp(product.chgRateInMonth)}}%
           </td>
           <td>
-            <div class="flex align-items-center justify-content-center">
+            <div class="flex align-items-center justify-content-start">
               <img class="w-1rem h-1rem mr-1" src="assets/images/explore/usd.png" alt="plug">
               <p class="font-bold">{{product.middlePriceInDay|bigNum}}</p>
             </div>
           </td>
           <td>
-            <div class="flex align-items-center justify-content-center">
+            <div class="flex align-items-center justify-content-start">
               <img class="w-1rem h-1rem mr-1" src="assets/images/explore/usd.png" alt="plug">
               <p class="font-bold">{{product.bottomPrice|bigNum}}</p>
             </div>
           </td>
           <td>
-            <div class="flex align-items-center justify-content-center">
+            <div class="flex align-items-center justify-content-start">
               <img class="w-1rem h-1rem mr-1" src="assets/images/explore/usd.png" alt="plug">
               <p class="font-bold">{{product.HighestPrice|bigNum}}</p>
             </div>
