@@ -176,7 +176,7 @@ export class HomeComponent extends ToolClassAutoClosePipe implements OnInit {
   // 获取探索市场数据
   getExploreData(input: number) {
     const key = this.exploreMarket.list[input].key;
-    this.net.getNefListByFilter$({category: key=='热门'?'':key, hot: key=='热门'?'1':''}).pipe(this.pipeSwitch$()).subscribe(data => {
+    this.net.getNefListByFilter$({category: key=='热门'?'':key, hot: key=='热门'?'1':'',page_size: '6'}).pipe(this.pipeSwitch$()).subscribe(data => {
       this.exploreMarket.list[input].loaded = true;
       if (data.code === 200 && data.data) {
         this.exploreMarket.list[input].data = data.data.map((item: any) => ({
