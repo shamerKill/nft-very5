@@ -105,22 +105,20 @@ export class AllNftComponent extends ToolClassAutoClosePipe implements OnInit {
   }
 
   ngOnInit(): void {
-    this.state.globalLoadingSwitch(true);
     this.getNftList();
   }
   paginate(e:pageObj){
     this.pageSize = e.rows;
     this.page = e.page+1;
-    this.state.globalLoadingSwitch(true);
     this.getNftList();
   }
   filterChange(event:filterObj) {
     this.filterObj = event;
-    this.state.globalLoadingSwitch(true);
     this.getNftList();
   }
   getNftList() {
     // 获取数据
+    this.state.globalLoadingSwitch(true);
     this.net.getNftListNew$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'','',this.page,this.pageSize).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
