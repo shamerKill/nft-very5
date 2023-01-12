@@ -124,7 +124,7 @@ export class AllNftComponent extends ToolClassAutoClosePipe implements OnInit {
     this.net.getNftListNew$('',this.filterObj.cate,this.filterObj.sell,this.filterObj.low,this.filterObj.high,this.filterObj.coin,this.filterObj.search,this.sortObj.id,'','',this.page,this.pageSize).pipe(this.pipeSwitch$()).subscribe(({code, data, msg}) => {
       this.state.globalLoadingSwitch(false);
       if (code !== 200) return this.BaseMessage.warn(msg??'');
-      if (Array.isArray(data.nfts) && data.nfts.length) {
+      if (data && Array.isArray(data.nfts) && data.nfts.length) {
         this.nftList = data.nfts
         this.total = data.count
       } else {

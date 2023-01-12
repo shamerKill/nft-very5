@@ -89,7 +89,7 @@ export const ToolFuncLinkWallet = (login$: NetService['signLogin$'], init: boole
     // 利用sign登录
     if (sign) {
       const login: any = await new Promise(resolve => {
-        login$(environment.signStr, sign!).subscribe(resolve);
+        login$(environment.signStr, sign!, accountAddress!).subscribe(resolve);
       });
       if (login.code !== 200) sign = undefined;
     }

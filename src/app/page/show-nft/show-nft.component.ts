@@ -370,9 +370,11 @@ export class ShowNftComponent extends ToolClassAutoClosePipe implements OnInit, 
     this.productInfo.contractAddress = data.nft.Token;
     this.productInfo.nowPrice = data.nft.CurrentPrice;
     this.productInfo.SellingType = data.nft.HaveNfts?.[0].SellingType;
-    this.productInfo.attributes = JSON.parse(data.nft.NftOriginal.Attributes).map((item: any) => {
-      return {key: item.trait_type, value: item.value};
-    }).filter((item: any) => item.key && item.value);
+    try {
+      this.productInfo.attributes = JSON.parse(data.nft.NftOriginal.Attributes).map((item: any) => {
+        return {key: item.trait_type, value: item.value};
+      }).filter((item: any) => item.key && item.value);
+    } catch (_) {}
     this.productInfo.creator = {
       name: data.creator.Name,
       avatar: data.creator.Avator||'assets/images/logo/default-avatar@2x.png',

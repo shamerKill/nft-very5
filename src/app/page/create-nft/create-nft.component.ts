@@ -107,9 +107,11 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
             this.describe = data.NftOriginal.Description;
             this.selectedNum = data.CreatorNumber;
             this.interactiveLink = data.NftOriginal.ExternalURL;
-            this.attributeList = JSON.parse(data.NftOriginal.Attributes).map((item: any) => {
-              return {key: item.trait_type, value: item.value};
-            }).filter((item: any) => item.key && item.value);
+            try {
+              this.attributeList = JSON.parse(data.NftOriginal.Attributes).map((item: any) => {
+                return {key: item.trait_type, value: item.value};
+              }).filter((item: any) => item.key && item.value);
+            } catch (_) {}
             // 根据id获取合集信息
             this.net.getCollectionDetail$(data.CollectionID).pipe(this.pipeSwitch$()).subscribe(collection => {
               if (collection.code !== 200) {
@@ -124,6 +126,7 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
                   type: collection.data.collection,
                 });
                 this.selectedCollectionId = data.CollectionID;
+                this.onListenData();
               }
             });
           }
@@ -290,13 +293,14 @@ export class CreateNftComponent extends ToolClassAutoClosePipe implements OnInit
 
   // 修改nft
   editNft(image: string) {
+    let traitArr = this.attributeList.filter(item => item.key && item.value).map(({key, value}) => {return {trait_type: key,value:value}});
     this.net.postEditNFT$({
       id: this.productId??'',
       name: this.name,
       image: image,
       external_link: this.interactiveLink,
       description: this.describe,
-      attr: this.attributeList.map(({key, value}) => `${key}:${value}`).join(','),
+      attr: JSON.stringify(traitArr),
     }).pipe(this.pipeSwitch$()).subscribe(data => {
       this.state.globalLoadingSwitch(false);
       if (data.code !== 200) return this.message.warn(data.msg ?? $localize`修改失败`);

@@ -97,8 +97,8 @@ export class NetService {
    * 登录接口
    **/
   // 此处调用时this指向错误，需用箭头函数
-  signLogin$ = (message: string, signStr: string) => {
-    return this.$post('v1/auth/login', { signStr, message }).pipe(throttleTime(1000), sub => {
+  signLogin$ = (message: string, signStr: string, address: string) => {
+    return this.$post('v1/auth/login', { signStr, message, address }).pipe(throttleTime(1000), sub => {
       const _sub = new Subject();
       sub.subscribe((data) => this.getNowUserInfo$().subscribe(() => _sub.next(data)));
       return _sub.pipe();
