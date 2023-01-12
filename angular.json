@@ -87,6 +87,9 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "en-US": {
+              "localize": ["en-US"]
             }
           },
           "defaultConfiguration": "production"
@@ -99,6 +102,9 @@
             },
             "development": {
               "browserTarget": "nft-very5:build:development"
+            },
+            "en-US": {
+              "browserTarget": "nft-very5:build:development,en-US"
             }
           },
           "defaultConfiguration": "development",
