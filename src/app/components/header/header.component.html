@@ -75,6 +75,10 @@
           <i class="iconfont icon-chuangjian text-xl"></i>
           <p class="flex-1 px-2 font-bold text-xl" i18n>创造NFT</p>
         </div>
+        <div *ngIf="hadAccount" class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus" (click)="onSwitchUserMenu()">
+          <i class="iconfont icon-shezhi text-xl"></i>
+          <p class="flex-1 px-2 font-bold text-xl" i18n>我的</p>
+        </div>
         <div class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus" (click)="onChangeWebMenuType(3)">
           <i class="iconfont icon-yuyan-01 text-xl"></i>
           <p class="flex-1 px-2 font-bold text-xl" i18n>语言</p>
@@ -82,6 +86,7 @@
           <i class="pi pi-angle-right text-xl"></i>
         </div>
       </div>
+      <div class="flex-1" (click)="onChangeWebMenuType(0)"></div>
       <div class="px-4" *ngIf="!hadAccount">
         <button
           pButton
