@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  projectName: 'very5',
+  projectName: 'Very5',
   signStr: 'very5',
   apiPath: '/proxy/',
   marketContract: 'gx1rzld99h0f8ex50wvs25v8m4gyeltmtjp6cqzll'

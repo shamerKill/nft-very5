@@ -262,6 +262,14 @@
         <source>Create NFT</source>
       </segment>
     </unit>
+    <unit id="2570246625492922404">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:81</note>
+      </notes>
+      <segment>
+        <source>My</source>
+      </segment>
+    </unit>
     <unit id="720166362468454188">
       <notes>
         <note category="location">src/app/components/header/header.component.html:81</note>
@@ -904,6 +912,74 @@
         <source>Collection succeeded</source>
       </segment>
     </unit>
+    <unit id="9034448765890767899">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:6</note>
+      </notes>
+      <segment>
+        <source>Price</source>
+      </segment>
+    </unit>
+    <unit id="661105073458440608">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:7</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:185</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:266</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:348</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:723</note>
+      </notes>
+      <segment>
+        <source>Total</source>
+      </segment>
+    </unit>
+    <unit id="2134992739355758253">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:8</note>
+      </notes>
+      <segment>
+        <source>From</source>
+      </segment>
+    </unit>
+    <unit id="9147014118972269757">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:9</note>
+      </notes>
+      <segment>
+        <source>To</source>
+      </segment>
+    </unit>
+    <unit id="5601254587589034652">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:22</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:283,279</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:279</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:842,838</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:865,861</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="7738218055268992139">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:23</note>
+      </notes>
+      <segment>
+        <source>Bidding</source>
+      </segment>
+    </unit>
+    <unit id="360400753666595950">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:24</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:24</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:669</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:731</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:789</note>
+      </notes>
+      <segment>
+        <source>Gift</source>
+      </segment>
+    </unit>
     <unit id="1605931622666794079">
       <notes>
         <note category="location">src/app/page/create-collection/create-collection.component.html:7,8</note>
@@ -1449,12 +1525,12 @@
         <source>Top Collection</source>
       </segment>
     </unit>
-    <unit id="1108180858595286288">
+    <unit id="1342721162570366899">
       <notes>
         <note category="location">src/app/page/home/home.component.html:175,176</note>
       </notes>
       <segment>
-        <source>Explore the world of very5</source>
+        <source>Explore the world of Very5</source>
       </segment>
     </unit>
     <unit id="6934725311611862605">
@@ -1465,12 +1541,12 @@
         <source>Set up Pando Wallet</source>
       </segment>
     </unit>
-    <unit id="2427750540791397968">
+    <unit id="7664763744734840382">
       <notes>
         <note category="location">src/app/page/home/home.component.html:184,185</note>
       </notes>
       <segment>
-        <source> Set up Pando Wallet wallet and connect it to very5 </source>
+        <source> Set up Pando Wallet wallet and connect it to Very5 </source>
       </segment>
     </unit>
     <unit id="2960387848227808543">
@@ -1489,7 +1565,7 @@
         <source>Explore the NFT world</source>
       </segment>
     </unit>
-    <unit id="311928548292448096">
+    <unit id="8134987624794540029">
       <notes>
         <note category="location">src/app/page/home/home.component.html:198,199</note>
       </notes>
@@ -1538,12 +1614,12 @@
         <source>Explore market</source>
       </segment>
     </unit>
-    <unit id="1267115972709799512">
+    <unit id="7518296693056622949">
       <notes>
         <note category="location">src/app/page/home/home.component.html:278,279</note>
       </notes>
       <segment>
-        <source>Learn about very5</source>
+        <source>Learn about Very5</source>
       </segment>
     </unit>
     <unit id="7475670004273215298">
@@ -2222,7 +2298,7 @@
         <note category="location">src/app/page/show-nft/show-nft.component.html:267,270</note>
       </notes>
       <segment>
-        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="tip]=&quot;product.fixedBuyer&quot;&gt;" dispEnd="&lt;/span&gt;"> <ph id="1" equiv="INTERPOLATION" disp="{{[&apos;预留&apos;, &apos;定价&apos;, &apos;竞价&apos;][product.sellType]}}"/> </pc></source>
+        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="tip]=&quot;product.fixedBuyer&quot;&gt;" dispEnd="&lt;/span&gt;"> <ph id="1" equiv="INTERPOLATION" disp="{{[&apos;reserve&apos;, &apos;Fix&apos;, &apos;Bidding&apos;][product.sellType]}}"/> </pc></source>
       </segment>
     </unit>
     <unit id="1223288074839210985">

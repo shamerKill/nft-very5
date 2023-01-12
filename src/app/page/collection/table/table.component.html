@@ -2,12 +2,12 @@
   <div class="table-content-list">
     <div class="table-content-list-title flex align-items-center justify-content-between">
       <div class="table-content-list-title-item"></div>
-      <div class="table-content-list-title-item flex align-items-center">收藏品</div>
-      <div class="table-content-list-title-item flex align-items-center">单价</div>
-      <div class="table-content-list-title-item flex align-items-center">数量</div>
-      <div class="table-content-list-title-item flex align-items-center">从</div>
-      <div class="table-content-list-title-item flex align-items-center">到</div>
-      <div class="table-content-list-title-item flex align-items-center">时间</div>
+      <div class="table-content-list-title-item flex align-items-center" i18n>收藏品</div>
+      <div class="table-content-list-title-item flex align-items-center" i18n>单价</div>
+      <div class="table-content-list-title-item flex align-items-center" i18n>数量</div>
+      <div class="table-content-list-title-item flex align-items-center" i18n>从</div>
+      <div class="table-content-list-title-item flex align-items-center" i18n>到</div>
+      <div class="table-content-list-title-item flex align-items-center" i18n>时间</div>
     </div>
     <div class="table-content-list-item flex align-items-center justify-content-between" *ngFor="let item of list">
       <div class="table-content-list-item-item flex align-items-center">
@@ -16,7 +16,13 @@
         <span class="iconfont icon-biaoq" *ngIf="item.EventType =='cancelled'"></span>
         <span class="iconfont icon-jiaoyi" *ngIf="item.EventType =='transfer'"></span>
         <span class="iconfont icon-chuangjiang" *ngIf="item.EventType =='make'"></span>
-        <span>{{item.EventType =='make'?'创建':item.EventType =='successful'?'销售':item.EventType =='cancelled'?'取消':item.EventType =='create'?'拍卖':item.EventType =='transfer'?'赠送':''}}</span>
+        <ng-container>
+          <span *ngIf="item.EventType =='make'" i18n>创建</span>
+          <span *ngIf="item.EventType =='successful'" i18n>销售</span>
+          <span *ngIf="item.EventType =='cancelled'" i18n>取消</span>
+          <span *ngIf="item.EventType =='create'" i18n>拍卖</span>
+          <span *ngIf="item.EventType =='transfer'" i18n>赠送</span>
+        </ng-container>
       </div>
       <div class="table-content-list-item-item flex align-items-center" [routerLink]="['/show/nft/'+item.Nft.NftOriginal.NftID]">
         <img [src]="item.Nft.NftOriginal.Image" alt="">

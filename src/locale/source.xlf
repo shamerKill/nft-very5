@@ -32,8 +32,8 @@
         <note category="location">src/app/components/filter-box/filter-box.component.html:95</note>
         <note category="location">src/app/components/filter-box/filter-box.component.html:117</note>
         <note category="location">src/app/components/filter-box/filter-box.component.html:139</note>
-        <note category="location">src/app/components/header/header.component.html:101,102</note>
-        <note category="location">src/app/components/header/header.component.html:112,113</note>
+        <note category="location">src/app/components/header/header.component.html:106,107</note>
+        <note category="location">src/app/components/header/header.component.html:117,118</note>
         <note category="location">src/app/page/show-nft/show-nft.component.html:236,237</note>
       </notes>
       <segment>
@@ -58,7 +58,7 @@
     <unit id="3398471299079623205">
       <notes>
         <note category="location">src/app/components/filter-box/filter-box.component.html:65</note>
-        <note category="location">src/app/components/header/header.component.html:152</note>
+        <note category="location">src/app/components/header/header.component.html:157</note>
         <note category="location">src/app/page/my-star/my-star.component.html:122</note>
         <note category="location">src/app/page/userDetail/userDetail.component.ts:154</note>
       </notes>
@@ -104,6 +104,7 @@
       <notes>
         <note category="location">src/app/components/filter-box/filter-box.component.ts:99</note>
         <note category="location">src/app/components/footer/footer.component.ts:27</note>
+        <note category="location">src/app/page/collection/table/table.component.html:20</note>
         <note category="location">src/app/page/create-collection/create-collection.component.html:287</note>
         <note category="location">src/app/page/create-nft/create-nft.component.html:234</note>
         <note category="location">src/app/page/show-nft/show-nft.component.ts:788,784</note>
@@ -123,6 +124,7 @@
     <unit id="1520121408837506490">
       <notes>
         <note category="location">src/app/components/filter-box/filter-box.component.ts:107</note>
+        <note category="location">src/app/page/collection/table/table.component.html:21</note>
       </notes>
       <segment>
         <source>销售</source>
@@ -152,7 +154,7 @@
       <notes>
         <note category="location">src/app/components/footer/footer.component.ts:17</note>
         <note category="location">src/app/components/header/header.component.html:68</note>
-        <note category="location">src/app/components/header/header.component.ts:200,199</note>
+        <note category="location">src/app/components/header/header.component.ts:203,202</note>
         <note category="location">src/app/page/home/home.component.html:14</note>
       </notes>
       <segment>
@@ -162,7 +164,7 @@
     <unit id="6728111234977276519">
       <notes>
         <note category="location">src/app/components/footer/footer.component.ts:24</note>
-        <note category="location">src/app/components/header/header.component.html:131</note>
+        <note category="location">src/app/components/header/header.component.html:136</note>
       </notes>
       <segment>
         <source>NFT</source>
@@ -180,7 +182,7 @@
       <notes>
         <note category="location">src/app/components/footer/footer.component.ts:37</note>
         <note category="location">src/app/components/header/header.component.html:73</note>
-        <note category="location">src/app/components/header/header.component.ts:221,220</note>
+        <note category="location">src/app/components/header/header.component.ts:224,223</note>
       </notes>
       <segment>
         <source>排行榜</source>
@@ -258,16 +260,24 @@
     <unit id="3663724213369234204">
       <notes>
         <note category="location">src/app/components/header/header.component.html:76,77</note>
-        <note category="location">src/app/components/header/header.component.ts:227,226</note>
+        <note category="location">src/app/components/header/header.component.ts:230,229</note>
         <note category="location">src/app/page/home/home.component.html:15</note>
       </notes>
       <segment>
         <source>创造NFT</source>
       </segment>
     </unit>
-    <unit id="720166362468454188">
+    <unit id="2570246625492922404">
       <notes>
         <note category="location">src/app/components/header/header.component.html:81</note>
+      </notes>
+      <segment>
+        <source>我的</source>
+      </segment>
+    </unit>
+    <unit id="720166362468454188">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:85</note>
       </notes>
       <segment>
         <source>语言</source>
@@ -275,7 +285,7 @@
     </unit>
     <unit id="4199974976797924336">
       <notes>
-        <note category="location">src/app/components/header/header.component.html:90</note>
+        <note category="location">src/app/components/header/header.component.html:95</note>
       </notes>
       <segment>
         <source>链接钱包</source>
@@ -283,7 +293,7 @@
     </unit>
     <unit id="6017875986165040324">
       <notes>
-        <note category="location">src/app/components/header/header.component.html:96,99</note>
+        <note category="location">src/app/components/header/header.component.html:101,104</note>
       </notes>
       <segment>
         <source><pc id="0" equivStart="START_ITALIC_TEXT" equivEnd="CLOSE_ITALIC_TEXT" type="fmt" dispStart="pi-angle-left text-2xl&quot;&gt;" dispEnd="探索"></pc> 探索 </source>
@@ -291,7 +301,7 @@
     </unit>
     <unit id="2383095038473338228">
       <notes>
-        <note category="location">src/app/components/header/header.component.html:107,110</note>
+        <note category="location">src/app/components/header/header.component.html:112,115</note>
       </notes>
       <segment>
         <source><pc id="0" equivStart="START_ITALIC_TEXT" equivEnd="CLOSE_ITALIC_TEXT" type="fmt" dispStart="pi-angle-left text-2xl&quot;&gt;" dispEnd="语言"></pc> 语言 </source>
@@ -299,7 +309,7 @@
     </unit>
     <unit id="5359661928089271827">
       <notes>
-        <note category="location">src/app/components/header/header.component.html:173</note>
+        <note category="location">src/app/components/header/header.component.html:178</note>
       </notes>
       <segment>
         <source>用户</source>
@@ -315,7 +325,7 @@
     </unit>
     <unit id="5866254605255506989">
       <notes>
-        <note category="location">src/app/components/header/header.component.ts:237,236</note>
+        <note category="location">src/app/components/header/header.component.ts:240,239</note>
       </notes>
       <segment>
         <source>English</source>
@@ -323,7 +333,7 @@
     </unit>
     <unit id="1520664020879989316">
       <notes>
-        <note category="location">src/app/components/header/header.component.ts:243,242</note>
+        <note category="location">src/app/components/header/header.component.ts:246,245</note>
       </notes>
       <segment>
         <source>简体中文</source>
@@ -331,7 +341,7 @@
     </unit>
     <unit id="5492256166747391648">
       <notes>
-        <note category="location">src/app/components/header/header.component.ts:296</note>
+        <note category="location">src/app/components/header/header.component.ts:299</note>
       </notes>
       <segment>
         <source>不支持PRC10地址</source>
@@ -339,7 +349,7 @@
     </unit>
     <unit id="4429954177750855285">
       <notes>
-        <note category="location">src/app/components/header/header.component.ts:298</note>
+        <note category="location">src/app/components/header/header.component.ts:301</note>
       </notes>
       <segment>
         <source>获取账户失败</source>
@@ -427,7 +437,7 @@
         <note category="location">src/app/page/auction/auction.component.html:180</note>
         <note category="location">src/app/page/auction/auction.component.html:214</note>
         <note category="location">src/app/page/collection/collection.component.html:141</note>
-        <note category="location">src/app/page/collection/table/table.component.html:46</note>
+        <note category="location">src/app/page/collection/table/table.component.html:52</note>
         <note category="location">src/app/page/explore/explore.component.html:17</note>
         <note category="location">src/app/page/my-star/my-star.component.html:55</note>
         <note category="location">src/app/page/my-star/my-star.component.html:154</note>
@@ -726,6 +736,7 @@
     <unit id="7916650317126777762">
       <notes>
         <note category="location">src/app/page/auction/auction.component.html:198</note>
+        <note category="location">src/app/page/collection/table/table.component.html:10</note>
         <note category="location">src/app/page/show-nft/show-nft.component.html:412</note>
       </notes>
       <segment>
@@ -882,6 +893,7 @@
     <unit id="8099481697259690702">
       <notes>
         <note category="location">src/app/page/collection/collection.component.ts:166</note>
+        <note category="location">src/app/page/collection/table/table.component.html:5</note>
         <note category="location">src/app/page/home/home.component.html:158</note>
         <note category="location">src/app/page/userDetail/userDetail.component.ts:152</note>
         <note category="location">src/app/server/database.service.ts:69</note>
@@ -905,6 +917,74 @@
       </notes>
       <segment>
         <source>收藏成功</source>
+      </segment>
+    </unit>
+    <unit id="9034448765890767899">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:6</note>
+      </notes>
+      <segment>
+        <source>单价</source>
+      </segment>
+    </unit>
+    <unit id="661105073458440608">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:7</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:185</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:266</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:348</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:723</note>
+      </notes>
+      <segment>
+        <source>数量</source>
+      </segment>
+    </unit>
+    <unit id="2134992739355758253">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:8</note>
+      </notes>
+      <segment>
+        <source>从</source>
+      </segment>
+    </unit>
+    <unit id="9147014118972269757">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:9</note>
+      </notes>
+      <segment>
+        <source>到</source>
+      </segment>
+    </unit>
+    <unit id="5601254587589034652">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:22</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:283,279</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:279</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:842,838</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:865,861</note>
+      </notes>
+      <segment>
+        <source>取消</source>
+      </segment>
+    </unit>
+    <unit id="7738218055268992139">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:23</note>
+      </notes>
+      <segment>
+        <source>拍卖</source>
+      </segment>
+    </unit>
+    <unit id="360400753666595950">
+      <notes>
+        <note category="location">src/app/page/collection/table/table.component.html:24</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:24</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:669</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:731</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:789</note>
+      </notes>
+      <segment>
+        <source>赠送</source>
       </segment>
     </unit>
     <unit id="1605931622666794079">
@@ -1206,17 +1286,6 @@
         <source>确定</source>
       </segment>
     </unit>
-    <unit id="5601254587589034652">
-      <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.ts:283,279</note>
-        <note category="location">src/app/page/create-nft/create-nft.component.ts:279</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:842,838</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:865,861</note>
-      </notes>
-      <segment>
-        <source>取消</source>
-      </segment>
-    </unit>
     <unit id="1236674547322853105">
       <notes>
         <note category="location">src/app/page/create-nft/create-nft.component.html:6,8</note>
@@ -1347,17 +1416,6 @@
         <source>此收藏品可售出多份</source>
       </segment>
     </unit>
-    <unit id="661105073458440608">
-      <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:185</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:266</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:348</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:723</note>
-      </notes>
-      <segment>
-        <source>数量</source>
-      </segment>
-    </unit>
     <unit id="480972691002447290">
       <notes>
         <note category="location">src/app/page/create-nft/create-nft.component.html:186</note>
@@ -1454,12 +1512,12 @@
         <source>顶级合集</source>
       </segment>
     </unit>
-    <unit id="1108180858595286288">
+    <unit id="1342721162570366899">
       <notes>
         <note category="location">src/app/page/home/home.component.html:179,180</note>
       </notes>
       <segment>
-        <source>探索very5的世界</source>
+        <source>探索Very5的世界</source>
       </segment>
     </unit>
     <unit id="6934725311611862605">
@@ -1470,12 +1528,12 @@
         <source>设置Pando Wallet</source>
       </segment>
     </unit>
-    <unit id="2427750540791397968">
+    <unit id="7664763744734840382">
       <notes>
         <note category="location">src/app/page/home/home.component.html:188,189</note>
       </notes>
       <segment>
-        <source> 设置好Pando Wallet钱包并将其连接至very5 </source>
+        <source> 设置好Pando Wallet钱包并将其连接至Very5 </source>
       </segment>
     </unit>
     <unit id="2960387848227808543">
@@ -1494,12 +1552,12 @@
         <source>探索NFT世界</source>
       </segment>
     </unit>
-    <unit id="311928548292448096">
+    <unit id="8134987624794540029">
       <notes>
         <note category="location">src/app/page/home/home.component.html:202,203</note>
       </notes>
       <segment>
-        <source> 在very5的世界中，你可以自由的探索、寻找并交易各种类型NFT。 </source>
+        <source> 在Very5的世界中，你可以自由的探索、寻找并交易各种类型NFT。 </source>
       </segment>
     </unit>
     <unit id="8453674733548743011">
@@ -1543,12 +1601,12 @@
         <source>探索市场</source>
       </segment>
     </unit>
-    <unit id="1267115972709799512">
+    <unit id="7518296693056622949">
       <notes>
         <note category="location">src/app/page/home/home.component.html:282,283</note>
       </notes>
       <segment>
-        <source>了解very5</source>
+        <source>了解Very5</source>
       </segment>
     </unit>
     <unit id="7475670004273215298">
@@ -2139,17 +2197,6 @@
       </notes>
       <segment>
         <source>出售</source>
-      </segment>
-    </unit>
-    <unit id="360400753666595950">
-      <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:24</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:669</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:731</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:789</note>
-      </notes>
-      <segment>
-        <source>赠送</source>
       </segment>
     </unit>
     <unit id="5127591672059742865">
