@@ -265,6 +265,14 @@
         <source>创造NFT</source>
       </segment>
     </unit>
+    <unit id="2570246625492922404">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:81</note>
+      </notes>
+      <segment>
+        <source>我的</source>
+      </segment>
+    </unit>
     <unit id="720166362468454188">
       <notes>
         <note category="location">src/app/components/header/header.component.html:81</note>
@@ -1459,7 +1467,7 @@
         <note category="location">src/app/page/home/home.component.html:179,180</note>
       </notes>
       <segment>
-        <source>探索very5的世界</source>
+        <source>探索Very5的世界</source>
       </segment>
     </unit>
     <unit id="6934725311611862605">
@@ -1475,7 +1483,7 @@
         <note category="location">src/app/page/home/home.component.html:188,189</note>
       </notes>
       <segment>
-        <source> 设置好Pando Wallet钱包并将其连接至very5 </source>
+        <source> 设置好Pando Wallet钱包并将其连接至Very5 </source>
       </segment>
     </unit>
     <unit id="2960387848227808543">
@@ -1548,7 +1556,7 @@
         <note category="location">src/app/page/home/home.component.html:282,283</note>
       </notes>
       <segment>
-        <source>了解very5</source>
+        <source>了解Very5</source>
       </segment>
     </unit>
     <unit id="7475670004273215298">

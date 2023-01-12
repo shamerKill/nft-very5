@@ -262,6 +262,14 @@
         <source>Create NFT</source>
       </segment>
     </unit>
+    <unit id="2570246625492922404">
+      <notes>
+        <note category="location">src/app/components/header/header.component.html:81</note>
+      </notes>
+      <segment>
+        <source>My</source>
+      </segment>
+    </unit>
     <unit id="720166362468454188">
       <notes>
         <note category="location">src/app/components/header/header.component.html:81</note>
@@ -1454,7 +1462,7 @@
         <note category="location">src/app/page/home/home.component.html:175,176</note>
       </notes>
       <segment>
-        <source>Explore the world of very5</source>
+        <source>Explore the world of Very5</source>
       </segment>
     </unit>
     <unit id="6934725311611862605">
@@ -1470,7 +1478,7 @@
         <note category="location">src/app/page/home/home.component.html:184,185</note>
       </notes>
       <segment>
-        <source> Set up Pando Wallet wallet and connect it to very5 </source>
+        <source> Set up Pando Wallet wallet and connect it to Very5 </source>
       </segment>
     </unit>
     <unit id="2960387848227808543">
@@ -1543,7 +1551,7 @@
         <note category="location">src/app/page/home/home.component.html:278,279</note>
       </notes>
       <segment>
-        <source>Learn about very5</source>
+        <source>Learn about Very5</source>
       </segment>
     </unit>
     <unit id="7475670004273215298">
@@ -2222,7 +2230,7 @@
         <note category="location">src/app/page/show-nft/show-nft.component.html:267,270</note>
       </notes>
       <segment>
-        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="tip]=&quot;product.fixedBuyer&quot;&gt;" dispEnd="&lt;/span&gt;"> <ph id="1" equiv="INTERPOLATION" disp="{{[&apos;预留&apos;, &apos;定价&apos;, &apos;竞价&apos;][product.sellType]}}"/> </pc></source>
+        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="tip]=&quot;product.fixedBuyer&quot;&gt;" dispEnd="&lt;/span&gt;"> <ph id="1" equiv="INTERPOLATION" disp="{{[&apos;reserve&apos;, &apos;Fix&apos;, &apos;Bidding&apos;][product.sellType]}}"/> </pc></source>
       </segment>
     </unit>
     <unit id="1223288074839210985">
