@@ -345,5 +345,12 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
     const inputTarget = event.target as HTMLInputElement;
     console.log(inputTarget.value);
   }
+  menuTab(item:any) {
+    if (item.key) {
+      this.router.navigate(['explore'],{queryParams:{id: item.key}});
+    } else {
+      this.router.navigate(['nft']);
+    }
+  }
 
 }

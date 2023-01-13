@@ -102,7 +102,7 @@
         探索
       </div>
       <div class="flex-1 overflow-scroll pl-4">
-        <div *ngFor="let item of exploreList" class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus">
+        <div *ngFor="let item of exploreList" class="flex py-4 px-4 align-items-center cursor-pointer top-border item-focus" (click)="menuTab(item)">
           <p class="flex-1 px-2 font-bold text-xl" i18n>{{item.title}}</p>
         </div>
       </div>
