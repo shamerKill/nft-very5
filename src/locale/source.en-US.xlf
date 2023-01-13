@@ -922,14 +922,13 @@
     </unit>
     <unit id="661105073458440608">
       <notes>
-        <note category="location">src/app/page/collection/table/table.component.html:7</note>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:185</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:266</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:348</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:723</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.html:183</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:252</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:328</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:684</note>
       </notes>
       <segment>
-        <source>Total</source>
+        <source>Number</source>
       </segment>
     </unit>
     <unit id="2134992739355758253">
@@ -950,11 +949,9 @@
     </unit>
     <unit id="5601254587589034652">
       <notes>
-        <note category="location">src/app/page/collection/table/table.component.html:22</note>
-        <note category="location">src/app/page/create-collection/create-collection.component.ts:283,279</note>
-        <note category="location">src/app/page/create-nft/create-nft.component.ts:279</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:842,838</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:865,861</note>
+        <note category="location">src/app/page/create-collection/create-collection.component.ts:281,277</note>
+        <note category="location">src/app/page/create-nft/create-nft.component.ts:276</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:763,759</note>
       </notes>
       <segment>
         <source>Cancel</source>
@@ -970,14 +967,11 @@
     </unit>
     <unit id="360400753666595950">
       <notes>
-        <note category="location">src/app/page/collection/table/table.component.html:24</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:24</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:669</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:731</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:789</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:23</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:630</note>
       </notes>
       <segment>
-        <source>Gift</source>
+        <source>Donate</source>
       </segment>
     </unit>
     <unit id="1605931622666794079">
@@ -1278,16 +1272,6 @@
         <source>Confirm</source>
       </segment>
     </unit>
-    <unit id="5601254587589034652">
-      <notes>
-        <note category="location">src/app/page/create-collection/create-collection.component.ts:281,277</note>
-        <note category="location">src/app/page/create-nft/create-nft.component.ts:276</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:763,759</note>
-      </notes>
-      <segment>
-        <source>Cancel</source>
-      </segment>
-    </unit>
     <unit id="1236674547322853105">
       <notes>
         <note category="location">src/app/page/create-nft/create-nft.component.html:6,8</note>
@@ -1416,17 +1400,6 @@
       </notes>
       <segment>
         <source>This NFT can be sold in multiple copies</source>
-      </segment>
-    </unit>
-    <unit id="661105073458440608">
-      <notes>
-        <note category="location">src/app/page/create-nft/create-nft.component.html:183</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:252</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:328</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:684</note>
-      </notes>
-      <segment>
-        <source>Number</source>
       </segment>
     </unit>
     <unit id="480972691002447290">
@@ -1570,7 +1543,7 @@
         <note category="location">src/app/page/home/home.component.html:198,199</note>
       </notes>
       <segment>
-        <source> In the world of very5, you can freely explore, find and trade various types of NFT. </source>
+        <source> In the world of Very5, you can freely explore, find and trade various types of NFT. </source>
       </segment>
     </unit>
     <unit id="8453674733548743011">
@@ -2108,6 +2081,14 @@
         <source> Preview </source>
       </segment>
     </unit>
+    <unit id="4827703394929253380">
+      <notes>
+        <note category="location">src/app/page/sell-nft/sell-nft.component.html:269</note>
+      </notes>
+      <segment>
+        <source>Publish</source>
+      </segment>
+    </unit>
     <unit id="8753455950737309582">
       <notes>
         <note category="location">src/app/page/sell-nft/sell-nft.component.ts:43</note>
@@ -2209,15 +2190,6 @@
         <source>Sell</source>
       </segment>
     </unit>
-    <unit id="360400753666595950">
-      <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:23</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:630</note>
-      </notes>
-      <segment>
-        <source>Donate</source>
-      </segment>
-    </unit>
     <unit id="5127591672059742865">
       <notes>
         <note category="location">src/app/page/show-nft/show-nft.component.html:56</note>
@@ -2293,12 +2265,44 @@
         <source>Mode</source>
       </segment>
     </unit>
-    <unit id="372461311882753312">
+    <unit id="3052845220325086596">
       <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.html:267,270</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:285</note>
       </notes>
       <segment>
-        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="tip]=&quot;product.fixedBuyer&quot;&gt;" dispEnd="&lt;/span&gt;"> <ph id="1" equiv="INTERPOLATION" disp="{{[&apos;reserve&apos;, &apos;Fix&apos;, &apos;Bidding&apos;][product.sellType]}}"/> </pc></source>
+        <source> Reserve </source>
+      </segment>
+    </unit>
+    <unit id="8758338897820708144">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:291</note>
+      </notes>
+      <segment>
+        <source> Fixed </source>
+      </segment>
+    </unit>
+    <unit id="5562453828706561896">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:297</note>
+      </notes>
+      <segment>
+        <source> Bid </source>
+      </segment>
+    </unit>
+    <unit id="2781917310130882568">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.html:314</note>
+      </notes>
+      <segment>
+        <source>Successful</source>
+      </segment>
+    </unit>
+    <unit id="8074334884446094229">
+      <notes>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:716</note>
+      </notes>
+      <segment>
+        <source>Withdraw</source>
       </segment>
     </unit>
     <unit id="1223288074839210985">
@@ -2440,14 +2444,6 @@
       </notes>
       <segment>
         <source>Trade successfully</source>
-      </segment>
-    </unit>
-    <unit id="8074334884446094229">
-      <notes>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:716</note>
-      </notes>
-      <segment>
-        <source>Withdraw</source>
       </segment>
     </unit>
     <unit id="5968037016658292818">

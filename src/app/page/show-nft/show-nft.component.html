@@ -277,9 +277,24 @@
             <td style="min-width: 4rem;">
               {{product.sellNum}}
             </td>
-            <td style="min-width: 4rem;" i18n [ngClass]="[['text-primary font-bold', 'text-900', 'text-primary'][product.sellType]]">
-              <span [pTooltip]="product.fixedBuyer">
-                {{['预留', '定价', '竞价'][product.sellType]}}
+            <td style="min-width: 4rem;" [ngClass]="[['text-primary font-bold', 'text-900', 'text-primary'][product.sellType]]">
+              <span
+                *ngIf="product.sellType === 0"
+                [pTooltip]="product.fixedBuyer"
+                i18n>
+                预留
+              </span>
+              <span
+                *ngIf="product.sellType === 1"
+                [pTooltip]="product.fixedBuyer"
+                i18n>
+                定价
+              </span>
+              <span
+                *ngIf="product.sellType === 2"
+                [pTooltip]="product.fixedBuyer"
+                i18n>
+                竞价
               </span>
             </td>
             <td style="min-width: 12rem;">
@@ -310,13 +325,15 @@
                 *ngIf="product.showAuctionBtn"
                 (click)="onAuctionSuccess(rowIndex)"
                 class="p-button-text p-button-rounded h-2rem"
-                label="成交"></button>
+                label="成交"
+                i18n-label></button>
               <button
                 pButton
                 *ngIf="product.sellerAddress === userInfoAddress && product.sellType !== 2"
                 (click)="onCancelOrder(rowIndex)"
                 class="p-button-text p-button-rounded h-2rem"
-                label="撤回"></button>
+                label="撤回"
+                i18n-label></button>
             </td>
           </tr>
         </ng-template>
