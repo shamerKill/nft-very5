@@ -352,5 +352,12 @@ export class HeaderComponent extends ToolClassAutoClosePipe implements OnInit, A
       this.router.navigate(['nft']);
     }
   }
+  changeLang(item:any) {
+    if (item == 'English') {
+      window.location.href = window.location.origin + '/en-US';
+    } else {
+      window.location.href = window.location.origin + '/zh-Hans';
+    }
+  }
 
 }
