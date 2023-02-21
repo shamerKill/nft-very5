@@ -235,6 +235,56 @@
         <source>CMC</source>
       </segment>
     </unit>
+    <unit id="7767555902779091213">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:72</note>
+      </notes>
+      <segment>
+        <source>更多</source>
+      </segment>
+    </unit>
+    <unit id="3400027835914346369">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:81</note>
+      </notes>
+      <segment>
+        <source>Discord</source>
+      </segment>
+    </unit>
+    <unit id="1715373473261069991">
+      <notes>
+        <note category="location">src/app/page/collection/collection.component.ts:75</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:222</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:67</note>
+      </notes>
+      <segment>
+        <source>Twitter</source>
+      </segment>
+    </unit>
+    <unit id="8401085193044135025">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:93</note>
+      </notes>
+      <segment>
+        <source>YouTube</source>
+      </segment>
+    </unit>
+    <unit id="5982496808088686844">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:99</note>
+      </notes>
+      <segment>
+        <source>Medium</source>
+      </segment>
+    </unit>
+    <unit id="55701353440365615">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:105</note>
+      </notes>
+      <segment>
+        <source>Reddit</source>
+      </segment>
+    </unit>
     <unit id="2994543364079367658">
       <notes>
         <note category="location">src/app/components/header/header.component.html:13,14</note>
@@ -874,16 +924,6 @@
         <source>Facebook</source>
       </segment>
     </unit>
-    <unit id="1715373473261069991">
-      <notes>
-        <note category="location">src/app/page/collection/collection.component.ts:75</note>
-        <note category="location">src/app/page/show-nft/show-nft.component.ts:222</note>
-        <note category="location">src/app/page/userDetail/userDetail.component.ts:67</note>
-      </notes>
-      <segment>
-        <source>Twitter</source>
-      </segment>
-    </unit>
     <unit id="8099481697259690702">
       <notes>
         <note category="location">src/app/components/filter-box/filter-box.component.ts:131</note>
@@ -1294,7 +1334,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.html:31</note>
       </notes>
       <segment>
-        <source>NFt File</source>
+        <source>NFT File</source>
       </segment>
     </unit>
     <unit id="2833842994095308075">
@@ -2278,7 +2318,7 @@
         <note category="location">src/app/page/show-nft/show-nft.component.html:291</note>
       </notes>
       <segment>
-        <source> Fix </source>
+        <source> Fixed </source>
       </segment>
     </unit>
     <unit id="5562453828706561896">
@@ -2286,7 +2326,7 @@
         <note category="location">src/app/page/show-nft/show-nft.component.html:297</note>
       </notes>
       <segment>
-        <source> Bidding </source>
+        <source> Bid </source>
       </segment>
     </unit>
     <unit id="2781917310130882568">

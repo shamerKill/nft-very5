@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import '@angular/localize';
 
-type TypeLinkList = {title: string; link: string, key?: string;type: number}[];
+type TypeLinkList = {title: string; link: string, key?: string; type: number; icon?: string; }[];
 
 @Component({
   selector: 'app-footer',
@@ -69,37 +69,43 @@ export class FooterComponent implements OnInit {
     }
   ];
   // 友情链接
-  linkTitle = $localize`Very5`;
+  linkTitle = $localize`更多`;
   linkLink: TypeLinkList = [
     {
       title: $localize`Telegram`,
       link: 'https://t.me/Very5Official',
-      type: 1
+      type: 1,
+      icon: '/assets/images/footer/telegram.png'
     },
     {
       title: $localize`Discord`,
       link: 'https://discord.gg/mZVUrFBCph',
-      type: 1
+      type: 1,
+      icon: '/assets/images/footer/discord.png'
     },
     {
       title: $localize`Twitter`,
       link: 'https://twitter.com/very5nft',
-      type: 1
+      type: 1,
+      icon: '/assets/images/footer/twitter.png'
     },
     {
       title: $localize`YouTube`,
       link: 'https://www.youtube.com/@Very5_Pro',
-      type: 1
+      type: 1,
+      icon: '/assets/images/footer/youtube.png'
     },
     {
       title: $localize`Medium`,
       link: 'https://medium.com/@very5nft',
-      type: 1
+      type: 1,
+      icon: '/assets/images/footer/medium.png'
     },
     {
       title: $localize`Reddit`,
       link: 'https://www.reddit.com/user/Very5_Pro',
-      type: 1
+      type: 1,
+      icon: '/assets/images/footer/reddit.png'
     }
   ];
   goLink(link:string,type:number,key:string='') {

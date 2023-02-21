@@ -235,6 +235,57 @@
         <source>CMC</source>
       </segment>
     </unit>
+    <unit id="7767555902779091213">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:72</note>
+      </notes>
+      <segment>
+        <source>More</source>
+      </segment>
+    </unit>
+    <unit id="3400027835914346369">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:81</note>
+      </notes>
+      <segment>
+        <source>Discord</source>
+      </segment>
+    </unit>
+    <unit id="1715373473261069991">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:87</note>
+        <note category="location">src/app/page/collection/collection.component.ts:80</note>
+        <note category="location">src/app/page/show-nft/show-nft.component.ts:238</note>
+        <note category="location">src/app/page/userDetail/userDetail.component.ts:69</note>
+      </notes>
+      <segment>
+        <source>Twitter</source>
+      </segment>
+    </unit>
+    <unit id="8401085193044135025">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:93</note>
+      </notes>
+      <segment>
+        <source>YouTube</source>
+      </segment>
+    </unit>
+    <unit id="5982496808088686844">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:99</note>
+      </notes>
+      <segment>
+        <source>Medium</source>
+      </segment>
+    </unit>
+    <unit id="55701353440365615">
+      <notes>
+        <note category="location">src/app/components/footer/footer.component.ts:105</note>
+      </notes>
+      <segment>
+        <source>Reddit</source>
+      </segment>
+    </unit>
     <unit id="2994543364079367658">
       <notes>
         <note category="location">src/app/components/header/header.component.html:13,14</note>
@@ -1294,7 +1345,7 @@
         <note category="location">src/app/page/create-nft/create-nft.component.html:31</note>
       </notes>
       <segment>
-        <source>NFt File</source>
+        <source>NFT File</source>
       </segment>
     </unit>
     <unit id="2833842994095308075">

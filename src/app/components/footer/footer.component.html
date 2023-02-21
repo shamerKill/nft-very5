@@ -24,6 +24,7 @@
         style="cursor: pointer;"
         (click)="goLink(item.link,item.type,item.key)"
         class="py-2 px-1 text-400 block flex w-6">
+        <img class="w-1rem h-1rem mr-1" *ngIf="item.icon" [src]="item.icon" [alt]="item.title">
         {{item.title}}
       </a>
     </div>
